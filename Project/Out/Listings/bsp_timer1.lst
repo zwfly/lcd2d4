@@ -1,0 +1,59 @@
+C51 COMPILER V9.56.0.0   BSP_TIMER1                                                        08/01/2017 22:22:46 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_TIMER1
+OBJECT MODULE PLACED IN .\Out\Objects\bsp_timer1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Bsp\src\bsp_timer1.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\
+                    -inc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_timer1.lst)
+                    - OBJECT(.\Out\Objects\bsp_timer1.obj)
+
+line level    source
+
+   1          /*
+   2           * bsp_timer1.c
+   3           *
+   4           *  Created on: 2017Äê6ÔÂ28ÈÕ
+   5           *      Author: fly
+   6           */
+   7          
+   8          #include "bsp.h"
+   9          
+  10          void Timer1_InitHard(void) {
+  11   1              clr_GATE_T1;
+  12   1              clr_CT_T1;
+  13   1              set_M1_T1;
+  14   1              clr_M0_T1;
+  15   1      
+  16   1              TH1 = (256 - 50);            //initial counter values
+  17   1              TL1 = (256 - 50);
+  18   1      
+  19   1      //      set_ET1;                                    //enable Timer0 interrupt
+  20   1      //      set_EA;                                     //enable interrupts
+  21   1      //      set_TR1;                                    //Timer0 run
+  22   1      
+  23   1      }
+  24          /*********************************************************************************************************
+             -***
+  25           *    TIMER 1 interrupt subroutine
+  26           *********************************************************************************************************
+             -***/
+  27          void Timer1_ISR(void)
+  28          interrupt 3           //interrupt address is 0x001B
+  29          {
+  30   1      
+  31   1              //P03 = ~P03;                                 //P0/3 toggle when interrupt
+  32   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     20    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

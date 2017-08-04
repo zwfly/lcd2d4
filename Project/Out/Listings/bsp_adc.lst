@@ -1,0 +1,66 @@
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/01/2017 22:22:46 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_ADC
+OBJECT MODULE PLACED IN .\Out\Objects\bsp_adc.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Bsp\src\bsp_adc.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\inc
+                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_adc.lst) OBJEC
+                    -T(.\Out\Objects\bsp_adc.obj)
+
+line level    source
+
+   1          /*
+   2           * bsp_adc.c
+   3           *
+   4           *  Created on: 2017Äê7ÔÂ7ÈÕ
+   5           *      Author: admin
+   6           */
+   7          
+   8          #include "bsp.h"
+   9          
+  10          void ADC_Init(void) {
+  11   1      
+  12   1      #if 1
+  13   1      
+  14   1              P0M1 &= ~SET_BIT1;
+  15   1              P0M2 |= SET_BIT1;
+  16   1              set_P01;
+  17   1      
+  18   1              set_ADCEN;
+  19   1      
+  20   1              ADCCON0 = 0x00;                   //select ADC pin
+  21   1              set_P0M1_0;                       //set ADC pin is input only mode
+  22   1              clr_P0M2_0;
+  23   1              set_P00DIDS;                      //disable digital connection
+  24   1      
+  25   1              clr_ADCDIV2;
+  26   1              set_ADCDIV1;
+  27   1              clr_ADCDIV0;
+  28   1      
+  29   1              //////
+  30   1      
+  31   1              set_ADCMPEN;
+  32   1              set_ADCMPOP;
+  33   1      
+  34   1              ADCMPH = 0;
+  35   1              ADCMPL = 0;
+  36   1      
+  37   1              EADC = 1;
+  38   1      #endif
+  39   1      }
+  40          
+  41          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     45    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
