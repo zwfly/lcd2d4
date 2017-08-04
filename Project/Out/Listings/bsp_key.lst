@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/01/2017 22:22:46 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/04/2017 22:16:58 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_KEY
@@ -62,7 +62,7 @@ line level    source
   51   2                      return 1;
   52   2              }
   53   1      }
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/01/2017 22:22:46 PAGE 2   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/04/2017 22:16:58 PAGE 2   
 
   54          static uint8_t IsKeyDown2(void) {
   55   1              if (P04) {
@@ -126,7 +126,7 @@ line level    source
  113           *********************************************************************************************************
  114           */
  115          void bsp_PutKey(uint8_t _KeyCode) {
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/01/2017 22:22:46 PAGE 3   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/04/2017 22:16:58 PAGE 3   
 
  116   1              s_tKey.Buf[s_tKey.Write] = _KeyCode;
  117   1      
@@ -190,7 +190,7 @@ line level    source
  175           *********************************************************************************************************
  176           */
  177          uint8_t bsp_GetKeyState(KEY_ID_E _ucKeyID) {
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/01/2017 22:22:46 PAGE 4   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/04/2017 22:16:58 PAGE 4   
 
  178   1              return s_tBtn[_ucKeyID].State;
  179   1      }
@@ -254,7 +254,7 @@ line level    source
  237          /*
  238           *********************************************************************************************************
  239           *      函 数 名: bsp_InitKeyVar
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/01/2017 22:22:46 PAGE 5   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/04/2017 22:16:58 PAGE 5   
 
  240           *      功能说明: 初始化按键变量
  241           *      形    参:  无
@@ -318,7 +318,7 @@ line level    source
  299   4                                      /* 发送按钮按下的消息 */
  300   4                                      bsp_PutKey((uint8_t) (3 * i + 1));
  301   4                              }
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/01/2017 22:22:46 PAGE 6   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/04/2017 22:16:58 PAGE 6   
 
  302   3      
  303   3                              if (pBtn->LongTime > 0) {
@@ -382,7 +382,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    XDATA SIZE       =     82       2
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/01/2017 22:22:46 PAGE 7   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/04/2017 22:16:58 PAGE 7   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

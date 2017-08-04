@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/01/2017 22:22:46 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/04/2017 22:16:58 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_BEEP
@@ -62,7 +62,7 @@ line level    source
   51          
   52          void BEEP_ENABLE() {
   53   1              set_T2DOE1;
-C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/01/2017 22:22:46 PAGE 2   
+C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/04/2017 22:16:58 PAGE 2   
 
   54   1              set_P30;
   55   1      }
@@ -126,7 +126,7 @@ line level    source
  113           */
  114          void BEEP_KeyTone(void) {
  115   1              BEEP_Start(0, 5, 1, 1); /* Ãù½Ð50ms£¬Í£10ms£¬ 1´Î */
-C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/01/2017 22:22:46 PAGE 3   
+C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/04/2017 22:16:58 PAGE 3   
 
  116   1      }
  117          
@@ -190,7 +190,7 @@ line level    source
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    314    ----
    CONSTANT SIZE    =   ----    ----
-C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/01/2017 22:22:46 PAGE 4   
+C51 COMPILER V9.56.0.0   BSP_BEEP                                                          08/04/2017 22:16:58 PAGE 4   
 
    XDATA SIZE       =   ----       8
    PDATA SIZE       =   ----    ----

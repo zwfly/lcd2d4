@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   APP_BATTERY                                                       08/01/2017 22:22:46 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_BATTERY                                                       08/04/2017 22:16:58 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_BATTERY
@@ -20,28 +20,31 @@ line level    source
    9          
   10          void app_battery_Init(void) {
   11   1      
-  12   1      }
-  13          
-  14          static void app_battery_detection(void) {
-  15   1      
-  16   1              set_ADCS;  //Trigger ADC start conversion
-  17   1      }
-  18          
-  19          void app_battery_1s_pro(void) {
-  20   1              static idata uint8_t
-  21   1              cnt = 0;
-  22   1      
-  23   1              cnt++;
-  24   1              if (cnt == 4) {
-  25   2                      clr_P01;
-  26   2              }
-  27   1      
-  28   1              if (cnt >= 5) {
-  29   2                      cnt = 0;
-  30   2                      app_battery_detection();
-  31   2              }
-  32   1      
-  33   1      }
+  12   1      
+  13   1      
+  14   1      
+  15   1      }
+  16          
+  17          static void app_battery_detection(void) {
+  18   1      
+  19   1              set_ADCS;  //Trigger ADC start conversion
+  20   1      }
+  21          
+  22          void app_battery_1s_pro(void) {
+  23   1              static idata uint8_t
+  24   1              cnt = 0;
+  25   1      
+  26   1              cnt++;
+  27   1              if (cnt == 4) {
+  28   2                      clr_P01;
+  29   2              }
+  30   1      
+  31   1              if (cnt >= 5) {
+  32   2                      cnt = 0;
+  33   2                      app_battery_detection();
+  34   2              }
+  35   1      
+  36   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

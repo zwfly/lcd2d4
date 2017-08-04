@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   APP_WORK                                                          08/01/2017 22:22:45 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_WORK                                                          08/04/2017 22:16:58 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_WORK
@@ -62,7 +62,7 @@ line level    source
   51   1              if (pull_once_flag) {
   52   2                      pull_once_flag = 0;
   53   2                      ///////////////////
-C51 COMPILER V9.56.0.0   APP_WORK                                                          08/01/2017 22:22:45 PAGE 2   
+C51 COMPILER V9.56.0.0   APP_WORK                                                          08/04/2017 22:16:58 PAGE 2   
 
   54   2                      app_key_clear_noOps_timeoutCnt();
   55   2                      app_work_pro();
@@ -126,7 +126,7 @@ line level    source
  113   3                                              / Rep_Pull_num[g_tWork.reps_mode - 'A'][1];
  114   3                              g_tWork.pulls_num = g_tWork.sum
  115   3                                              % Rep_Pull_num[g_tWork.reps_mode - 'A'][1];
-C51 COMPILER V9.56.0.0   APP_WORK                                                          08/01/2017 22:22:45 PAGE 3   
+C51 COMPILER V9.56.0.0   APP_WORK                                                          08/04/2017 22:16:58 PAGE 3   
 
  116   3                              g_tWork.cal_num = g_tWork.sum * CAL_a;
  117   3                      }
@@ -190,7 +190,7 @@ line level    source
                       LCD_Show_Pulls_Num(g_tWork.pulls_num);
                       LCD_Show_CAL_Num(g_tWork.cal_num);
                       if (reps_num_appear_flag) {
-C51 COMPILER V9.56.0.0   APP_WORK                                                          08/01/2017 22:22:45 PAGE 4   
+C51 COMPILER V9.56.0.0   APP_WORK                                                          08/04/2017 22:16:58 PAGE 4   
 
                               LCD_Show_REP_Num(g_tWork.reps_num);
                       } else {
