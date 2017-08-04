@@ -9,9 +9,6 @@
 
 void app_battery_Init(void) {
 
-
-
-
 }
 
 static void app_battery_detection(void) {
