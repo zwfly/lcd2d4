@@ -5,10 +5,16 @@
 /******************************************************************************
  * FUNCTION_PURPOSE: ADC interrupt Service Routine
  ******************************************************************************/
-void ADC_ISR(void) interrupt 11
+void ADC_ISR(void)
+interrupt 11
 {
 	clr_ADCF;                               //clear ADC interrupt flag
-	app_battery_voltage_result();
+
+	g_tADC_Result.result = ADCRH;
+	g_tADC_Result.result <<= 2;
+	g_tADC_Result.result |= ADCRL;
+
+	g_tADC_Result.busy = 0;
 }
 /******************************************************************************
  * FUNCTION_PURPOSE: I/O Pin interrupt Service Routine
@@ -53,8 +59,9 @@ void main(void) {
 		if (Task_time.flag_10ms) {
 			Task_time.flag_10ms = 0;
 			//////////////////
-			BEEP_Pro();
+
 			bsp_KeyScan();
+			ADC_Start();
 		}
 		if (Task_time.flag_100ms) {
 			Task_time.flag_100ms = 0;
@@ -84,7 +91,6 @@ void main(void) {
 //				LCD_Show_Pulls_Num(tmp);
 //				LCD_Show_CAL_Num(tmp);
 			}
-
 
 		}
 

@@ -30,22 +30,9 @@ static void bsp_DetectKey(uint8_t i);
  *	返 回 值: 返回值1 表示按下，0表示未按下
  *********************************************************************************************************
  */
-#if 0
+
 static uint8_t IsKeyDown1(void) {
-	return !P03;
-}
-static uint8_t IsKeyDown2(void) {
-	return !P04;
-}
-static uint8_t IsKeyDown3(void) {
-	return !P05;
-}
-static uint8_t IsKeyDown4(void) {
-	return !P06;
-}
-#else
-static uint8_t IsKeyDown1(void) {
-	if (P03) {
+	if (P02) {
 		return 0;
 	} else {
 		return 1;
@@ -72,7 +59,7 @@ static uint8_t IsKeyDown4(void) {
 		return 1;
 	}
 }
-#if DEBUG_KEY
+
 static uint8_t IsKeyDown5(void) {
 	if (P55) {
 		return 0;
@@ -80,17 +67,35 @@ static uint8_t IsKeyDown5(void) {
 		return 1;
 	}
 }
-#endif
-#endif
-
-/* S1 S3组合键 */
-static uint8_t IsKeyDown_1and3(void) {
-	if ((P03 == 0) && (P05 == 0)) {
-		return 1;
-	} else {
+static uint8_t IsKeyDown6(void) {
+	if (P55) {
 		return 0;
+	} else {
+		return 1;
 	}
 }
+static uint8_t IsKeyDown7(void) {
+	if (P55) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+static uint8_t IsKeyDown8(void) {
+	if (P55) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+static uint8_t IsKeyDown9(void) {
+	if (P55) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
 /*
  *********************************************************************************************************
  *	函 数 名: bsp_InitKey
@@ -216,22 +221,9 @@ void bsp_ClearKey(void) {
  */
 static void bsp_InitKeyHard(void) {
 
-	set_P0M1_3;
-	clr_P0M2_3;
+	set_P0M1_2;
+	clr_P0M2_2;
 
-	set_P0M1_4;
-	clr_P0M2_4;
-
-	set_P0M1_5;
-	clr_P0M2_5;
-
-	set_P0M1_6;
-	clr_P0M2_6;
-
-#if DEBUG_KEY
-	P5M1 |= 0x20;
-	P5M2 &= ~0x20;
-#endif
 }
 
 /*
@@ -267,12 +259,11 @@ static void bsp_InitKeyVar(void) {
 	s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
 	s_tBtn[2].IsKeyDownFunc = IsKeyDown3;
 	s_tBtn[3].IsKeyDownFunc = IsKeyDown4;
-#if DEBUG_KEY
 	s_tBtn[4].IsKeyDownFunc = IsKeyDown5;
-	s_tBtn[5].IsKeyDownFunc = IsKeyDown_1and3;
-#else
-	s_tBtn[4].IsKeyDownFunc = IsKeyDown_1and3;
-#endif
+	s_tBtn[5].IsKeyDownFunc = IsKeyDown6;
+	s_tBtn[6].IsKeyDownFunc = IsKeyDown7;
+	s_tBtn[7].IsKeyDownFunc = IsKeyDown8;
+	s_tBtn[8].IsKeyDownFunc = IsKeyDown9;
 
 }
 

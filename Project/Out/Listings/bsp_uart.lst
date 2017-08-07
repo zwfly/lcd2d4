@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_UART                                                          08/04/2017 22:16:58 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_UART                                                          08/07/2017 22:37:07 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_UART
@@ -18,35 +18,33 @@ line level    source
    7          
    8          #include "bsp.h"
    9          
-  10          #include "bsp_beep.h"
+  10          BIT riflag;
   11          
-  12          BIT riflag;
-  13          
-  14          void Uart_InitHard(void) {
-  15   1      
-  16   1              P5M1 &= ~SET_BIT7;
-  17   1              P5M2 |= SET_BIT7;
-  18   1      
-  19   1              InitialUART1_Timer3(9600);
-  20   1      //      set_ES_1;
-  21   1      //      set_ET1;
-  22   1      }
-  23          #if 1
-  24          BIT Get_Data_From_UART1(uint8_t *c) {
-  25   1              BIT b;
-  26   1      
-  27   1              if (RI_1) {
-  28   2                      *c = SBUF_1;
-  29   2                      RI_1 = 0;
-  30   2                      b = TRUE;
-  31   2              } else {
-  32   2                      b = FALSE;
-  33   2              }
-  34   1              return b;
-  35   1      }
-  36          #endif
-  37          
-  38          #if 0
+  12          void Uart_InitHard(void) {
+  13   1      
+  14   1              P5M1 &= ~SET_BIT7;
+  15   1              P5M2 |= SET_BIT7;
+  16   1      
+  17   1              InitialUART1_Timer3(9600);
+  18   1      //      set_ES_1;
+  19   1      //      set_ET1;
+  20   1      }
+  21          #if 1
+  22          BIT Get_Data_From_UART1(uint8_t *c) {
+  23   1              BIT b;
+  24   1      
+  25   1              if (RI_1) {
+  26   2                      *c = SBUF_1;
+  27   2                      RI_1 = 0;
+  28   2                      b = TRUE;
+  29   2              } else {
+  30   2                      b = FALSE;
+  31   2              }
+  32   1              return b;
+  33   1      }
+  34          #endif
+  35          
+  36          #if 0
               void serial_IT(void)
               interrupt 15
               {
@@ -62,10 +60,10 @@ line level    source
                       }
                       if (TI_1) {
                               clr_TI_1; /* if emission occur */
-C51 COMPILER V9.56.0.0   BSP_UART                                                          08/04/2017 22:16:58 PAGE 2   
-
                       }
               }
+C51 COMPILER V9.56.0.0   BSP_UART                                                          08/07/2017 22:37:07 PAGE 2   
+
               #endif
 
 

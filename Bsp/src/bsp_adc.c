@@ -7,13 +7,20 @@
 
 #include "bsp.h"
 
+ADC_RESULT_T g_tADC_Result;
+
 void ADC_Init(void) {
+	g_tADC_Result.busy = 0;
+	g_tADC_Result.channel = 0;
+	g_tADC_Result.result = 1023;
 
 #if 1
 
-	P0M1 &= ~SET_BIT1;
-	P0M2 |= SET_BIT1;
-	set_P01;
+	clr_P0M1_0;
+	clr_P0M2_0;
+
+	clr_P0M1_1;
+	clr_P0M2_1;
 
 	set_ADCEN;
 
@@ -26,16 +33,28 @@ void ADC_Init(void) {
 	set_ADCDIV1;
 	clr_ADCDIV0;
 
-	//////
-
-	set_ADCMPEN;
-	set_ADCMPOP;
-
-	ADCMPH = 0;
-	ADCMPL = 0;
-
 	EADC = 1;
 #endif
 }
 
+void ADC_Start(void) {
 
+	g_tADC_Result.busy = 1;
+
+	if (g_tADC_Result.channel) {
+		g_tADC_Result.channel = 0;
+		clr_ADCHS3;
+		clr_ADCHS2;
+		clr_ADCHS1;
+		clr_ADCHS0;
+		set_ADCS;  //Trigger ADC start conversion
+	} else {
+		g_tADC_Result.channel = 1;
+		clr_ADCHS3;
+		clr_ADCHS2;
+		clr_ADCHS1;
+		set_ADCHS0;
+		set_ADCS;  //Trigger ADC start conversion
+	}
+
+}

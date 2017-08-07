@@ -11,11 +11,10 @@
 #include "Delay.h"
 //#include "Display.h"
 
-#include "bsp_beep.h"
 #include "bsp_key.h"
-#include "bsp_bright.h"
+#include "bsp_lcdBright.h"
+#include "bsp_keyBright.h"
 #include "bsp_display.h"
-#include "bsp_hall.h"
 #include "bsp_bt.h"
 #include "bsp_uart.h"
 #include "bsp_timer0.h"

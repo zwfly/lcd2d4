@@ -11,9 +11,9 @@ void bsp_Init(void) {
 
 	ADC_Init();
 	bsp_InitKey();
-	Hall_Init();
+
 	Bright_InitHard();
-	BEEP_InitHard();
+
 	LCD_display_InitHard();
 	Timer0_InitHard();
 //	Timer1_InitHard();

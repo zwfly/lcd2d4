@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   MAIN                                                              08/04/2017 22:16:58 PAGE 1   
+C51 COMPILER V9.56.0.0   MAIN                                                              08/07/2017 22:37:06 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
@@ -16,104 +16,108 @@ line level    source
    5          /******************************************************************************
    6           * FUNCTION_PURPOSE: ADC interrupt Service Routine
    7           ******************************************************************************/
-   8          void ADC_ISR(void) interrupt 11
-   9          {
-  10   1              clr_ADCF;                               //clear ADC interrupt flag
-  11   1              app_battery_voltage_result();
-  12   1      }
-  13          /******************************************************************************
-  14           * FUNCTION_PURPOSE: I/O Pin interrupt Service Routine
-  15           ******************************************************************************/
-  16          void PinInterrupt_ISR(void)
-  17          interrupt 7
-  18          {
-  19   1      
-  20   1              if (PIF & 0x08) {
-  21   2      
-  22   2                      if (g_tDevice.status == E_PowerDown) {
-  23   3      
-  24   3                              g_tDevice.status = E_PowerReady;
-  25   3      
-  26   3                      }
-  27   2      
-  28   2              }
-  29   1      
-  30   1              PIF = 0x00;                             //clear interrupt flag
-  31   1      }
-  32          void main(void) {
-  33   1              uint8_t ucKeyCode;
-  34   1              System_Clock_Select(E_HIRCEN);
-  35   1      
-  36   1      #if  0
+   8          void ADC_ISR(void)
+   9          interrupt 11
+  10          {
+  11   1              clr_ADCF;                               //clear ADC interrupt flag
+  12   1      
+  13   1              g_tADC_Result.result = ADCRH;
+  14   1              g_tADC_Result.result <<= 2;
+  15   1              g_tADC_Result.result |= ADCRL;
+  16   1      }
+  17          /******************************************************************************
+  18           * FUNCTION_PURPOSE: I/O Pin interrupt Service Routine
+  19           ******************************************************************************/
+  20          void PinInterrupt_ISR(void)
+  21          interrupt 7
+  22          {
+  23   1      
+  24   1              if (PIF & 0x08) {
+  25   2      
+  26   2                      if (g_tDevice.status == E_PowerDown) {
+  27   3      
+  28   3                              g_tDevice.status = E_PowerReady;
+  29   3      
+  30   3                      }
+  31   2      
+  32   2              }
+  33   1      
+  34   1              PIF = 0x00;                             //clear interrupt flag
+  35   1      }
+  36          void main(void) {
+  37   1              uint8_t ucKeyCode;
+  38   1              System_Clock_Select(E_HIRCEN);
+  39   1      
+  40   1      #if  0
                       CKDIV = 1;                        //Fsys = Fosc / (2* CLKDIV) = Fcpu
               #endif
-  39   1      
-  40   1              /****************/
-  41   1              bsp_Init();
-  42   1      
-  43   1              /****************/
-  44   1              work_Init();
-  45   1              app_key_init();
-  46   1              app_charge_Init();
-  47   1      
-  48   1              /****************/
-  49   1              Show_FW_Version_Number_To_PC();
-  50   1      
-  51   1              while (1) {
-  52   2      
-  53   2                      if (Task_time.flag_10ms) {
-C51 COMPILER V9.56.0.0   MAIN                                                              08/04/2017 22:16:58 PAGE 2   
+  43   1      
+  44   1              /****************/
+  45   1              bsp_Init();
+  46   1      
+  47   1              /****************/
+  48   1              work_Init();
+  49   1              app_key_init();
+  50   1              app_charge_Init();
+  51   1      
+  52   1              /****************/
+  53   1              Show_FW_Version_Number_To_PC();
+C51 COMPILER V9.56.0.0   MAIN                                                              08/07/2017 22:37:06 PAGE 2   
 
-  54   3                              Task_time.flag_10ms = 0;
-  55   3                              //////////////////
-  56   3                              BEEP_Pro();
-  57   3                              bsp_KeyScan();
-  58   3                      }
-  59   2                      if (Task_time.flag_100ms) {
-  60   3                              Task_time.flag_100ms = 0;
-  61   3                              //////////////////
-  62   3                              app_key_100ms_pro();
-  63   3                              app_work_100ms_pro();
-  64   3                              app_charge_100ms_pro();
-  65   3                              Repeat_Pro();
-  66   3      
-  67   3                      }
-  68   2                      if (Task_time.flag_1s) {
-  69   3                              static uint8_t tmp = 0;
-  70   3                              static uint8_t cnt = 0;
-  71   3                              Task_time.flag_1s = 0;
-  72   3                              //////////////////
-  73   3                              app_key_1s_pro();
-  74   3                              app_work_1s_pro();
-  75   3                              app_charge_1s_pro();
-  76   3                              app_battery_1s_pro();
-  77   3      
-  78   3                              cnt++;
-  79   3                              if (cnt > 3) {
-  80   4                                      cnt = 10;
-  81   4      
-  82   4                                      tmp++;
-  83   4      //                              LCD_Show_REP_Num(tmp % 99);
-  84   4      //                              LCD_Show_Pulls_Num(tmp);
-  85   4      //                              LCD_Show_CAL_Num(tmp);
-  86   4                              }
-  87   3      
-  88   3      
-  89   3                      }
-  90   2      
-  91   2      #if 1
-  92   2      
-  93   2                      ucKeyCode = bsp_GetKey();
-  94   2                      if (ucKeyCode != KEY_NONE) {
-  95   3                              app_key_pro(ucKeyCode);
-  96   3                      }
-  97   2      #endif
-  98   2              }
-  99   1      }
+  54   1      
+  55   1              while (1) {
+  56   2      
+  57   2                      if (Task_time.flag_10ms) {
+  58   3                              Task_time.flag_10ms = 0;
+  59   3                              //////////////////
+  60   3      
+  61   3                              bsp_KeyScan();
+  62   3                              ADC_Start();
+  63   3                      }
+  64   2                      if (Task_time.flag_100ms) {
+  65   3                              Task_time.flag_100ms = 0;
+  66   3                              //////////////////
+  67   3                              app_key_100ms_pro();
+  68   3                              app_work_100ms_pro();
+  69   3                              app_charge_100ms_pro();
+  70   3                              Repeat_Pro();
+  71   3      
+  72   3                      }
+  73   2                      if (Task_time.flag_1s) {
+  74   3                              static uint8_t tmp = 0;
+  75   3                              static uint8_t cnt = 0;
+  76   3                              Task_time.flag_1s = 0;
+  77   3                              //////////////////
+  78   3                              app_key_1s_pro();
+  79   3                              app_work_1s_pro();
+  80   3                              app_charge_1s_pro();
+  81   3                              app_battery_1s_pro();
+  82   3      
+  83   3                              cnt++;
+  84   3                              if (cnt > 3) {
+  85   4                                      cnt = 10;
+  86   4      
+  87   4                                      tmp++;
+  88   4      //                              LCD_Show_REP_Num(tmp % 99);
+  89   4      //                              LCD_Show_Pulls_Num(tmp);
+  90   4      //                              LCD_Show_CAL_Num(tmp);
+  91   4                              }
+  92   3      
+  93   3                      }
+  94   2      
+  95   2      #if 1
+  96   2      
+  97   2                      ucKeyCode = bsp_GetKey();
+  98   2                      if (ucKeyCode != KEY_NONE) {
+  99   3                              app_key_pro(ucKeyCode);
+ 100   3                      }
+ 101   2      #endif
+ 102   2              }
+ 103   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    208    ----
+   CODE SIZE        =    233    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =      2       1
    PDATA SIZE       =   ----    ----

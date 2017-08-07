@@ -507,14 +507,14 @@ void app_key_pro(uint8_t keyCode) {
 
 		break;
 	case KEY_DOWN_K1:
-		BEEP_KeyTone();
+
 		if (g_tDevice.status == E_PowerOn) {
 			app_key_power_or_return();
 		}
 
 		break;
 	case KEY_LONG_K1:
-		BEEP_KeyTone();
+
 		if (g_tDevice.status == E_PowerOn) {
 			g_tDevice.status = E_PowerDown;
 			app_power_off();
@@ -531,7 +531,7 @@ void app_key_pro(uint8_t keyCode) {
 
 		break;
 	case KEY_DOWN_K2:
-		BEEP_KeyTone();
+
 		app_key_set();
 		break;
 	case KEY_LONG_K2:
@@ -541,7 +541,7 @@ void app_key_pro(uint8_t keyCode) {
 
 		break;
 	case KEY_DOWN_K3:
-		BEEP_KeyTone();
+
 		app_key_add();
 		break;
 	case KEY_LONG_K3:
@@ -551,33 +551,24 @@ void app_key_pro(uint8_t keyCode) {
 
 		break;
 	case KEY_DOWN_K4:
-		BEEP_KeyTone();
+
 		app_key_ok();
 		break;
 	case KEY_LONG_K4:
 
 		break;
-#if DEBUG_KEY
+
 	case KEY_UP_K5:
 
 		break;
 	case KEY_DOWN_K5:
-		//BEEP_KeyTone();
+
 		query_work_sum();
 		break;
 	case KEY_LONG_K5:
 
 		break;
-#endif
-	case KEY_UP_K1K3:
 
-		break;
-	case KEY_DOWN_K1K3:
-
-		break;
-	case KEY_LONG_K1K3:
-
-		break;
 	default:
 //		BEEP_KeyTone();
 		break;

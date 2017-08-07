@@ -7,8 +7,6 @@
 
 #include "bsp.h"
 
-#include "bsp_beep.h"
-
 BIT riflag;
 
 void Uart_InitHard(void) {
