@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_DISPLAY
@@ -26,1058 +26,1151 @@ line level    source
   15          void LCD_display_InitHard(void) {
   16   1      
   17   1      #if 1
-  18   1      
-  19   1              P1M2 = 0x00;
-  20   1              P1M1 = 0xFF;
-  21   1      
-  22   1              P2M2 = 0x00;
-  23   1              P2M1 = 0xFF;
-  24   1      
-  25   1              P4M2 = 0x00;
-  26   1              P4M1 = 0xFF;
-  27   1      #endif
-  28   1      
-  29   1              //LCDCON = 0x40;      //;VLCD = 0.9VDD (VDD = 3.3V, VLCD = 3.0V)
-  30   1              LCDCON = 0x00;                  //;1/4 duty, 1/3 bias, 150kO resistor ladder
-  31   1      
-  32   1              LCDCLK = 0x04;      //
-  33   1      
-  34   1              //enable seg pin
-  35   1              LCDSEG0 = 0xFF;
-  36   1              LCDSEG1 = 0xFF;
-  37   1              LCDSEG2 = 0x07;
-  38   1      
-  39   1              LCDCON |= SET_BIT7;  //LCDEN = 1
-  40   1      
-  41   1              LCD_Clear_All();
-  42   1      }
-  43          
-  44          void LCD_Clear_All(void) {
-  45   1              uint8_t i;
-  46   1              for (i = 0; i < 19; i++) {
-  47   2                      LCDPTR = i;
-  48   2                      LCDDAT = 0;
-  49   2              }
-  50   1      }
-  51          
-  52          void LCD_Clear_Bluetooth_ICO(void) {
-  53   1      //      clr_SEG10EN;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 2   
+  18   1              P0M2 = 0x00;
+  19   1              P0M1 = 0x80;
+  20   1      
+  21   1              P1M2 = 0x00;
+  22   1              P1M1 = 0xFF;
+  23   1      
+  24   1              P2M2 = 0x00;
+  25   1              P2M1 = 0xFF;
+  26   1      
+  27   1              P3M2 = 0x00;
+  28   1              P3M1 = 0x0F;
+  29   1      
+  30   1              P4M2 = 0x00;
+  31   1              P4M1 = 0xFF;
+  32   1      
+  33   1              P5M2 = 0x00;
+  34   1              P5M1 = 0xFF;
+  35   1      #endif
+  36   1      
+  37   1              //LCDCON = 0x40;      //;VLCD = 0.9VDD (VDD = 3.3V, VLCD = 3.0V)
+  38   1              LCDCON = 0x00;                  //;1/4 duty, 1/3 bias, 150kO resistor ladder
+  39   1      
+  40   1              LCDCLK = 0x04;      //
+  41   1      
+  42   1              //enable seg pin
+  43   1              LCDSEG0 = 0xFF;
+  44   1              LCDSEG1 = 0xFF;
+  45   1              LCDSEG2 = 0xFF;
+  46   1              LCDSEG3 = 0xFF;
+  47   1      
+  48   1              LCDCON |= SET_BIT7;  //LCDEN = 1
+  49   1      
+  50   1              LCD_Clear_All();
+  51   1      }
+  52          
+  53          void LCD_Clear_All(void) {
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 2   
 
-  54   1              LCDPTR = 10;
-  55   1              LCDDAT &= ~ COM0;
-  56   1      }
-  57          void LCD_Show_Bluetooth_ICO(void) {
-  58   1      //      set_SEG10EN;
-  59   1              LCDPTR = 10;
-  60   1              LCDDAT |= COM0;
-  61   1      }
-  62          
-  63          void LCD_Clear_Bluetooth_Fill_ICO(void) {
-  64   1      //      clr_SEG12EN;
-  65   1              LCDPTR = 12;
-  66   1              LCDDAT &= ~ COM0;
-  67   1      }
-  68          void LCD_Show_Bluetooth_Fill_ICO(void) {
-  69   1      //      set_SEG12EN;
-  70   1              LCDPTR = 12;
-  71   1              LCDDAT |= COM0;
+  54   1              uint8_t i;
+  55   1              for (i = 0; i < 32; i++) {
+  56   2                      LCDPTR = i;
+  57   2                      LCDDAT = 0;
+  58   2              }
+  59   1      }
+  60          
+  61          void LCD_Clear_LED_ICO(void) {
+  62   1              LCDPTR = 18;
+  63   1              LCDDAT &= ~ COM3;
+  64   1      }
+  65          void LCD_Show_LED_ICO(void) {
+  66   1              LCDPTR = 18;
+  67   1              LCDDAT |= COM3;
+  68   1      }
+  69          void LCD_Clear_FM_ICO(void) {
+  70   1              LCDPTR = 14;
+  71   1              LCDDAT &= ~ COM3;
   72   1      }
-  73          
-  74          void LCD_Clear_Line_up(void) {
-  75   1      //      clr_SEG8EN;
-  76   1              LCDPTR = 8;
-  77   1              LCDDAT &= ~ COM0;
-  78   1      }
-  79          void LCD_Show_Line_up(void) {
-  80   1      //      set_SEG8EN;
-  81   1              LCDPTR = 8;
-  82   1              LCDDAT |= COM0;
-  83   1      }
-  84          void LCD_Clear_Battery_ICO(void) {
-  85   1      //      clr_SEG14EN;
-  86   1              LCDPTR = 14;
-  87   1              LCDDAT &= ~COM0;
-  88   1      }
-  89          void LCD_Show_Battery_ICO(void) {
-  90   1      //      set_SEG14EN;
-  91   1              LCDPTR = 14;
-  92   1              LCDDAT |= COM0;
-  93   1      }
-  94          void LCD_Clear_REP_ICO(void) {
-  95   1      //      clr_SEG16EN;
-  96   1              LCDPTR = 16;
-  97   1              LCDDAT &= ~ COM0;
-  98   1      }
-  99          void LCD_Show_REP_ICO(void) {
- 100   1      //      set_SEG16EN;
- 101   1              LCDPTR = 16;
- 102   1              LCDDAT |= COM0;
- 103   1      }
- 104          void LCD_Clear_REP_Num(void) {
- 105   1      
- 106   1              LCDPTR = 18;
- 107   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 108   1      //      LCDDAT = COM1 + COM2 + COM3;
- 109   1      
- 110   1              LCDPTR = 19;
- 111   1              LCDDAT = 0;
- 112   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 113   1      
- 114   1              LCDPTR = 20;
- 115   1              LCDDAT &= ~(COM1 + COM2 + COM3);
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 3   
+  73          void LCD_Show_FM_ICO(void) {
+  74   1              LCDPTR = 14;
+  75   1              LCDDAT |= COM3;
+  76   1      }
+  77          void LCD_Clear_BLUETooTH_ICO(void) {
+  78   1      //      clr_SEG12EN;
+  79   1              LCDPTR = 12;
+  80   1              LCDDAT &= ~ COM0;
+  81   1      }
+  82          void LCD_Show_BLUETooTH_ICO(void) {
+  83   1      //      set_SEG12EN;
+  84   1              LCDPTR = 12;
+  85   1              LCDDAT |= COM0;
+  86   1      }
+  87          
+  88          void LCD_Clear_AUX_ICO(void) {
+  89   1      //      clr_SEG14EN;
+  90   1              LCDPTR = 14;
+  91   1              LCDDAT &= ~COM0;
+  92   1      }
+  93          void LCD_Show_AUX_ICO(void) {
+  94   1      //      set_SEG14EN;
+  95   1              LCDPTR = 14;
+  96   1              LCDDAT |= COM0;
+  97   1      }
+  98          void LCD_Clear_USB_ICO(void) {
+  99   1      //      clr_SEG16EN;
+ 100   1              LCDPTR = 16;
+ 101   1              LCDDAT &= ~ COM0;
+ 102   1      }
+ 103          void LCD_Show_USB_ICO(void) {
+ 104   1      //      set_SEG16EN;
+ 105   1              LCDPTR = 16;
+ 106   1              LCDDAT |= COM0;
+ 107   1      }
+ 108          void LCD_Clear_MHZ_ICO(void) {
+ 109   1      //      clr_SEG16EN;
+ 110   1              LCDPTR = 16;
+ 111   1              LCDDAT &= ~ COM0;
+ 112   1      }
+ 113          void LCD_Show_MHZ_ICO(void) {
+ 114   1      //      set_SEG16EN;
+ 115   1              LCDPTR = 16;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 3   
 
- 116   1      //      LCDDAT = COM1 + COM2 + COM3;
- 117   1      
- 118   1              LCDPTR = 21;
- 119   1              LCDDAT = 0;
- 120   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 121   1      }
- 122          void LCD_Show_REP_Num(uint8_t num) {
- 123   1              uint8_t ge;
- 124   1              uint8_t shi;
- 125   1      
- 126   1              if (num > 99) {
- 127   2                      return;
- 128   2              }
- 129   1      
- 130   1              shi = num / 10;
- 131   1              ge = num % 10;
- 132   1              if (num > 9) {
- 133   2      //              set_SEG14EN;
- 134   2      //              set_SEG15EN;
- 135   2                      switch (shi) {
- 136   3                      case 0:
- 137   3                              LCDPTR = 14;
- 138   3                              LCDDAT = COM1 + COM3;
- 139   3      
- 140   3                              LCDPTR = 15;
- 141   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 142   3                              break;
- 143   3                      case 1:
- 144   3                              LCDPTR = 14;
- 145   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 146   3      
- 147   3                              LCDPTR = 15;
- 148   3                              LCDDAT = COM1 + COM2;
- 149   3                              break;
- 150   3                      case 2:
- 151   3                              LCDPTR = 14;
- 152   3                              LCDDAT = COM2 + COM3;
- 153   3      
- 154   3                              LCDPTR = 15;
- 155   3                              LCDDAT = COM0 + COM1 + COM3;
- 156   3                              break;
- 157   3                      case 3:
- 158   3                              LCDPTR = 14;
- 159   3                              LCDDAT = COM2;
- 160   3      
- 161   3                              LCDPTR = 15;
- 162   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 163   3                              break;
- 164   3                      case 4:
- 165   3                              LCDPTR = 14;
- 166   3                              LCDDAT = COM1 + COM2;
- 167   3      
- 168   3                              LCDPTR = 15;
- 169   3                              LCDDAT = COM1 + COM2;
- 170   3                              break;
- 171   3                      case 5:
- 172   3                              LCDPTR = 14;
- 173   3                              LCDDAT = COM1 + COM2;
- 174   3      
- 175   3                              LCDPTR = 15;
- 176   3                              LCDDAT = COM0 + COM2 + COM3;
- 177   3                              break;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 4   
+ 116   1              LCDDAT |= COM0;
+ 117   1      }
+ 118          void LCD_Clear_BAZOOKA_ICO(void) {
+ 119   1              //      clr_SEG16EN;
+ 120   1              LCDPTR = 16;
+ 121   1              LCDDAT &= ~ COM0;
+ 122   1      }
+ 123          void LCD_Show_BAZOOKA_ICO(void) {
+ 124   1              //      set_SEG16EN;
+ 125   1              LCDPTR = 16;
+ 126   1              LCDDAT |= COM0;
+ 127   1      }
+ 128          void LCD_Clear_colon_ICO(void) {
+ 129   1              //      clr_SEG16EN;
+ 130   1              LCDPTR = 16;
+ 131   1              LCDDAT &= ~ COM0;
+ 132   1      }
+ 133          void LCD_Show_colon_ICO(void) {
+ 134   1              //      set_SEG16EN;
+ 135   1              LCDPTR = 16;
+ 136   1              LCDDAT |= COM0;
+ 137   1      }
+ 138          void LCD_Clear_mi_all(void) {
+ 139   1      
+ 140   1              LCDPTR = 18;
+ 141   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 142   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 143   1      
+ 144   1              LCDPTR = 19;
+ 145   1              LCDDAT = 0;
+ 146   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 147   1      
+ 148   1              LCDPTR = 20;
+ 149   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 150   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 151   1      
+ 152   1              LCDPTR = 21;
+ 153   1              LCDDAT = 0;
+ 154   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 155   1      }
+ 156          void LCD_Clear_mi(uint8_t n) {
+ 157   1      n++;
+ 158   1      }
+ 159          void LCD_show_mi(uint8_t n, char c) {
+ 160   1              switch (n) {
+ 161   2              case 0: {
+ 162   3                      switch (c) {
+ 163   4                      case '0':
+ 164   4                              LCDPTR = 14;
+ 165   4                              LCDDAT = COM1 + COM3;
+ 166   4      
+ 167   4                              LCDPTR = 15;
+ 168   4                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 169   4                              break;
+ 170   4                      case '1':
+ 171   4                              break;
+ 172   4                      case '2':
+ 173   4                              break;
+ 174   4                      case '3':
+ 175   4                              break;
+ 176   4                      case '4':
+ 177   4                              break;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 4   
 
- 178   3                      case 6:
- 179   3                              LCDPTR = 14;
- 180   3                              LCDDAT = COM1 + COM2 + COM3;
- 181   3      
- 182   3                              LCDPTR = 15;
- 183   3                              LCDDAT = COM0 + COM2 + COM3;
- 184   3                              break;
- 185   3                      case 7:
- 186   3                              LCDPTR = 14;
- 187   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 188   3      
- 189   3                              LCDPTR = 15;
- 190   3                              LCDDAT = COM0 + COM1 + COM2;
- 191   3                              break;
- 192   3                      case 8:
- 193   3                              LCDPTR = 14;
- 194   3                              LCDDAT = COM1 + COM2 + COM3;
- 195   3      
- 196   3                              LCDPTR = 15;
- 197   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 198   3                              break;
- 199   3                      case 9:
- 200   3                              LCDPTR = 14;
- 201   3                              LCDDAT = COM1 + COM2;
- 202   3      
- 203   3                              LCDPTR = 15;
- 204   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 205   3                              break;
- 206   3                      }
- 207   2              } else {
- 208   2      //              clr_SEG14EN;
- 209   2      //              clr_SEG15EN;
- 210   2      
- 211   2                      LCDPTR = 14;
- 212   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 213   2      //              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 214   2      
- 215   2                      LCDPTR = 15;
- 216   2                      LCDDAT = 0;
- 217   2      //              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 218   2              }
- 219   1      //      set_SEG16EN;
- 220   1      //      set_SEG17EN;
- 221   1              switch (ge) {
- 222   2              case 0:
- 223   2                      LCDPTR = 16;
- 224   2                      LCDDAT = COM1 + COM3;
- 225   2      
- 226   2                      LCDPTR = 17;
- 227   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 228   2                      break;
- 229   2              case 1:
- 230   2                      LCDPTR = 16;
- 231   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 232   2      
- 233   2                      LCDPTR = 17;
- 234   2                      LCDDAT = COM1 + COM2;
- 235   2                      break;
- 236   2              case 2:
- 237   2                      LCDPTR = 16;
- 238   2                      LCDDAT = COM2 + COM3;
- 239   2      
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 5   
+ 178   4                      case '5':
+ 179   4                              break;
+ 180   4                      case '6':
+ 181   4                              break;
+ 182   4                      case '7':
+ 183   4                              break;
+ 184   4                      case '8':
+ 185   4                              break;
+ 186   4                      case '9':
+ 187   4                              break;
+ 188   4                      case ' ':
+ 189   4                              LCD_Clear_mi(n);
+ 190   4                              break;
+ 191   4                      }
+ 192   3              }
+ 193   2                      break;
+ 194   2              case 1:
+ 195   2                      break;
+ 196   2              case 2:
+ 197   2                      break;
+ 198   2              case 3:
+ 199   2                      break;
+ 200   2              case 4:
+ 201   2                      break;
+ 202   2              case 5:
+ 203   2                      break;
+ 204   2              case 6:
+ 205   2                      break;
+ 206   2              case 7:
+ 207   2                      break;
+ 208   2              }
+ 209   1      }
+ 210          
+ 211          void LCD_Show_REP_Num(uint8_t num) {
+ 212   1              uint8_t ge;
+ 213   1              uint8_t shi;
+ 214   1      
+ 215   1              if (num > 99) {
+ 216   2                      return;
+ 217   2              }
+ 218   1      
+ 219   1              shi = num / 10;
+ 220   1              ge = num % 10;
+ 221   1              if (num > 9) {
+ 222   2      //              set_SEG14EN;
+ 223   2      //              set_SEG15EN;
+ 224   2                      switch (shi) {
+ 225   3                      case 0:
+ 226   3                              LCDPTR = 14;
+ 227   3                              LCDDAT = COM1 + COM3;
+ 228   3      
+ 229   3                              LCDPTR = 15;
+ 230   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 231   3                              break;
+ 232   3                      case 1:
+ 233   3                              LCDPTR = 14;
+ 234   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 235   3      
+ 236   3                              LCDPTR = 15;
+ 237   3                              LCDDAT = COM1 + COM2;
+ 238   3                              break;
+ 239   3                      case 2:
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 5   
 
- 240   2                      LCDPTR = 17;
- 241   2                      LCDDAT = COM0 + COM1 + COM3;
- 242   2                      break;
- 243   2              case 3:
- 244   2                      LCDPTR = 16;
- 245   2                      LCDDAT = COM2;
- 246   2      
- 247   2                      LCDPTR = 17;
- 248   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 249   2                      break;
- 250   2              case 4:
- 251   2                      LCDPTR = 16;
- 252   2                      LCDDAT = COM1 + COM2;
- 253   2      
- 254   2                      LCDPTR = 17;
- 255   2                      LCDDAT = COM1 + COM2;
- 256   2                      break;
- 257   2              case 5:
- 258   2                      LCDPTR = 16;
- 259   2                      LCDDAT = COM1 + COM2;
- 260   2      
- 261   2                      LCDPTR = 17;
- 262   2                      LCDDAT = COM0 + COM2 + COM3;
- 263   2                      break;
- 264   2              case 6:
- 265   2                      LCDPTR = 16;
- 266   2                      LCDDAT = COM1 + COM2 + COM3;
- 267   2      
- 268   2                      LCDPTR = 17;
- 269   2                      LCDDAT = COM0 + COM2 + COM3;
- 270   2                      break;
- 271   2              case 7:
- 272   2                      LCDPTR = 16;
- 273   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 274   2      
- 275   2                      LCDPTR = 17;
- 276   2                      LCDDAT = COM0 + COM1 + COM2;
- 277   2                      break;
- 278   2              case 8:
- 279   2                      LCDPTR = 16;
- 280   2                      LCDDAT = COM1 + COM2 + COM3;
- 281   2      
- 282   2                      LCDPTR = 17;
- 283   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 284   2                      break;
- 285   2              case 9:
- 286   2                      LCDPTR = 16;
- 287   2                      LCDDAT = COM1 + COM2;
- 288   2      
- 289   2                      LCDPTR = 17;
- 290   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 291   2                      break;
- 292   2              }
- 293   1      }
- 294          void LCD_Clear_ABCD(void) {
- 295   1      //      clr_SEG18EN;
- 296   1              LCDPTR = 18;
- 297   1              LCDDAT = 0;
- 298   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 299   1      }
- 300          void LCD_Show_ABCD_all(void) {
- 301   1      //      set_SEG18EN;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 6   
+ 240   3                              LCDPTR = 14;
+ 241   3                              LCDDAT = COM2 + COM3;
+ 242   3      
+ 243   3                              LCDPTR = 15;
+ 244   3                              LCDDAT = COM0 + COM1 + COM3;
+ 245   3                              break;
+ 246   3                      case 3:
+ 247   3                              LCDPTR = 14;
+ 248   3                              LCDDAT = COM2;
+ 249   3      
+ 250   3                              LCDPTR = 15;
+ 251   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 252   3                              break;
+ 253   3                      case 4:
+ 254   3                              LCDPTR = 14;
+ 255   3                              LCDDAT = COM1 + COM2;
+ 256   3      
+ 257   3                              LCDPTR = 15;
+ 258   3                              LCDDAT = COM1 + COM2;
+ 259   3                              break;
+ 260   3                      case 5:
+ 261   3                              LCDPTR = 14;
+ 262   3                              LCDDAT = COM1 + COM2;
+ 263   3      
+ 264   3                              LCDPTR = 15;
+ 265   3                              LCDDAT = COM0 + COM2 + COM3;
+ 266   3                              break;
+ 267   3                      case 6:
+ 268   3                              LCDPTR = 14;
+ 269   3                              LCDDAT = COM1 + COM2 + COM3;
+ 270   3      
+ 271   3                              LCDPTR = 15;
+ 272   3                              LCDDAT = COM0 + COM2 + COM3;
+ 273   3                              break;
+ 274   3                      case 7:
+ 275   3                              LCDPTR = 14;
+ 276   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 277   3      
+ 278   3                              LCDPTR = 15;
+ 279   3                              LCDDAT = COM0 + COM1 + COM2;
+ 280   3                              break;
+ 281   3                      case 8:
+ 282   3                              LCDPTR = 14;
+ 283   3                              LCDDAT = COM1 + COM2 + COM3;
+ 284   3      
+ 285   3                              LCDPTR = 15;
+ 286   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 287   3                              break;
+ 288   3                      case 9:
+ 289   3                              LCDPTR = 14;
+ 290   3                              LCDDAT = COM1 + COM2;
+ 291   3      
+ 292   3                              LCDPTR = 15;
+ 293   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 294   3                              break;
+ 295   3                      }
+ 296   2              } else {
+ 297   2      //              clr_SEG14EN;
+ 298   2      //              clr_SEG15EN;
+ 299   2      
+ 300   2                      LCDPTR = 14;
+ 301   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 6   
 
- 302   1              LCDPTR = 18;
- 303   1              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 304   1      }
- 305          void LCD_Show_ABCD(char c) {
- 306   1      //      set_SEG18EN;
- 307   1              LCDPTR = 18;
- 308   1      
- 309   1              switch (c) {
- 310   2              case 'A':
- 311   2                      LCDDAT = COM0;
- 312   2                      break;
- 313   2              case 'B':
- 314   2                      LCDDAT = COM1;
- 315   2                      break;
- 316   2              case 'C':
- 317   2                      LCDDAT = COM2;
- 318   2                      break;
- 319   2              case 'D':
- 320   2                      LCDDAT = COM3;
- 321   2                      break;
- 322   2              default:
- 323   2      //              LCDPTR = 18;
- 324   2      //              LCDDAT = 0;
- 325   2                      break;
- 326   2              }
- 327   1      }
- 328          void LCD_Clear_Pulls_Num(void) {
- 329   1      
- 330   1              LCDPTR = 8;
- 331   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 332   1      //      LCDDAT = COM1 + COM2 + COM3;
- 333   1      
- 334   1              LCDPTR = 9;
- 335   1              LCDDAT = 0;
- 336   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 337   1      
- 338   1              LCDPTR = 10;
- 339   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 340   1      //      LCDDAT = COM1 + COM2 + COM3;
- 341   1      
- 342   1              LCDPTR = 11;
- 343   1              LCDDAT = 0;
- 344   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 345   1      
- 346   1              LCDPTR = 12;
- 347   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 348   1      //      LCDDAT = COM1 + COM2 + COM3;
- 349   1      
- 350   1              LCDPTR = 13;
- 351   1              LCDDAT = 0;
- 352   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 353   1      }
- 354          void LCD_Show_Pulls_Num(uint16_t num) {
- 355   1              uint8_t ge;
- 356   1              uint8_t shi;
- 357   1              uint8_t bai;
- 358   1      
- 359   1              if (num > 999) {
- 360   2      
- 361   2                      return;
- 362   2              }
- 363   1              bai = num / 100;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 7   
+ 302   2      //              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 303   2      
+ 304   2                      LCDPTR = 15;
+ 305   2                      LCDDAT = 0;
+ 306   2      //              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 307   2              }
+ 308   1      //      set_SEG16EN;
+ 309   1      //      set_SEG17EN;
+ 310   1              switch (ge) {
+ 311   2              case 0:
+ 312   2                      LCDPTR = 16;
+ 313   2                      LCDDAT = COM1 + COM3;
+ 314   2      
+ 315   2                      LCDPTR = 17;
+ 316   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 317   2                      break;
+ 318   2              case 1:
+ 319   2                      LCDPTR = 16;
+ 320   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 321   2      
+ 322   2                      LCDPTR = 17;
+ 323   2                      LCDDAT = COM1 + COM2;
+ 324   2                      break;
+ 325   2              case 2:
+ 326   2                      LCDPTR = 16;
+ 327   2                      LCDDAT = COM2 + COM3;
+ 328   2      
+ 329   2                      LCDPTR = 17;
+ 330   2                      LCDDAT = COM0 + COM1 + COM3;
+ 331   2                      break;
+ 332   2              case 3:
+ 333   2                      LCDPTR = 16;
+ 334   2                      LCDDAT = COM2;
+ 335   2      
+ 336   2                      LCDPTR = 17;
+ 337   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 338   2                      break;
+ 339   2              case 4:
+ 340   2                      LCDPTR = 16;
+ 341   2                      LCDDAT = COM1 + COM2;
+ 342   2      
+ 343   2                      LCDPTR = 17;
+ 344   2                      LCDDAT = COM1 + COM2;
+ 345   2                      break;
+ 346   2              case 5:
+ 347   2                      LCDPTR = 16;
+ 348   2                      LCDDAT = COM1 + COM2;
+ 349   2      
+ 350   2                      LCDPTR = 17;
+ 351   2                      LCDDAT = COM0 + COM2 + COM3;
+ 352   2                      break;
+ 353   2              case 6:
+ 354   2                      LCDPTR = 16;
+ 355   2                      LCDDAT = COM1 + COM2 + COM3;
+ 356   2      
+ 357   2                      LCDPTR = 17;
+ 358   2                      LCDDAT = COM0 + COM2 + COM3;
+ 359   2                      break;
+ 360   2              case 7:
+ 361   2                      LCDPTR = 16;
+ 362   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 363   2      
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 7   
 
- 364   1              shi = num % 100 / 10;
- 365   1              ge = num % 10;
- 366   1              if (num > 99) {
- 367   2      //              set_SEG8EN;
- 368   2      //              set_SEG9EN;
- 369   2      
- 370   2                      switch (bai) {
- 371   3                      case 0:
- 372   3                              LCDPTR = 8;
- 373   3                              LCDDAT = COM1 + COM3;
- 374   3      
- 375   3                              LCDPTR = 9;
- 376   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 377   3                              break;
- 378   3                      case 1:
- 379   3                              LCDPTR = 8;
- 380   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 381   3      
- 382   3                              LCDPTR = 9;
- 383   3                              LCDDAT = COM1 + COM2;
- 384   3                              break;
- 385   3                      case 2:
- 386   3                              LCDPTR = 8;
- 387   3                              LCDDAT = COM2 + COM3;
- 388   3      
- 389   3                              LCDPTR = 9;
- 390   3                              LCDDAT = COM0 + COM1 + COM3;
- 391   3                              break;
- 392   3                      case 3:
- 393   3                              LCDPTR = 8;
- 394   3                              LCDDAT = COM2;
- 395   3      
- 396   3                              LCDPTR = 9;
- 397   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 398   3                              break;
- 399   3                      case 4:
- 400   3                              LCDPTR = 8;
- 401   3                              LCDDAT = COM1 + COM2;
- 402   3      
- 403   3                              LCDPTR = 9;
- 404   3                              LCDDAT = COM1 + COM2;
- 405   3                              break;
- 406   3                      case 5:
- 407   3                              LCDPTR = 8;
- 408   3                              LCDDAT = COM1 + COM2;
- 409   3      
- 410   3                              LCDPTR = 9;
- 411   3                              LCDDAT = COM0 + COM2 + COM3;
- 412   3                              break;
- 413   3                      case 6:
- 414   3                              LCDPTR = 8;
- 415   3                              LCDDAT = COM1 + COM2 + COM3;
- 416   3      
- 417   3                              LCDPTR = 9;
- 418   3                              LCDDAT = COM0 + COM2 + COM3;
- 419   3                              break;
- 420   3                      case 7:
- 421   3                              LCDPTR = 8;
- 422   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 423   3      
- 424   3                              LCDPTR = 9;
- 425   3                              LCDDAT = COM0 + COM1 + COM2;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 8   
+ 364   2                      LCDPTR = 17;
+ 365   2                      LCDDAT = COM0 + COM1 + COM2;
+ 366   2                      break;
+ 367   2              case 8:
+ 368   2                      LCDPTR = 16;
+ 369   2                      LCDDAT = COM1 + COM2 + COM3;
+ 370   2      
+ 371   2                      LCDPTR = 17;
+ 372   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 373   2                      break;
+ 374   2              case 9:
+ 375   2                      LCDPTR = 16;
+ 376   2                      LCDDAT = COM1 + COM2;
+ 377   2      
+ 378   2                      LCDPTR = 17;
+ 379   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 380   2                      break;
+ 381   2              }
+ 382   1      }
+ 383          void LCD_Clear_ABCD(void) {
+ 384   1      //      clr_SEG18EN;
+ 385   1              LCDPTR = 18;
+ 386   1              LCDDAT = 0;
+ 387   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 388   1      }
+ 389          void LCD_Show_ABCD_all(void) {
+ 390   1      //      set_SEG18EN;
+ 391   1              LCDPTR = 18;
+ 392   1              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 393   1      }
+ 394          void LCD_Show_ABCD(char c) {
+ 395   1      //      set_SEG18EN;
+ 396   1              LCDPTR = 18;
+ 397   1      
+ 398   1              switch (c) {
+ 399   2              case 'A':
+ 400   2                      LCDDAT = COM0;
+ 401   2                      break;
+ 402   2              case 'B':
+ 403   2                      LCDDAT = COM1;
+ 404   2                      break;
+ 405   2              case 'C':
+ 406   2                      LCDDAT = COM2;
+ 407   2                      break;
+ 408   2              case 'D':
+ 409   2                      LCDDAT = COM3;
+ 410   2                      break;
+ 411   2              default:
+ 412   2      //              LCDPTR = 18;
+ 413   2      //              LCDDAT = 0;
+ 414   2                      break;
+ 415   2              }
+ 416   1      }
+ 417          void LCD_Clear_Pulls_Num(void) {
+ 418   1      
+ 419   1              LCDPTR = 8;
+ 420   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 421   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 422   1      
+ 423   1              LCDPTR = 9;
+ 424   1              LCDDAT = 0;
+ 425   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 8   
 
- 426   3                              break;
- 427   3                      case 8:
- 428   3                              LCDPTR = 8;
- 429   3                              LCDDAT = COM1 + COM2 + COM3;
- 430   3      
- 431   3                              LCDPTR = 9;
- 432   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 433   3                              break;
- 434   3                      case 9:
- 435   3                              LCDPTR = 8;
- 436   3                              LCDDAT = COM1 + COM2;
- 437   3      
- 438   3                              LCDPTR = 9;
- 439   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 440   3                              break;
- 441   3                      }
- 442   2              } else {
- 443   2                      LCDPTR = 8;
- 444   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 445   2      
- 446   2                      LCDPTR = 9;
- 447   2                      LCDDAT = 0;
- 448   2              }
- 449   1              if (num > 9) {
- 450   2                      set_SEG10EN;
- 451   2                      set_SEG11EN;
- 452   2      
- 453   2                      switch (shi) {
- 454   3                      case 0:
- 455   3                              LCDPTR = 10;
- 456   3                              LCDDAT = COM1 + COM3;
- 457   3      
- 458   3                              LCDPTR = 11;
- 459   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 460   3                              break;
- 461   3                      case 1:
- 462   3                              LCDPTR = 10;
- 463   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 464   3      
- 465   3                              LCDPTR = 11;
- 466   3                              LCDDAT = COM1 + COM2;
- 467   3                              break;
- 468   3                      case 2:
- 469   3                              LCDPTR = 10;
- 470   3                              LCDDAT = COM2 + COM3;
- 471   3      
- 472   3                              LCDPTR = 11;
- 473   3                              LCDDAT = COM0 + COM1 + COM3;
- 474   3                              break;
- 475   3                      case 3:
- 476   3                              LCDPTR = 10;
- 477   3                              LCDDAT = COM2;
- 478   3      
- 479   3                              LCDPTR = 11;
- 480   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 481   3                              break;
- 482   3                      case 4:
- 483   3                              LCDPTR = 10;
- 484   3                              LCDDAT = COM1 + COM2;
- 485   3      
- 486   3                              LCDPTR = 11;
- 487   3                              LCDDAT = COM1 + COM2;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 9   
+ 426   1      
+ 427   1              LCDPTR = 10;
+ 428   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 429   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 430   1      
+ 431   1              LCDPTR = 11;
+ 432   1              LCDDAT = 0;
+ 433   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 434   1      
+ 435   1              LCDPTR = 12;
+ 436   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 437   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 438   1      
+ 439   1              LCDPTR = 13;
+ 440   1              LCDDAT = 0;
+ 441   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 442   1      }
+ 443          void LCD_Show_Pulls_Num(uint16_t num) {
+ 444   1              uint8_t ge;
+ 445   1              uint8_t shi;
+ 446   1              uint8_t bai;
+ 447   1      
+ 448   1              if (num > 999) {
+ 449   2      
+ 450   2                      return;
+ 451   2              }
+ 452   1              bai = num / 100;
+ 453   1              shi = num % 100 / 10;
+ 454   1              ge = num % 10;
+ 455   1              if (num > 99) {
+ 456   2      //              set_SEG8EN;
+ 457   2      //              set_SEG9EN;
+ 458   2      
+ 459   2                      switch (bai) {
+ 460   3                      case 0:
+ 461   3                              LCDPTR = 8;
+ 462   3                              LCDDAT = COM1 + COM3;
+ 463   3      
+ 464   3                              LCDPTR = 9;
+ 465   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 466   3                              break;
+ 467   3                      case 1:
+ 468   3                              LCDPTR = 8;
+ 469   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 470   3      
+ 471   3                              LCDPTR = 9;
+ 472   3                              LCDDAT = COM1 + COM2;
+ 473   3                              break;
+ 474   3                      case 2:
+ 475   3                              LCDPTR = 8;
+ 476   3                              LCDDAT = COM2 + COM3;
+ 477   3      
+ 478   3                              LCDPTR = 9;
+ 479   3                              LCDDAT = COM0 + COM1 + COM3;
+ 480   3                              break;
+ 481   3                      case 3:
+ 482   3                              LCDPTR = 8;
+ 483   3                              LCDDAT = COM2;
+ 484   3      
+ 485   3                              LCDPTR = 9;
+ 486   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 487   3                              break;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 9   
 
- 488   3                              break;
- 489   3                      case 5:
- 490   3                              LCDPTR = 10;
- 491   3                              LCDDAT = COM1 + COM2;
- 492   3      
- 493   3                              LCDPTR = 11;
- 494   3                              LCDDAT = COM0 + COM2 + COM3;
- 495   3                              break;
- 496   3                      case 6:
- 497   3                              LCDPTR = 10;
- 498   3                              LCDDAT = COM1 + COM2 + COM3;
- 499   3      
- 500   3                              LCDPTR = 11;
- 501   3                              LCDDAT = COM0 + COM2 + COM3;
- 502   3                              break;
- 503   3                      case 7:
- 504   3                              LCDPTR = 10;
- 505   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 506   3      
- 507   3                              LCDPTR = 11;
- 508   3                              LCDDAT = COM0 + COM1 + COM2;
- 509   3                              break;
- 510   3                      case 8:
- 511   3                              LCDPTR = 10;
- 512   3                              LCDDAT = COM1 + COM2 + COM3;
- 513   3      
- 514   3                              LCDPTR = 11;
- 515   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 516   3                              break;
- 517   3                      case 9:
- 518   3                              LCDPTR = 10;
- 519   3                              LCDDAT = COM1 + COM2;
- 520   3      
- 521   3                              LCDPTR = 11;
- 522   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 523   3                              break;
- 524   3                      }
- 525   2              } else {
- 526   2      //              clr_SEG10EN;
- 527   2      //              clr_SEG11EN;
- 528   2                      LCDPTR = 10;
- 529   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 530   2      
- 531   2                      LCDPTR = 11;
- 532   2                      LCDDAT = 0;
- 533   2              }
- 534   1      //      set_SEG12EN;
- 535   1      //      set_SEG13EN;
- 536   1              switch (ge) {
- 537   2              case 0:
- 538   2                      LCDPTR = 12;
- 539   2                      LCDDAT = COM1 + COM3;
- 540   2      
- 541   2                      LCDPTR = 13;
- 542   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 543   2                      break;
- 544   2              case 1:
- 545   2                      LCDPTR = 12;
- 546   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 547   2      
- 548   2                      LCDPTR = 13;
- 549   2                      LCDDAT = COM1 + COM2;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 10  
+ 488   3                      case 4:
+ 489   3                              LCDPTR = 8;
+ 490   3                              LCDDAT = COM1 + COM2;
+ 491   3      
+ 492   3                              LCDPTR = 9;
+ 493   3                              LCDDAT = COM1 + COM2;
+ 494   3                              break;
+ 495   3                      case 5:
+ 496   3                              LCDPTR = 8;
+ 497   3                              LCDDAT = COM1 + COM2;
+ 498   3      
+ 499   3                              LCDPTR = 9;
+ 500   3                              LCDDAT = COM0 + COM2 + COM3;
+ 501   3                              break;
+ 502   3                      case 6:
+ 503   3                              LCDPTR = 8;
+ 504   3                              LCDDAT = COM1 + COM2 + COM3;
+ 505   3      
+ 506   3                              LCDPTR = 9;
+ 507   3                              LCDDAT = COM0 + COM2 + COM3;
+ 508   3                              break;
+ 509   3                      case 7:
+ 510   3                              LCDPTR = 8;
+ 511   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 512   3      
+ 513   3                              LCDPTR = 9;
+ 514   3                              LCDDAT = COM0 + COM1 + COM2;
+ 515   3                              break;
+ 516   3                      case 8:
+ 517   3                              LCDPTR = 8;
+ 518   3                              LCDDAT = COM1 + COM2 + COM3;
+ 519   3      
+ 520   3                              LCDPTR = 9;
+ 521   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 522   3                              break;
+ 523   3                      case 9:
+ 524   3                              LCDPTR = 8;
+ 525   3                              LCDDAT = COM1 + COM2;
+ 526   3      
+ 527   3                              LCDPTR = 9;
+ 528   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 529   3                              break;
+ 530   3                      }
+ 531   2              } else {
+ 532   2                      LCDPTR = 8;
+ 533   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 534   2      
+ 535   2                      LCDPTR = 9;
+ 536   2                      LCDDAT = 0;
+ 537   2              }
+ 538   1              if (num > 9) {
+ 539   2                      set_SEG10EN;
+ 540   2                      set_SEG11EN;
+ 541   2      
+ 542   2                      switch (shi) {
+ 543   3                      case 0:
+ 544   3                              LCDPTR = 10;
+ 545   3                              LCDDAT = COM1 + COM3;
+ 546   3      
+ 547   3                              LCDPTR = 11;
+ 548   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 549   3                              break;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 10  
 
- 550   2                      break;
- 551   2              case 2:
- 552   2                      LCDPTR = 12;
- 553   2                      LCDDAT = COM2 + COM3;
- 554   2      
- 555   2                      LCDPTR = 13;
- 556   2                      LCDDAT = COM0 + COM1 + COM3;
- 557   2                      break;
- 558   2              case 3:
- 559   2                      LCDPTR = 12;
- 560   2                      LCDDAT = COM2;
- 561   2      
- 562   2                      LCDPTR = 13;
- 563   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 564   2                      break;
- 565   2              case 4:
- 566   2                      LCDPTR = 12;
- 567   2                      LCDDAT = COM1 + COM2;
- 568   2      
- 569   2                      LCDPTR = 13;
- 570   2                      LCDDAT = COM1 + COM2;
- 571   2                      break;
- 572   2              case 5:
- 573   2                      LCDPTR = 12;
- 574   2                      LCDDAT = COM1 + COM2;
- 575   2      
- 576   2                      LCDPTR = 13;
- 577   2                      LCDDAT = COM0 + COM2 + COM3;
- 578   2                      break;
- 579   2              case 6:
- 580   2                      LCDPTR = 12;
- 581   2                      LCDDAT = COM1 + COM2 + COM3;
- 582   2      
- 583   2                      LCDPTR = 13;
- 584   2                      LCDDAT = COM0 + COM2 + COM3;
- 585   2                      break;
- 586   2              case 7:
- 587   2                      LCDPTR = 12;
- 588   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 589   2      
- 590   2                      LCDPTR = 13;
- 591   2                      LCDDAT = COM0 + COM1 + COM2;
- 592   2                      break;
- 593   2              case 8:
- 594   2                      LCDPTR = 12;
- 595   2                      LCDDAT = COM1 + COM2 + COM3;
- 596   2      
- 597   2                      LCDPTR = 13;
- 598   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 599   2                      break;
- 600   2              case 9:
- 601   2                      LCDPTR = 12;
- 602   2                      LCDDAT = COM1 + COM2;
- 603   2      
- 604   2                      LCDPTR = 13;
- 605   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 606   2                      break;
- 607   2              }
- 608   1      }
- 609          void LCD_Clear_QS_ICO(void) {
- 610   1      //      clr_SEG2EN;
- 611   1              LCDPTR = 2;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 11  
+ 550   3                      case 1:
+ 551   3                              LCDPTR = 10;
+ 552   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 553   3      
+ 554   3                              LCDPTR = 11;
+ 555   3                              LCDDAT = COM1 + COM2;
+ 556   3                              break;
+ 557   3                      case 2:
+ 558   3                              LCDPTR = 10;
+ 559   3                              LCDDAT = COM2 + COM3;
+ 560   3      
+ 561   3                              LCDPTR = 11;
+ 562   3                              LCDDAT = COM0 + COM1 + COM3;
+ 563   3                              break;
+ 564   3                      case 3:
+ 565   3                              LCDPTR = 10;
+ 566   3                              LCDDAT = COM2;
+ 567   3      
+ 568   3                              LCDPTR = 11;
+ 569   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 570   3                              break;
+ 571   3                      case 4:
+ 572   3                              LCDPTR = 10;
+ 573   3                              LCDDAT = COM1 + COM2;
+ 574   3      
+ 575   3                              LCDPTR = 11;
+ 576   3                              LCDDAT = COM1 + COM2;
+ 577   3                              break;
+ 578   3                      case 5:
+ 579   3                              LCDPTR = 10;
+ 580   3                              LCDDAT = COM1 + COM2;
+ 581   3      
+ 582   3                              LCDPTR = 11;
+ 583   3                              LCDDAT = COM0 + COM2 + COM3;
+ 584   3                              break;
+ 585   3                      case 6:
+ 586   3                              LCDPTR = 10;
+ 587   3                              LCDDAT = COM1 + COM2 + COM3;
+ 588   3      
+ 589   3                              LCDPTR = 11;
+ 590   3                              LCDDAT = COM0 + COM2 + COM3;
+ 591   3                              break;
+ 592   3                      case 7:
+ 593   3                              LCDPTR = 10;
+ 594   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 595   3      
+ 596   3                              LCDPTR = 11;
+ 597   3                              LCDDAT = COM0 + COM1 + COM2;
+ 598   3                              break;
+ 599   3                      case 8:
+ 600   3                              LCDPTR = 10;
+ 601   3                              LCDDAT = COM1 + COM2 + COM3;
+ 602   3      
+ 603   3                              LCDPTR = 11;
+ 604   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 605   3                              break;
+ 606   3                      case 9:
+ 607   3                              LCDPTR = 10;
+ 608   3                              LCDDAT = COM1 + COM2;
+ 609   3      
+ 610   3                              LCDPTR = 11;
+ 611   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 11  
 
- 612   1              LCDDAT &= ~ COM0;
- 613   1      }
- 614          void LCD_Show_QS_ICO(void) {
- 615   1      //      set_SEG2EN;
- 616   1              LCDPTR = 2;
- 617   1              LCDDAT |= COM0;
- 618   1      }
- 619          void LCD_Clear_COACH_ICO(void) {
- 620   1      //      clr_SEG4EN;
- 621   1              LCDPTR = 4;
- 622   1              LCDDAT &= ~COM0;
- 623   1      }
- 624          void LCD_Show_COACH_ICO(void) {
- 625   1      //      set_SEG4EN;
- 626   1              LCDPTR = 4;
- 627   1              LCDDAT = COM0;
- 628   1      }
- 629          void LCD_Clear_Line_down(void) {
- 630   1      //      clr_SEG8EN;
- 631   1              LCDPTR = 8;
- 632   1              LCDDAT &= ~COM0;
- 633   1      }
- 634          void LCD_Show_Line_down(void) {
- 635   1      //      set_SEG8EN;
- 636   1              LCDPTR = 8;
- 637   1              LCDDAT |= COM0;
- 638   1      }
- 639          void LCD_Clear_Heart_ICO(void) {
- 640   1      //      clr_SEG0EN;
- 641   1              LCDPTR = 0;
- 642   1              LCDDAT &= ~COM0;
- 643   1      }
- 644          void LCD_Show_Heart_ICO(void) {
- 645   1      //      set_SEG0EN;
- 646   1              LCDPTR = 0;
- 647   1              LCDDAT |= COM0;
- 648   1      }
- 649          void LCD_Clear_CAL_Num(void) {
- 650   1      
- 651   1              LCDPTR = 0;
- 652   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 653   1      //      LCDDAT = COM1 + COM2 + COM3;
- 654   1      
- 655   1              LCDPTR = 1;
- 656   1              LCDDAT = 0;
- 657   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 658   1      
- 659   1              LCDPTR = 2;
- 660   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 661   1      //      LCDDAT = COM1 + COM2 + COM3;
- 662   1      
- 663   1              LCDPTR = 3;
- 664   1              LCDDAT = 0;
- 665   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 666   1      
- 667   1              LCDPTR = 4;
- 668   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 669   1      //      LCDDAT = COM1 + COM2 + COM3;
- 670   1      
- 671   1              LCDPTR = 5;
- 672   1              LCDDAT = 0;
- 673   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 12  
+ 612   3                              break;
+ 613   3                      }
+ 614   2              } else {
+ 615   2      //              clr_SEG10EN;
+ 616   2      //              clr_SEG11EN;
+ 617   2                      LCDPTR = 10;
+ 618   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 619   2      
+ 620   2                      LCDPTR = 11;
+ 621   2                      LCDDAT = 0;
+ 622   2              }
+ 623   1      //      set_SEG12EN;
+ 624   1      //      set_SEG13EN;
+ 625   1              switch (ge) {
+ 626   2              case 0:
+ 627   2                      LCDPTR = 12;
+ 628   2                      LCDDAT = COM1 + COM3;
+ 629   2      
+ 630   2                      LCDPTR = 13;
+ 631   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 632   2                      break;
+ 633   2              case 1:
+ 634   2                      LCDPTR = 12;
+ 635   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 636   2      
+ 637   2                      LCDPTR = 13;
+ 638   2                      LCDDAT = COM1 + COM2;
+ 639   2                      break;
+ 640   2              case 2:
+ 641   2                      LCDPTR = 12;
+ 642   2                      LCDDAT = COM2 + COM3;
+ 643   2      
+ 644   2                      LCDPTR = 13;
+ 645   2                      LCDDAT = COM0 + COM1 + COM3;
+ 646   2                      break;
+ 647   2              case 3:
+ 648   2                      LCDPTR = 12;
+ 649   2                      LCDDAT = COM2;
+ 650   2      
+ 651   2                      LCDPTR = 13;
+ 652   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 653   2                      break;
+ 654   2              case 4:
+ 655   2                      LCDPTR = 12;
+ 656   2                      LCDDAT = COM1 + COM2;
+ 657   2      
+ 658   2                      LCDPTR = 13;
+ 659   2                      LCDDAT = COM1 + COM2;
+ 660   2                      break;
+ 661   2              case 5:
+ 662   2                      LCDPTR = 12;
+ 663   2                      LCDDAT = COM1 + COM2;
+ 664   2      
+ 665   2                      LCDPTR = 13;
+ 666   2                      LCDDAT = COM0 + COM2 + COM3;
+ 667   2                      break;
+ 668   2              case 6:
+ 669   2                      LCDPTR = 12;
+ 670   2                      LCDDAT = COM1 + COM2 + COM3;
+ 671   2      
+ 672   2                      LCDPTR = 13;
+ 673   2                      LCDDAT = COM0 + COM2 + COM3;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 12  
 
- 674   1      
- 675   1              LCDPTR = 6;
- 676   1              LCDDAT &= ~(COM1 + COM2 + COM3);
- 677   1      //      LCDDAT = COM1 + COM2 + COM3;
- 678   1      
- 679   1              LCDPTR = 7;
- 680   1              LCDDAT = 0;
- 681   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 682   1      }
- 683          void LCD_Show_CAL_Num(uint16_t num) {
- 684   1              uint8_t ge;
- 685   1              uint8_t shi;
- 686   1              uint8_t bai;
- 687   1              uint8_t qian;
- 688   1      
- 689   1              if (num > 9999) {
- 690   2                      return;
- 691   2              }
- 692   1              qian = num / 1000;
- 693   1              bai = num % 1000 / 100;
- 694   1              shi = num % 100 / 10;
- 695   1              ge = num % 10;
- 696   1              if (num > 999) {
- 697   2      //              set_SEG0EN;
- 698   2      //              set_SEG1EN;
- 699   2      
- 700   2                      switch (qian) {
- 701   3                      case 0:
- 702   3                              LCDPTR = 0;
- 703   3                              LCDDAT = COM1 + COM3;
- 704   3      
- 705   3                              LCDPTR = 1;
- 706   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 707   3                              break;
- 708   3                      case 1:
- 709   3                              LCDPTR = 0;
- 710   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 711   3      
- 712   3                              LCDPTR = 1;
- 713   3                              LCDDAT = COM1 + COM2;
- 714   3                              break;
- 715   3                      case 2:
- 716   3                              LCDPTR = 0;
- 717   3                              LCDDAT = COM2 + COM3;
- 718   3      
- 719   3                              LCDPTR = 1;
- 720   3                              LCDDAT = COM0 + COM1 + COM3;
- 721   3                              break;
- 722   3                      case 3:
- 723   3                              LCDPTR = 0;
- 724   3                              LCDDAT = COM2;
- 725   3      
- 726   3                              LCDPTR = 1;
- 727   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 728   3                              break;
- 729   3                      case 4:
- 730   3                              LCDPTR = 0;
- 731   3                              LCDDAT = COM1 + COM2;
- 732   3      
- 733   3                              LCDPTR = 1;
- 734   3                              LCDDAT = COM1 + COM2;
- 735   3                              break;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 13  
+ 674   2                      break;
+ 675   2              case 7:
+ 676   2                      LCDPTR = 12;
+ 677   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 678   2      
+ 679   2                      LCDPTR = 13;
+ 680   2                      LCDDAT = COM0 + COM1 + COM2;
+ 681   2                      break;
+ 682   2              case 8:
+ 683   2                      LCDPTR = 12;
+ 684   2                      LCDDAT = COM1 + COM2 + COM3;
+ 685   2      
+ 686   2                      LCDPTR = 13;
+ 687   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 688   2                      break;
+ 689   2              case 9:
+ 690   2                      LCDPTR = 12;
+ 691   2                      LCDDAT = COM1 + COM2;
+ 692   2      
+ 693   2                      LCDPTR = 13;
+ 694   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 695   2                      break;
+ 696   2              }
+ 697   1      }
+ 698          void LCD_Clear_QS_ICO(void) {
+ 699   1      //      clr_SEG2EN;
+ 700   1              LCDPTR = 2;
+ 701   1              LCDDAT &= ~ COM0;
+ 702   1      }
+ 703          void LCD_Show_QS_ICO(void) {
+ 704   1      //      set_SEG2EN;
+ 705   1              LCDPTR = 2;
+ 706   1              LCDDAT |= COM0;
+ 707   1      }
+ 708          void LCD_Clear_COACH_ICO(void) {
+ 709   1      //      clr_SEG4EN;
+ 710   1              LCDPTR = 4;
+ 711   1              LCDDAT &= ~COM0;
+ 712   1      }
+ 713          void LCD_Show_COACH_ICO(void) {
+ 714   1      //      set_SEG4EN;
+ 715   1              LCDPTR = 4;
+ 716   1              LCDDAT = COM0;
+ 717   1      }
+ 718          void LCD_Clear_Line_down(void) {
+ 719   1      //      clr_SEG8EN;
+ 720   1              LCDPTR = 8;
+ 721   1              LCDDAT &= ~COM0;
+ 722   1      }
+ 723          void LCD_Show_Line_down(void) {
+ 724   1      //      set_SEG8EN;
+ 725   1              LCDPTR = 8;
+ 726   1              LCDDAT |= COM0;
+ 727   1      }
+ 728          void LCD_Clear_Heart_ICO(void) {
+ 729   1      //      clr_SEG0EN;
+ 730   1              LCDPTR = 0;
+ 731   1              LCDDAT &= ~COM0;
+ 732   1      }
+ 733          void LCD_Show_Heart_ICO(void) {
+ 734   1      //      set_SEG0EN;
+ 735   1              LCDPTR = 0;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 13  
 
- 736   3                      case 5:
- 737   3                              LCDPTR = 0;
- 738   3                              LCDDAT = COM1 + COM2;
- 739   3      
- 740   3                              LCDPTR = 1;
- 741   3                              LCDDAT = COM0 + COM2 + COM3;
- 742   3                              break;
- 743   3                      case 6:
- 744   3                              LCDPTR = 0;
- 745   3                              LCDDAT = COM1 + COM2 + COM3;
- 746   3      
- 747   3                              LCDPTR = 1;
- 748   3                              LCDDAT = COM0 + COM2 + COM3;
- 749   3                              break;
- 750   3                      case 7:
- 751   3                              LCDPTR = 0;
- 752   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 753   3      
- 754   3                              LCDPTR = 1;
- 755   3                              LCDDAT = COM0 + COM1 + COM2;
- 756   3                              break;
- 757   3                      case 8:
- 758   3                              LCDPTR = 0;
- 759   3                              LCDDAT = COM1 + COM2 + COM3;
- 760   3      
- 761   3                              LCDPTR = 1;
- 762   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 763   3                              break;
- 764   3                      case 9:
- 765   3                              LCDPTR = 0;
- 766   3                              LCDDAT = COM1 + COM2;
- 767   3      
- 768   3                              LCDPTR = 1;
- 769   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 770   3                              break;
- 771   3                      }
- 772   2              } else {
- 773   2                      LCDPTR = 0;
- 774   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 775   2      
- 776   2                      LCDPTR = 1;
- 777   2                      LCDDAT = 0;
- 778   2              }
- 779   1              if (num > 99) {
- 780   2      
- 781   2                      switch (bai) {
- 782   3                      case 0:
- 783   3                              LCDPTR = 2;
- 784   3                              LCDDAT = COM1 + COM3;
- 785   3      
- 786   3                              LCDPTR = 3;
- 787   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 788   3                              break;
- 789   3                      case 1:
- 790   3                              LCDPTR = 2;
- 791   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 792   3      
- 793   3                              LCDPTR = 3;
- 794   3                              LCDDAT = COM1 + COM2;
- 795   3                              break;
- 796   3                      case 2:
- 797   3                              LCDPTR = 2;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 14  
+ 736   1              LCDDAT |= COM0;
+ 737   1      }
+ 738          void LCD_Clear_CAL_Num(void) {
+ 739   1      
+ 740   1              LCDPTR = 0;
+ 741   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 742   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 743   1      
+ 744   1              LCDPTR = 1;
+ 745   1              LCDDAT = 0;
+ 746   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 747   1      
+ 748   1              LCDPTR = 2;
+ 749   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 750   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 751   1      
+ 752   1              LCDPTR = 3;
+ 753   1              LCDDAT = 0;
+ 754   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 755   1      
+ 756   1              LCDPTR = 4;
+ 757   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 758   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 759   1      
+ 760   1              LCDPTR = 5;
+ 761   1              LCDDAT = 0;
+ 762   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 763   1      
+ 764   1              LCDPTR = 6;
+ 765   1              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 766   1      //      LCDDAT = COM1 + COM2 + COM3;
+ 767   1      
+ 768   1              LCDPTR = 7;
+ 769   1              LCDDAT = 0;
+ 770   1      //      LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 771   1      }
+ 772          void LCD_Show_CAL_Num(uint16_t num) {
+ 773   1              uint8_t ge;
+ 774   1              uint8_t shi;
+ 775   1              uint8_t bai;
+ 776   1              uint8_t qian;
+ 777   1      
+ 778   1              if (num > 9999) {
+ 779   2                      return;
+ 780   2              }
+ 781   1              qian = num / 1000;
+ 782   1              bai = num % 1000 / 100;
+ 783   1              shi = num % 100 / 10;
+ 784   1              ge = num % 10;
+ 785   1              if (num > 999) {
+ 786   2      //              set_SEG0EN;
+ 787   2      //              set_SEG1EN;
+ 788   2      
+ 789   2                      switch (qian) {
+ 790   3                      case 0:
+ 791   3                              LCDPTR = 0;
+ 792   3                              LCDDAT = COM1 + COM3;
+ 793   3      
+ 794   3                              LCDPTR = 1;
+ 795   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 796   3                              break;
+ 797   3                      case 1:
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 14  
 
- 798   3                              LCDDAT = COM2 + COM3;
- 799   3      
- 800   3                              LCDPTR = 3;
- 801   3                              LCDDAT = COM0 + COM1 + COM3;
- 802   3                              break;
- 803   3                      case 3:
- 804   3                              LCDPTR = 2;
- 805   3                              LCDDAT = COM2;
- 806   3      
- 807   3                              LCDPTR = 3;
- 808   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 809   3                              break;
- 810   3                      case 4:
- 811   3                              LCDPTR = 2;
- 812   3                              LCDDAT = COM1 + COM2;
- 813   3      
- 814   3                              LCDPTR = 3;
- 815   3                              LCDDAT = COM1 + COM2;
- 816   3                              break;
- 817   3                      case 5:
- 818   3                              LCDPTR = 2;
- 819   3                              LCDDAT = COM1 + COM2;
- 820   3      
- 821   3                              LCDPTR = 3;
- 822   3                              LCDDAT = COM0 + COM2 + COM3;
- 823   3                              break;
- 824   3                      case 6:
- 825   3                              LCDPTR = 2;
- 826   3                              LCDDAT = COM1 + COM2 + COM3;
- 827   3      
- 828   3                              LCDPTR = 3;
- 829   3                              LCDDAT = COM0 + COM2 + COM3;
- 830   3                              break;
- 831   3                      case 7:
- 832   3                              LCDPTR = 2;
- 833   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 834   3      
- 835   3                              LCDPTR = 3;
- 836   3                              LCDDAT = COM0 + COM1 + COM2;
- 837   3                              break;
- 838   3                      case 8:
- 839   3                              LCDPTR = 2;
- 840   3                              LCDDAT = COM1 + COM2 + COM3;
- 841   3      
- 842   3                              LCDPTR = 3;
- 843   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 844   3                              break;
- 845   3                      case 9:
- 846   3                              LCDPTR = 2;
- 847   3                              LCDDAT = COM1 + COM2;
- 848   3      
- 849   3                              LCDPTR = 3;
- 850   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 851   3                              break;
- 852   3                      }
- 853   2              } else {
- 854   2      //              clr_SEG2EN;
- 855   2      //              clr_SEG3EN;
- 856   2                      LCDPTR = 2;
- 857   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 858   2      
- 859   2                      LCDPTR = 3;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 15  
+ 798   3                              LCDPTR = 0;
+ 799   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 800   3      
+ 801   3                              LCDPTR = 1;
+ 802   3                              LCDDAT = COM1 + COM2;
+ 803   3                              break;
+ 804   3                      case 2:
+ 805   3                              LCDPTR = 0;
+ 806   3                              LCDDAT = COM2 + COM3;
+ 807   3      
+ 808   3                              LCDPTR = 1;
+ 809   3                              LCDDAT = COM0 + COM1 + COM3;
+ 810   3                              break;
+ 811   3                      case 3:
+ 812   3                              LCDPTR = 0;
+ 813   3                              LCDDAT = COM2;
+ 814   3      
+ 815   3                              LCDPTR = 1;
+ 816   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 817   3                              break;
+ 818   3                      case 4:
+ 819   3                              LCDPTR = 0;
+ 820   3                              LCDDAT = COM1 + COM2;
+ 821   3      
+ 822   3                              LCDPTR = 1;
+ 823   3                              LCDDAT = COM1 + COM2;
+ 824   3                              break;
+ 825   3                      case 5:
+ 826   3                              LCDPTR = 0;
+ 827   3                              LCDDAT = COM1 + COM2;
+ 828   3      
+ 829   3                              LCDPTR = 1;
+ 830   3                              LCDDAT = COM0 + COM2 + COM3;
+ 831   3                              break;
+ 832   3                      case 6:
+ 833   3                              LCDPTR = 0;
+ 834   3                              LCDDAT = COM1 + COM2 + COM3;
+ 835   3      
+ 836   3                              LCDPTR = 1;
+ 837   3                              LCDDAT = COM0 + COM2 + COM3;
+ 838   3                              break;
+ 839   3                      case 7:
+ 840   3                              LCDPTR = 0;
+ 841   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 842   3      
+ 843   3                              LCDPTR = 1;
+ 844   3                              LCDDAT = COM0 + COM1 + COM2;
+ 845   3                              break;
+ 846   3                      case 8:
+ 847   3                              LCDPTR = 0;
+ 848   3                              LCDDAT = COM1 + COM2 + COM3;
+ 849   3      
+ 850   3                              LCDPTR = 1;
+ 851   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 852   3                              break;
+ 853   3                      case 9:
+ 854   3                              LCDPTR = 0;
+ 855   3                              LCDDAT = COM1 + COM2;
+ 856   3      
+ 857   3                              LCDPTR = 1;
+ 858   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 859   3                              break;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 15  
 
- 860   2                      LCDDAT = 0;
- 861   2              }
- 862   1              if (num > 9) {
- 863   2      //              set_SEG4EN;
- 864   2      //              set_SEG5EN;
- 865   2      
- 866   2                      switch (shi) {
- 867   3                      case 0:
- 868   3                              LCDPTR = 4;
- 869   3                              LCDDAT = COM1 + COM3;
- 870   3      
- 871   3                              LCDPTR = 5;
- 872   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 873   3                              break;
- 874   3                      case 1:
- 875   3                              LCDPTR = 4;
- 876   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 877   3      
- 878   3                              LCDPTR = 5;
- 879   3                              LCDDAT = COM1 + COM2;
- 880   3                              break;
- 881   3                      case 2:
- 882   3                              LCDPTR = 4;
- 883   3                              LCDDAT = COM2 + COM3;
- 884   3      
- 885   3                              LCDPTR = 5;
- 886   3                              LCDDAT = COM0 + COM1 + COM3;
- 887   3                              break;
- 888   3                      case 3:
- 889   3                              LCDPTR = 4;
- 890   3                              LCDDAT = COM2;
- 891   3      
- 892   3                              LCDPTR = 5;
- 893   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 894   3                              break;
- 895   3                      case 4:
- 896   3                              LCDPTR = 4;
- 897   3                              LCDDAT = COM1 + COM2;
- 898   3      
- 899   3                              LCDPTR = 5;
- 900   3                              LCDDAT = COM1 + COM2;
- 901   3                              break;
- 902   3                      case 5:
- 903   3                              LCDPTR = 4;
+ 860   3                      }
+ 861   2              } else {
+ 862   2                      LCDPTR = 0;
+ 863   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 864   2      
+ 865   2                      LCDPTR = 1;
+ 866   2                      LCDDAT = 0;
+ 867   2              }
+ 868   1              if (num > 99) {
+ 869   2      
+ 870   2                      switch (bai) {
+ 871   3                      case 0:
+ 872   3                              LCDPTR = 2;
+ 873   3                              LCDDAT = COM1 + COM3;
+ 874   3      
+ 875   3                              LCDPTR = 3;
+ 876   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 877   3                              break;
+ 878   3                      case 1:
+ 879   3                              LCDPTR = 2;
+ 880   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 881   3      
+ 882   3                              LCDPTR = 3;
+ 883   3                              LCDDAT = COM1 + COM2;
+ 884   3                              break;
+ 885   3                      case 2:
+ 886   3                              LCDPTR = 2;
+ 887   3                              LCDDAT = COM2 + COM3;
+ 888   3      
+ 889   3                              LCDPTR = 3;
+ 890   3                              LCDDAT = COM0 + COM1 + COM3;
+ 891   3                              break;
+ 892   3                      case 3:
+ 893   3                              LCDPTR = 2;
+ 894   3                              LCDDAT = COM2;
+ 895   3      
+ 896   3                              LCDPTR = 3;
+ 897   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 898   3                              break;
+ 899   3                      case 4:
+ 900   3                              LCDPTR = 2;
+ 901   3                              LCDDAT = COM1 + COM2;
+ 902   3      
+ 903   3                              LCDPTR = 3;
  904   3                              LCDDAT = COM1 + COM2;
- 905   3      
- 906   3                              LCDPTR = 5;
- 907   3                              LCDDAT = COM0 + COM2 + COM3;
- 908   3                              break;
- 909   3                      case 6:
- 910   3                              LCDPTR = 4;
- 911   3                              LCDDAT = COM1 + COM2 + COM3;
- 912   3      
- 913   3                              LCDPTR = 5;
- 914   3                              LCDDAT = COM0 + COM2 + COM3;
- 915   3                              break;
- 916   3                      case 7:
- 917   3                              LCDPTR = 4;
- 918   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
- 919   3      
- 920   3                              LCDPTR = 5;
- 921   3                              LCDDAT = COM0 + COM1 + COM2;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 16  
+ 905   3                              break;
+ 906   3                      case 5:
+ 907   3                              LCDPTR = 2;
+ 908   3                              LCDDAT = COM1 + COM2;
+ 909   3      
+ 910   3                              LCDPTR = 3;
+ 911   3                              LCDDAT = COM0 + COM2 + COM3;
+ 912   3                              break;
+ 913   3                      case 6:
+ 914   3                              LCDPTR = 2;
+ 915   3                              LCDDAT = COM1 + COM2 + COM3;
+ 916   3      
+ 917   3                              LCDPTR = 3;
+ 918   3                              LCDDAT = COM0 + COM2 + COM3;
+ 919   3                              break;
+ 920   3                      case 7:
+ 921   3                              LCDPTR = 2;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 16  
 
- 922   3                              break;
- 923   3                      case 8:
- 924   3                              LCDPTR = 4;
- 925   3                              LCDDAT = COM1 + COM2 + COM3;
- 926   3      
- 927   3                              LCDPTR = 5;
- 928   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 929   3                              break;
- 930   3                      case 9:
- 931   3                              LCDPTR = 4;
- 932   3                              LCDDAT = COM1 + COM2;
- 933   3      
- 934   3                              LCDPTR = 5;
- 935   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
- 936   3                              break;
- 937   3                      }
- 938   2              } else {
- 939   2      //              clr_SEG4EN;
- 940   2      //              clr_SEG5EN;
- 941   2                      LCDPTR = 4;
- 942   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 943   2      
- 944   2                      LCDPTR = 5;
- 945   2                      LCDDAT = 0;
- 946   2              }
- 947   1      
- 948   1      //      set_SEG6EN;
- 949   1      //      set_SEG7EN;
- 950   1              switch (ge) {
- 951   2              case 0:
- 952   2                      LCDPTR = 6;
- 953   2                      LCDDAT = COM1 + COM3;
+ 922   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 923   3      
+ 924   3                              LCDPTR = 3;
+ 925   3                              LCDDAT = COM0 + COM1 + COM2;
+ 926   3                              break;
+ 927   3                      case 8:
+ 928   3                              LCDPTR = 2;
+ 929   3                              LCDDAT = COM1 + COM2 + COM3;
+ 930   3      
+ 931   3                              LCDPTR = 3;
+ 932   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 933   3                              break;
+ 934   3                      case 9:
+ 935   3                              LCDPTR = 2;
+ 936   3                              LCDDAT = COM1 + COM2;
+ 937   3      
+ 938   3                              LCDPTR = 3;
+ 939   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 940   3                              break;
+ 941   3                      }
+ 942   2              } else {
+ 943   2      //              clr_SEG2EN;
+ 944   2      //              clr_SEG3EN;
+ 945   2                      LCDPTR = 2;
+ 946   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+ 947   2      
+ 948   2                      LCDPTR = 3;
+ 949   2                      LCDDAT = 0;
+ 950   2              }
+ 951   1              if (num > 9) {
+ 952   2      //              set_SEG4EN;
+ 953   2      //              set_SEG5EN;
  954   2      
- 955   2                      LCDPTR = 7;
- 956   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 957   2                      break;
- 958   2              case 1:
- 959   2                      LCDPTR = 6;
- 960   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
- 961   2      
- 962   2                      LCDPTR = 7;
- 963   2                      LCDDAT = COM1 + COM2;
- 964   2                      break;
- 965   2              case 2:
- 966   2                      LCDPTR = 6;
- 967   2                      LCDDAT = COM2 + COM3;
- 968   2      
- 969   2                      LCDPTR = 7;
- 970   2                      LCDDAT = COM0 + COM1 + COM3;
- 971   2                      break;
- 972   2              case 3:
- 973   2                      LCDPTR = 6;
- 974   2                      LCDDAT = COM2;
- 975   2      
- 976   2                      LCDPTR = 7;
- 977   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
- 978   2                      break;
- 979   2              case 4:
- 980   2                      LCDPTR = 6;
- 981   2                      LCDDAT = COM1 + COM2;
- 982   2      
- 983   2                      LCDPTR = 7;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/07/2017 22:37:07 PAGE 17  
+ 955   2                      switch (shi) {
+ 956   3                      case 0:
+ 957   3                              LCDPTR = 4;
+ 958   3                              LCDDAT = COM1 + COM3;
+ 959   3      
+ 960   3                              LCDPTR = 5;
+ 961   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 962   3                              break;
+ 963   3                      case 1:
+ 964   3                              LCDPTR = 4;
+ 965   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+ 966   3      
+ 967   3                              LCDPTR = 5;
+ 968   3                              LCDDAT = COM1 + COM2;
+ 969   3                              break;
+ 970   3                      case 2:
+ 971   3                              LCDPTR = 4;
+ 972   3                              LCDDAT = COM2 + COM3;
+ 973   3      
+ 974   3                              LCDPTR = 5;
+ 975   3                              LCDDAT = COM0 + COM1 + COM3;
+ 976   3                              break;
+ 977   3                      case 3:
+ 978   3                              LCDPTR = 4;
+ 979   3                              LCDDAT = COM2;
+ 980   3      
+ 981   3                              LCDPTR = 5;
+ 982   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+ 983   3                              break;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 17  
 
- 984   2                      LCDDAT = COM1 + COM2;
- 985   2                      break;
- 986   2              case 5:
- 987   2                      LCDPTR = 6;
- 988   2                      LCDDAT = COM1 + COM2;
- 989   2      
- 990   2                      LCDPTR = 7;
- 991   2                      LCDDAT = COM0 + COM2 + COM3;
- 992   2                      break;
- 993   2              case 6:
- 994   2                      LCDPTR = 6;
- 995   2                      LCDDAT = COM1 + COM2 + COM3;
- 996   2      
- 997   2                      LCDPTR = 7;
- 998   2                      LCDDAT = COM0 + COM2 + COM3;
- 999   2                      break;
-1000   2              case 7:
-1001   2                      LCDPTR = 6;
-1002   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
-1003   2      
-1004   2                      LCDPTR = 7;
-1005   2                      LCDDAT = COM0 + COM1 + COM2;
-1006   2                      break;
-1007   2              case 8:
-1008   2                      LCDPTR = 6;
-1009   2                      LCDDAT = COM1 + COM2 + COM3;
-1010   2      
-1011   2                      LCDPTR = 7;
-1012   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
-1013   2                      break;
-1014   2              case 9:
-1015   2                      LCDPTR = 6;
-1016   2                      LCDDAT = COM1 + COM2;
-1017   2      
-1018   2                      LCDPTR = 7;
-1019   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
-1020   2                      break;
-1021   2              }
-1022   1      }
-1023          void LCD_Clear_CAL_ICO(void) {
-1024   1      //      clr_SEG6EN;
-1025   1              LCDPTR = 6;
-1026   1              LCDDAT &= ~ COM0;
-1027   1      }
-1028          void LCD_Show_CAL_ICO(void) {
-1029   1      //      set_SEG6EN;
-1030   1              LCDPTR = 6;
-1031   1              LCDDAT |= COM0;
-1032   1      }
-1033          
+ 984   3                      case 4:
+ 985   3                              LCDPTR = 4;
+ 986   3                              LCDDAT = COM1 + COM2;
+ 987   3      
+ 988   3                              LCDPTR = 5;
+ 989   3                              LCDDAT = COM1 + COM2;
+ 990   3                              break;
+ 991   3                      case 5:
+ 992   3                              LCDPTR = 4;
+ 993   3                              LCDDAT = COM1 + COM2;
+ 994   3      
+ 995   3                              LCDPTR = 5;
+ 996   3                              LCDDAT = COM0 + COM2 + COM3;
+ 997   3                              break;
+ 998   3                      case 6:
+ 999   3                              LCDPTR = 4;
+1000   3                              LCDDAT = COM1 + COM2 + COM3;
+1001   3      
+1002   3                              LCDPTR = 5;
+1003   3                              LCDDAT = COM0 + COM2 + COM3;
+1004   3                              break;
+1005   3                      case 7:
+1006   3                              LCDPTR = 4;
+1007   3                              LCDDAT &= ~(COM1 + COM2 + COM3);
+1008   3      
+1009   3                              LCDPTR = 5;
+1010   3                              LCDDAT = COM0 + COM1 + COM2;
+1011   3                              break;
+1012   3                      case 8:
+1013   3                              LCDPTR = 4;
+1014   3                              LCDDAT = COM1 + COM2 + COM3;
+1015   3      
+1016   3                              LCDPTR = 5;
+1017   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+1018   3                              break;
+1019   3                      case 9:
+1020   3                              LCDPTR = 4;
+1021   3                              LCDDAT = COM1 + COM2;
+1022   3      
+1023   3                              LCDPTR = 5;
+1024   3                              LCDDAT = COM0 + COM1 + COM2 + COM3;
+1025   3                              break;
+1026   3                      }
+1027   2              } else {
+1028   2      //              clr_SEG4EN;
+1029   2      //              clr_SEG5EN;
+1030   2                      LCDPTR = 4;
+1031   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+1032   2      
+1033   2                      LCDPTR = 5;
+1034   2                      LCDDAT = 0;
+1035   2              }
+1036   1      
+1037   1      //      set_SEG6EN;
+1038   1      //      set_SEG7EN;
+1039   1              switch (ge) {
+1040   2              case 0:
+1041   2                      LCDPTR = 6;
+1042   2                      LCDDAT = COM1 + COM3;
+1043   2      
+1044   2                      LCDPTR = 7;
+1045   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 18  
+
+1046   2                      break;
+1047   2              case 1:
+1048   2                      LCDPTR = 6;
+1049   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+1050   2      
+1051   2                      LCDPTR = 7;
+1052   2                      LCDDAT = COM1 + COM2;
+1053   2                      break;
+1054   2              case 2:
+1055   2                      LCDPTR = 6;
+1056   2                      LCDDAT = COM2 + COM3;
+1057   2      
+1058   2                      LCDPTR = 7;
+1059   2                      LCDDAT = COM0 + COM1 + COM3;
+1060   2                      break;
+1061   2              case 3:
+1062   2                      LCDPTR = 6;
+1063   2                      LCDDAT = COM2;
+1064   2      
+1065   2                      LCDPTR = 7;
+1066   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+1067   2                      break;
+1068   2              case 4:
+1069   2                      LCDPTR = 6;
+1070   2                      LCDDAT = COM1 + COM2;
+1071   2      
+1072   2                      LCDPTR = 7;
+1073   2                      LCDDAT = COM1 + COM2;
+1074   2                      break;
+1075   2              case 5:
+1076   2                      LCDPTR = 6;
+1077   2                      LCDDAT = COM1 + COM2;
+1078   2      
+1079   2                      LCDPTR = 7;
+1080   2                      LCDDAT = COM0 + COM2 + COM3;
+1081   2                      break;
+1082   2              case 6:
+1083   2                      LCDPTR = 6;
+1084   2                      LCDDAT = COM1 + COM2 + COM3;
+1085   2      
+1086   2                      LCDPTR = 7;
+1087   2                      LCDDAT = COM0 + COM2 + COM3;
+1088   2                      break;
+1089   2              case 7:
+1090   2                      LCDPTR = 6;
+1091   2                      LCDDAT &= ~(COM1 + COM2 + COM3);
+1092   2      
+1093   2                      LCDPTR = 7;
+1094   2                      LCDDAT = COM0 + COM1 + COM2;
+1095   2                      break;
+1096   2              case 8:
+1097   2                      LCDPTR = 6;
+1098   2                      LCDDAT = COM1 + COM2 + COM3;
+1099   2      
+1100   2                      LCDPTR = 7;
+1101   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+1102   2                      break;
+1103   2              case 9:
+1104   2                      LCDPTR = 6;
+1105   2                      LCDDAT = COM1 + COM2;
+1106   2      
+1107   2                      LCDPTR = 7;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/09/2017 22:10:03 PAGE 19  
+
+1108   2                      LCDDAT = COM0 + COM1 + COM2 + COM3;
+1109   2                      break;
+1110   2              }
+1111   1      }
+1112          void LCD_Clear_CAL_ICO(void) {
+1113   1      //      clr_SEG6EN;
+1114   1              LCDPTR = 6;
+1115   1              LCDDAT &= ~ COM0;
+1116   1      }
+1117          void LCD_Show_CAL_ICO(void) {
+1118   1      //      set_SEG6EN;
+1119   1              LCDPTR = 6;
+1120   1              LCDDAT |= COM0;
+1121   1      }
+1122          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2088    ----
+   CODE SIZE        =   2178    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----       5
    PDATA SIZE       =   ----    ----

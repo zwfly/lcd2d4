@@ -1,5 +1,5 @@
 #include "app.h"
-#include "app_charge.h"
+
 //uint8_t c;
 //DEVICE_T g_tDevice;
 /******************************************************************************
@@ -47,12 +47,11 @@ void main(void) {
 	bsp_Init();
 
 	/****************/
-	work_Init();
-	app_key_init();
-	app_charge_Init();
-
+//	work_Init();
+//	app_key_init();
+//	app_charge_Init();
 	/****************/
-	Show_FW_Version_Number_To_PC();
+//	Show_FW_Version_Number_To_PC();
 
 	while (1) {
 
@@ -60,41 +59,40 @@ void main(void) {
 			Task_time.flag_10ms = 0;
 			//////////////////
 
-			bsp_KeyScan();
-			ADC_Start();
+//			bsp_KeyScan();
+			//ADC_Start();
 		}
 		if (Task_time.flag_100ms) {
 			Task_time.flag_100ms = 0;
 			//////////////////
-			app_key_100ms_pro();
-			app_work_100ms_pro();
-			app_charge_100ms_pro();
-			Repeat_Pro();
+//			app_key_100ms_pro();
+//			app_work_100ms_pro();
+//			app_charge_100ms_pro();
+//			Repeat_Pro();
 
 		}
 		if (Task_time.flag_1s) {
-			static uint8_t tmp = 0;
 			static uint8_t cnt = 0;
 			Task_time.flag_1s = 0;
 			//////////////////
-			app_key_1s_pro();
-			app_work_1s_pro();
-			app_charge_1s_pro();
-			app_battery_1s_pro();
-
+//			app_key_1s_pro();
+//			app_work_1s_pro();
+//			app_charge_1s_pro();
+//			app_battery_1s_pro();
 			cnt++;
-			if (cnt > 3) {
-				cnt = 10;
+			if (cnt % 2) {
 
-				tmp++;
-//				LCD_Show_REP_Num(tmp % 99);
-//				LCD_Show_Pulls_Num(tmp);
-//				LCD_Show_CAL_Num(tmp);
+				LCD_Show_LED_ICO();
+				LCD_Clear_FM_ICO();
+			} else {
+
+				LCD_Clear_LED_ICO();
+				LCD_Show_FM_ICO();
 			}
 
 		}
 
-#if 1
+#if 0
 
 		ucKeyCode = bsp_GetKey();
 		if (ucKeyCode != KEY_NONE) {

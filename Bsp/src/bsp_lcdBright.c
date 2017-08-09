@@ -7,19 +7,19 @@
 
 #include "bsp.h"
 
-void Bright_InitHard(void) {
+void LCD_Bright_InitHard(void) {
 
 #if 1
-	P3M1 &= ~SET_BIT1;
-	P3M2 |= SET_BIT1;
+	clr_P0M1_6;
+	set_P0M2_6;
 
 	lcd_bright_on();
 #endif
 
 }
 void lcd_bright_off(void) {
-	clr_P31;
+	clr_P06;
 }
 void lcd_bright_on() {
-	set_P31;
+	set_P06;
 }

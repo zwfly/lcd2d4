@@ -8,7 +8,7 @@
 #ifndef BSP_INC_BSP_LCDBRIGHT_H_
 #define BSP_INC_BSP_LCDBRIGHT_H_
 
-void Bright_InitHard(void);
+void LCD_Bright_InitHard(void);
 void lcd_bright_off(void);
 void lcd_bright_on(void);
 

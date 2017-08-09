@@ -388,16 +388,6 @@
               <FileType>5</FileType>
               <FilePath>..\App\inc\app.h</FilePath>
             </File>
-            <File>
-              <FileName>app_charge.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\App\src\app_charge.c</FilePath>
-            </File>
-            <File>
-              <FileName>app_battery.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\App\src\app_battery.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
