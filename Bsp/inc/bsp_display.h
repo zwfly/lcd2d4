@@ -14,6 +14,9 @@ void LCD_Show_LED_ICO(void);
 void LCD_Clear_FM_ICO(void);
 void LCD_Show_FM_ICO(void);
 
+void LCD_Clear_mi(uint8_t n);
+void LCD_Show_mi(uint8_t n, char c);
+
 void LCD_display_InitHard(void);
 
 #endif /* BSP_INC_BSP_DISPLAY_H_ */

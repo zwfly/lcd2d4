@@ -52,7 +52,6 @@ void main(void) {
 //	app_charge_Init();
 	/****************/
 //	Show_FW_Version_Number_To_PC();
-
 	while (1) {
 
 		if (Task_time.flag_10ms) {
@@ -79,17 +78,12 @@ void main(void) {
 //			app_work_1s_pro();
 //			app_charge_1s_pro();
 //			app_battery_1s_pro();
-			cnt++;
-			if (cnt % 2) {
-
-				LCD_Show_LED_ICO();
-				LCD_Clear_FM_ICO();
-			} else {
-
-				LCD_Clear_LED_ICO();
-				LCD_Show_FM_ICO();
+			//cnt++;
+			LCD_Show_mi(0, (cnt++) + '0');
+			if (cnt >= 6) {
+				LCD_Clear_mi(0);
+				cnt = 0;
 			}
-
 		}
 
 #if 0

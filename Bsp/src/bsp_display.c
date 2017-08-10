@@ -47,7 +47,6 @@ void LCD_display_InitHard(void) {
 
 	LCDCON |= SET_BIT7;  //LCDEN = 1
 
-
 	LCD_Clear_All();
 }
 
@@ -76,105 +75,247 @@ void LCD_Show_FM_ICO(void) {
 	LCDDAT |= COM3;
 }
 void LCD_Clear_BLUETooTH_ICO(void) {
-//	clr_SEG12EN;
-	LCDPTR = 12;
-	LCDDAT &= ~ COM0;
+	LCDPTR = 11;
+	LCDDAT &= ~ COM3;
 }
 void LCD_Show_BLUETooTH_ICO(void) {
-//	set_SEG12EN;
-	LCDPTR = 12;
-	LCDDAT |= COM0;
+	LCDPTR = 11;
+	LCDDAT |= COM3;
 }
-
 void LCD_Clear_AUX_ICO(void) {
-//	clr_SEG14EN;
-	LCDPTR = 14;
-	LCDDAT &= ~COM0;
+	LCDPTR = 10;
+	LCDDAT &= ~COM3;
 }
 void LCD_Show_AUX_ICO(void) {
-//	set_SEG14EN;
-	LCDPTR = 14;
-	LCDDAT |= COM0;
+	LCDPTR = 10;
+	LCDDAT |= COM3;
 }
 void LCD_Clear_USB_ICO(void) {
-//	clr_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT &= ~ COM0;
+	LCDPTR = 3;
+	LCDDAT &= ~ COM3;
 }
 void LCD_Show_USB_ICO(void) {
-//	set_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT |= COM0;
+	LCDPTR = 3;
+	LCDDAT |= COM3;
 }
 void LCD_Clear_MHZ_ICO(void) {
-//	clr_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT &= ~ COM0;
+	LCDPTR = 2;
+	LCDDAT &= ~ COM3;
 }
 void LCD_Show_MHZ_ICO(void) {
-//	set_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT |= COM0;
+	LCDPTR = 2;
+	LCDDAT |= COM3;
 }
 void LCD_Clear_BAZOOKA_ICO(void) {
-	//	clr_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT &= ~ COM0;
+	LCDPTR = 15;
+	LCDDAT &= ~ COM3;
 }
 void LCD_Show_BAZOOKA_ICO(void) {
-	//	set_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT |= COM0;
+	LCDPTR = 15;
+	LCDDAT |= COM3;
 }
-void LCD_Clear_colon_ICO(void) {
-	//	clr_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT &= ~ COM0;
+/*
+ * Ã°ºÅ   :
+ * */
+void LCD_Clear_upColon_ICO(void) {
+	LCDPTR = 7;
+	LCDDAT &= ~ COM3;
 }
-void LCD_Show_colon_ICO(void) {
-	//	set_SEG16EN;
-	LCDPTR = 16;
-	LCDDAT |= COM0;
+void LCD_Show_upColon_ICO(void) {
+	LCDPTR = 7;
+	LCDDAT |= COM3;
+}
+void LCD_Clear_downColon_ICO(void) {
+	LCDPTR = 6;
+	LCDDAT &= ~ COM3;
+}
+void LCD_Show_downColon_ICO(void) {
+	LCDPTR = 6;
+	LCDDAT |= COM3;
+}
+
+void LCD_Clear_mi(uint8_t n) {
+	switch (n) {
+	case 0:
+		LCDPTR = 31;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 30;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 29;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 28;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	case 1:
+		LCDPTR = 27;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 26;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 25;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 24;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	case 2:
+		LCDPTR = 23;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 22;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 21;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 20;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	case 3:
+		LCDPTR = 19;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 18;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 17;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 16;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	case 4:
+		LCDPTR = 15;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 14;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 13;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 12;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	case 5:
+		LCDPTR = 11;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 10;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 9;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 8;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	case 6:
+		LCDPTR = 7;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 6;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 5;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 4;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	case 7:
+		LCDPTR = 3;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 2;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
+
+		LCDPTR = 1;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+
+		LCDPTR = 0;
+		LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
+		break;
+	}
 }
 void LCD_Clear_mi_all(void) {
-
-	LCDPTR = 18;
-	LCDDAT &= ~(COM1 + COM2 + COM3);
-//	LCDDAT = COM1 + COM2 + COM3;
-
-	LCDPTR = 19;
-	LCDDAT = 0;
-//	LCDDAT = COM0 + COM1 + COM2 + COM3;
-
-	LCDPTR = 20;
-	LCDDAT &= ~(COM1 + COM2 + COM3);
-//	LCDDAT = COM1 + COM2 + COM3;
-
-	LCDPTR = 21;
-	LCDDAT = 0;
-//	LCDDAT = COM0 + COM1 + COM2 + COM3;
+	uint8_t i = 0;
+	for (i = 0; i < 8; i++) {
+		LCD_Clear_mi(i);
+	}
 }
-void LCD_Clear_mi(uint8_t n) {
-n++;
-}
-void LCD_show_mi(uint8_t n, char c) {
+void LCD_Show_mi(uint8_t n, char c) {
 	switch (n) {
 	case 0: {
 		switch (c) {
 		case '0':
-			LCDPTR = 14;
-			LCDDAT = COM1 + COM3;
+			LCDPTR = 31;
+			LCDDAT = COM0 + COM2;
 
-			LCDPTR = 15;
-			LCDDAT = COM0 + COM1 + COM2 + COM3;
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = COM3;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM3;
 			break;
 		case '1':
+			LCDPTR = 31;
+			LCDDAT = 0;
+
+			LCDPTR = 30;
+			LCDDAT = 0;
+
+			LCDPTR = 29;
+			LCDDAT = 0;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM3;
 			break;
 		case '2':
+			LCDPTR = 31;
+			LCDDAT = COM1 + COM2;
+
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = COM3;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM1;
 			break;
 		case '3':
+			LCDPTR = 31;
+			LCDDAT = COM1;
+
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = COM3;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM1 + COM3;
 			break;
 		case '4':
+			LCDPTR = 31;
+			LCDDAT = COM0 +COM1;
+
+			LCDPTR = 30;
+			LCDDAT = 0;
+
+			LCDPTR = 29;
+			LCDDAT = 0;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM1 + COM3;
 			break;
 		case '5':
 			break;
@@ -188,6 +329,7 @@ void LCD_show_mi(uint8_t n, char c) {
 			break;
 		case ' ':
 			LCD_Clear_mi(n);
+
 			break;
 		}
 	}
