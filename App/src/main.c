@@ -80,7 +80,7 @@ void main(void) {
 //			app_battery_1s_pro();
 			//cnt++;
 			LCD_Show_mi(0, (cnt++) + '0');
-			if (cnt >= 6) {
+			if (cnt >= 11) {
 				LCD_Clear_mi(0);
 				cnt = 0;
 			}

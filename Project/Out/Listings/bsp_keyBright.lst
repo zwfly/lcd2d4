@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_KEYBRIGHT                                                     08/10/2017 22:48:23 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_KEYBRIGHT                                                     08/11/2017 22:59:23 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_KEYBRIGHT
@@ -24,7 +24,7 @@ line level    source
   13   1              clr_P0M1_5;
   14   1              set_P0M2_5;
   15   1      
-  16   1              key_bright_on();
+  16   1              key_bright_off();
   17   1      
   18   1      }
   19          void key_bright_off(void) {

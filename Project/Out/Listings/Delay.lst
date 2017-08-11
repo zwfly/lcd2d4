@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   DELAY                                                             08/10/2017 22:48:23 PAGE 1   
+C51 COMPILER V9.56.0.0   DELAY                                                             08/11/2017 22:59:24 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE DELAY
@@ -62,7 +62,7 @@ line level    source
   44   2              }
   45   1      }
   46          //-------------------------------------------------------------------------
-C51 COMPILER V9.56.0.0   DELAY                                                             08/10/2017 22:48:23 PAGE 2   
+C51 COMPILER V9.56.0.0   DELAY                                                             08/11/2017 22:59:24 PAGE 2   
 
   47          void Delay10us(UINT16 u16CNT) {
   48   1              clr_T0M;                                //T0M=0, Timer0 Clock = Fsys/12
@@ -126,7 +126,7 @@ line level    source
  106          void WakeUp_Timer_Delay25ms(UINT32 u32CNT)  //Clock source is 10KHz
  107          {
  108   1              clr_WKPS2;                              //Clock Divider Scale is 1
-C51 COMPILER V9.56.0.0   DELAY                                                             08/10/2017 22:48:23 PAGE 3   
+C51 COMPILER V9.56.0.0   DELAY                                                             08/11/2017 22:59:24 PAGE 3   
 
  109   1              clr_WKPS1;
  110   1              clr_WKPS0;

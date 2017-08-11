@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   MAIN                                                              08/10/2017 22:48:22 PAGE 1   
+C51 COMPILER V9.56.0.0   MAIN                                                              08/11/2017 22:59:23 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   51   1      //      app_key_init();
   52   1      //      app_charge_Init();
   53   1              /****************/
-C51 COMPILER V9.56.0.0   MAIN                                                              08/10/2017 22:48:22 PAGE 2   
+C51 COMPILER V9.56.0.0   MAIN                                                              08/11/2017 22:59:23 PAGE 2   
 
   54   1      //      Show_FW_Version_Number_To_PC();
   55   1              while (1) {
@@ -93,7 +93,7 @@ line level    source
   80   3      //                      app_battery_1s_pro();
   81   3                              //cnt++;
   82   3                              LCD_Show_mi(0, (cnt++) + '0');
-  83   3                              if (cnt >= 6) {
+  83   3                              if (cnt >= 11) {
   84   4                                      LCD_Clear_mi(0);
   85   4                                      cnt = 0;
   86   4                              }

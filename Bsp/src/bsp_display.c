@@ -248,6 +248,285 @@ void LCD_Clear_mi_all(void) {
 		LCD_Clear_mi(i);
 	}
 }
+void LCD_Show_mi_(uint8_t n, char c) {
+	if (n > 7) {
+		return;
+	}
+
+	switch (c) {
+	case '0':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0 + COM2;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM0 + COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM3;
+		break;
+	case '1':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM3;
+		break;
+	case '2':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM1 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1;
+		break;
+	case '3':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM1;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1 + COM3;
+		break;
+	case '4':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1 + COM3;
+		break;
+	case '5':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM1 + COM3;
+		break;
+	case '6':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM1 + COM3;
+		break;
+	case '7':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM3;
+		break;
+	case '8':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1 + COM3;
+		break;
+	case '9':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1 + COM3;
+		break;
+	case ' ':
+		LCD_Clear_mi(n);
+		break;
+	case 'A':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1 + COM3;
+		break;
+	case 'B':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM1 + COM2 + COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1 + COM3;
+		break;
+	case 'C':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0 + COM2;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM0 + COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = 0;
+		break;
+	case 'D':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM1 + COM2 + COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM3;
+		break;
+	case 'E':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM1;
+		break;
+	case 'F':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1 + COM2;
+
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM1;
+		break;
+	case 'G':
+
+		break;
+	case 'H':
+
+		break;
+	case 'I':
+
+		break;
+	case 'J':
+
+		break;
+	case 'K':
+
+		break;
+	case 'L':
+
+		break;
+	case 'M':
+
+		break;
+	case 'N':
+
+		break;
+	case 'O':
+
+		break;
+	case 'P':
+
+		break;
+	case 'Q':
+
+		break;
+	case 'R':
+
+		break;
+	case 'S':
+
+		break;
+	case 'T':
+
+		break;
+	case 'U':
+
+		break;
+	case 'V':
+
+		break;
+	case 'W':
+
+		break;
+	case 'X':
+
+		break;
+	case 'Y':
+
+		break;
+	case 'Z':
+
+		break;
+	}
+}
 void LCD_Show_mi(uint8_t n, char c) {
 	switch (n) {
 	case 0: {
@@ -257,10 +536,10 @@ void LCD_Show_mi(uint8_t n, char c) {
 			LCDDAT = COM0 + COM2;
 
 			LCDPTR = 30;
-			LCDDAT = COM0;
+			LCDDAT = COM0 + COM2;
 
 			LCDPTR = 29;
-			LCDDAT = COM3;
+			LCDDAT = COM0 + COM3;
 
 			LCDPTR = 28;
 			LCDDAT = COM0 + COM3;
@@ -273,7 +552,7 @@ void LCD_Show_mi(uint8_t n, char c) {
 			LCDDAT = 0;
 
 			LCDPTR = 29;
-			LCDDAT = 0;
+			LCDDAT = COM0;
 
 			LCDPTR = 28;
 			LCDDAT = COM0 + COM3;
@@ -306,7 +585,7 @@ void LCD_Show_mi(uint8_t n, char c) {
 			break;
 		case '4':
 			LCDPTR = 31;
-			LCDDAT = COM0 +COM1;
+			LCDDAT = COM0 + COM1;
 
 			LCDPTR = 30;
 			LCDDAT = 0;
@@ -318,23 +597,234 @@ void LCD_Show_mi(uint8_t n, char c) {
 			LCDDAT = COM0 + COM1 + COM3;
 			break;
 		case '5':
+			LCDPTR = 31;
+			LCDDAT = COM0 + COM1;
+
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = COM3;
+
+			LCDPTR = 28;
+			LCDDAT = COM1 + COM3;
 			break;
 		case '6':
+			LCDPTR = 31;
+			LCDDAT = COM0 + COM1 + COM2;
+
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = COM3;
+
+			LCDPTR = 28;
+			LCDDAT = COM1 + COM3;
 			break;
 		case '7':
+			LCDPTR = 31;
+			LCDDAT = 0;
+
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = 0;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM3;
 			break;
 		case '8':
+			LCDPTR = 31;
+			LCDDAT = COM0 + COM1 + COM2;
+
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = COM3;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM1 + COM3;
 			break;
 		case '9':
+			LCDPTR = 31;
+			LCDDAT = COM0 + COM1;
+
+			LCDPTR = 30;
+			LCDDAT = COM0;
+
+			LCDPTR = 29;
+			LCDDAT = COM3;
+
+			LCDPTR = 28;
+			LCDDAT = COM0 + COM1 + COM3;
 			break;
 		case ' ':
 			LCD_Clear_mi(n);
+			break;
+		case 'A':
+
+			break;
+		case 'B':
+
+			break;
+		case 'C':
+
+			break;
+		case 'D':
+
+			break;
+		case 'E':
+
+			break;
+		case 'F':
+
+			break;
+		case 'G':
 
 			break;
 		}
 	}
 		break;
-	case 1:
+	case 1: {
+		switch (c) {
+		case '0':
+			LCDPTR = 27;
+			LCDDAT = COM0 + COM2;
+
+			LCDPTR = 26;
+			LCDDAT = COM0 + COM2;
+
+			LCDPTR = 25;
+			LCDDAT = COM0 + COM3;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM3;
+			break;
+		case '1':
+			LCDPTR = 27;
+			LCDDAT = 0;
+
+			LCDPTR = 26;
+			LCDDAT = 0;
+
+			LCDPTR = 25;
+			LCDDAT = COM0;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM3;
+			break;
+		case '2':
+			LCDPTR = 27;
+			LCDDAT = COM1 + COM2;
+
+			LCDPTR = 26;
+			LCDDAT = COM0;
+
+			LCDPTR = 25;
+			LCDDAT = COM3;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM1;
+			break;
+		case '3':
+			LCDPTR = 27;
+			LCDDAT = COM1;
+
+			LCDPTR = 26;
+			LCDDAT = COM0;
+
+			LCDPTR = 25;
+			LCDDAT = COM3;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM1 + COM3;
+			break;
+		case '4':
+			LCDPTR = 27;
+			LCDDAT = COM0 + COM1;
+
+			LCDPTR = 26;
+			LCDDAT = 0;
+
+			LCDPTR = 25;
+			LCDDAT = 0;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM1 + COM3;
+			break;
+		case '5':
+			LCDPTR = 27;
+			LCDDAT = COM0 + COM1;
+
+			LCDPTR = 26;
+			LCDDAT = COM0;
+
+			LCDPTR = 25;
+			LCDDAT = COM3;
+
+			LCDPTR = 24;
+			LCDDAT = COM1 + COM3;
+			break;
+		case '6':
+			LCDPTR = 27;
+			LCDDAT = COM0 + COM1 + COM2;
+
+			LCDPTR = 26;
+			LCDDAT = COM0;
+
+			LCDPTR = 25;
+			LCDDAT = COM3;
+
+			LCDPTR = 24;
+			LCDDAT = COM1 + COM3;
+			break;
+		case '7':
+			LCDPTR = 27;
+			LCDDAT = 0;
+
+			LCDPTR = 26;
+			LCDDAT = COM0;
+
+			LCDPTR = 25;
+			LCDDAT = 0;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM3;
+			break;
+		case '8':
+			LCDPTR = 27;
+			LCDDAT = COM0 + COM1 + COM2;
+
+			LCDPTR = 26;
+			LCDDAT = COM0;
+
+			LCDPTR = 25;
+			LCDDAT = COM3;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM1 + COM3;
+			break;
+		case '9':
+			LCDPTR = 27;
+			LCDDAT = COM0 + COM1;
+
+			LCDPTR = 26;
+			LCDDAT = COM0;
+
+			LCDPTR = 25;
+			LCDDAT = COM3;
+
+			LCDPTR = 24;
+			LCDDAT = COM0 + COM1 + COM3;
+			break;
+		case ' ':
+			LCD_Clear_mi(n);
+			break;
+		}
+	}
 		break;
 	case 2:
 		break;
