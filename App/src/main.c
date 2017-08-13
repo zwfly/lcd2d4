@@ -79,8 +79,9 @@ void main(void) {
 //			app_charge_1s_pro();
 //			app_battery_1s_pro();
 			//cnt++;
-			LCD_Show_mi(0, (cnt++) + '0');
-			if (cnt >= 11) {
+			LCD_Show_mi_(0, (cnt++) + '0');
+			LCD_Show_mi_(7, cnt + '0');
+			if (cnt >= 26) {
 				LCD_Clear_mi(0);
 				cnt = 0;
 			}

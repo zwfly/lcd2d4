@@ -418,10 +418,10 @@ void LCD_Show_mi_(uint8_t n, char c) {
 		LCDDAT = COM0 + COM2;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT = COM0;
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = 0;
@@ -466,10 +466,30 @@ void LCD_Show_mi_(uint8_t n, char c) {
 		LCDDAT = COM1;
 		break;
 	case 'G':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM2;
 
+		LCDPTR = 30 - n * 4;
+		LCDDAT = COM0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = COM3;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM1 + COM3;
 		break;
 	case 'H':
+		LCDPTR = 31 - n * 4;
+		LCDDAT = COM0 + COM1 + COM2;
 
+		LCDPTR = 30 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 29 - n * 4;
+		LCDDAT = 0;
+
+		LCDPTR = 28 - n * 4;
+		LCDDAT = COM0 + COM1 + COM3;
 		break;
 	case 'I':
 
