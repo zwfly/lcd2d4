@@ -77,7 +77,7 @@ static uint8_t noOps_timeoutCnt = 0;
 static BIT offBight_flag = 0;
 //static BIT keyInvalid_flag = 0;
 void app_key_100ms_pro(void) {
-	static uint8_t cnt = 0;
+static idata	 uint8_t cnt = 0;
 
 	if (g_tDevice.status == E_PowerDown) {
 		cnt++;

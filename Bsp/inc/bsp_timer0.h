@@ -9,6 +9,8 @@
 #define BSP_INC_BSP_TIMER0_H_
 
 typedef struct {
+	uint8_t cnt_5ms;
+	uint8_t flag_5ms;
 
 	uint8_t cnt_10ms;
 	uint8_t flag_10ms;

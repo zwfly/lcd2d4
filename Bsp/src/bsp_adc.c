@@ -7,27 +7,32 @@
 
 #include "bsp.h"
 
-ADC_RESULT_T g_tADC_Result;
+idata ADC_RESULT_T g_tADC_Result;
 
 void ADC_Init(void) {
 	g_tADC_Result.busy = 0;
 	g_tADC_Result.channel = 0;
-	g_tADC_Result.result = 1023;
-
+	g_tADC_Result.result[0] = 1023;
+	g_tADC_Result.result[1] = 1023;
 #if 1
 
-	clr_P0M1_0;
-	clr_P0M2_0;
+//	clr_P0M1_0;
+//	clr_P0M2_0;
 
-	clr_P0M1_1;
-	clr_P0M2_1;
+//	clr_P0M1_1;
+//	clr_P0M2_1;
 
 	set_ADCEN;
 
 	ADCCON0 = 0x00;                   //select ADC pin
 	set_P0M1_0;                       //set ADC pin is input only mode
 	clr_P0M2_0;
+
+	set_P0M1_1;                       //set ADC pin is input only mode
+	clr_P0M2_1;
+
 	set_P00DIDS;                      //disable digital connection
+	set_P01DIDS;
 
 	clr_ADCDIV2;
 	set_ADCDIV1;

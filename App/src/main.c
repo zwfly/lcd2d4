@@ -10,9 +10,9 @@ interrupt 11
 {
 	clr_ADCF;                               //clear ADC interrupt flag
 
-	g_tADC_Result.result = ADCRH;
-	g_tADC_Result.result <<= 2;
-	g_tADC_Result.result |= ADCRL;
+	g_tADC_Result.result[g_tADC_Result.channel] = ADCRH;
+	g_tADC_Result.result[g_tADC_Result.channel] <<= 2;
+	g_tADC_Result.result[g_tADC_Result.channel] |= ADCRL;
 
 	g_tADC_Result.busy = 0;
 }
@@ -53,15 +53,22 @@ void main(void) {
 	/****************/
 //	Show_FW_Version_Number_To_PC();
 	while (1) {
+		if (Task_time.flag_5ms) {
+			Task_time.flag_5ms = 0;
+			//////////////////
 
+			ADC_Start();
+		}
 		if (Task_time.flag_10ms) {
 			Task_time.flag_10ms = 0;
 			//////////////////
 
 //			bsp_KeyScan();
-			//ADC_Start();
+
 		}
 		if (Task_time.flag_100ms) {
+			char ss[16] = { 0 };
+			static uint8_t n = 0;
 			Task_time.flag_100ms = 0;
 			//////////////////
 //			app_key_100ms_pro();
@@ -69,8 +76,20 @@ void main(void) {
 //			app_charge_100ms_pro();
 //			Repeat_Pro();
 
+			n++;
+			if (n >= 5) {
+				n = 0;
+#if 1
+				sprintf(ss, "ch0 %d", g_tADC_Result.result[0]);
+#else
+				sprintf(ss, "ch1 %d", g_tADC_Result.result[1]);
+#endif
+				LCD_ShowString(ss);
+			}
+
 		}
 		if (Task_time.flag_1s) {
+			static char *str = "ABCDEFGHIJKLMNOPQ";
 			static uint8_t cnt = 0;
 			Task_time.flag_1s = 0;
 			//////////////////
@@ -78,13 +97,13 @@ void main(void) {
 //			app_work_1s_pro();
 //			app_charge_1s_pro();
 //			app_battery_1s_pro();
-			//cnt++;
-			LCD_Show_mi_(0, (cnt++) + '0');
-			LCD_Show_mi_(7, cnt + '0');
-			if (cnt >= 26) {
-				LCD_Clear_mi(0);
+			cnt++;
+
+			//	LCD_ShowString(str + cnt);
+			if (cnt > strlen(str)) {
 				cnt = 0;
 			}
+
 		}
 
 #if 0

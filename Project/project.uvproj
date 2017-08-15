@@ -404,11 +404,6 @@
               <FilePath>..\Bsp\src\bsp_key.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_bt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Bsp\src\bsp_bt.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_display.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\src\bsp_display.c</FilePath>
@@ -442,6 +437,11 @@
               <FileName>bsp_lcdBright.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\src\bsp_lcdBright.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_2d4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Bsp\src\bsp_2d4.c</FilePath>
             </File>
           </Files>
         </Group>

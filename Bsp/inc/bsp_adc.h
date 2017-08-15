@@ -11,11 +11,11 @@
 typedef struct {
 	uint8_t busy;
 	uint8_t channel;
-	uint16_t result;
+	uint16_t result[2];
 
 } ADC_RESULT_T;
 
-extern ADC_RESULT_T g_tADC_Result;
+extern idata ADC_RESULT_T g_tADC_Result;
 
 void ADC_Init(void);
 void ADC_Start(void);

@@ -10,6 +10,7 @@
 
 //#include <stdio.h>
 //#include <N76E616.h>
+#include <string.h>
 
 
 #include "bsp.h"

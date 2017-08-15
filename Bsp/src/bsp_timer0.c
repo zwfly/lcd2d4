@@ -36,11 +36,12 @@ void Timer0_InitHard(void) {
 }
 
 static void timer0_ParamInit(void) {
-
+	Task_time.cnt_5ms = 1;
 	Task_time.cnt_10ms = 0;
 	Task_time.cnt_100ms = 0;
 	Task_time.cnt_1s = 0;
 
+	Task_time.flag_5ms = 0;
 	Task_time.flag_10ms = 0;
 	Task_time.flag_100ms = 0;
 	Task_time.flag_1s = 0;
@@ -52,6 +53,12 @@ interrupt 1              //interrupt address is 0x000B
 {
 	TH0 = u8TH0_tmp;
 	TL0 = u8TL0_tmp;
+
+	if (++Task_time.cnt_5ms >= 5) {
+		Task_time.cnt_5ms = 0;
+		Task_time.flag_5ms = 1;
+
+	}
 
 	if (++Task_time.cnt_10ms >= 10) {
 		Task_time.cnt_10ms = 0;
