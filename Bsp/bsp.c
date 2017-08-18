@@ -10,7 +10,7 @@ void bsp_Init(void) {
 	Set_All_GPIO_Input_Mode();
 
 	ADC_Init();
-//	bsp_InitKey();
+	bsp_InitKey();
 	KEY_Bright_InitHard();
 	LCD_Bright_InitHard();
 

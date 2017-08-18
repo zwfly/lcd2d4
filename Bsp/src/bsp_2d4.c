@@ -180,7 +180,7 @@ void RF_RxMode(void) {
 	RF_WriteReg(W_REGISTER + CONFIG, 0X8F);						// 将RF设置成RX模式
 	CE_HIGH;										// Set CE pin high 开始接收数据
 //	delay_ms(2);
-	
+
 	nop
 	nop
 	nop
@@ -240,11 +240,11 @@ void RF_TxData(uint8_t *ucPayload, uint8_t length) {
 		RF_WriteBuf(W_TX_PAYLOAD, ucPayload, length);
 		CE_HIGH;                             //rf entery tx mode start send data
 //		delay_10us(60);                            //keep ce high at least 600us
-	nop
-	nop
-	nop
-	nop
-				CE_LOW;                                                 //rf entery stb3
+		nop
+		nop
+		nop
+		nop
+		CE_LOW;                                                 //rf entery stb3
 	}
 }
 
@@ -294,7 +294,7 @@ void RF_Init(void) {
 	if (PAYLOAD_WIDTH < 33) {
 		RF_WriteReg(W_REGISTER + FEATURE, 0x20);//FIFO_LEN=32 BYTE  and enable Software control ce
 	} else {
-		RF_WriteReg(W_REGISTER + FEATURE, 0x38);	//FIFO_LEN=64 BYTE  and enable Software control ce
+		RF_WriteReg(W_REGISTER + FEATURE, 0x38);//FIFO_LEN=64 BYTE  and enable Software control ce
 	}
 	CE_LOW;
 	RF_WriteReg(FLUSH_TX, 0);									// CLEAR TXFIFO

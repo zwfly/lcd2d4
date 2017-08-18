@@ -20,7 +20,6 @@ static char letter = '\0';
  * */
 uint8_t level = 0;
 
-static void app_UI_init(void);
 
 void app_key_init(void) {
 	level = 0;
@@ -36,33 +35,29 @@ void app_key_init(void) {
 	mode = E_Simple_metering_mode;
 	g_tWork.mode = E_Simple_metering_mode;
 	g_tDevice.status = E_PowerOn;
-	app_UI_init();
+
 }
 
-static void app_UI_init(void) {
-	
-}
+
 
 void app_flash_Show(void) {
 
 }
 void app_flash_Clear(void) {
 
-
 }
 void app_key_power_or_return(void) {
 
-
 }
 void app_key_set(void) {
-	
+
 }
 
 void app_key_add(void) {
 
 }
 void app_key_ok(void) {
-	
+
 }
 
 void app_power_on(void) {
@@ -77,7 +72,8 @@ static uint8_t noOps_timeoutCnt = 0;
 static BIT offBight_flag = 0;
 //static BIT keyInvalid_flag = 0;
 void app_key_100ms_pro(void) {
-static idata	 uint8_t cnt = 0;
+	static idata uint8_t
+	cnt = 0;
 
 	if (g_tDevice.status == E_PowerDown) {
 		cnt++;
@@ -86,7 +82,7 @@ static idata	 uint8_t cnt = 0;
 
 			app_key_clear_noOps_timeoutCnt();
 //			keyInvalid_flag = 1;
-			set_PD;
+//			set_PD;
 		}
 	} else {
 		cnt = 0;
@@ -115,42 +111,14 @@ void app_key_pro(uint8_t keyCode) {
 
 	app_key_clear_noOps_timeoutCnt();
 
-	if (offBight_flag && (g_tDevice.status == E_PowerOn)) {
-		offBight_flag = 0;
-		lcd_bright_on();
-		//	keyInvalid_flag = 1;
-		return;
-	}
-
 	switch (keyCode) {
 	case KEY_UP_K1:
-
-		if (g_tDevice.status == E_PowerReady) {
-			app_power_off();
-			printf("power off\n");
-			g_tDevice.status = E_PowerDown;
-		}
 
 		break;
 	case KEY_DOWN_K1:
 
-		if (g_tDevice.status == E_PowerOn) {
-			app_key_power_or_return();
-		}
-
 		break;
 	case KEY_LONG_K1:
-
-		if (g_tDevice.status == E_PowerOn) {
-			g_tDevice.status = E_PowerDown;
-			app_power_off();
-		} else if (g_tDevice.status == E_PowerDown) {
-			g_tDevice.status = E_PowerOn;
-			app_power_on();
-		} else if (g_tDevice.status == E_PowerReady) {
-			g_tDevice.status = E_PowerOn;
-			app_power_on();
-		}
 
 		break;
 	case KEY_UP_K2:
@@ -158,7 +126,6 @@ void app_key_pro(uint8_t keyCode) {
 		break;
 	case KEY_DOWN_K2:
 
-		app_key_set();
 		break;
 	case KEY_LONG_K2:
 
@@ -168,7 +135,6 @@ void app_key_pro(uint8_t keyCode) {
 		break;
 	case KEY_DOWN_K3:
 
-		app_key_add();
 		break;
 	case KEY_LONG_K3:
 
@@ -178,7 +144,6 @@ void app_key_pro(uint8_t keyCode) {
 		break;
 	case KEY_DOWN_K4:
 
-		app_key_ok();
 		break;
 	case KEY_LONG_K4:
 
@@ -189,7 +154,6 @@ void app_key_pro(uint8_t keyCode) {
 		break;
 	case KEY_DOWN_K5:
 
-		query_work_sum();
 		break;
 	case KEY_LONG_K5:
 

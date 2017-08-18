@@ -48,7 +48,7 @@ void main(void) {
 
 	/****************/
 //	work_Init();
-//	app_key_init();
+	app_key_init();
 //	app_charge_Init();
 	/****************/
 //	Show_FW_Version_Number_To_PC();
@@ -63,7 +63,7 @@ void main(void) {
 			Task_time.flag_10ms = 0;
 			//////////////////
 
-//			bsp_KeyScan();
+			bsp_KeyScan();
 
 		}
 		if (Task_time.flag_100ms) {
@@ -106,7 +106,7 @@ void main(void) {
 
 		}
 
-#if 0
+#if 1
 
 		ucKeyCode = bsp_GetKey();
 		if (ucKeyCode != KEY_NONE) {

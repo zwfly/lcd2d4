@@ -52,67 +52,75 @@ static uint8_t IsKeyDown1(void) {
 }
 //CH1, S2 ad = 980
 static uint8_t IsKeyDown2(void) {
-	if (g_tADC_Result.result[0]) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (g_tADC_Result.result[0]) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 //CH1, S3 ad = 954
 static uint8_t IsKeyDown3(void) {
-	if (P05) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (P05) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 //CH1, S4 ad = 884
 static uint8_t IsKeyDown4(void) {
-	if (P06) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (P06) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 //CH1, S5 ad = 0
 static uint8_t IsKeyDown5(void) {
-	if (P55) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (P55) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 //CH2, S6 ad = 1020
 static uint8_t IsKeyDown6(void) {
-	if (P55) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (P55) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 //CH2, S7 ad = 1018
 static uint8_t IsKeyDown7(void) {
-	if (P55) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (P55) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 //CH2, S8 ad = 1016
 static uint8_t IsKeyDown8(void) {
-	if (P55) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (P55) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 //CH2, S9 ad = 1009
 static uint8_t IsKeyDown9(void) {
-	if (P55) {
-		return 0;
-	} else {
-		return 1;
-	}
+//	if (P55) {
+//		return 0;
+//	} else {
+//		return 1;
+//	}
+	return 0;
 }
 
 /*
