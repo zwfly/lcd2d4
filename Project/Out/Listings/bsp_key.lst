@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/16/2017 20:14:44 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/20/2017 22:57:50 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_KEY
@@ -26,7 +26,7 @@ line level    source
   15          
   16          #include "bsp.h"
   17          
-  18          #define KEY_AD_ERROR 10
+  18          #define KEY_AD_ERROR 5
   19          
   20          #define S2_AD  980
   21          #define S3_AD  955
@@ -61,345 +61,315 @@ line level    source
   50   2                      return 1;
   51   2              }
   52   1      }
-  53          //CH1, S2 ad = 980
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/16/2017 20:14:44 PAGE 2   
+  53          uint16_t max = 0;
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/20/2017 22:57:50 PAGE 2   
 
-  54          static uint8_t IsKeyDown2(void) {
-  55   1      //      if (g_tADC_Result.result[0]) {
-  56   1      //              return 0;
-  57   1      //      } else {
-  58   1      //              return 1;
-  59   1      //      }
-  60   1              return 0;
+  54          uint16_t min = 0;
+  55          static uint8_t IsKeyDown(uint16_t key_ad, uint16_t result_ad) {
+  56   1      
+  57   1              max = (key_ad + KEY_AD_ERROR) > 1023 ? 1023 : key_ad + KEY_AD_ERROR;
+  58   1              min = (key_ad < KEY_AD_ERROR) ? 0 : (key_ad - KEY_AD_ERROR);
+  59   1      
+  60   1              return ((result_ad >= min) && (result_ad <= max));
   61   1      }
-  62          //CH1, S3 ad = 954
-  63          static uint8_t IsKeyDown3(void) {
-  64   1      //      if (P05) {
-  65   1      //              return 0;
-  66   1      //      } else {
-  67   1      //              return 1;
-  68   1      //      }
-  69   1              return 0;
-  70   1      }
-  71          //CH1, S4 ad = 884
-  72          static uint8_t IsKeyDown4(void) {
-  73   1      //      if (P06) {
-  74   1      //              return 0;
-  75   1      //      } else {
-  76   1      //              return 1;
-  77   1      //      }
-  78   1              return 0;
-  79   1      }
-  80          //CH1, S5 ad = 0
-  81          static uint8_t IsKeyDown5(void) {
-  82   1      //      if (P55) {
-  83   1      //              return 0;
-  84   1      //      } else {
-  85   1      //              return 1;
-  86   1      //      }
-  87   1              return 0;
+  62          
+  63          //CH1, S2 ad = 980
+  64          static uint8_t IsKeyDown2(void) {
+  65   1      
+  66   1              return IsKeyDown(S2_AD, g_tADC_Result.result[0]);
+  67   1      }
+  68          //CH1, S3 ad = 954
+  69          static uint8_t IsKeyDown3(void) {
+  70   1              return IsKeyDown(S3_AD, g_tADC_Result.result[0]);
+  71   1      }
+  72          //CH1, S4 ad = 884
+  73          static uint8_t IsKeyDown4(void) {
+  74   1              return IsKeyDown(S4_AD, g_tADC_Result.result[0]);
+  75   1      }
+  76          //CH1, S5 ad = 0
+  77          static uint8_t IsKeyDown5(void) {
+  78   1      
+  79   1              return IsKeyDown(S5_AD, g_tADC_Result.result[0]);
+  80   1      }
+  81          //CH2, S6 ad = 1020
+  82          static uint8_t IsKeyDown6(void) {
+  83   1              return IsKeyDown(S6_AD, g_tADC_Result.result[1]);
+  84   1      }
+  85          //CH2, S7 ad = 1018
+  86          static uint8_t IsKeyDown7(void) {
+  87   1              return IsKeyDown(S7_AD, g_tADC_Result.result[1]);
   88   1      }
-  89          //CH2, S6 ad = 1020
-  90          static uint8_t IsKeyDown6(void) {
-  91   1      //      if (P55) {
-  92   1      //              return 0;
-  93   1      //      } else {
-  94   1      //              return 1;
-  95   1      //      }
-  96   1              return 0;
-  97   1      }
-  98          //CH2, S7 ad = 1018
-  99          static uint8_t IsKeyDown7(void) {
- 100   1      //      if (P55) {
- 101   1      //              return 0;
- 102   1      //      } else {
- 103   1      //              return 1;
- 104   1      //      }
- 105   1              return 0;
- 106   1      }
- 107          //CH2, S8 ad = 1016
- 108          static uint8_t IsKeyDown8(void) {
- 109   1      //      if (P55) {
- 110   1      //              return 0;
- 111   1      //      } else {
- 112   1      //              return 1;
- 113   1      //      }
- 114   1              return 0;
- 115   1      }
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/16/2017 20:14:44 PAGE 3   
+  89          //CH2, S8 ad = 1016
+  90          static uint8_t IsKeyDown8(void) {
+  91   1              return IsKeyDown(S8_AD, g_tADC_Result.result[1]);
+  92   1      }
+  93          //CH2, S9 ad = 1009
+  94          static uint8_t IsKeyDown9(void) {
+  95   1              return IsKeyDown(S9_AD, g_tADC_Result.result[1]);
+  96   1      }
+  97          
+  98          /*
+  99           *********************************************************************************************************
+ 100           *      函 数 名: bsp_InitKey
+ 101           *      功能说明: 初始化按键. 该函数被 bsp_Init() 调用。
+ 102           *      形    参:  无
+ 103           *      返 回 值: 无
+ 104           *********************************************************************************************************
+ 105           */
+ 106          void bsp_InitKey(void) {
+ 107   1              bsp_InitKeyVar(); /* 初始化按键变量 */
+ 108   1              bsp_InitKeyHard(); /* 初始化按键硬件 */
+ 109   1      }
+ 110          
+ 111          /*
+ 112           *********************************************************************************************************
+ 113           *      函 数 名: bsp_PutKey
+ 114           *      功能说明: 将1个键值压入按键FIFO缓冲区。可用于模拟一个按键。
+ 115           *      形    参:  _KeyCode : 按键代码
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/20/2017 22:57:50 PAGE 3   
 
- 116          //CH2, S9 ad = 1009
- 117          static uint8_t IsKeyDown9(void) {
- 118   1      //      if (P55) {
- 119   1      //              return 0;
- 120   1      //      } else {
- 121   1      //              return 1;
- 122   1      //      }
- 123   1              return 0;
- 124   1      }
- 125          
- 126          /*
- 127           *********************************************************************************************************
- 128           *      函 数 名: bsp_InitKey
- 129           *      功能说明: 初始化按键. 该函数被 bsp_Init() 调用。
- 130           *      形    参:  无
- 131           *      返 回 值: 无
- 132           *********************************************************************************************************
- 133           */
- 134          void bsp_InitKey(void) {
- 135   1              bsp_InitKeyVar(); /* 初始化按键变量 */
- 136   1              bsp_InitKeyHard(); /* 初始化按键硬件 */
- 137   1      }
- 138          
- 139          /*
- 140           *********************************************************************************************************
- 141           *      函 数 名: bsp_PutKey
- 142           *      功能说明: 将1个键值压入按键FIFO缓冲区。可用于模拟一个按键。
- 143           *      形    参:  _KeyCode : 按键代码
- 144           *      返 回 值: 无
- 145           *********************************************************************************************************
- 146           */
- 147          void bsp_PutKey(uint8_t _KeyCode) {
- 148   1              s_tKey.Buf[s_tKey.Write] = _KeyCode;
- 149   1      
- 150   1              if (++s_tKey.Write >= KEY_FIFO_SIZE) {
- 151   2                      s_tKey.Write = 0;
- 152   2              }
- 153   1      }
- 154          
- 155          /*
+ 116           *      返 回 值: 无
+ 117           *********************************************************************************************************
+ 118           */
+ 119          void bsp_PutKey(uint8_t _KeyCode) {
+ 120   1              s_tKey.Buf[s_tKey.Write] = _KeyCode;
+ 121   1      
+ 122   1              if (++s_tKey.Write >= KEY_FIFO_SIZE) {
+ 123   2                      s_tKey.Write = 0;
+ 124   2              }
+ 125   1      }
+ 126          
+ 127          /*
+ 128           *********************************************************************************************************
+ 129           *      函 数 名: bsp_GetKey
+ 130           *      功能说明: 从按键FIFO缓冲区读取一个键值。
+ 131           *      形    参:  无
+ 132           *      返 回 值: 按键代码
+ 133           *********************************************************************************************************
+ 134           */
+ 135          uint8_t bsp_GetKey(void) {
+ 136   1              uint8_t ret;
+ 137   1      
+ 138   1              if (s_tKey.Read == s_tKey.Write) {
+ 139   2                      return KEY_NONE;
+ 140   2              } else {
+ 141   2                      ret = s_tKey.Buf[s_tKey.Read];
+ 142   2      
+ 143   2                      if (++s_tKey.Read >= KEY_FIFO_SIZE) {
+ 144   3                              s_tKey.Read = 0;
+ 145   3                      }
+ 146   2                      return ret;
+ 147   2              }
+ 148   1      }
+ 149          
+ 150          /*
+ 151           *********************************************************************************************************
+ 152           *      函 数 名: bsp_GetKey2
+ 153           *      功能说明: 从按键FIFO缓冲区读取一个键值。独立的读指针。
+ 154           *      形    参:  无
+ 155           *      返 回 值: 按键代码
  156           *********************************************************************************************************
- 157           *      函 数 名: bsp_GetKey
- 158           *      功能说明: 从按键FIFO缓冲区读取一个键值。
- 159           *      形    参:  无
- 160           *      返 回 值: 按键代码
- 161           *********************************************************************************************************
- 162           */
- 163          uint8_t bsp_GetKey(void) {
- 164   1              uint8_t ret;
- 165   1      
- 166   1              if (s_tKey.Read == s_tKey.Write) {
- 167   2                      return KEY_NONE;
- 168   2              } else {
- 169   2                      ret = s_tKey.Buf[s_tKey.Read];
- 170   2      
- 171   2                      if (++s_tKey.Read >= KEY_FIFO_SIZE) {
- 172   3                              s_tKey.Read = 0;
- 173   3                      }
- 174   2                      return ret;
- 175   2              }
- 176   1      }
- 177          
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/16/2017 20:14:44 PAGE 4   
+ 157           */
+ 158          uint8_t bsp_GetKey2(void) {
+ 159   1              uint8_t ret;
+ 160   1      
+ 161   1              if (s_tKey.Read2 == s_tKey.Write) {
+ 162   2                      return KEY_NONE;
+ 163   2              } else {
+ 164   2                      ret = s_tKey.Buf[s_tKey.Read2];
+ 165   2      
+ 166   2                      if (++s_tKey.Read2 >= KEY_FIFO_SIZE) {
+ 167   3                              s_tKey.Read2 = 0;
+ 168   3                      }
+ 169   2                      return ret;
+ 170   2              }
+ 171   1      }
+ 172          
+ 173          /*
+ 174           *********************************************************************************************************
+ 175           *      函 数 名: bsp_GetKeyState
+ 176           *      功能说明: 读取按键的状态
+ 177           *      形    参:  _ucKeyID : 按键ID，从0开始
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/20/2017 22:57:50 PAGE 4   
 
- 178          /*
+ 178           *      返 回 值: 1 表示按下， 0 表示未按下
  179           *********************************************************************************************************
- 180           *      函 数 名: bsp_GetKey2
- 181           *      功能说明: 从按键FIFO缓冲区读取一个键值。独立的读指针。
- 182           *      形    参:  无
- 183           *      返 回 值: 按键代码
- 184           *********************************************************************************************************
- 185           */
- 186          uint8_t bsp_GetKey2(void) {
- 187   1              uint8_t ret;
- 188   1      
- 189   1              if (s_tKey.Read2 == s_tKey.Write) {
- 190   2                      return KEY_NONE;
- 191   2              } else {
- 192   2                      ret = s_tKey.Buf[s_tKey.Read2];
- 193   2      
- 194   2                      if (++s_tKey.Read2 >= KEY_FIFO_SIZE) {
- 195   3                              s_tKey.Read2 = 0;
- 196   3                      }
- 197   2                      return ret;
- 198   2              }
+ 180           */
+ 181          uint8_t bsp_GetKeyState(KEY_ID_E _ucKeyID) {
+ 182   1              return s_tBtn[_ucKeyID].State;
+ 183   1      }
+ 184          
+ 185          /*
+ 186           *********************************************************************************************************
+ 187           *      函 数 名: bsp_SetKeyParam
+ 188           *      功能说明: 设置按键参数
+ 189           *      形    参：_ucKeyID : 按键ID，从0开始
+ 190           *                      _LongTime : 长按事件时间
+ 191           *                       _RepeatSpeed : 连发速度
+ 192           *      返 回 值: 无
+ 193           *********************************************************************************************************
+ 194           */
+ 195          void bsp_SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t _RepeatSpeed) {
+ 196   1              s_tBtn[_ucKeyID].LongTime = _LongTime; /* 长按时间 0 表示不检测长按键事件 */
+ 197   1              s_tBtn[_ucKeyID].RepeatSpeed = _RepeatSpeed; /* 按键连发的速度，0表示不支持连发 */
+ 198   1              s_tBtn[_ucKeyID].RepeatCount = 0; /* 连发计数器 */
  199   1      }
  200          
  201          /*
  202           *********************************************************************************************************
- 203           *      函 数 名: bsp_GetKeyState
- 204           *      功能说明: 读取按键的状态
- 205           *      形    参:  _ucKeyID : 按键ID，从0开始
- 206           *      返 回 值: 1 表示按下， 0 表示未按下
+ 203           *      函 数 名: bsp_ClearKey
+ 204           *      功能说明: 清空按键FIFO缓冲区
+ 205           *      形    参：无
+ 206           *      返 回 值: 按键代码
  207           *********************************************************************************************************
  208           */
- 209          uint8_t bsp_GetKeyState(KEY_ID_E _ucKeyID) {
- 210   1              return s_tBtn[_ucKeyID].State;
+ 209          void bsp_ClearKey(void) {
+ 210   1              s_tKey.Read = s_tKey.Write;
  211   1      }
  212          
  213          /*
  214           *********************************************************************************************************
- 215           *      函 数 名: bsp_SetKeyParam
- 216           *      功能说明: 设置按键参数
- 217           *      形    参：_ucKeyID : 按键ID，从0开始
- 218           *                      _LongTime : 长按事件时间
- 219           *                       _RepeatSpeed : 连发速度
- 220           *      返 回 值: 无
- 221           *********************************************************************************************************
- 222           */
- 223          void bsp_SetKeyParam(uint8_t _ucKeyID, uint16_t _LongTime, uint8_t _RepeatSpeed) {
- 224   1              s_tBtn[_ucKeyID].LongTime = _LongTime; /* 长按时间 0 表示不检测长按键事件 */
- 225   1              s_tBtn[_ucKeyID].RepeatSpeed = _RepeatSpeed; /* 按键连发的速度，0表示不支持连发 */
- 226   1              s_tBtn[_ucKeyID].RepeatCount = 0; /* 连发计数器 */
- 227   1      }
- 228          
- 229          /*
- 230           *********************************************************************************************************
- 231           *      函 数 名: bsp_ClearKey
- 232           *      功能说明: 清空按键FIFO缓冲区
- 233           *      形    参：无
- 234           *      返 回 值: 按键代码
- 235           *********************************************************************************************************
- 236           */
- 237          void bsp_ClearKey(void) {
- 238   1              s_tKey.Read = s_tKey.Write;
- 239   1      }
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/16/2017 20:14:44 PAGE 5   
+ 215           *      函 数 名: bsp_InitKeyHard
+ 216           *      功能说明: 配置按键对应的GPIO
+ 217           *      形    参:  无
+ 218           *      返 回 值: 无
+ 219           *********************************************************************************************************
+ 220           */
+ 221          static void bsp_InitKeyHard(void) {
+ 222   1      
+ 223   1              set_P0M1_2;
+ 224   1              clr_P0M2_2;
+ 225   1      
+ 226   1      }
+ 227          
+ 228          /*
+ 229           *********************************************************************************************************
+ 230           *      函 数 名: bsp_InitKeyVar
+ 231           *      功能说明: 初始化按键变量
+ 232           *      形    参:  无
+ 233           *      返 回 值: 无
+ 234           *********************************************************************************************************
+ 235           */
+ 236          static void bsp_InitKeyVar(void) {
+ 237   1              uint8_t i;
+ 238   1      
+ 239   1              /* 对按键FIFO读写指针清零 */
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/20/2017 22:57:50 PAGE 5   
 
- 240          
- 241          /*
- 242           *********************************************************************************************************
- 243           *      函 数 名: bsp_InitKeyHard
- 244           *      功能说明: 配置按键对应的GPIO
- 245           *      形    参:  无
- 246           *      返 回 值: 无
- 247           *********************************************************************************************************
- 248           */
- 249          static void bsp_InitKeyHard(void) {
- 250   1      
- 251   1              set_P0M1_2;
- 252   1              clr_P0M2_2;
- 253   1      
- 254   1      }
- 255          
- 256          /*
- 257           *********************************************************************************************************
- 258           *      函 数 名: bsp_InitKeyVar
- 259           *      功能说明: 初始化按键变量
- 260           *      形    参:  无
- 261           *      返 回 值: 无
- 262           *********************************************************************************************************
- 263           */
- 264          static void bsp_InitKeyVar(void) {
- 265   1              uint8_t i;
+ 240   1              s_tKey.Read = 0;
+ 241   1              s_tKey.Write = 0;
+ 242   1              s_tKey.Read2 = 0;
+ 243   1      
+ 244   1              /* 给每个按键结构体成员变量赋一组缺省值 */
+ 245   1              for (i = 0; i < KEY_COUNT; i++) {
+ 246   2                      s_tBtn[i].LongTime = KEY_LONG_TIME; /* 长按时间 0 表示不检测长按键事件 */
+ 247   2                      s_tBtn[i].Count = KEY_FILTER_TIME / 2; /* 计数器设置为滤波时间的一半 */
+ 248   2                      s_tBtn[i].State = 0; /* 按键缺省状态，0为未按下 */
+ 249   2                      //s_tBtn[i].KeyCodeDown = 3 * i + 1;                            /* 按键按下的键值代码 */
+ 250   2                      //s_tBtn[i].KeyCodeUp   = 3 * i + 2;                            /* 按键弹起的键值代码 */
+ 251   2                      //s_tBtn[i].KeyCodeLong = 3 * i + 3;                            /* 按键被持续按下的键值代码 */
+ 252   2                      s_tBtn[i].RepeatSpeed = 0; /* 按键连发的速度，0表示不支持连发 */
+ 253   2                      s_tBtn[i].RepeatCount = 0; /* 连发计数器 */
+ 254   2              }
+ 255   1      
+ 256   1              /* 判断按键按下的函数 */
+ 257   1              s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
+ 258   1              s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
+ 259   1              s_tBtn[2].IsKeyDownFunc = IsKeyDown3;
+ 260   1              s_tBtn[3].IsKeyDownFunc = IsKeyDown4;
+ 261   1              s_tBtn[4].IsKeyDownFunc = IsKeyDown5;
+ 262   1              s_tBtn[5].IsKeyDownFunc = IsKeyDown6;
+ 263   1              s_tBtn[6].IsKeyDownFunc = IsKeyDown7;
+ 264   1              s_tBtn[7].IsKeyDownFunc = IsKeyDown8;
+ 265   1              s_tBtn[8].IsKeyDownFunc = IsKeyDown9;
  266   1      
- 267   1              /* 对按键FIFO读写指针清零 */
- 268   1              s_tKey.Read = 0;
- 269   1              s_tKey.Write = 0;
- 270   1              s_tKey.Read2 = 0;
- 271   1      
- 272   1              /* 给每个按键结构体成员变量赋一组缺省值 */
- 273   1              for (i = 0; i < KEY_COUNT; i++) {
- 274   2                      s_tBtn[i].LongTime = KEY_LONG_TIME; /* 长按时间 0 表示不检测长按键事件 */
- 275   2                      s_tBtn[i].Count = KEY_FILTER_TIME / 2; /* 计数器设置为滤波时间的一半 */
- 276   2                      s_tBtn[i].State = 0; /* 按键缺省状态，0为未按下 */
- 277   2                      //s_tBtn[i].KeyCodeDown = 3 * i + 1;                            /* 按键按下的键值代码 */
- 278   2                      //s_tBtn[i].KeyCodeUp   = 3 * i + 2;                            /* 按键弹起的键值代码 */
- 279   2                      //s_tBtn[i].KeyCodeLong = 3 * i + 3;                            /* 按键被持续按下的键值代码 */
- 280   2                      s_tBtn[i].RepeatSpeed = 0; /* 按键连发的速度，0表示不支持连发 */
- 281   2                      s_tBtn[i].RepeatCount = 0; /* 连发计数器 */
- 282   2              }
- 283   1      
- 284   1              /* 判断按键按下的函数 */
- 285   1              s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
- 286   1              s_tBtn[1].IsKeyDownFunc = IsKeyDown2;
- 287   1              s_tBtn[2].IsKeyDownFunc = IsKeyDown3;
- 288   1              s_tBtn[3].IsKeyDownFunc = IsKeyDown4;
- 289   1              s_tBtn[4].IsKeyDownFunc = IsKeyDown5;
- 290   1              s_tBtn[5].IsKeyDownFunc = IsKeyDown6;
- 291   1              s_tBtn[6].IsKeyDownFunc = IsKeyDown7;
- 292   1              s_tBtn[7].IsKeyDownFunc = IsKeyDown8;
- 293   1              s_tBtn[8].IsKeyDownFunc = IsKeyDown9;
- 294   1      
- 295   1      }
- 296          
- 297          /*
- 298           *********************************************************************************************************
- 299           *      函 数 名: bsp_DetectKey
- 300           *      功能说明: 检测一个按键。非阻塞状态，必须被周期性的调用。
- 301           *      形    参:  按键结构变量指针
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/16/2017 20:14:44 PAGE 6   
+ 267   1      }
+ 268          
+ 269          /*
+ 270           *********************************************************************************************************
+ 271           *      函 数 名: bsp_DetectKey
+ 272           *      功能说明: 检测一个按键。非阻塞状态，必须被周期性的调用。
+ 273           *      形    参:  按键结构变量指针
+ 274           *      返 回 值: 无
+ 275           *********************************************************************************************************
+ 276           */
+ 277          KEY_T *pBtn;
+ 278          static void bsp_DetectKey(uint8_t i) {
+ 279   1              pBtn = &s_tBtn[i];
+ 280   1              if (pBtn->IsKeyDownFunc()) {
+ 281   2                      if (pBtn->Count < KEY_FILTER_TIME) {
+ 282   3                              pBtn->Count = KEY_FILTER_TIME;
+ 283   3                      } else if (pBtn->Count < 2 * KEY_FILTER_TIME) {
+ 284   3                              pBtn->Count++;
+ 285   3                      } else {
+ 286   3                              if (pBtn->State == 0) {
+ 287   4                                      pBtn->State = 1;
+ 288   4      
+ 289   4                                      /* 发送按钮按下的消息 */
+ 290   4                                      bsp_PutKey((uint8_t) (3 * i + 1));
+ 291   4                              }
+ 292   3      
+ 293   3                              if (pBtn->LongTime > 0) {
+ 294   4                                      if (pBtn->LongCount < pBtn->LongTime) {
+ 295   5                                              /* 发送按钮持续按下的消息 */
+ 296   5                                              if (++pBtn->LongCount == pBtn->LongTime) {
+ 297   6                                                      /* 键值放入按键FIFO */
+ 298   6                                                      bsp_PutKey((uint8_t) (3 * i + 3));
+ 299   6                                              }
+ 300   5                                      } else {
+ 301   5                                              if (pBtn->RepeatSpeed > 0) {
+C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/20/2017 22:57:50 PAGE 6   
 
- 302           *      返 回 值: 无
- 303           *********************************************************************************************************
- 304           */
- 305          KEY_T *pBtn;
- 306          static void bsp_DetectKey(uint8_t i) {
- 307   1              pBtn = &s_tBtn[i];
- 308   1              if (pBtn->IsKeyDownFunc()) {
- 309   2                      if (pBtn->Count < KEY_FILTER_TIME) {
- 310   3                              pBtn->Count = KEY_FILTER_TIME;
- 311   3                      } else if (pBtn->Count < 2 * KEY_FILTER_TIME) {
- 312   3                              pBtn->Count++;
- 313   3                      } else {
- 314   3                              if (pBtn->State == 0) {
- 315   4                                      pBtn->State = 1;
- 316   4      
- 317   4                                      /* 发送按钮按下的消息 */
- 318   4                                      bsp_PutKey((uint8_t) (3 * i + 1));
- 319   4                              }
- 320   3      
- 321   3                              if (pBtn->LongTime > 0) {
- 322   4                                      if (pBtn->LongCount < pBtn->LongTime) {
- 323   5                                              /* 发送按钮持续按下的消息 */
- 324   5                                              if (++pBtn->LongCount == pBtn->LongTime) {
- 325   6                                                      /* 键值放入按键FIFO */
- 326   6                                                      bsp_PutKey((uint8_t) (3 * i + 3));
- 327   6                                              }
- 328   5                                      } else {
- 329   5                                              if (pBtn->RepeatSpeed > 0) {
- 330   6                                                      if (++pBtn->RepeatCount >= pBtn->RepeatSpeed) {
- 331   7                                                              pBtn->RepeatCount = 0;
- 332   7                                                              /* 常按键后，每隔10ms发送1个按键 */
- 333   7                                                              bsp_PutKey((uint8_t) (3 * i + 1));
- 334   7                                                      }
- 335   6                                              }
- 336   5                                      }
- 337   4                              }
- 338   3                      }
- 339   2              } else {
- 340   2                      if (pBtn->Count > KEY_FILTER_TIME) {
- 341   3                              pBtn->Count = KEY_FILTER_TIME;
- 342   3                      } else if (pBtn->Count != 0) {
- 343   3                              pBtn->Count--;
- 344   3                      } else {
- 345   3                              if (pBtn->State == 1) {
- 346   4                                      pBtn->State = 0;
- 347   4      
- 348   4                                      /* 发送按钮弹起的消息 */
- 349   4                                      bsp_PutKey((uint8_t) (3 * i + 2));
- 350   4                              }
- 351   3                      }
- 352   2                      pBtn->LongCount = 0;
- 353   2                      pBtn->RepeatCount = 0;
- 354   2              }
- 355   1      }
- 356          
- 357          /*
- 358           *********************************************************************************************************
- 359           *      函 数 名: bsp_KeyScan
- 360           *      功能说明: 扫描所有按键。非阻塞，被systick中断周期性的调用
- 361           *      形    参:  无
- 362           *      返 回 值: 无
- 363           *********************************************************************************************************
-C51 COMPILER V9.56.0.0   BSP_KEY                                                           08/16/2017 20:14:44 PAGE 7   
-
- 364           */
- 365          void bsp_KeyScan(void) {
- 366   1              uint8_t i;
- 367   1      
- 368   1              for (i = 0; i < KEY_COUNT; i++) {
- 369   2                      bsp_DetectKey(i);
- 370   2              }
- 371   1      }
- 372          
- 373          /***************************** (END OF FILE) *********************************/
+ 302   6                                                      if (++pBtn->RepeatCount >= pBtn->RepeatSpeed) {
+ 303   7                                                              pBtn->RepeatCount = 0;
+ 304   7                                                              /* 常按键后，每隔10ms发送1个按键 */
+ 305   7                                                              bsp_PutKey((uint8_t) (3 * i + 1));
+ 306   7                                                      }
+ 307   6                                              }
+ 308   5                                      }
+ 309   4                              }
+ 310   3                      }
+ 311   2              } else {
+ 312   2                      if (pBtn->Count > KEY_FILTER_TIME) {
+ 313   3                              pBtn->Count = KEY_FILTER_TIME;
+ 314   3                      } else if (pBtn->Count != 0) {
+ 315   3                              pBtn->Count--;
+ 316   3                      } else {
+ 317   3                              if (pBtn->State == 1) {
+ 318   4                                      pBtn->State = 0;
+ 319   4      
+ 320   4                                      /* 发送按钮弹起的消息 */
+ 321   4                                      bsp_PutKey((uint8_t) (3 * i + 2));
+ 322   4                              }
+ 323   3                      }
+ 324   2                      pBtn->LongCount = 0;
+ 325   2                      pBtn->RepeatCount = 0;
+ 326   2              }
+ 327   1      }
+ 328          
+ 329          /*
+ 330           *********************************************************************************************************
+ 331           *      函 数 名: bsp_KeyScan
+ 332           *      功能说明: 扫描所有按键。非阻塞，被systick中断周期性的调用
+ 333           *      形    参:  无
+ 334           *      返 回 值: 无
+ 335           *********************************************************************************************************
+ 336           */
+ 337          void bsp_KeyScan(void) {
+ 338   1              uint8_t i;
+ 339   1      
+ 340   1              for (i = 0; i < KEY_COUNT; i++) {
+ 341   2                      bsp_DetectKey(i);
+ 342   2              }
+ 343   1      }
+ 344          
+ 345          /***************************** (END OF FILE) *********************************/
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    700    ----
+   CODE SIZE        =    880    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =      3       2
+   XDATA SIZE       =      7       2
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =    112    ----

@@ -9,7 +9,6 @@
 #define APP_INC_APP_2D4_H_
 
 void app_2d4_init(void);
-
-
+void app_2d4_pro(void);
 
 #endif /* APP_INC_APP_2D4_H_ */

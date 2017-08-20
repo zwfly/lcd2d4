@@ -13,11 +13,11 @@
 #define         SCK_HIGH                (P04 = 1)
 #define         SCK_LOW                 (P04 = 0)
 
-#define         SPI_DATA_HIGH           (P35 = 1)
-#define         SPI_DATA_LOW            (P35 = 0)
-#define         SPI_DATA_STATUS         (P35)
-#define         SPI_DATA_OUTPUT_MODE     clr_P0M1_4;set_P0M2_4
-#define         SPI_DATA_INPUT_MODE      set_P0M1_4;clr_P0M2_4
+#define         SPI_DATA_HIGH           (P03 = 1)
+#define         SPI_DATA_LOW            (P03 = 0)
+#define         SPI_DATA_STATUS         (P03)
+#define         SPI_DATA_OUTPUT_MODE     clr_P0M1_3;set_P0M2_3
+#define         SPI_DATA_INPUT_MODE      set_P0M1_3;clr_P0M2_3
 #define         CE_HIGH                  RF_WriteReg(CE_FSPI_ON, 0)
 #define         CE_LOW                   RF_WriteReg(CE_FSPI_OFF, 0)
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@
 #define		RX_PW_P4			0x15
 #define		RX_PW_P5			0x16
 #define		FIFO_STATUS			0x17
-#define		DEM_CAL				0x19
+#define		DEMOD_CAL			0x19
 #define     RF_CAL2				0x1A
 #define     DEM_CAL2			0x1B
 #define		DYNPD				0x1C

@@ -25,11 +25,20 @@ void ADC_Init(void) {
 	set_ADCEN;
 
 	ADCCON0 = 0x00;                   //select ADC pin
-	set_P0M1_0;                       //set ADC pin is input only mode
+#if 0
+			set_P0M1_0;                       //set ADC pin is input only mode
+			clr_P0M2_0;
+
+			set_P0M1_1;//set ADC pin is input only mode
+			clr_P0M2_1;
+#else
+	clr_P0M1_0;                       //set ADC pin is input only mode
 	clr_P0M2_0;
 
-	set_P0M1_1;                       //set ADC pin is input only mode
+	clr_P0M1_1;                       //set ADC pin is input only mode
 	clr_P0M2_1;
+
+#endif
 
 	set_P00DIDS;                      //disable digital connection
 	set_P01DIDS;

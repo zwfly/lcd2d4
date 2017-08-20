@@ -16,32 +16,11 @@ interrupt 11
 
 	g_tADC_Result.busy = 0;
 }
-/******************************************************************************
- * FUNCTION_PURPOSE: I/O Pin interrupt Service Routine
- ******************************************************************************/
-void PinInterrupt_ISR(void)
-interrupt 7
-{
-
-	if (PIF & 0x08) {
-
-		if (g_tDevice.status == E_PowerDown) {
-
-			g_tDevice.status = E_PowerReady;
-
-		}
-
-	}
-
-	PIF = 0x00;                             //clear interrupt flag
-}
+static char ss[16] = { 0 };
 void main(void) {
 	uint8_t ucKeyCode;
 	System_Clock_Select(E_HIRCEN);
 
-#if  0
-	CKDIV = 1;                        //Fsys = Fosc / (2* CLKDIV) = Fcpu
-#endif
 
 	/****************/
 	bsp_Init();
@@ -49,7 +28,7 @@ void main(void) {
 	/****************/
 //	work_Init();
 	app_key_init();
-//	app_charge_Init();
+	app_2d4_init();
 	/****************/
 //	Show_FW_Version_Number_To_PC();
 	while (1) {
@@ -67,7 +46,8 @@ void main(void) {
 
 		}
 		if (Task_time.flag_100ms) {
-			char ss[16] = { 0 };
+			uint8_t i = 0;
+
 			static uint8_t n = 0;
 			Task_time.flag_100ms = 0;
 			//////////////////
@@ -84,25 +64,20 @@ void main(void) {
 #else
 				sprintf(ss, "ch1 %d", g_tADC_Result.result[1]);
 #endif
-				LCD_ShowString(ss);
-			}
+				//	LCD_ShowString(ss);
 
+			}
+			app_2d4_pro();
 		}
 		if (Task_time.flag_1s) {
-			static char *str = "ABCDEFGHIJKLMNOPQ";
-			static uint8_t cnt = 0;
 			Task_time.flag_1s = 0;
 			//////////////////
 //			app_key_1s_pro();
 //			app_work_1s_pro();
 //			app_charge_1s_pro();
 //			app_battery_1s_pro();
-			cnt++;
 
-			//	LCD_ShowString(str + cnt);
-			if (cnt > strlen(str)) {
-				cnt = 0;
-			}
+//			app_2d4_pro();
 
 		}
 

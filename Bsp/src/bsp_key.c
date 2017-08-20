@@ -15,7 +15,7 @@
 
 #include "bsp.h"
 
-#define KEY_AD_ERROR 10
+#define KEY_AD_ERROR 5
 
 #define S2_AD  980
 #define S3_AD  955
@@ -50,77 +50,49 @@ static uint8_t IsKeyDown1(void) {
 		return 1;
 	}
 }
+uint16_t max = 0;
+uint16_t min = 0;
+static uint8_t IsKeyDown(uint16_t key_ad, uint16_t result_ad) {
+
+	max = (key_ad + KEY_AD_ERROR) > 1023 ? 1023 : key_ad + KEY_AD_ERROR;
+	min = (key_ad < KEY_AD_ERROR) ? 0 : (key_ad - KEY_AD_ERROR);
+
+	return ((result_ad >= min) && (result_ad <= max));
+}
+
 //CH1, S2 ad = 980
 static uint8_t IsKeyDown2(void) {
-//	if (g_tADC_Result.result[0]) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+
+	return IsKeyDown(S2_AD, g_tADC_Result.result[0]);
 }
 //CH1, S3 ad = 954
 static uint8_t IsKeyDown3(void) {
-//	if (P05) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+	return IsKeyDown(S3_AD, g_tADC_Result.result[0]);
 }
 //CH1, S4 ad = 884
 static uint8_t IsKeyDown4(void) {
-//	if (P06) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+	return IsKeyDown(S4_AD, g_tADC_Result.result[0]);
 }
 //CH1, S5 ad = 0
 static uint8_t IsKeyDown5(void) {
-//	if (P55) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+
+	return IsKeyDown(S5_AD, g_tADC_Result.result[0]);
 }
 //CH2, S6 ad = 1020
 static uint8_t IsKeyDown6(void) {
-//	if (P55) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+	return IsKeyDown(S6_AD, g_tADC_Result.result[1]);
 }
 //CH2, S7 ad = 1018
 static uint8_t IsKeyDown7(void) {
-//	if (P55) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+	return IsKeyDown(S7_AD, g_tADC_Result.result[1]);
 }
 //CH2, S8 ad = 1016
 static uint8_t IsKeyDown8(void) {
-//	if (P55) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+	return IsKeyDown(S8_AD, g_tADC_Result.result[1]);
 }
 //CH2, S9 ad = 1009
 static uint8_t IsKeyDown9(void) {
-//	if (P55) {
-//		return 0;
-//	} else {
-//		return 1;
-//	}
-	return 0;
+	return IsKeyDown(S9_AD, g_tADC_Result.result[1]);
 }
 
 /*

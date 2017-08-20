@@ -5,7 +5,6 @@
  *      Author: fly
  */
 
-
 #include "bsp.h"
 
 void KEY_Bright_InitHard(void) {
@@ -19,6 +18,9 @@ void KEY_Bright_InitHard(void) {
 void key_bright_off(void) {
 	clr_P05;
 }
-void key_bright_on() {
+void key_bright_on(void) {
 	set_P05;
+}
+void key_bright_toggle(void) {
+	P05 = ~P05;
 }

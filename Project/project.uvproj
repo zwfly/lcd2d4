@@ -174,7 +174,7 @@
             <Capability>1</Capability>
             <DriverSelection>4102</DriverSelection>
           </Flash1>
-          <bUseTDR>0</bUseTDR>
+          <bUseTDR>1</bUseTDR>
           <Flash2>BIN\Nuvoton_8051_Keil_uVision_Driver.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
@@ -387,6 +387,11 @@
               <FileName>app.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\App\inc\app.h</FilePath>
+            </File>
+            <File>
+              <FileName>app_2d4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\src\app_2d4.c</FilePath>
             </File>
           </Files>
         </Group>

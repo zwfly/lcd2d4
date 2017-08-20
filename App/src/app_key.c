@@ -20,7 +20,6 @@ static char letter = '\0';
  * */
 uint8_t level = 0;
 
-
 void app_key_init(void) {
 	level = 0;
 
@@ -37,8 +36,6 @@ void app_key_init(void) {
 	g_tDevice.status = E_PowerOn;
 
 }
-
-
 
 void app_flash_Show(void) {
 
@@ -72,44 +69,21 @@ static uint8_t noOps_timeoutCnt = 0;
 static BIT offBight_flag = 0;
 //static BIT keyInvalid_flag = 0;
 void app_key_100ms_pro(void) {
-	static idata uint8_t
-	cnt = 0;
 
-	if (g_tDevice.status == E_PowerDown) {
-		cnt++;
-		if (cnt >= 3) {
-			cnt = 0;
-
-			app_key_clear_noOps_timeoutCnt();
-//			keyInvalid_flag = 1;
-//			set_PD;
-		}
-	} else {
-		cnt = 0;
-	}
 }
 
 void app_key_1s_pro(void) {
-
-	noOps_timeoutCnt++;
-	if (noOps_timeoutCnt == 10) {
-		offBight_flag = 1;
-//		keyInvalid_flag = 1;
-		lcd_bright_off();
-		printf("off bright\n");
-	} else if (noOps_timeoutCnt == 20) {
-		app_power_off();
-		printf("power off\n");
-		g_tDevice.status = E_PowerDown;
-	}
 
 }
 void app_key_clear_noOps_timeoutCnt(void) {
 	noOps_timeoutCnt = 0;
 }
+
 void app_key_pro(uint8_t keyCode) {
 
 	app_key_clear_noOps_timeoutCnt();
+
+	key_bright_toggle();
 
 	switch (keyCode) {
 	case KEY_UP_K1:
@@ -148,7 +122,6 @@ void app_key_pro(uint8_t keyCode) {
 	case KEY_LONG_K4:
 
 		break;
-
 	case KEY_UP_K5:
 
 		break;
@@ -158,9 +131,44 @@ void app_key_pro(uint8_t keyCode) {
 	case KEY_LONG_K5:
 
 		break;
+	case KEY_UP_K6:
 
+		break;
+	case KEY_DOWN_K6:
+
+		break;
+	case KEY_LONG_K6:
+
+		break;
+	case KEY_UP_K7:
+
+		break;
+	case KEY_DOWN_K7:
+
+		break;
+	case KEY_LONG_K7:
+
+		break;
+	case KEY_UP_K8:
+
+		break;
+	case KEY_DOWN_K8:
+
+		break;
+	case KEY_LONG_K8:
+
+		break;
+	case KEY_UP_K9:
+
+		break;
+	case KEY_DOWN_K9:
+
+		break;
+	case KEY_LONG_K9:
+
+		break;
 	default:
-//		BEEP_KeyTone();
+
 		break;
 
 	}

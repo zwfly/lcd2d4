@@ -21,7 +21,6 @@ void Wireless2d4_InitHard(void) {
 	P3M1 &= ~SET_BIT5;
 	P3M2 |= SET_BIT5;
 
-	P34 = 0;
 }
 
 const uint8_t TX_ADDRESS_DEF[5] = { 0xCC, 0xCC, 0xCC, 0xCC, 0xCC }; //RF 地址：接收端和发送端需一致
@@ -49,9 +48,9 @@ void SPI_WW(uint8_t R_REG) {
 		} else {
 			SPI_DATA_LOW;
 		}
-		R_REG = R_REG << 1;
-
+		R_REG <<= 1;
 		SCK_HIGH;
+		nop
 	}
 	SCK_LOW;
 
@@ -63,8 +62,10 @@ void SPI_WW(uint8_t R_REG) {
 /******************************************************************************/
 void RF_WriteReg(uint8_t reg, uint8_t wdata) {
 	CSN_LOW;
+	nop
 	SPI_WW(reg);
 	SPI_WW(wdata);
+	nop
 	CSN_HIGH;
 }
 
@@ -97,9 +98,9 @@ void SPI_WR(uint8_t R_REG) {
 		} else {
 			SPI_DATA_LOW;
 		}
-		R_REG = R_REG << 1;
-
+		R_REG <<= 1;
 		SCK_HIGH;
+		nop
 	}
 	SPI_DATA_INPUT_MODE
 	;
@@ -134,10 +135,12 @@ uint8_t ucRF_ReadReg(uint8_t reg) {
 	uint8_t dt;
 
 	CSN_LOW;
+	nop
 	SPI_WR(reg);
 	dt = ucSPI_Read();
 	SPI_DATA_OUTPUT_MODE
 	;
+	nop
 	CSN_HIGH;
 
 	return dt;
@@ -169,6 +172,8 @@ void RF_TxMode(void) {
 //	delay_10us(1);
 	nop
 	nop
+	nop
+	nop
 }
 
 /******************************************************************************/
@@ -176,15 +181,15 @@ void RF_TxMode(void) {
 //            将RF设置成RX模式，准备接收数据
 /******************************************************************************/
 void RF_RxMode(void) {
+	uint16_t i = 0;
 	CE_LOW;
 	RF_WriteReg(W_REGISTER + CONFIG, 0X8F);						// 将RF设置成RX模式
 	CE_HIGH;										// Set CE pin high 开始接收数据
 //	delay_ms(2);
+	for (i = 0; i < 2000; i++) {
+		nop
+	}
 
-	nop
-	nop
-	nop
-	nop
 }
 
 /******************************************************************************/
@@ -235,15 +240,14 @@ void RF_SetChannel(uint8_t Channel) {
 //              length 通常等于 PAYLOAD_WIDTH
 /******************************************************************************/
 void RF_TxData(uint8_t *ucPayload, uint8_t length) {
-	if (0 == ucRF_GetStatus())                                 // rf free status
-			{
+	if (0 == ucRF_GetStatus()) {                             // rf free status
+		uint16_t i = 0;
 		RF_WriteBuf(W_TX_PAYLOAD, ucPayload, length);
 		CE_HIGH;                             //rf entery tx mode start send data
 //		delay_10us(60);                            //keep ce high at least 600us
-		nop
-		nop
-		nop
-		nop
+		for (i = 0; i < 200; i++) {
+			nop
+		}
 		CE_LOW;                                                 //rf entery stb3
 	}
 }
@@ -282,11 +286,11 @@ uint8_t ucRF_DumpRxData(uint8_t *ucPayload, uint8_t length) {
 //                Initial RF
 /******************************************************************************/
 void RF_Init(void) {
-	uint8_t BB_cal_data[] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
-	uint8_t RF_cal_data[] = { 0xF6, 0x37, 0x5D };
-	uint8_t RF_cal2_data[] = { 0x45, 0x21, 0xef, 0xAC, 0x5A, 0x50 };
-	uint8_t Dem_cal_data[] = { 0x01 };
-	uint8_t Dem_cal2_data[] = { 0x0b, 0xDF, 0x02 };
+	uint8_t BB_cal_data[5] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
+	uint8_t RF_cal_data[3] = { 0xF6, 0x37, 0x5D };
+	uint8_t RF_cal2_data[6] = { 0x45, 0x21, 0xef, 0xAC, 0x5A, 0x50 };
+	uint8_t Dem_cal_data[1] = { 0x01 };
+	uint8_t Dem_cal2_data[3] = { 0x0b, 0xDF, 0x02 };
 	SPI_init();
 	RF_WriteReg(RST_FSPI, 0x5A);								//Software Reset
 	RF_WriteReg(RST_FSPI, 0XA5);
@@ -310,7 +314,7 @@ void RF_Init(void) {
 			sizeof(TX_ADDRESS_DEF));	// RX_Addr0 same as TX_Adr for Auto.Ack
 	RF_WriteBuf(W_REGISTER + BB_CAL, BB_cal_data, sizeof(BB_cal_data));
 	RF_WriteBuf(W_REGISTER + RF_CAL2, RF_cal2_data, sizeof(RF_cal2_data));
-	RF_WriteBuf(W_REGISTER + DEM_CAL, Dem_cal_data, sizeof(Dem_cal_data));
+	RF_WriteBuf(W_REGISTER + DEMOD_CAL, Dem_cal_data, sizeof(Dem_cal_data));
 	RF_WriteBuf(W_REGISTER + RF_CAL, RF_cal_data, sizeof(RF_cal_data));
 	RF_WriteBuf(W_REGISTER + DEM_CAL2, Dem_cal2_data, sizeof(Dem_cal2_data));
 	RF_WriteReg(W_REGISTER + DYNPD, 0x00);
@@ -330,26 +334,30 @@ void RF_Init(void) {
 //            		进入载波模式
 /******************************************************************************/
 void RF_Carrier(uint8_t ucChannel_Set) {
-	uint8_t BB_cal_data[] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
-	uint8_t RF_cal_data[] = { 0xF6, 0x37, 0x5D };
-	uint8_t RF_cal2_data[] = { 0x45, 0x21, 0xEF, 0xAC, 0x5A, 0x50 };
-	uint8_t Dem_cal_data[] = { 0xE1 };
-	uint8_t Dem_cal2_data[] = { 0x0B, 0xDF, 0x02 };
+	uint8_t i = 0;
+	uint8_t BB_cal_data[5] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
+	uint8_t RF_cal_data[3] = { 0xF6, 0x37, 0x5D };
+	uint8_t RF_cal2_data[6] = { 0x45, 0x21, 0xEF, 0xAC, 0x5A, 0x50 };
+	uint8_t Dem_cal_data[1] = { 0xE1 };
+	uint8_t Dem_cal2_data[3] = { 0x0B, 0xDF, 0x02 };
 
 	RF_WriteReg(RST_FSPI, 0x5A);								//Software Reset
 	RF_WriteReg(RST_FSPI, 0XA5);
 	RF_WriteReg(W_REGISTER + FEATURE, 0x20);
 	CE_LOW;
 //	delay_ms(200);
-	nop
-	nop
-	nop
-	nop
+	for (i = 0; i < 220; i++) {
+		nop
+		nop
+		nop
+		nop
+	}
+
 	RF_WriteReg(W_REGISTER + RF_CH, ucChannel_Set);						//单载波频点
 	RF_WriteReg(W_REGISTER + RF_SETUP, RF_POWER);      					//13dbm
 	RF_WriteBuf(W_REGISTER + BB_CAL, BB_cal_data, sizeof(BB_cal_data));
 	RF_WriteBuf(W_REGISTER + RF_CAL2, RF_cal2_data, sizeof(RF_cal2_data));
-	RF_WriteBuf(W_REGISTER + DEM_CAL, Dem_cal_data, sizeof(Dem_cal_data));
+	RF_WriteBuf(W_REGISTER + DEMOD_CAL, Dem_cal_data, sizeof(Dem_cal_data));
 	RF_WriteBuf(W_REGISTER + RF_CAL, RF_cal_data, sizeof(RF_cal_data));
 	RF_WriteBuf(W_REGISTER + DEM_CAL2, Dem_cal2_data, sizeof(Dem_cal2_data));
 }

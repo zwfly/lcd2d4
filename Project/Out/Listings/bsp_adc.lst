@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/16/2017 20:14:45 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/20/2017 22:57:50 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_ADC
@@ -36,46 +36,55 @@ line level    source
   25   1              set_ADCEN;
   26   1      
   27   1              ADCCON0 = 0x00;                   //select ADC pin
-  28   1              set_P0M1_0;                       //set ADC pin is input only mode
-  29   1              clr_P0M2_0;
-  30   1      
-  31   1              set_P0M1_1;                       //set ADC pin is input only mode
-  32   1              clr_P0M2_1;
-  33   1      
-  34   1              set_P00DIDS;                      //disable digital connection
-  35   1              set_P01DIDS;
-  36   1      
-  37   1              clr_ADCDIV2;
-  38   1              set_ADCDIV1;
-  39   1              clr_ADCDIV0;
+  28   1      #if 0
+                                      set_P0M1_0;                       //set ADC pin is input only mode
+                                      clr_P0M2_0;
+              
+                                      set_P0M1_1;//set ADC pin is input only mode
+                                      clr_P0M2_1;
+              #else
+  35   1              clr_P0M1_0;                       //set ADC pin is input only mode
+  36   1              clr_P0M2_0;
+  37   1      
+  38   1              clr_P0M1_1;                       //set ADC pin is input only mode
+  39   1              clr_P0M2_1;
   40   1      
-  41   1              EADC = 1;
-  42   1      #endif
-  43   1      }
-  44          
-  45          void ADC_Start(void) {
-  46   1      
-  47   1              g_tADC_Result.busy = 1;
-  48   1      
-  49   1              if (g_tADC_Result.channel) {
-  50   2                      g_tADC_Result.channel = 0;
-  51   2                      clr_ADCHS3;
-  52   2                      clr_ADCHS2;
-  53   2                      clr_ADCHS1;
-C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/16/2017 20:14:45 PAGE 2   
+  41   1      #endif
+  42   1      
+  43   1              set_P00DIDS;                      //disable digital connection
+  44   1              set_P01DIDS;
+  45   1      
+  46   1              clr_ADCDIV2;
+  47   1              set_ADCDIV1;
+  48   1              clr_ADCDIV0;
+  49   1      
+  50   1              EADC = 1;
+  51   1      #endif
+  52   1      }
+  53          
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/20/2017 22:57:50 PAGE 2   
 
-  54   2                      clr_ADCHS0;
-  55   2                      set_ADCS;  //Trigger ADC start conversion
-  56   2              } else {
-  57   2                      g_tADC_Result.channel = 1;
-  58   2                      clr_ADCHS3;
-  59   2                      clr_ADCHS2;
-  60   2                      clr_ADCHS1;
-  61   2                      set_ADCHS0;
-  62   2                      set_ADCS;  //Trigger ADC start conversion
-  63   2              }
-  64   1      
-  65   1      }
+  54          void ADC_Start(void) {
+  55   1      
+  56   1              g_tADC_Result.busy = 1;
+  57   1      
+  58   1              if (g_tADC_Result.channel) {
+  59   2                      g_tADC_Result.channel = 0;
+  60   2                      clr_ADCHS3;
+  61   2                      clr_ADCHS2;
+  62   2                      clr_ADCHS1;
+  63   2                      clr_ADCHS0;
+  64   2                      set_ADCS;  //Trigger ADC start conversion
+  65   2              } else {
+  66   2                      g_tADC_Result.channel = 1;
+  67   2                      clr_ADCHS3;
+  68   2                      clr_ADCHS2;
+  69   2                      clr_ADCHS1;
+  70   2                      set_ADCHS0;
+  71   2                      set_ADCS;  //Trigger ADC start conversion
+  72   2              }
+  73   1      
+  74   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

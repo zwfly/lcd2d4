@@ -10,6 +10,7 @@
 
 void KEY_Bright_InitHard(void);
 void key_bright_off(void);
-void key_bright_on();
+void key_bright_on(void);
+void key_bright_toggle(void);
 
 #endif /* BSP_INC_BSP_KEYBRIGHT_H_ */
