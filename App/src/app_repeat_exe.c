@@ -82,11 +82,6 @@ void Repeat_Stop(void) {
  */
 void Repeat_Pro(void) {
 
-	if (g_tDevice.status == E_PowerDown) {
-		Repeat_Stop();
-		return;
-	}
-
 	if ((g_tRepeat.ucEnalbe == 0) || (g_tRepeat.usStopTime == 0)) {
 		return;
 	}

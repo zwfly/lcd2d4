@@ -9,24 +9,17 @@
 #define APP_INC_APP_WORK_H_
 
 typedef enum {
-	E_TRAINING_PLACE = 0,
-	E_Simple_metering_mode,
-	E_Quick_start_mode,
-	E_Coach_mode,
-} E_TRAINING_MODE;
+	E_MODE_PLACE = 0, E_BT_mode, E_FM_mode, E_USB_mode, E_AUX_mode,
+} E_MODE;
 
 typedef struct _WORK_T {
-	E_TRAINING_MODE mode;
-	char reps_mode;
-	uint16_t sum;
-	uint8_t reps_num;
-	uint16_t pulls_num;
-	uint16_t cal_num;
+	E_MODE mode;
+	uint8_t vol;
+	uint8_t track;
 
 } WORK_T;
 extern WORK_T g_tWork;
 
-extern const uint8_t Rep_Pull_num[4][2];
 
 void work_Init(void);
 void query_work_sum(void);

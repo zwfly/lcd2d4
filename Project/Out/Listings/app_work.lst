@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   APP_WORK                                                          08/20/2017 22:57:49 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_WORK                                                          08/21/2017 21:12:41 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_WORK
@@ -18,72 +18,41 @@ line level    source
    7          
    8          #include "app.h"
    9          
-  10          #define BEEP_SHORT_TIME  10
-  11          #define BEEP_LONG_TIME  30
-  12          #define COACH_DELAY_TIME 200
-  13          #define CAL_a 2
+  10          WORK_T g_tWork;
+  11          
+  12          
+  13          static void app_work_pro(void);
   14          
-  15          const uint8_t Rep_Pull_num[4][2] = { { 10, 20 }, { 20, 25 }, { 30, 30 }, { 50,
-  16                          40 } };
-  17          
-  18          WORK_T g_tWork;
-  19          static uint8_t count_NoAction = 0;
-  20          static BIT pull_once_flag = 0;
-  21          
-  22          static void app_work_pro(void);
+  15          void work_Init(void) {
+  16   1              g_tWork.mode = E_MODE_PLACE;
+  17   1      
+  18   1      }
+  19          
+  20          void query_work_sum(void) {
+  21   1      
+  22   1      }
   23          
-  24          void work_Init(void) {
-  25   1              g_tWork.mode = E_Simple_metering_mode;
-  26   1              g_tWork.reps_mode = '\0';
-  27   1              g_tWork.sum = 0;
-  28   1              g_tWork.reps_num = 0;
-  29   1              g_tWork.pulls_num = 0;
-  30   1              g_tWork.cal_num = 0;
-  31   1      
-  32   1              count_NoAction = 0;
+  24          void app_work_1s_pro(void) {
+  25   1      
+  26   1      }
+  27          void app_work_100ms_pro(void) {
+  28   1      
+  29   1      }
+  30          
+  31          static void app_work_pro(void) {
+  32   1      
   33   1      }
   34          
-  35          void query_work_sum(void) {
-  36   1              g_tWork.sum++;
-  37   1              if (g_tWork.sum > 10000) {
-  38   2                      g_tWork.sum = 0;
-  39   2              }
-  40   1              pull_once_flag = 1;
-  41   1      
-  42   1      }
-  43          
-  44          void app_work_1s_pro(void) {
-  45   1              if (count_NoAction < 255) {
-  46   2                      count_NoAction++;
-  47   2              }
-  48   1      
-  49   1      }
-  50          void app_work_100ms_pro(void) {
-  51   1              if (pull_once_flag) {
-  52   2                      pull_once_flag = 0;
-  53   2                      ///////////////////
-C51 COMPILER V9.56.0.0   APP_WORK                                                          08/20/2017 22:57:49 PAGE 2   
-
-  54   2                      app_key_clear_noOps_timeoutCnt();
-  55   2                      app_work_pro();
-  56   2              }
-  57   1      
-  58   1      }
-  59          
-  60          static void app_work_pro(void) {
-  61   1              
-  62   1      }
-  63          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     90    ----
+   CODE SIZE        =     10    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     18    ----
+   XDATA SIZE       =      3    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =      1    ----
+   BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 

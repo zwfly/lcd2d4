@@ -14,7 +14,6 @@ interrupt 11
 	g_tADC_Result.result[g_tADC_Result.channel] <<= 2;
 	g_tADC_Result.result[g_tADC_Result.channel] |= ADCRL;
 
-	g_tADC_Result.busy = 0;
 }
 static char ss[16] = { 0 };
 void main(void) {

@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/20/2017 22:57:50 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/21/2017 21:12:42 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_ADC
@@ -21,79 +21,75 @@ line level    source
   10          idata ADC_RESULT_T g_tADC_Result;
   11          
   12          void ADC_Init(void) {
-  13   1              g_tADC_Result.busy = 0;
-  14   1              g_tADC_Result.channel = 0;
-  15   1              g_tADC_Result.result[0] = 1023;
-  16   1              g_tADC_Result.result[1] = 1023;
-  17   1      #if 1
-  18   1      
-  19   1      //      clr_P0M1_0;
-  20   1      //      clr_P0M2_0;
-  21   1      
-  22   1      //      clr_P0M1_1;
-  23   1      //      clr_P0M2_1;
-  24   1      
-  25   1              set_ADCEN;
-  26   1      
-  27   1              ADCCON0 = 0x00;                   //select ADC pin
-  28   1      #if 0
+  13   1              g_tADC_Result.channel = 0;
+  14   1              g_tADC_Result.result[0] = 1023;
+  15   1              g_tADC_Result.result[1] = 1023;
+  16   1      #if 1
+  17   1      
+  18   1      //      clr_P0M1_0;
+  19   1      //      clr_P0M2_0;
+  20   1      
+  21   1      //      clr_P0M1_1;
+  22   1      //      clr_P0M2_1;
+  23   1      
+  24   1              set_ADCEN;
+  25   1      
+  26   1              ADCCON0 = 0x00;                   //select ADC pin
+  27   1      #if 0
                                       set_P0M1_0;                       //set ADC pin is input only mode
                                       clr_P0M2_0;
               
                                       set_P0M1_1;//set ADC pin is input only mode
                                       clr_P0M2_1;
               #else
-  35   1              clr_P0M1_0;                       //set ADC pin is input only mode
-  36   1              clr_P0M2_0;
-  37   1      
-  38   1              clr_P0M1_1;                       //set ADC pin is input only mode
-  39   1              clr_P0M2_1;
-  40   1      
-  41   1      #endif
-  42   1      
-  43   1              set_P00DIDS;                      //disable digital connection
-  44   1              set_P01DIDS;
-  45   1      
-  46   1              clr_ADCDIV2;
-  47   1              set_ADCDIV1;
-  48   1              clr_ADCDIV0;
-  49   1      
-  50   1              EADC = 1;
-  51   1      #endif
-  52   1      }
-  53          
-C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/20/2017 22:57:50 PAGE 2   
+  34   1              clr_P0M1_0;                       //set ADC pin is input only mode
+  35   1              clr_P0M2_0;
+  36   1      
+  37   1              clr_P0M1_1;                       //set ADC pin is input only mode
+  38   1              clr_P0M2_1;
+  39   1      
+  40   1      #endif
+  41   1      
+  42   1              set_P00DIDS;                      //disable digital connection
+  43   1              set_P01DIDS;
+  44   1      
+  45   1              clr_ADCDIV2;
+  46   1              set_ADCDIV1;
+  47   1              clr_ADCDIV0;
+  48   1      
+  49   1              EADC = 1;
+  50   1      #endif
+  51   1      }
+  52          
+  53          void ADC_Start(void) {
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           08/21/2017 21:12:42 PAGE 2   
 
-  54          void ADC_Start(void) {
-  55   1      
-  56   1              g_tADC_Result.busy = 1;
-  57   1      
-  58   1              if (g_tADC_Result.channel) {
-  59   2                      g_tADC_Result.channel = 0;
-  60   2                      clr_ADCHS3;
-  61   2                      clr_ADCHS2;
-  62   2                      clr_ADCHS1;
-  63   2                      clr_ADCHS0;
-  64   2                      set_ADCS;  //Trigger ADC start conversion
-  65   2              } else {
-  66   2                      g_tADC_Result.channel = 1;
-  67   2                      clr_ADCHS3;
-  68   2                      clr_ADCHS2;
-  69   2                      clr_ADCHS1;
-  70   2                      set_ADCHS0;
-  71   2                      set_ADCS;  //Trigger ADC start conversion
-  72   2              }
-  73   1      
-  74   1      }
+  54   1              if (g_tADC_Result.channel) {
+  55   2                      g_tADC_Result.channel = 0;
+  56   2                      clr_ADCHS3;
+  57   2                      clr_ADCHS2;
+  58   2                      clr_ADCHS1;
+  59   2                      clr_ADCHS0;
+  60   2                      set_ADCS;  //Trigger ADC start conversion
+  61   2              } else {
+  62   2                      g_tADC_Result.channel = 1;
+  63   2                      clr_ADCHS3;
+  64   2                      clr_ADCHS2;
+  65   2                      clr_ADCHS1;
+  66   2                      set_ADCHS0;
+  67   2                      set_ADCS;  //Trigger ADC start conversion
+  68   2              }
+  69   1      
+  70   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     89    ----
+   CODE SIZE        =     84    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-   IDATA SIZE       =      6    ----
+   IDATA SIZE       =      5    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 

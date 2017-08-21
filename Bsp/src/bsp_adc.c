@@ -10,7 +10,6 @@
 idata ADC_RESULT_T g_tADC_Result;
 
 void ADC_Init(void) {
-	g_tADC_Result.busy = 0;
 	g_tADC_Result.channel = 0;
 	g_tADC_Result.result[0] = 1023;
 	g_tADC_Result.result[1] = 1023;
@@ -52,9 +51,6 @@ void ADC_Init(void) {
 }
 
 void ADC_Start(void) {
-
-	g_tADC_Result.busy = 1;
-
 	if (g_tADC_Result.channel) {
 		g_tADC_Result.channel = 0;
 		clr_ADCHS3;

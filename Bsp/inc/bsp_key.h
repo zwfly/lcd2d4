@@ -12,7 +12,7 @@
 #ifndef __BSP_KEY_H
 #define __BSP_KEY_H
 
-#define KEY_COUNT    9
+#define KEY_COUNT    10
 
 /* 根据应用程序的功能重命名按键宏 */
 #define KEY_DOWN_K1		KEY_1_DOWN
@@ -51,9 +51,22 @@
 #define KEY_UP_K9		KEY_9_UP
 #define KEY_LONG_K9		KEY_9_LONG
 
+#define KEY_DOWN_K_1AND6	KEY_1AND6_DOWN
+#define KEY_UP_K_1AND6		KEY_1AND6_UP
+#define KEY_LONG_K_1AND6	KEY_1AND6_LONG
+
 /* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
 typedef enum {
-	KID_K1 = 0, KID_K2, KID_K3, KID_K4, KID_K5, KID_K6, KID_K7, KID_K8, KID_K9,
+	KID_K1 = 0,
+	KID_K2,
+	KID_K3,
+	KID_K4,
+	KID_K5,
+	KID_K6,
+	KID_K7,
+	KID_K8,
+	KID_K9,
+	KID_K_1AND6,
 
 } KEY_ID_E;
 
@@ -126,6 +139,9 @@ typedef enum {
 	KEY_9_UP, /* 9键弹起 */
 	KEY_9_LONG, /* 9键长按 */
 
+	KEY_1AND6_DOWN, /* 9键按下 */
+	KEY_1AND6_UP, /* 9键弹起 */
+	KEY_1AND6_LONG, /* 9键长按 */
 } KEY_ENUM;
 
 /* 按键FIFO用到变量 */
