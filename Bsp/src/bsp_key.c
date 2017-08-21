@@ -244,6 +244,7 @@ static void bsp_InitKeyHard(void) {
 static void bsp_InitKeyVar(void) {
 	uint8_t i;
 
+
 	/* 对按键FIFO读写指针清零 */
 	s_tKey.Read = 0;
 	s_tKey.Write = 0;
