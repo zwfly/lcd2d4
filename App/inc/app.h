@@ -18,6 +18,7 @@
 #include "app_work.h"
 #include "app_key.h"
 #include "app_2d4.h"
+#include "app_lcd.h"
 
 //typedef struct _DEVICE_T {
 ////	BIT de;

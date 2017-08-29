@@ -72,6 +72,13 @@ void Repeat_Stop(void) {
 
 }
 
+BIT app_repeat_IsEnable(void) {
+	if (g_tRepeat.ucEnalbe) {
+		return 1;
+	}
+	return 0;
+}
+
 /*
  *********************************************************************************************************
  *	º¯ Êý Ãû:

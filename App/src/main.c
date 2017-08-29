@@ -20,7 +20,6 @@ void main(void) {
 	uint8_t ucKeyCode;
 	System_Clock_Select(E_HIRCEN);
 
-
 	/****************/
 	bsp_Init();
 
@@ -28,13 +27,13 @@ void main(void) {
 //	work_Init();
 	app_key_init();
 	app_2d4_init();
+	app_lcd_init();
 	/****************/
 //	Show_FW_Version_Number_To_PC();
 	while (1) {
 		if (Task_time.flag_5ms) {
 			Task_time.flag_5ms = 0;
 			//////////////////
-
 			ADC_Start();
 		}
 		if (Task_time.flag_10ms) {
@@ -42,7 +41,6 @@ void main(void) {
 			//////////////////
 
 			bsp_KeyScan();
-
 		}
 		if (Task_time.flag_100ms) {
 			uint8_t i = 0;
@@ -53,7 +51,9 @@ void main(void) {
 //			app_key_100ms_pro();
 //			app_work_100ms_pro();
 //			app_charge_100ms_pro();
-//			Repeat_Pro();
+			Repeat_Pro();
+
+			app_lcd_pro();
 
 			n++;
 			if (n >= 5) {

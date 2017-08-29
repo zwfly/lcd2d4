@@ -128,7 +128,7 @@ void RF_Init(void);
 /******************Parameter define **********************/
 
 #define         DEFAULT_CHANNEL                78				//初始化时的频率： 2478 MHz
-#define         PAYLOAD_WIDTH                  8				//Payload宽度：    8bytes
+#define         PAYLOAD_WIDTH                  16				//Payload宽度：    8bytes
 #define         TRANSMIT_TYPE                  TRANS_BURST_MODE 		//使用普通型模式    TRANS_BURST_MODE    TRANS_ENHANCE_MODE
 #define         DATA_RATE                      DR_1M                            //通信速率1Mbps       DR_2M    DR_1M  DR_250K
 #define         RF_POWER                      (RF13dBm |DATA_RATE)		//发射功率13dBm

@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    08/21/2017 21:12:41 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    08/29/2017 22:43:09 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_REPEAT_EXE
@@ -62,7 +62,7 @@ line level    source
   51   1              g_tRepeat.usCount = 0;
   52   1              g_tRepeat.usCycleCount = 0;
   53   1              g_tRepeat.ucState = 0;
-C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    08/21/2017 21:12:41 PAGE 2   
+C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    08/29/2017 22:43:09 PAGE 2   
 
   54   1              g_tRepeat.ucEnalbe = 1; /* 设置完全局参数后再使能发声标志 */
   55   1      
@@ -85,59 +85,66 @@ line level    source
   72   1      
   73   1      }
   74          
-  75          /*
-  76           *********************************************************************************************************
-  77           *      函 数 名:
-  78           *      功能说明: 每隔100ms调用1次该函数，用于控制蜂鸣器发声。该函数在  中被调用。
-  79           *      形    参：无
-  80           *      返 回 值: 无
-  81           *********************************************************************************************************
-  82           */
-  83          void Repeat_Pro(void) {
-  84   1      
-  85   1              if ((g_tRepeat.ucEnalbe == 0) || (g_tRepeat.usStopTime == 0)) {
-  86   2                      return;
-  87   2              }
-  88   1      
-  89   1              if (g_tRepeat.ucState == 0) {
-  90   2                      if (g_tRepeat.usStopTime > 0) /* 间断 */
-  91   2                      {
-  92   3                              if (++g_tRepeat.usCount >= g_tRepeat.usStartTime) {
-  93   4                                      Repeat_Stop_exe(); /* 停止 */
-  94   4                                      g_tRepeat.usCount = 0;
-  95   4                                      g_tRepeat.ucState = 1;
-  96   4                              }
-  97   3                      } else {
-  98   3                              /* 不做任何处理，连续 */
-  99   3                      }
- 100   2              } else if (g_tRepeat.ucState == 1) {
- 101   2                      if (++g_tRepeat.usCount >= g_tRepeat.usStopTime) {
- 102   3                              /* 连续时，直到调用stop停止为止 */
- 103   3                              if (g_tRepeat.usCycle > 0) {
- 104   4                                      if (++g_tRepeat.usCycleCount >= g_tRepeat.usCycle) {
- 105   5                                              /* 循环次数到，停止 */
- 106   5                                              g_tRepeat.ucEnalbe = 0;
- 107   5                                      }
- 108   4      
- 109   4                                      if (g_tRepeat.ucEnalbe == 0) {
- 110   5                                              g_tRepeat.usStopTime = 0;
- 111   5                                              return;
- 112   5                                      }
- 113   4                              }
- 114   3                              g_tRepeat.usCount = 0;
- 115   3                              g_tRepeat.ucState = 0;
-C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    08/21/2017 21:12:41 PAGE 3   
+  75          BIT app_repeat_IsEnable(void) {
+  76   1              if (g_tRepeat.ucEnalbe) {
+  77   2                      return 1;
+  78   2              }
+  79   1              return 0;
+  80   1      }
+  81          
+  82          /*
+  83           *********************************************************************************************************
+  84           *      函 数 名:
+  85           *      功能说明: 每隔100ms调用1次该函数，用于控制蜂鸣器发声。该函数在  中被调用。
+  86           *      形    参：无
+  87           *      返 回 值: 无
+  88           *********************************************************************************************************
+  89           */
+  90          void Repeat_Pro(void) {
+  91   1      
+  92   1              if ((g_tRepeat.ucEnalbe == 0) || (g_tRepeat.usStopTime == 0)) {
+  93   2                      return;
+  94   2              }
+  95   1      
+  96   1              if (g_tRepeat.ucState == 0) {
+  97   2                      if (g_tRepeat.usStopTime > 0) /* 间断 */
+  98   2                      {
+  99   3                              if (++g_tRepeat.usCount >= g_tRepeat.usStartTime) {
+ 100   4                                      Repeat_Stop_exe(); /* 停止 */
+ 101   4                                      g_tRepeat.usCount = 0;
+ 102   4                                      g_tRepeat.ucState = 1;
+ 103   4                              }
+ 104   3                      } else {
+ 105   3                              /* 不做任何处理，连续 */
+ 106   3                      }
+ 107   2              } else if (g_tRepeat.ucState == 1) {
+ 108   2                      if (++g_tRepeat.usCount >= g_tRepeat.usStopTime) {
+ 109   3                              /* 连续时，直到调用stop停止为止 */
+ 110   3                              if (g_tRepeat.usCycle > 0) {
+ 111   4                                      if (++g_tRepeat.usCycleCount >= g_tRepeat.usCycle) {
+ 112   5                                              /* 循环次数到，停止 */
+ 113   5                                              g_tRepeat.ucEnalbe = 0;
+ 114   5                                      }
+ 115   4      
+C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    08/29/2017 22:43:09 PAGE 3   
 
- 116   3      
- 117   3                              Repeat_Start_exe(); /* 开始 */
- 118   3                      }
- 119   2              }
- 120   1      
- 121   1      }
+ 116   4                                      if (g_tRepeat.ucEnalbe == 0) {
+ 117   5                                              g_tRepeat.usStopTime = 0;
+ 118   5                                              return;
+ 119   5                                      }
+ 120   4                              }
+ 121   3                              g_tRepeat.usCount = 0;
+ 122   3                              g_tRepeat.ucState = 0;
+ 123   3      
+ 124   3                              Repeat_Start_exe(); /* 开始 */
+ 125   3                      }
+ 126   2              }
+ 127   1      
+ 128   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    307    ----
+   CODE SIZE        =    317    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =     18    ----
    PDATA SIZE       =   ----    ----

@@ -393,6 +393,11 @@
               <FileType>1</FileType>
               <FilePath>..\App\src\app_2d4.c</FilePath>
             </File>
+            <File>
+              <FileName>app_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\src\app_lcd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

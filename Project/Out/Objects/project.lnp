@@ -3,6 +3,7 @@
 ".\Out\Objects\app_work.obj",
 ".\Out\Objects\app_repeat_exe.obj",
 ".\Out\Objects\app_2d4.obj",
+".\Out\Objects\app_lcd.obj",
 ".\Out\Objects\bsp.obj",
 ".\Out\Objects\bsp_key.obj",
 ".\Out\Objects\bsp_display.obj",
