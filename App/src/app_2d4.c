@@ -21,7 +21,6 @@ void app_2d4_init(void) {
 	RF_RxMode();
 
 //	RF_Carrier(1);
-
 }
 
 void app_2d4_send(uint8_t *d, uint8_t len) {
