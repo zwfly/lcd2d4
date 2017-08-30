@@ -24,10 +24,12 @@ void main(void) {
 	bsp_Init();
 
 	/****************/
-//	work_Init();
+
 	app_key_init();
 	app_2d4_init();
 	app_lcd_init();
+	app_work_Init();
+
 	/****************/
 //	Show_FW_Version_Number_To_PC();
 	while (1) {

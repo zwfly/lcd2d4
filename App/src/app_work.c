@@ -7,15 +7,14 @@
 
 #include "app.h"
 
-WORK_T g_tWork;
-
+idata WORK_T g_tWork;
 
 static void app_work_pro(void);
 
-void work_Init(void) {
-	g_tWork.mode = E_MODE_PLACE;
+void app_work_Init(void) {
+	g_tWork.mode = 'B';
 
-
+	LCD_Show_BAZOOKA_ICO();
 }
 
 void app_work_1s_pro(void) {

@@ -7,11 +7,12 @@
 
 #include "app.h"
 
-static uint8_t sendRcv_flag = 0; //0 rcv£¬ 1 send
-static uint8_t rcvBuf[PAYLOAD_WIDTH] = { 0 };
-static uint8_t sendBuf[PAYLOAD_WIDTH] = { 0 };
+static idata uint8_t sendRcv_flag = 0; //0 rcv£¬ 1 send
+static idata uint8_t rcvBuf[PAYLOAD_WIDTH] = { 0 };
+static idata uint8_t sendBuf[PAYLOAD_WIDTH] = { 0 };
 
 void app_2d4_init(void) {
+
 
 	sendRcv_flag = 0;
 	memset(rcvBuf, 0, sizeof(rcvBuf));
@@ -19,6 +20,7 @@ void app_2d4_init(void) {
 
 	RF_Init();
 	RF_RxMode();
+
 //	RF_Carrier(1);
 
 }
@@ -37,16 +39,49 @@ void app_2d4_send(uint8_t *d, uint8_t len) {
 	}
 
 }
-
-static void repeat_demo_start(void) {
-	LCD_ShowString("RELAY ON");
+static void speaker_status_resp(void) {
+	if (g_tWork.status.bits.speaker) {
+		LCD_ShowString(" BAZOOKA");
+	} else {
+		LCD_ShowString(" PWR OFF");
+	}
 
 }
-static void repeat_demo_stop(void) {
-	LCD_ShowString("RELAYOFF");
+static void relay_status_resp(void) {
+	if (g_tWork.status.bits.relay) {
+		LCD_ShowString("RELAY ON");
+	} else {
+		LCD_ShowString("RELAYOFF");
+	}
 
 }
+static void vol_resp(void) {
+	char str[16] = { 0 };
 
+	sprintf(str, " VOL %u", (uint16_t) g_tWork.vol);
+	LCD_ShowString(str);
+}
+static void mode_resp(void) {
+	char str[16] = { 0 };
+
+	switch (g_tWork.mode) {
+	case 'B':
+		g_tWork.mode = 'F';
+		break;
+	case 'F':
+		g_tWork.mode = 'A';
+		break;
+	case 'A':
+		g_tWork.mode = 'U';
+		break;
+	case 'U':
+		g_tWork.mode = 'B';
+		break;
+	}
+
+	sprintf(str, " VOL %u", (uint16_t) g_tWork.vol);
+	LCD_ShowString(str);
+}
 static void app_2d4_Rcv(uint8_t *buf) {
 	uint8_t i = 0;
 	uint8_t index = 0;
@@ -73,13 +108,33 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		break;
 	case POWER_LONG_CMD:
 
+		if (buf[3]) {
+			g_tWork.status.bits.speaker = 1;
+			Repeat_SetStart(speaker_status_resp);
+			Repeat_SetStop(0);
+
+			Repeat_Start(20, 1, 1);
+		} else {
+			g_tWork.status.bits.speaker = 0;
+			Repeat_SetStart(speaker_status_resp);
+			Repeat_SetStop(0);
+
+			Repeat_Start(20, 1, 0);
+		}
+
 		break;
 	case ACC_CMD:
 
-		Repeat_SetStart(repeat_demo_start);
-		Repeat_SetStop(repeat_demo_stop);
+		if (buf[3] == 1) {
+			g_tWork.status.bits.relay = 1;
+		} else {
+			g_tWork.status.bits.relay = 0;
+		}
 
-		Repeat_Start(10, 10, 5);
+		Repeat_SetStart(relay_status_resp);
+		Repeat_SetStop(0);
+
+		Repeat_Start(20, 1, 1);
 
 		break;
 	case UP_CMD:
@@ -91,16 +146,69 @@ static void app_2d4_Rcv(uint8_t *buf) {
 	case DOME_CMD:
 		break;
 	case VOL_ADD_CMD:
+		g_tWork.vol = buf[3];
 
+		Repeat_SetStart(vol_resp);
+		Repeat_SetStop(0);
+
+		Repeat_Start(20, 1, 1);
 		break;
 	case VOL_MINUS_CMD:
+		g_tWork.vol = buf[3];
 
+		Repeat_SetStart(vol_resp);
+		Repeat_SetStop(0);
+
+		Repeat_Start(20, 1, 1);
 		break;
 	case PLAY_CMD:
 
 		break;
 	case MODE_CMD:
+		g_tWork.mode = (char) buf[3];
 
+		switch (g_tWork.mode) {
+		case 'B':
+			LCD_Clear_FM_ICO();
+//			LCD_Show_FM_ICO();
+//			LCD_Clear_BLUETooTH_ICO();
+			LCD_Show_BLUETooTH_ICO();
+			LCD_Clear_AUX_ICO();
+//			LCD_Show_AUX_ICO();
+			LCD_Clear_USB_ICO();
+//			LCD_Show_USB_ICO();
+			break;
+		case 'F':
+//			LCD_Clear_FM_ICO();
+			LCD_Show_FM_ICO();
+			LCD_Clear_BLUETooTH_ICO();
+//			LCD_Show_BLUETooTH_ICO();
+			LCD_Clear_AUX_ICO();
+//			LCD_Show_AUX_ICO();
+			LCD_Clear_USB_ICO();
+//			LCD_Show_USB_ICO();
+			break;
+		case 'A':
+			LCD_Clear_FM_ICO();
+//			LCD_Show_FM_ICO();
+			LCD_Clear_BLUETooTH_ICO();
+//			LCD_Show_BLUETooTH_ICO();
+//			LCD_Clear_AUX_ICO();
+			LCD_Show_AUX_ICO();
+			LCD_Clear_USB_ICO();
+//			LCD_Show_USB_ICO();
+			break;
+		case 'U':
+			LCD_Clear_FM_ICO();
+//			LCD_Show_FM_ICO();
+			LCD_Clear_BLUETooTH_ICO();
+//			LCD_Show_BLUETooTH_ICO();
+			LCD_Clear_AUX_ICO();
+//			LCD_Show_AUX_ICO();
+//			LCD_Clear_USB_ICO();
+			LCD_Show_USB_ICO();
+			break;
+		}
 		break;
 	}
 	if (index) {
@@ -145,6 +253,7 @@ void app_2d4_pro(void) {
 	} else {
 		if (ucRF_DumpRxData(rcvBuf, sizeof(rcvBuf))) {
 
+//			key_bright_toggle();
 
 			app_2d4_Rcv(rcvBuf);
 		}

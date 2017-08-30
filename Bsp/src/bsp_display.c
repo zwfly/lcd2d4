@@ -277,23 +277,25 @@ void LCD_ShowChar(uint8_t n, char c) {
 	switch (c) {
 	case '0':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= COM0 + COM2;
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= COM0 + COM2;
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case '1':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM0;
@@ -303,49 +305,56 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case '2':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= COM1 + COM2;
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT = ( COM0 + COM1);
 		break;
 	case '3':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1;
+		LCDDAT |= COM1;
+		LCDDAT &= ~(COM0 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case '4':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT |= ( COM0 + COM1);
+		LCDDAT &= ~ COM2;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case '5':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT |= ( COM0 + COM1);
+		LCDDAT &= ~ COM2;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
@@ -355,91 +364,100 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case '6':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case '7':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case '8':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case '9':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT |= ( COM0 + COM1);
+		LCDDAT &= ~ COM2;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case ' ':
 		LCD_Clear_mi(n);
 		break;
 	case 'A':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case 'B':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM1 + COM2 + COM3;
+		LCDDAT = ( COM1 + COM2 + COM3);
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case 'C':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
@@ -449,23 +467,25 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'D':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM1 + COM2 + COM3;
+		LCDDAT = ( COM1 + COM2 + COM3);
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'E':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= COM0 + COM1 + COM2;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~( COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
@@ -475,10 +495,11 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'F':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
@@ -488,75 +509,80 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'G':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case 'H':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case 'I':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM1 + COM2 + COM3;
+		LCDDAT = ( COM1 + COM2 + COM3);
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = 0;
 		break;
 	case 'J':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM2;
+		LCDDAT |= COM2;
+		LCDDAT &= ~(COM0 + COM1);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'K':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case 'L':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~(COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
@@ -566,142 +592,157 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'M':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM1;
+		LCDDAT |= COM1;
+		LCDDAT &= ~(COM0 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT = ( COM0 + COM2);
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'N':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'O':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'P':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT = ( COM0 + COM1);
 		break;
 	case 'Q':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM2 + COM3;
+		LCDDAT = ( COM0 + COM2 + COM3);
 		break;
 	case 'R':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT = ( COM0 + COM1 + COM2);
 		break;
 	case 'S':
 		break;
 	case 'T':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT = ( COM1 + COM2);
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = 0;
 		break;
 	case 'U':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'V':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM1;
+		LCDDAT |= COM1;
+		LCDDAT &= ~(COM0 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM2 + COM3;
+		LCDDAT = ( COM0 + COM2 + COM3);
 		break;
 	case 'W':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM1 + COM2 + COM3;
+		LCDDAT = ( COM1 + COM2 + COM3);
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'X':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= ( COM1 + COM2);
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM0;
@@ -711,62 +752,68 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'Y':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT |= ( COM0 + COM1);
+		LCDDAT &= ~ COM2;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case 'Z':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1;
+		LCDDAT |= COM1;
+		LCDDAT &= ~(COM0 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = COM1;
 		break;
 	case 'a':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= ( COM1 + COM2);
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case 'b':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case 'c':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= ( COM1 + COM2);
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
@@ -776,36 +823,39 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'd':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= ( COM1 + COM2);
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case 'e':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT = ( COM0 + COM1);
 		break;
 	case 'f':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
@@ -817,49 +867,49 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'h':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case 'i':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT = ( COM1 + COM2);
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = 0;
 		break;
 	case 'j':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 		break;
 	case 'k':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM0;
@@ -871,64 +921,69 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'm':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= ( COM1 + COM2);
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM2;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case 'n':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= ( COM1 + COM2);
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case 'o':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM1 + COM2;
+		LCDDAT |= ( COM1 + COM2);
+		LCDDAT &= ~ COM0;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM1 + COM3;
+		LCDDAT = ( COM1 + COM3);
 		break;
 	case 'p':
 		break;
 	case 'q':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1;
+		LCDDAT |= ( COM0 + COM1);
+		LCDDAT &= ~ COM2;
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0;
+		LCDDAT |= COM0;
+		LCDDAT &= ~(COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM0 + COM1 + COM3;
+		LCDDAT = ( COM0 + COM1 + COM3);
 		break;
 	case 'r':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM2;
@@ -940,10 +995,10 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 't':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM0 + COM1 + COM2;
+		LCDDAT |= ( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
@@ -953,10 +1008,11 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'u':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM2;
+		LCDDAT |= COM2;
+		LCDDAT &= ~(COM0 + COM1);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = COM3;
@@ -966,26 +1022,27 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'v':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
 		LCDDAT = 0;
 
 		LCDPTR = 28 - n * 4;
-		LCDDAT = COM2 + COM3;
+		LCDDAT = ( COM2 + COM3);
 		break;
 	case 'w':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = COM2;
+		LCDDAT |= COM2;
+		LCDDAT &= ~(COM0 + COM1);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM2 + COM3;
+		LCDDAT = ( COM2 + COM3);
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = COM3;
@@ -994,26 +1051,28 @@ void LCD_ShowChar(uint8_t n, char c) {
 		break;
 	case 'y':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM1;
+		LCDDAT |= COM1;
+		LCDDAT &= ~(COM0 + COM2);
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT = ( COM0 + COM2);
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = 0;
 		break;
 	case 'z':
 		LCDPTR = 31 - n * 4;
-		LCDDAT = 0;
+		LCDDAT &= ~( COM0 + COM1 + COM2);
 
 		LCDPTR = 30 - n * 4;
-		LCDDAT = COM0 + COM2;
+		LCDDAT |= ( COM0 + COM2);
+		LCDDAT &= ~ COM1;
 
 		LCDPTR = 29 - n * 4;
-		LCDDAT = COM0 + COM3;
+		LCDDAT = ( COM0 + COM3);
 
 		LCDPTR = 28 - n * 4;
 		LCDDAT = 0;

@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_DISPLAY
@@ -62,7 +62,7 @@ line level    source
   51   1              LCD_Clear_All();
   52   1      }
   53          
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 2   
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 2   
 
   54          void LCD_Clear_All(void) {
   55   1              uint8_t i;
@@ -126,7 +126,7 @@ line level    source
  113   1      }
  114          void LCD_Show_BAZOOKA_ICO(void) {
  115   1              LCDPTR = 15;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 3   
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 3   
 
  116   1              LCDDAT |= COM3;
  117   1      }
@@ -190,7 +190,7 @@ line level    source
  175   2              case 2:
  176   2                      LCDPTR = 23;
  177   2                      LCDDAT &= ~(COM0 + COM1 + COM2);
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 4   
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 4   
 
  178   2      
  179   2                      LCDPTR = 22;
@@ -254,7 +254,7 @@ line level    source
  237   2                      LCDPTR = 4;
  238   2                      LCDDAT &= ~(COM0 + COM1 + COM2 + COM3);
  239   2                      break;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 5   
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 5   
 
  240   2              case 7:
  241   2                      LCDPTR = 3;
@@ -296,810 +296,871 @@ line level    source
  277   1              switch (c) {
  278   2              case '0':
  279   2                      LCDPTR = 31 - n * 4;
- 280   2                      LCDDAT = COM0 + COM2;
- 281   2      
- 282   2                      LCDPTR = 30 - n * 4;
- 283   2                      LCDDAT = COM0 + COM2;
- 284   2      
- 285   2                      LCDPTR = 29 - n * 4;
- 286   2                      LCDDAT = COM0 + COM3;
- 287   2      
- 288   2                      LCDPTR = 28 - n * 4;
- 289   2                      LCDDAT = COM0 + COM3;
- 290   2                      break;
- 291   2              case '1':
- 292   2                      LCDPTR = 31 - n * 4;
- 293   2                      LCDDAT = 0;
- 294   2      
- 295   2                      LCDPTR = 30 - n * 4;
- 296   2                      LCDDAT = 0;
- 297   2      
- 298   2                      LCDPTR = 29 - n * 4;
- 299   2                      LCDDAT = COM0;
- 300   2      
- 301   2                      LCDPTR = 28 - n * 4;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 6   
+ 280   2                      LCDDAT |= COM0 + COM2;
+ 281   2                      LCDDAT &= ~ COM1;
+ 282   2      
+ 283   2                      LCDPTR = 30 - n * 4;
+ 284   2                      LCDDAT |= COM0 + COM2;
+ 285   2                      LCDDAT &= ~ COM1;
+ 286   2      
+ 287   2                      LCDPTR = 29 - n * 4;
+ 288   2                      LCDDAT = ( COM0 + COM3);
+ 289   2      
+ 290   2                      LCDPTR = 28 - n * 4;
+ 291   2                      LCDDAT = ( COM0 + COM3);
+ 292   2                      break;
+ 293   2              case '1':
+ 294   2                      LCDPTR = 31 - n * 4;
+ 295   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 296   2      
+ 297   2                      LCDPTR = 30 - n * 4;
+ 298   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 299   2      
+ 300   2                      LCDPTR = 29 - n * 4;
+ 301   2                      LCDDAT = COM0;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 6   
 
- 302   2                      LCDDAT = COM0 + COM3;
- 303   2                      break;
- 304   2              case '2':
- 305   2                      LCDPTR = 31 - n * 4;
- 306   2                      LCDDAT = COM1 + COM2;
- 307   2      
- 308   2                      LCDPTR = 30 - n * 4;
- 309   2                      LCDDAT = COM0;
+ 302   2      
+ 303   2                      LCDPTR = 28 - n * 4;
+ 304   2                      LCDDAT = COM0 + COM3;
+ 305   2                      break;
+ 306   2              case '2':
+ 307   2                      LCDPTR = 31 - n * 4;
+ 308   2                      LCDDAT |= COM1 + COM2;
+ 309   2                      LCDDAT &= ~ COM0;
  310   2      
- 311   2                      LCDPTR = 29 - n * 4;
- 312   2                      LCDDAT = COM3;
- 313   2      
- 314   2                      LCDPTR = 28 - n * 4;
- 315   2                      LCDDAT = COM0 + COM1;
- 316   2                      break;
- 317   2              case '3':
- 318   2                      LCDPTR = 31 - n * 4;
- 319   2                      LCDDAT = COM1;
- 320   2      
- 321   2                      LCDPTR = 30 - n * 4;
- 322   2                      LCDDAT = COM0;
- 323   2      
- 324   2                      LCDPTR = 29 - n * 4;
- 325   2                      LCDDAT = COM3;
- 326   2      
- 327   2                      LCDPTR = 28 - n * 4;
- 328   2                      LCDDAT = COM0 + COM1 + COM3;
- 329   2                      break;
- 330   2              case '4':
- 331   2                      LCDPTR = 31 - n * 4;
- 332   2                      LCDDAT = COM0 + COM1;
- 333   2      
- 334   2                      LCDPTR = 30 - n * 4;
- 335   2                      LCDDAT = 0;
- 336   2      
- 337   2                      LCDPTR = 29 - n * 4;
- 338   2                      LCDDAT = 0;
- 339   2      
- 340   2                      LCDPTR = 28 - n * 4;
- 341   2                      LCDDAT = COM0 + COM1 + COM3;
- 342   2                      break;
- 343   2              case '5':
- 344   2                      LCDPTR = 31 - n * 4;
- 345   2                      LCDDAT = COM0 + COM1;
+ 311   2                      LCDPTR = 30 - n * 4;
+ 312   2                      LCDDAT |= COM0;
+ 313   2                      LCDDAT &= ~(COM1 + COM2);
+ 314   2      
+ 315   2                      LCDPTR = 29 - n * 4;
+ 316   2                      LCDDAT = COM3;
+ 317   2      
+ 318   2                      LCDPTR = 28 - n * 4;
+ 319   2                      LCDDAT = ( COM0 + COM1);
+ 320   2                      break;
+ 321   2              case '3':
+ 322   2                      LCDPTR = 31 - n * 4;
+ 323   2                      LCDDAT |= COM1;
+ 324   2                      LCDDAT &= ~(COM0 + COM2);
+ 325   2      
+ 326   2                      LCDPTR = 30 - n * 4;
+ 327   2                      LCDDAT |= COM0;
+ 328   2                      LCDDAT &= ~(COM1 + COM2);
+ 329   2      
+ 330   2                      LCDPTR = 29 - n * 4;
+ 331   2                      LCDDAT = COM3;
+ 332   2      
+ 333   2                      LCDPTR = 28 - n * 4;
+ 334   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 335   2                      break;
+ 336   2              case '4':
+ 337   2                      LCDPTR = 31 - n * 4;
+ 338   2                      LCDDAT |= ( COM0 + COM1);
+ 339   2                      LCDDAT &= ~ COM2;
+ 340   2      
+ 341   2                      LCDPTR = 30 - n * 4;
+ 342   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 343   2      
+ 344   2                      LCDPTR = 29 - n * 4;
+ 345   2                      LCDDAT = 0;
  346   2      
- 347   2                      LCDPTR = 30 - n * 4;
- 348   2                      LCDDAT = COM0;
- 349   2      
- 350   2                      LCDPTR = 29 - n * 4;
- 351   2                      LCDDAT = COM3;
- 352   2      
- 353   2                      LCDPTR = 28 - n * 4;
- 354   2                      LCDDAT = COM1 + COM3;
- 355   2                      break;
- 356   2              case '6':
- 357   2                      LCDPTR = 31 - n * 4;
- 358   2                      LCDDAT = COM0 + COM1 + COM2;
- 359   2      
- 360   2                      LCDPTR = 30 - n * 4;
- 361   2                      LCDDAT = COM0;
- 362   2      
- 363   2                      LCDPTR = 29 - n * 4;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 7   
+ 347   2                      LCDPTR = 28 - n * 4;
+ 348   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 349   2                      break;
+ 350   2              case '5':
+ 351   2                      LCDPTR = 31 - n * 4;
+ 352   2                      LCDDAT |= ( COM0 + COM1);
+ 353   2                      LCDDAT &= ~ COM2;
+ 354   2      
+ 355   2                      LCDPTR = 30 - n * 4;
+ 356   2                      LCDDAT |= COM0;
+ 357   2                      LCDDAT &= ~(COM1 + COM2);
+ 358   2      
+ 359   2                      LCDPTR = 29 - n * 4;
+ 360   2                      LCDDAT = COM3;
+ 361   2      
+ 362   2                      LCDPTR = 28 - n * 4;
+ 363   2                      LCDDAT = COM1 + COM3;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 7   
 
- 364   2                      LCDDAT = COM3;
- 365   2      
- 366   2                      LCDPTR = 28 - n * 4;
- 367   2                      LCDDAT = COM1 + COM3;
- 368   2                      break;
- 369   2              case '7':
- 370   2                      LCDPTR = 31 - n * 4;
- 371   2                      LCDDAT = 0;
+ 364   2                      break;
+ 365   2              case '6':
+ 366   2                      LCDPTR = 31 - n * 4;
+ 367   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 368   2      
+ 369   2                      LCDPTR = 30 - n * 4;
+ 370   2                      LCDDAT |= COM0;
+ 371   2                      LCDDAT &= ~(COM1 + COM2);
  372   2      
- 373   2                      LCDPTR = 30 - n * 4;
- 374   2                      LCDDAT = COM0;
+ 373   2                      LCDPTR = 29 - n * 4;
+ 374   2                      LCDDAT = COM3;
  375   2      
- 376   2                      LCDPTR = 29 - n * 4;
- 377   2                      LCDDAT = 0;
- 378   2      
- 379   2                      LCDPTR = 28 - n * 4;
- 380   2                      LCDDAT = COM0 + COM3;
- 381   2                      break;
- 382   2              case '8':
- 383   2                      LCDPTR = 31 - n * 4;
- 384   2                      LCDDAT = COM0 + COM1 + COM2;
- 385   2      
- 386   2                      LCDPTR = 30 - n * 4;
- 387   2                      LCDDAT = COM0;
- 388   2      
- 389   2                      LCDPTR = 29 - n * 4;
- 390   2                      LCDDAT = COM3;
- 391   2      
- 392   2                      LCDPTR = 28 - n * 4;
- 393   2                      LCDDAT = COM0 + COM1 + COM3;
- 394   2                      break;
- 395   2              case '9':
- 396   2                      LCDPTR = 31 - n * 4;
- 397   2                      LCDDAT = COM0 + COM1;
- 398   2      
- 399   2                      LCDPTR = 30 - n * 4;
- 400   2                      LCDDAT = COM0;
- 401   2      
- 402   2                      LCDPTR = 29 - n * 4;
- 403   2                      LCDDAT = COM3;
- 404   2      
- 405   2                      LCDPTR = 28 - n * 4;
- 406   2                      LCDDAT = COM0 + COM1 + COM3;
- 407   2                      break;
- 408   2              case ' ':
- 409   2                      LCD_Clear_mi(n);
- 410   2                      break;
- 411   2              case 'A':
- 412   2                      LCDPTR = 31 - n * 4;
- 413   2                      LCDDAT = COM0 + COM1 + COM2;
- 414   2      
- 415   2                      LCDPTR = 30 - n * 4;
- 416   2                      LCDDAT = COM0;
- 417   2      
- 418   2                      LCDPTR = 29 - n * 4;
- 419   2                      LCDDAT = 0;
- 420   2      
- 421   2                      LCDPTR = 28 - n * 4;
- 422   2                      LCDDAT = COM0 + COM1 + COM3;
- 423   2                      break;
- 424   2              case 'B':
- 425   2                      LCDPTR = 31 - n * 4;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 8   
+ 376   2                      LCDPTR = 28 - n * 4;
+ 377   2                      LCDDAT = ( COM1 + COM3);
+ 378   2                      break;
+ 379   2              case '7':
+ 380   2                      LCDPTR = 31 - n * 4;
+ 381   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 382   2      
+ 383   2                      LCDPTR = 30 - n * 4;
+ 384   2                      LCDDAT |= COM0;
+ 385   2                      LCDDAT &= ~(COM1 + COM2);
+ 386   2      
+ 387   2                      LCDPTR = 29 - n * 4;
+ 388   2                      LCDDAT = 0;
+ 389   2      
+ 390   2                      LCDPTR = 28 - n * 4;
+ 391   2                      LCDDAT = ( COM0 + COM3);
+ 392   2                      break;
+ 393   2              case '8':
+ 394   2                      LCDPTR = 31 - n * 4;
+ 395   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 396   2      
+ 397   2                      LCDPTR = 30 - n * 4;
+ 398   2                      LCDDAT |= COM0;
+ 399   2                      LCDDAT &= ~(COM1 + COM2);
+ 400   2      
+ 401   2                      LCDPTR = 29 - n * 4;
+ 402   2                      LCDDAT = COM3;
+ 403   2      
+ 404   2                      LCDPTR = 28 - n * 4;
+ 405   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 406   2                      break;
+ 407   2              case '9':
+ 408   2                      LCDPTR = 31 - n * 4;
+ 409   2                      LCDDAT |= ( COM0 + COM1);
+ 410   2                      LCDDAT &= ~ COM2;
+ 411   2      
+ 412   2                      LCDPTR = 30 - n * 4;
+ 413   2                      LCDDAT |= COM0;
+ 414   2                      LCDDAT &= ~(COM1 + COM2);
+ 415   2      
+ 416   2                      LCDPTR = 29 - n * 4;
+ 417   2                      LCDDAT = COM3;
+ 418   2      
+ 419   2                      LCDPTR = 28 - n * 4;
+ 420   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 421   2                      break;
+ 422   2              case ' ':
+ 423   2                      LCD_Clear_mi(n);
+ 424   2                      break;
+ 425   2              case 'A':
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 8   
 
- 426   2                      LCDDAT = 0;
- 427   2      
- 428   2                      LCDPTR = 30 - n * 4;
- 429   2                      LCDDAT = COM0;
- 430   2      
- 431   2                      LCDPTR = 29 - n * 4;
- 432   2                      LCDDAT = COM1 + COM2 + COM3;
- 433   2      
- 434   2                      LCDPTR = 28 - n * 4;
- 435   2                      LCDDAT = COM0 + COM1 + COM3;
- 436   2                      break;
- 437   2              case 'C':
- 438   2                      LCDPTR = 31 - n * 4;
- 439   2                      LCDDAT = COM0 + COM2;
- 440   2      
- 441   2                      LCDPTR = 30 - n * 4;
- 442   2                      LCDDAT = COM0;
- 443   2      
- 444   2                      LCDPTR = 29 - n * 4;
- 445   2                      LCDDAT = COM3;
+ 426   2                      LCDPTR = 31 - n * 4;
+ 427   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 428   2      
+ 429   2                      LCDPTR = 30 - n * 4;
+ 430   2                      LCDDAT |= COM0;
+ 431   2                      LCDDAT &= ~(COM1 + COM2);
+ 432   2      
+ 433   2                      LCDPTR = 29 - n * 4;
+ 434   2                      LCDDAT = 0;
+ 435   2      
+ 436   2                      LCDPTR = 28 - n * 4;
+ 437   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 438   2                      break;
+ 439   2              case 'B':
+ 440   2                      LCDPTR = 31 - n * 4;
+ 441   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 442   2      
+ 443   2                      LCDPTR = 30 - n * 4;
+ 444   2                      LCDDAT |= COM0;
+ 445   2                      LCDDAT &= ~(COM1 + COM2);
  446   2      
- 447   2                      LCDPTR = 28 - n * 4;
- 448   2                      LCDDAT = 0;
- 449   2                      break;
- 450   2              case 'D':
- 451   2                      LCDPTR = 31 - n * 4;
- 452   2                      LCDDAT = 0;
- 453   2      
- 454   2                      LCDPTR = 30 - n * 4;
- 455   2                      LCDDAT = COM0;
- 456   2      
- 457   2                      LCDPTR = 29 - n * 4;
- 458   2                      LCDDAT = COM1 + COM2 + COM3;
- 459   2      
- 460   2                      LCDPTR = 28 - n * 4;
- 461   2                      LCDDAT = COM0 + COM3;
- 462   2                      break;
- 463   2              case 'E':
- 464   2                      LCDPTR = 31 - n * 4;
- 465   2                      LCDDAT = COM0 + COM1 + COM2;
- 466   2      
- 467   2                      LCDPTR = 30 - n * 4;
- 468   2                      LCDDAT = COM0;
- 469   2      
- 470   2                      LCDPTR = 29 - n * 4;
- 471   2                      LCDDAT = COM3;
- 472   2      
- 473   2                      LCDPTR = 28 - n * 4;
- 474   2                      LCDDAT = COM1;
- 475   2                      break;
- 476   2              case 'F':
- 477   2                      LCDPTR = 31 - n * 4;
- 478   2                      LCDDAT = COM0 + COM1 + COM2;
- 479   2      
- 480   2                      LCDPTR = 30 - n * 4;
- 481   2                      LCDDAT = COM0;
- 482   2      
- 483   2                      LCDPTR = 29 - n * 4;
- 484   2                      LCDDAT = 0;
+ 447   2                      LCDPTR = 29 - n * 4;
+ 448   2                      LCDDAT = ( COM1 + COM2 + COM3);
+ 449   2      
+ 450   2                      LCDPTR = 28 - n * 4;
+ 451   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 452   2                      break;
+ 453   2              case 'C':
+ 454   2                      LCDPTR = 31 - n * 4;
+ 455   2                      LCDDAT |= ( COM0 + COM2);
+ 456   2                      LCDDAT &= ~ COM1;
+ 457   2      
+ 458   2                      LCDPTR = 30 - n * 4;
+ 459   2                      LCDDAT |= COM0;
+ 460   2                      LCDDAT &= ~(COM1 + COM2);
+ 461   2      
+ 462   2                      LCDPTR = 29 - n * 4;
+ 463   2                      LCDDAT = COM3;
+ 464   2      
+ 465   2                      LCDPTR = 28 - n * 4;
+ 466   2                      LCDDAT = 0;
+ 467   2                      break;
+ 468   2              case 'D':
+ 469   2                      LCDPTR = 31 - n * 4;
+ 470   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 471   2      
+ 472   2                      LCDPTR = 30 - n * 4;
+ 473   2                      LCDDAT |= COM0;
+ 474   2                      LCDDAT &= ~(COM1 + COM2);
+ 475   2      
+ 476   2                      LCDPTR = 29 - n * 4;
+ 477   2                      LCDDAT = ( COM1 + COM2 + COM3);
+ 478   2      
+ 479   2                      LCDPTR = 28 - n * 4;
+ 480   2                      LCDDAT = ( COM0 + COM3);
+ 481   2                      break;
+ 482   2              case 'E':
+ 483   2                      LCDPTR = 31 - n * 4;
+ 484   2                      LCDDAT |= COM0 + COM1 + COM2;
  485   2      
- 486   2                      LCDPTR = 28 - n * 4;
- 487   2                      LCDDAT = COM1;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 9   
+ 486   2                      LCDPTR = 30 - n * 4;
+ 487   2                      LCDDAT |= COM0;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 9   
 
- 488   2                      break;
- 489   2              case 'G':
- 490   2                      LCDPTR = 31 - n * 4;
- 491   2                      LCDDAT = COM0 + COM2;
+ 488   2                      LCDDAT &= ~( COM1 + COM2);
+ 489   2      
+ 490   2                      LCDPTR = 29 - n * 4;
+ 491   2                      LCDDAT = COM3;
  492   2      
- 493   2                      LCDPTR = 30 - n * 4;
- 494   2                      LCDDAT = COM0;
- 495   2      
- 496   2                      LCDPTR = 29 - n * 4;
- 497   2                      LCDDAT = COM3;
- 498   2      
- 499   2                      LCDPTR = 28 - n * 4;
- 500   2                      LCDDAT = COM1 + COM3;
- 501   2                      break;
- 502   2              case 'H':
- 503   2                      LCDPTR = 31 - n * 4;
- 504   2                      LCDDAT = COM0 + COM1 + COM2;
- 505   2      
- 506   2                      LCDPTR = 30 - n * 4;
- 507   2                      LCDDAT = 0;
- 508   2      
- 509   2                      LCDPTR = 29 - n * 4;
- 510   2                      LCDDAT = 0;
- 511   2      
- 512   2                      LCDPTR = 28 - n * 4;
- 513   2                      LCDDAT = COM0 + COM1 + COM3;
- 514   2                      break;
- 515   2              case 'I':
- 516   2                      LCDPTR = 31 - n * 4;
- 517   2                      LCDDAT = 0;
+ 493   2                      LCDPTR = 28 - n * 4;
+ 494   2                      LCDDAT = COM1;
+ 495   2                      break;
+ 496   2              case 'F':
+ 497   2                      LCDPTR = 31 - n * 4;
+ 498   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 499   2      
+ 500   2                      LCDPTR = 30 - n * 4;
+ 501   2                      LCDDAT |= COM0;
+ 502   2                      LCDDAT &= ~(COM1 + COM2);
+ 503   2      
+ 504   2                      LCDPTR = 29 - n * 4;
+ 505   2                      LCDDAT = 0;
+ 506   2      
+ 507   2                      LCDPTR = 28 - n * 4;
+ 508   2                      LCDDAT = COM1;
+ 509   2                      break;
+ 510   2              case 'G':
+ 511   2                      LCDPTR = 31 - n * 4;
+ 512   2                      LCDDAT |= ( COM0 + COM2);
+ 513   2                      LCDDAT &= ~ COM1;
+ 514   2      
+ 515   2                      LCDPTR = 30 - n * 4;
+ 516   2                      LCDDAT |= COM0;
+ 517   2                      LCDDAT &= ~(COM1 + COM2);
  518   2      
- 519   2                      LCDPTR = 30 - n * 4;
- 520   2                      LCDDAT = COM0;
+ 519   2                      LCDPTR = 29 - n * 4;
+ 520   2                      LCDDAT = COM3;
  521   2      
- 522   2                      LCDPTR = 29 - n * 4;
- 523   2                      LCDDAT = COM1 + COM2 + COM3;
- 524   2      
- 525   2                      LCDPTR = 28 - n * 4;
- 526   2                      LCDDAT = 0;
- 527   2                      break;
- 528   2              case 'J':
- 529   2                      LCDPTR = 31 - n * 4;
- 530   2                      LCDDAT = COM2;
+ 522   2                      LCDPTR = 28 - n * 4;
+ 523   2                      LCDDAT = ( COM1 + COM3);
+ 524   2                      break;
+ 525   2              case 'H':
+ 526   2                      LCDPTR = 31 - n * 4;
+ 527   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 528   2      
+ 529   2                      LCDPTR = 30 - n * 4;
+ 530   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
  531   2      
- 532   2                      LCDPTR = 30 - n * 4;
+ 532   2                      LCDPTR = 29 - n * 4;
  533   2                      LCDDAT = 0;
  534   2      
- 535   2                      LCDPTR = 29 - n * 4;
- 536   2                      LCDDAT = COM3;
- 537   2      
- 538   2                      LCDPTR = 28 - n * 4;
- 539   2                      LCDDAT = COM0 + COM3;
- 540   2                      break;
- 541   2              case 'K':
- 542   2                      LCDPTR = 31 - n * 4;
- 543   2                      LCDDAT = COM0 + COM1 + COM2;
- 544   2      
- 545   2                      LCDPTR = 30 - n * 4;
- 546   2                      LCDDAT = 0;
- 547   2      
- 548   2                      LCDPTR = 29 - n * 4;
- 549   2                      LCDDAT = COM0;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 10  
+ 535   2                      LCDPTR = 28 - n * 4;
+ 536   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 537   2                      break;
+ 538   2              case 'I':
+ 539   2                      LCDPTR = 31 - n * 4;
+ 540   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 541   2      
+ 542   2                      LCDPTR = 30 - n * 4;
+ 543   2                      LCDDAT |= COM0;
+ 544   2                      LCDDAT &= ~(COM1 + COM2);
+ 545   2      
+ 546   2                      LCDPTR = 29 - n * 4;
+ 547   2                      LCDDAT = ( COM1 + COM2 + COM3);
+ 548   2      
+ 549   2                      LCDPTR = 28 - n * 4;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 10  
 
- 550   2      
- 551   2                      LCDPTR = 28 - n * 4;
- 552   2                      LCDDAT = COM1 + COM3;
- 553   2                      break;
- 554   2              case 'L':
- 555   2                      LCDPTR = 31 - n * 4;
- 556   2                      LCDDAT = COM0 + COM2;
- 557   2      
- 558   2                      LCDPTR = 30 - n * 4;
- 559   2                      LCDDAT = 0;
- 560   2      
- 561   2                      LCDPTR = 29 - n * 4;
- 562   2                      LCDDAT = COM3;
- 563   2      
- 564   2                      LCDPTR = 28 - n * 4;
- 565   2                      LCDDAT = 0;
- 566   2                      break;
- 567   2              case 'M':
- 568   2                      LCDPTR = 31 - n * 4;
- 569   2                      LCDDAT = COM0 + COM2;
- 570   2      
- 571   2                      LCDPTR = 30 - n * 4;
- 572   2                      LCDDAT = COM1;
- 573   2      
- 574   2                      LCDPTR = 29 - n * 4;
- 575   2                      LCDDAT = COM0 + COM2;
- 576   2      
- 577   2                      LCDPTR = 28 - n * 4;
- 578   2                      LCDDAT = COM0 + COM3;
- 579   2                      break;
- 580   2              case 'N':
- 581   2                      LCDPTR = 31 - n * 4;
- 582   2                      LCDDAT = COM0 + COM2;
+ 550   2                      LCDDAT = 0;
+ 551   2                      break;
+ 552   2              case 'J':
+ 553   2                      LCDPTR = 31 - n * 4;
+ 554   2                      LCDDAT |= COM2;
+ 555   2                      LCDDAT &= ~(COM0 + COM1);
+ 556   2      
+ 557   2                      LCDPTR = 30 - n * 4;
+ 558   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 559   2      
+ 560   2                      LCDPTR = 29 - n * 4;
+ 561   2                      LCDDAT = COM3;
+ 562   2      
+ 563   2                      LCDPTR = 28 - n * 4;
+ 564   2                      LCDDAT = ( COM0 + COM3);
+ 565   2                      break;
+ 566   2              case 'K':
+ 567   2                      LCDPTR = 31 - n * 4;
+ 568   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 569   2      
+ 570   2                      LCDPTR = 30 - n * 4;
+ 571   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 572   2      
+ 573   2                      LCDPTR = 29 - n * 4;
+ 574   2                      LCDDAT = COM0;
+ 575   2      
+ 576   2                      LCDPTR = 28 - n * 4;
+ 577   2                      LCDDAT = ( COM1 + COM3);
+ 578   2                      break;
+ 579   2              case 'L':
+ 580   2                      LCDPTR = 31 - n * 4;
+ 581   2                      LCDDAT |= ( COM0 + COM2);
+ 582   2                      LCDDAT &= ~ COM1;
  583   2      
  584   2                      LCDPTR = 30 - n * 4;
- 585   2                      LCDDAT = COM0;
+ 585   2                      LCDDAT &= ~(COM0 + COM1 + COM2);
  586   2      
  587   2                      LCDPTR = 29 - n * 4;
- 588   2                      LCDDAT = 0;
+ 588   2                      LCDDAT = COM3;
  589   2      
  590   2                      LCDPTR = 28 - n * 4;
- 591   2                      LCDDAT = COM0 + COM3;
+ 591   2                      LCDDAT = 0;
  592   2                      break;
- 593   2              case 'O':
+ 593   2              case 'M':
  594   2                      LCDPTR = 31 - n * 4;
- 595   2                      LCDDAT = COM0 + COM2;
- 596   2      
- 597   2                      LCDPTR = 30 - n * 4;
- 598   2                      LCDDAT = COM0;
- 599   2      
- 600   2                      LCDPTR = 29 - n * 4;
- 601   2                      LCDDAT = COM3;
- 602   2      
- 603   2                      LCDPTR = 28 - n * 4;
- 604   2                      LCDDAT = COM0 + COM3;
- 605   2                      break;
- 606   2              case 'P':
- 607   2                      LCDPTR = 31 - n * 4;
- 608   2                      LCDDAT = COM0 + COM1 + COM2;
- 609   2      
- 610   2                      LCDPTR = 30 - n * 4;
- 611   2                      LCDDAT = COM0;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 11  
+ 595   2                      LCDDAT |= ( COM0 + COM2);
+ 596   2                      LCDDAT &= ~ COM1;
+ 597   2      
+ 598   2                      LCDPTR = 30 - n * 4;
+ 599   2                      LCDDAT |= COM1;
+ 600   2                      LCDDAT &= ~(COM0 + COM2);
+ 601   2      
+ 602   2                      LCDPTR = 29 - n * 4;
+ 603   2                      LCDDAT = ( COM0 + COM2);
+ 604   2      
+ 605   2                      LCDPTR = 28 - n * 4;
+ 606   2                      LCDDAT = ( COM0 + COM3);
+ 607   2                      break;
+ 608   2              case 'N':
+ 609   2                      LCDPTR = 31 - n * 4;
+ 610   2                      LCDDAT |= ( COM0 + COM2);
+ 611   2                      LCDDAT &= ~ COM1;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 11  
 
  612   2      
- 613   2                      LCDPTR = 29 - n * 4;
- 614   2                      LCDDAT = 0;
- 615   2      
- 616   2                      LCDPTR = 28 - n * 4;
- 617   2                      LCDDAT = COM0 + COM1;
- 618   2                      break;
- 619   2              case 'Q':
- 620   2                      LCDPTR = 31 - n * 4;
- 621   2                      LCDDAT = COM0 + COM2;
- 622   2      
- 623   2                      LCDPTR = 30 - n * 4;
- 624   2                      LCDDAT = COM0;
- 625   2      
- 626   2                      LCDPTR = 29 - n * 4;
- 627   2                      LCDDAT = COM3;
- 628   2      
- 629   2                      LCDPTR = 28 - n * 4;
- 630   2                      LCDDAT = COM0 + COM2 + COM3;
- 631   2                      break;
- 632   2              case 'R':
- 633   2                      LCDPTR = 31 - n * 4;
- 634   2                      LCDDAT = COM0 + COM1 + COM2;
- 635   2      
- 636   2                      LCDPTR = 30 - n * 4;
- 637   2                      LCDDAT = COM0;
- 638   2      
- 639   2                      LCDPTR = 29 - n * 4;
- 640   2                      LCDDAT = 0;
+ 613   2                      LCDPTR = 30 - n * 4;
+ 614   2                      LCDDAT |= COM0;
+ 615   2                      LCDDAT &= ~(COM1 + COM2);
+ 616   2      
+ 617   2                      LCDPTR = 29 - n * 4;
+ 618   2                      LCDDAT = 0;
+ 619   2      
+ 620   2                      LCDPTR = 28 - n * 4;
+ 621   2                      LCDDAT = ( COM0 + COM3);
+ 622   2                      break;
+ 623   2              case 'O':
+ 624   2                      LCDPTR = 31 - n * 4;
+ 625   2                      LCDDAT |= ( COM0 + COM2);
+ 626   2                      LCDDAT &= ~ COM1;
+ 627   2      
+ 628   2                      LCDPTR = 30 - n * 4;
+ 629   2                      LCDDAT |= COM0;
+ 630   2                      LCDDAT &= ~(COM1 + COM2);
+ 631   2      
+ 632   2                      LCDPTR = 29 - n * 4;
+ 633   2                      LCDDAT = COM3;
+ 634   2      
+ 635   2                      LCDPTR = 28 - n * 4;
+ 636   2                      LCDDAT = ( COM0 + COM3);
+ 637   2                      break;
+ 638   2              case 'P':
+ 639   2                      LCDPTR = 31 - n * 4;
+ 640   2                      LCDDAT |= ( COM0 + COM1 + COM2);
  641   2      
- 642   2                      LCDPTR = 28 - n * 4;
- 643   2                      LCDDAT = COM0 + COM1 + COM2;
- 644   2                      break;
- 645   2              case 'S':
- 646   2                      break;
- 647   2              case 'T':
- 648   2                      LCDPTR = 31 - n * 4;
- 649   2                      LCDDAT = 0;
- 650   2      
- 651   2                      LCDPTR = 30 - n * 4;
- 652   2                      LCDDAT = COM0;
- 653   2      
- 654   2                      LCDPTR = 29 - n * 4;
- 655   2                      LCDDAT = COM1 + COM2;
+ 642   2                      LCDPTR = 30 - n * 4;
+ 643   2                      LCDDAT |= COM0;
+ 644   2                      LCDDAT &= ~(COM1 + COM2);
+ 645   2      
+ 646   2                      LCDPTR = 29 - n * 4;
+ 647   2                      LCDDAT = 0;
+ 648   2      
+ 649   2                      LCDPTR = 28 - n * 4;
+ 650   2                      LCDDAT = ( COM0 + COM1);
+ 651   2                      break;
+ 652   2              case 'Q':
+ 653   2                      LCDPTR = 31 - n * 4;
+ 654   2                      LCDDAT |= ( COM0 + COM2);
+ 655   2                      LCDDAT &= ~ COM1;
  656   2      
- 657   2                      LCDPTR = 28 - n * 4;
- 658   2                      LCDDAT = 0;
- 659   2                      break;
- 660   2              case 'U':
- 661   2                      LCDPTR = 31 - n * 4;
- 662   2                      LCDDAT = COM0 + COM2;
+ 657   2                      LCDPTR = 30 - n * 4;
+ 658   2                      LCDDAT |= COM0;
+ 659   2                      LCDDAT &= ~(COM1 + COM2);
+ 660   2      
+ 661   2                      LCDPTR = 29 - n * 4;
+ 662   2                      LCDDAT = COM3;
  663   2      
- 664   2                      LCDPTR = 30 - n * 4;
- 665   2                      LCDDAT = 0;
- 666   2      
- 667   2                      LCDPTR = 29 - n * 4;
- 668   2                      LCDDAT = COM3;
- 669   2      
- 670   2                      LCDPTR = 28 - n * 4;
- 671   2                      LCDDAT = COM0 + COM3;
- 672   2                      break;
- 673   2              case 'V':
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 12  
+ 664   2                      LCDPTR = 28 - n * 4;
+ 665   2                      LCDDAT = ( COM0 + COM2 + COM3);
+ 666   2                      break;
+ 667   2              case 'R':
+ 668   2                      LCDPTR = 31 - n * 4;
+ 669   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 670   2      
+ 671   2                      LCDPTR = 30 - n * 4;
+ 672   2                      LCDDAT |= COM0;
+ 673   2                      LCDDAT &= ~(COM1 + COM2);
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 12  
 
- 674   2                      LCDPTR = 31 - n * 4;
- 675   2                      LCDDAT = 0;
- 676   2      
- 677   2                      LCDPTR = 30 - n * 4;
- 678   2                      LCDDAT = COM1;
- 679   2      
- 680   2                      LCDPTR = 29 - n * 4;
- 681   2                      LCDDAT = 0;
- 682   2      
- 683   2                      LCDPTR = 28 - n * 4;
- 684   2                      LCDDAT = COM0 + COM2 + COM3;
- 685   2                      break;
- 686   2              case 'W':
- 687   2                      LCDPTR = 31 - n * 4;
- 688   2                      LCDDAT = COM0 + COM2;
- 689   2      
- 690   2                      LCDPTR = 30 - n * 4;
- 691   2                      LCDDAT = 0;
- 692   2      
- 693   2                      LCDPTR = 29 - n * 4;
- 694   2                      LCDDAT = COM1 + COM2 + COM3;
- 695   2      
- 696   2                      LCDPTR = 28 - n * 4;
- 697   2                      LCDDAT = COM0 + COM3;
- 698   2                      break;
- 699   2              case 'X':
- 700   2                      LCDPTR = 31 - n * 4;
- 701   2                      LCDDAT = 0;
- 702   2      
- 703   2                      LCDPTR = 30 - n * 4;
- 704   2                      LCDDAT = COM1 + COM2;
- 705   2      
- 706   2                      LCDPTR = 29 - n * 4;
- 707   2                      LCDDAT = COM0;
- 708   2      
- 709   2                      LCDPTR = 28 - n * 4;
- 710   2                      LCDDAT = COM2;
- 711   2                      break;
- 712   2              case 'Y':
- 713   2                      LCDPTR = 31 - n * 4;
- 714   2                      LCDDAT = COM0 + COM1;
- 715   2      
- 716   2                      LCDPTR = 30 - n * 4;
- 717   2                      LCDDAT = 0;
+ 674   2      
+ 675   2                      LCDPTR = 29 - n * 4;
+ 676   2                      LCDDAT = 0;
+ 677   2      
+ 678   2                      LCDPTR = 28 - n * 4;
+ 679   2                      LCDDAT = ( COM0 + COM1 + COM2);
+ 680   2                      break;
+ 681   2              case 'S':
+ 682   2                      break;
+ 683   2              case 'T':
+ 684   2                      LCDPTR = 31 - n * 4;
+ 685   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 686   2      
+ 687   2                      LCDPTR = 30 - n * 4;
+ 688   2                      LCDDAT |= COM0;
+ 689   2                      LCDDAT &= ~(COM1 + COM2);
+ 690   2      
+ 691   2                      LCDPTR = 29 - n * 4;
+ 692   2                      LCDDAT = ( COM1 + COM2);
+ 693   2      
+ 694   2                      LCDPTR = 28 - n * 4;
+ 695   2                      LCDDAT = 0;
+ 696   2                      break;
+ 697   2              case 'U':
+ 698   2                      LCDPTR = 31 - n * 4;
+ 699   2                      LCDDAT |= ( COM0 + COM2);
+ 700   2                      LCDDAT &= ~ COM1;
+ 701   2      
+ 702   2                      LCDPTR = 30 - n * 4;
+ 703   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 704   2      
+ 705   2                      LCDPTR = 29 - n * 4;
+ 706   2                      LCDDAT = COM3;
+ 707   2      
+ 708   2                      LCDPTR = 28 - n * 4;
+ 709   2                      LCDDAT = ( COM0 + COM3);
+ 710   2                      break;
+ 711   2              case 'V':
+ 712   2                      LCDPTR = 31 - n * 4;
+ 713   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 714   2      
+ 715   2                      LCDPTR = 30 - n * 4;
+ 716   2                      LCDDAT |= COM1;
+ 717   2                      LCDDAT &= ~(COM0 + COM2);
  718   2      
  719   2                      LCDPTR = 29 - n * 4;
- 720   2                      LCDDAT = COM3;
+ 720   2                      LCDDAT = 0;
  721   2      
  722   2                      LCDPTR = 28 - n * 4;
- 723   2                      LCDDAT = COM0 + COM1 + COM3;
+ 723   2                      LCDDAT = ( COM0 + COM2 + COM3);
  724   2                      break;
- 725   2              case 'Z':
+ 725   2              case 'W':
  726   2                      LCDPTR = 31 - n * 4;
- 727   2                      LCDDAT = COM1;
- 728   2      
- 729   2                      LCDPTR = 30 - n * 4;
- 730   2                      LCDDAT = COM0 + COM2;
- 731   2      
- 732   2                      LCDPTR = 29 - n * 4;
- 733   2                      LCDDAT = COM0 + COM3;
- 734   2      
- 735   2                      LCDPTR = 28 - n * 4;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 13  
+ 727   2                      LCDDAT |= ( COM0 + COM2);
+ 728   2                      LCDDAT &= ~ COM1;
+ 729   2      
+ 730   2                      LCDPTR = 30 - n * 4;
+ 731   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 732   2      
+ 733   2                      LCDPTR = 29 - n * 4;
+ 734   2                      LCDDAT = ( COM1 + COM2 + COM3);
+ 735   2      
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 13  
 
- 736   2                      LCDDAT = COM1;
- 737   2                      break;
- 738   2              case 'a':
- 739   2                      LCDPTR = 31 - n * 4;
- 740   2                      LCDDAT = COM1 + COM2;
- 741   2      
- 742   2                      LCDPTR = 30 - n * 4;
- 743   2                      LCDDAT = COM0;
- 744   2      
- 745   2                      LCDPTR = 29 - n * 4;
- 746   2                      LCDDAT = COM3;
- 747   2      
- 748   2                      LCDPTR = 28 - n * 4;
- 749   2                      LCDDAT = COM0 + COM1 + COM3;
- 750   2                      break;
- 751   2              case 'b':
- 752   2                      LCDPTR = 31 - n * 4;
- 753   2                      LCDDAT = COM0 + COM1 + COM2;
- 754   2      
- 755   2                      LCDPTR = 30 - n * 4;
- 756   2                      LCDDAT = 0;
+ 736   2                      LCDPTR = 28 - n * 4;
+ 737   2                      LCDDAT = ( COM0 + COM3);
+ 738   2                      break;
+ 739   2              case 'X':
+ 740   2                      LCDPTR = 31 - n * 4;
+ 741   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 742   2      
+ 743   2                      LCDPTR = 30 - n * 4;
+ 744   2                      LCDDAT |= ( COM1 + COM2);
+ 745   2                      LCDDAT &= ~ COM0;
+ 746   2      
+ 747   2                      LCDPTR = 29 - n * 4;
+ 748   2                      LCDDAT = COM0;
+ 749   2      
+ 750   2                      LCDPTR = 28 - n * 4;
+ 751   2                      LCDDAT = COM2;
+ 752   2                      break;
+ 753   2              case 'Y':
+ 754   2                      LCDPTR = 31 - n * 4;
+ 755   2                      LCDDAT |= ( COM0 + COM1);
+ 756   2                      LCDDAT &= ~ COM2;
  757   2      
- 758   2                      LCDPTR = 29 - n * 4;
- 759   2                      LCDDAT = COM3;
+ 758   2                      LCDPTR = 30 - n * 4;
+ 759   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
  760   2      
- 761   2                      LCDPTR = 28 - n * 4;
- 762   2                      LCDDAT = COM1 + COM3;
- 763   2                      break;
- 764   2              case 'c':
- 765   2                      LCDPTR = 31 - n * 4;
- 766   2                      LCDDAT = COM1 + COM2;
- 767   2      
- 768   2                      LCDPTR = 30 - n * 4;
- 769   2                      LCDDAT = 0;
- 770   2      
- 771   2                      LCDPTR = 29 - n * 4;
- 772   2                      LCDDAT = COM3;
- 773   2      
- 774   2                      LCDPTR = 28 - n * 4;
- 775   2                      LCDDAT = COM1;
- 776   2                      break;
- 777   2              case 'd':
- 778   2                      LCDPTR = 31 - n * 4;
- 779   2                      LCDDAT = COM1 + COM2;
- 780   2      
- 781   2                      LCDPTR = 30 - n * 4;
- 782   2                      LCDDAT = 0;
- 783   2      
- 784   2                      LCDPTR = 29 - n * 4;
- 785   2                      LCDDAT = COM3;
+ 761   2                      LCDPTR = 29 - n * 4;
+ 762   2                      LCDDAT = COM3;
+ 763   2      
+ 764   2                      LCDPTR = 28 - n * 4;
+ 765   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 766   2                      break;
+ 767   2              case 'Z':
+ 768   2                      LCDPTR = 31 - n * 4;
+ 769   2                      LCDDAT |= COM1;
+ 770   2                      LCDDAT &= ~(COM0 + COM2);
+ 771   2      
+ 772   2                      LCDPTR = 30 - n * 4;
+ 773   2                      LCDDAT |= ( COM0 + COM2);
+ 774   2                      LCDDAT &= ~ COM1;
+ 775   2      
+ 776   2                      LCDPTR = 29 - n * 4;
+ 777   2                      LCDDAT = ( COM0 + COM3);
+ 778   2      
+ 779   2                      LCDPTR = 28 - n * 4;
+ 780   2                      LCDDAT = COM1;
+ 781   2                      break;
+ 782   2              case 'a':
+ 783   2                      LCDPTR = 31 - n * 4;
+ 784   2                      LCDDAT |= ( COM1 + COM2);
+ 785   2                      LCDDAT &= ~ COM0;
  786   2      
- 787   2                      LCDPTR = 28 - n * 4;
- 788   2                      LCDDAT = COM0 + COM1 + COM3;
- 789   2                      break;
- 790   2              case 'e':
- 791   2                      LCDPTR = 31 - n * 4;
- 792   2                      LCDDAT = COM0 + COM1 + COM2;
+ 787   2                      LCDPTR = 30 - n * 4;
+ 788   2                      LCDDAT |= COM0;
+ 789   2                      LCDDAT &= ~(COM1 + COM2);
+ 790   2      
+ 791   2                      LCDPTR = 29 - n * 4;
+ 792   2                      LCDDAT = COM3;
  793   2      
- 794   2                      LCDPTR = 30 - n * 4;
- 795   2                      LCDDAT = COM0;
- 796   2      
- 797   2                      LCDPTR = 29 - n * 4;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 14  
+ 794   2                      LCDPTR = 28 - n * 4;
+ 795   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 796   2                      break;
+ 797   2              case 'b':
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 14  
 
- 798   2                      LCDDAT = COM3;
- 799   2      
- 800   2                      LCDPTR = 28 - n * 4;
- 801   2                      LCDDAT = COM0 + COM1;
- 802   2                      break;
- 803   2              case 'f':
- 804   2                      LCDPTR = 31 - n * 4;
- 805   2                      LCDDAT = COM0 + COM1 + COM2;
+ 798   2                      LCDPTR = 31 - n * 4;
+ 799   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 800   2      
+ 801   2                      LCDPTR = 30 - n * 4;
+ 802   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 803   2      
+ 804   2                      LCDPTR = 29 - n * 4;
+ 805   2                      LCDDAT = COM3;
  806   2      
- 807   2                      LCDPTR = 30 - n * 4;
- 808   2                      LCDDAT = COM0;
- 809   2      
- 810   2                      LCDPTR = 29 - n * 4;
- 811   2                      LCDDAT = 0;
- 812   2      
- 813   2                      LCDPTR = 28 - n * 4;
- 814   2                      LCDDAT = 0;
- 815   2                      break;
- 816   2              case 'g':
- 817   2                      break;
- 818   2              case 'h':
- 819   2                      LCDPTR = 31 - n * 4;
- 820   2                      LCDDAT = COM0 + COM1 + COM2;
- 821   2      
- 822   2                      LCDPTR = 30 - n * 4;
- 823   2                      LCDDAT = 0;
- 824   2      
- 825   2                      LCDPTR = 29 - n * 4;
- 826   2                      LCDDAT = 0;
- 827   2      
- 828   2                      LCDPTR = 28 - n * 4;
- 829   2                      LCDDAT = COM1 + COM3;
- 830   2                      break;
- 831   2              case 'i':
- 832   2                      LCDPTR = 31 - n * 4;
- 833   2                      LCDDAT = 0;
+ 807   2                      LCDPTR = 28 - n * 4;
+ 808   2                      LCDDAT = ( COM1 + COM3);
+ 809   2                      break;
+ 810   2              case 'c':
+ 811   2                      LCDPTR = 31 - n * 4;
+ 812   2                      LCDDAT |= ( COM1 + COM2);
+ 813   2                      LCDDAT &= ~ COM0;
+ 814   2      
+ 815   2                      LCDPTR = 30 - n * 4;
+ 816   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 817   2      
+ 818   2                      LCDPTR = 29 - n * 4;
+ 819   2                      LCDDAT = COM3;
+ 820   2      
+ 821   2                      LCDPTR = 28 - n * 4;
+ 822   2                      LCDDAT = COM1;
+ 823   2                      break;
+ 824   2              case 'd':
+ 825   2                      LCDPTR = 31 - n * 4;
+ 826   2                      LCDDAT |= ( COM1 + COM2);
+ 827   2                      LCDDAT &= ~ COM0;
+ 828   2      
+ 829   2                      LCDPTR = 30 - n * 4;
+ 830   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 831   2      
+ 832   2                      LCDPTR = 29 - n * 4;
+ 833   2                      LCDDAT = COM3;
  834   2      
- 835   2                      LCDPTR = 30 - n * 4;
- 836   2                      LCDDAT = 0;
- 837   2      
- 838   2                      LCDPTR = 29 - n * 4;
- 839   2                      LCDDAT = COM1 + COM2;
- 840   2      
- 841   2                      LCDPTR = 28 - n * 4;
- 842   2                      LCDDAT = 0;
- 843   2                      break;
- 844   2              case 'j':
- 845   2                      LCDPTR = 31 - n * 4;
- 846   2                      LCDDAT = 0;
- 847   2      
- 848   2                      LCDPTR = 30 - n * 4;
- 849   2                      LCDDAT = 0;
- 850   2      
- 851   2                      LCDPTR = 29 - n * 4;
- 852   2                      LCDDAT = COM3;
- 853   2      
- 854   2                      LCDPTR = 28 - n * 4;
- 855   2                      LCDDAT = COM0 + COM3;
- 856   2                      break;
- 857   2              case 'k':
- 858   2                      LCDPTR = 31 - n * 4;
- 859   2                      LCDDAT = COM0 + COM1 + COM2;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 15  
+ 835   2                      LCDPTR = 28 - n * 4;
+ 836   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 837   2                      break;
+ 838   2              case 'e':
+ 839   2                      LCDPTR = 31 - n * 4;
+ 840   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 841   2      
+ 842   2                      LCDPTR = 30 - n * 4;
+ 843   2                      LCDDAT |= COM0;
+ 844   2                      LCDDAT &= ~(COM1 + COM2);
+ 845   2      
+ 846   2                      LCDPTR = 29 - n * 4;
+ 847   2                      LCDDAT = COM3;
+ 848   2      
+ 849   2                      LCDPTR = 28 - n * 4;
+ 850   2                      LCDDAT = ( COM0 + COM1);
+ 851   2                      break;
+ 852   2              case 'f':
+ 853   2                      LCDPTR = 31 - n * 4;
+ 854   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 855   2      
+ 856   2                      LCDPTR = 30 - n * 4;
+ 857   2                      LCDDAT |= COM0;
+ 858   2                      LCDDAT &= ~(COM1 + COM2);
+ 859   2      
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 15  
 
- 860   2      
- 861   2                      LCDPTR = 30 - n * 4;
- 862   2                      LCDDAT = 0;
- 863   2      
- 864   2                      LCDPTR = 29 - n * 4;
- 865   2                      LCDDAT = COM0;
- 866   2      
- 867   2                      LCDPTR = 28 - n * 4;
- 868   2                      LCDDAT = COM2;
- 869   2                      break;
- 870   2              case 'l':
- 871   2                      break;
- 872   2              case 'm':
- 873   2                      LCDPTR = 31 - n * 4;
- 874   2                      LCDDAT = COM1 + COM2;
- 875   2      
- 876   2                      LCDPTR = 30 - n * 4;
- 877   2                      LCDDAT = 0;
- 878   2      
- 879   2                      LCDPTR = 29 - n * 4;
- 880   2                      LCDDAT = COM2;
- 881   2      
- 882   2                      LCDPTR = 28 - n * 4;
- 883   2                      LCDDAT = COM1 + COM3;
- 884   2                      break;
- 885   2              case 'n':
- 886   2                      LCDPTR = 31 - n * 4;
- 887   2                      LCDDAT = COM1 + COM2;
- 888   2      
- 889   2                      LCDPTR = 30 - n * 4;
- 890   2                      LCDDAT = 0;
- 891   2      
- 892   2                      LCDPTR = 29 - n * 4;
- 893   2                      LCDDAT = 0;
- 894   2      
- 895   2                      LCDPTR = 28 - n * 4;
- 896   2                      LCDDAT = COM1 + COM3;
- 897   2                      break;
- 898   2              case 'o':
- 899   2                      LCDPTR = 31 - n * 4;
- 900   2                      LCDDAT = COM1 + COM2;
- 901   2      
- 902   2                      LCDPTR = 30 - n * 4;
- 903   2                      LCDDAT = 0;
- 904   2      
- 905   2                      LCDPTR = 29 - n * 4;
- 906   2                      LCDDAT = COM3;
- 907   2      
- 908   2                      LCDPTR = 28 - n * 4;
- 909   2                      LCDDAT = COM1 + COM3;
- 910   2                      break;
- 911   2              case 'p':
- 912   2                      break;
- 913   2              case 'q':
- 914   2                      LCDPTR = 31 - n * 4;
- 915   2                      LCDDAT = COM0 + COM1;
+ 860   2                      LCDPTR = 29 - n * 4;
+ 861   2                      LCDDAT = 0;
+ 862   2      
+ 863   2                      LCDPTR = 28 - n * 4;
+ 864   2                      LCDDAT = 0;
+ 865   2                      break;
+ 866   2              case 'g':
+ 867   2                      break;
+ 868   2              case 'h':
+ 869   2                      LCDPTR = 31 - n * 4;
+ 870   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 871   2      
+ 872   2                      LCDPTR = 30 - n * 4;
+ 873   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 874   2      
+ 875   2                      LCDPTR = 29 - n * 4;
+ 876   2                      LCDDAT = 0;
+ 877   2      
+ 878   2                      LCDPTR = 28 - n * 4;
+ 879   2                      LCDDAT = ( COM1 + COM3);
+ 880   2                      break;
+ 881   2              case 'i':
+ 882   2                      LCDPTR = 31 - n * 4;
+ 883   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 884   2      
+ 885   2                      LCDPTR = 30 - n * 4;
+ 886   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 887   2      
+ 888   2                      LCDPTR = 29 - n * 4;
+ 889   2                      LCDDAT = ( COM1 + COM2);
+ 890   2      
+ 891   2                      LCDPTR = 28 - n * 4;
+ 892   2                      LCDDAT = 0;
+ 893   2                      break;
+ 894   2              case 'j':
+ 895   2                      LCDPTR = 31 - n * 4;
+ 896   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 897   2      
+ 898   2                      LCDPTR = 30 - n * 4;
+ 899   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 900   2      
+ 901   2                      LCDPTR = 29 - n * 4;
+ 902   2                      LCDDAT = COM3;
+ 903   2      
+ 904   2                      LCDPTR = 28 - n * 4;
+ 905   2                      LCDDAT = ( COM0 + COM3);
+ 906   2                      break;
+ 907   2              case 'k':
+ 908   2                      LCDPTR = 31 - n * 4;
+ 909   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 910   2      
+ 911   2                      LCDPTR = 30 - n * 4;
+ 912   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 913   2      
+ 914   2                      LCDPTR = 29 - n * 4;
+ 915   2                      LCDDAT = COM0;
  916   2      
- 917   2                      LCDPTR = 30 - n * 4;
- 918   2                      LCDDAT = COM0;
- 919   2      
- 920   2                      LCDPTR = 29 - n * 4;
- 921   2                      LCDDAT = 0;
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 16  
+ 917   2                      LCDPTR = 28 - n * 4;
+ 918   2                      LCDDAT = COM2;
+ 919   2                      break;
+ 920   2              case 'l':
+ 921   2                      break;
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 16  
 
- 922   2      
- 923   2                      LCDPTR = 28 - n * 4;
- 924   2                      LCDDAT = COM0 + COM1 + COM3;
- 925   2                      break;
- 926   2              case 'r':
- 927   2                      LCDPTR = 31 - n * 4;
- 928   2                      LCDDAT = 0;
+ 922   2              case 'm':
+ 923   2                      LCDPTR = 31 - n * 4;
+ 924   2                      LCDDAT |= ( COM1 + COM2);
+ 925   2                      LCDDAT &= ~ COM0;
+ 926   2      
+ 927   2                      LCDPTR = 30 - n * 4;
+ 928   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
  929   2      
- 930   2                      LCDPTR = 30 - n * 4;
- 931   2                      LCDDAT = 0;
+ 930   2                      LCDPTR = 29 - n * 4;
+ 931   2                      LCDDAT = COM2;
  932   2      
- 933   2                      LCDPTR = 29 - n * 4;
- 934   2                      LCDDAT = COM2;
- 935   2      
- 936   2                      LCDPTR = 28 - n * 4;
- 937   2                      LCDDAT = COM1;
- 938   2                      break;
- 939   2              case 's':
- 940   2                      break;
- 941   2              case 't':
- 942   2                      LCDPTR = 31 - n * 4;
- 943   2                      LCDDAT = COM0 + COM1 + COM2;
- 944   2      
- 945   2                      LCDPTR = 30 - n * 4;
- 946   2                      LCDDAT = 0;
- 947   2      
- 948   2                      LCDPTR = 29 - n * 4;
- 949   2                      LCDDAT = COM3;
- 950   2      
- 951   2                      LCDPTR = 28 - n * 4;
- 952   2                      LCDDAT = COM1;
- 953   2                      break;
- 954   2              case 'u':
- 955   2                      LCDPTR = 31 - n * 4;
- 956   2                      LCDDAT = COM2;
+ 933   2                      LCDPTR = 28 - n * 4;
+ 934   2                      LCDDAT = ( COM1 + COM3);
+ 935   2                      break;
+ 936   2              case 'n':
+ 937   2                      LCDPTR = 31 - n * 4;
+ 938   2                      LCDDAT |= ( COM1 + COM2);
+ 939   2                      LCDDAT &= ~ COM0;
+ 940   2      
+ 941   2                      LCDPTR = 30 - n * 4;
+ 942   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 943   2      
+ 944   2                      LCDPTR = 29 - n * 4;
+ 945   2                      LCDDAT = 0;
+ 946   2      
+ 947   2                      LCDPTR = 28 - n * 4;
+ 948   2                      LCDDAT = ( COM1 + COM3);
+ 949   2                      break;
+ 950   2              case 'o':
+ 951   2                      LCDPTR = 31 - n * 4;
+ 952   2                      LCDDAT |= ( COM1 + COM2);
+ 953   2                      LCDDAT &= ~ COM0;
+ 954   2      
+ 955   2                      LCDPTR = 30 - n * 4;
+ 956   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
  957   2      
- 958   2                      LCDPTR = 30 - n * 4;
- 959   2                      LCDDAT = 0;
+ 958   2                      LCDPTR = 29 - n * 4;
+ 959   2                      LCDDAT = COM3;
  960   2      
- 961   2                      LCDPTR = 29 - n * 4;
- 962   2                      LCDDAT = COM3;
- 963   2      
- 964   2                      LCDPTR = 28 - n * 4;
- 965   2                      LCDDAT = COM3;
- 966   2                      break;
- 967   2              case 'v':
- 968   2                      LCDPTR = 31 - n * 4;
- 969   2                      LCDDAT = 0;
+ 961   2                      LCDPTR = 28 - n * 4;
+ 962   2                      LCDDAT = ( COM1 + COM3);
+ 963   2                      break;
+ 964   2              case 'p':
+ 965   2                      break;
+ 966   2              case 'q':
+ 967   2                      LCDPTR = 31 - n * 4;
+ 968   2                      LCDDAT |= ( COM0 + COM1);
+ 969   2                      LCDDAT &= ~ COM2;
  970   2      
  971   2                      LCDPTR = 30 - n * 4;
- 972   2                      LCDDAT = 0;
- 973   2      
- 974   2                      LCDPTR = 29 - n * 4;
- 975   2                      LCDDAT = 0;
- 976   2      
- 977   2                      LCDPTR = 28 - n * 4;
- 978   2                      LCDDAT = COM2 + COM3;
- 979   2                      break;
- 980   2              case 'w':
- 981   2                      LCDPTR = 31 - n * 4;
- 982   2                      LCDDAT = COM2;
- 983   2      
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 17  
+ 972   2                      LCDDAT |= COM0;
+ 973   2                      LCDDAT &= ~(COM1 + COM2);
+ 974   2      
+ 975   2                      LCDPTR = 29 - n * 4;
+ 976   2                      LCDDAT = 0;
+ 977   2      
+ 978   2                      LCDPTR = 28 - n * 4;
+ 979   2                      LCDDAT = ( COM0 + COM1 + COM3);
+ 980   2                      break;
+ 981   2              case 'r':
+ 982   2                      LCDPTR = 31 - n * 4;
+ 983   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 17  
 
- 984   2                      LCDPTR = 30 - n * 4;
- 985   2                      LCDDAT = 0;
- 986   2      
- 987   2                      LCDPTR = 29 - n * 4;
- 988   2                      LCDDAT = COM2 + COM3;
- 989   2      
- 990   2                      LCDPTR = 28 - n * 4;
- 991   2                      LCDDAT = COM3;
- 992   2                      break;
- 993   2              case 'x':
- 994   2                      break;
- 995   2              case 'y':
- 996   2                      LCDPTR = 31 - n * 4;
- 997   2                      LCDDAT = 0;
- 998   2      
- 999   2                      LCDPTR = 30 - n * 4;
-1000   2                      LCDDAT = COM1;
-1001   2      
-1002   2                      LCDPTR = 29 - n * 4;
-1003   2                      LCDDAT = COM0 + COM2;
-1004   2      
-1005   2                      LCDPTR = 28 - n * 4;
-1006   2                      LCDDAT = 0;
-1007   2                      break;
-1008   2              case 'z':
-1009   2                      LCDPTR = 31 - n * 4;
-1010   2                      LCDDAT = 0;
-1011   2      
-1012   2                      LCDPTR = 30 - n * 4;
-1013   2                      LCDDAT = COM0 + COM2;
-1014   2      
-1015   2                      LCDPTR = 29 - n * 4;
-1016   2                      LCDDAT = COM0 + COM3;
-1017   2      
-1018   2                      LCDPTR = 28 - n * 4;
-1019   2                      LCDDAT = 0;
-1020   2                      break;
-1021   2      
-1022   2              }
-1023   1      }
-1024          
-1025          void LCD_ShowString(char *s) {
-1026   1              uint8_t i = 0;
-1027   1              uint8_t len = 0;
-1028   1              BIT b = 0;
-1029   1      
-1030   1              if (s == 0) {
-1031   2                      return;
-1032   2              }
-1033   1              len = strlen(s);
-1034   1              if (len >= 8) {
-1035   2                      for (i = 0; i < 8; i++) {
-1036   3                              LCD_ShowChar(i, *(s + i));
-1037   3                      }
-1038   2              } else {
-1039   2                      for (i = 0; i < 8; i++) {
-1040   3                              if (b == 0) {
-1041   4                                      if (*(s + i) != 0) {
-1042   5                                              LCD_ShowChar(i, *(s + i));
-1043   5                                      } else {
-1044   5                                              b = 1;
-1045   5                                              LCD_ShowChar(i, ' ');
-C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/29/2017 22:43:10 PAGE 18  
+ 984   2      
+ 985   2                      LCDPTR = 30 - n * 4;
+ 986   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+ 987   2      
+ 988   2                      LCDPTR = 29 - n * 4;
+ 989   2                      LCDDAT = COM2;
+ 990   2      
+ 991   2                      LCDPTR = 28 - n * 4;
+ 992   2                      LCDDAT = COM1;
+ 993   2                      break;
+ 994   2              case 's':
+ 995   2                      break;
+ 996   2              case 't':
+ 997   2                      LCDPTR = 31 - n * 4;
+ 998   2                      LCDDAT |= ( COM0 + COM1 + COM2);
+ 999   2      
+1000   2                      LCDPTR = 30 - n * 4;
+1001   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+1002   2      
+1003   2                      LCDPTR = 29 - n * 4;
+1004   2                      LCDDAT = COM3;
+1005   2      
+1006   2                      LCDPTR = 28 - n * 4;
+1007   2                      LCDDAT = COM1;
+1008   2                      break;
+1009   2              case 'u':
+1010   2                      LCDPTR = 31 - n * 4;
+1011   2                      LCDDAT |= COM2;
+1012   2                      LCDDAT &= ~(COM0 + COM1);
+1013   2      
+1014   2                      LCDPTR = 30 - n * 4;
+1015   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+1016   2      
+1017   2                      LCDPTR = 29 - n * 4;
+1018   2                      LCDDAT = COM3;
+1019   2      
+1020   2                      LCDPTR = 28 - n * 4;
+1021   2                      LCDDAT = COM3;
+1022   2                      break;
+1023   2              case 'v':
+1024   2                      LCDPTR = 31 - n * 4;
+1025   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+1026   2      
+1027   2                      LCDPTR = 30 - n * 4;
+1028   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+1029   2      
+1030   2                      LCDPTR = 29 - n * 4;
+1031   2                      LCDDAT = 0;
+1032   2      
+1033   2                      LCDPTR = 28 - n * 4;
+1034   2                      LCDDAT = ( COM2 + COM3);
+1035   2                      break;
+1036   2              case 'w':
+1037   2                      LCDPTR = 31 - n * 4;
+1038   2                      LCDDAT |= COM2;
+1039   2                      LCDDAT &= ~(COM0 + COM1);
+1040   2      
+1041   2                      LCDPTR = 30 - n * 4;
+1042   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+1043   2      
+1044   2                      LCDPTR = 29 - n * 4;
+1045   2                      LCDDAT = ( COM2 + COM3);
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 18  
 
-1046   5                                      }
-1047   4                              } else {
-1048   4                                      LCD_ShowChar(i, ' ');
-1049   4                              }
-1050   3                      }
-1051   2              }
-1052   1      
-1053   1      }
+1046   2      
+1047   2                      LCDPTR = 28 - n * 4;
+1048   2                      LCDDAT = COM3;
+1049   2                      break;
+1050   2              case 'x':
+1051   2                      break;
+1052   2              case 'y':
+1053   2                      LCDPTR = 31 - n * 4;
+1054   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+1055   2      
+1056   2                      LCDPTR = 30 - n * 4;
+1057   2                      LCDDAT |= COM1;
+1058   2                      LCDDAT &= ~(COM0 + COM2);
+1059   2      
+1060   2                      LCDPTR = 29 - n * 4;
+1061   2                      LCDDAT = ( COM0 + COM2);
+1062   2      
+1063   2                      LCDPTR = 28 - n * 4;
+1064   2                      LCDDAT = 0;
+1065   2                      break;
+1066   2              case 'z':
+1067   2                      LCDPTR = 31 - n * 4;
+1068   2                      LCDDAT &= ~( COM0 + COM1 + COM2);
+1069   2      
+1070   2                      LCDPTR = 30 - n * 4;
+1071   2                      LCDDAT |= ( COM0 + COM2);
+1072   2                      LCDDAT &= ~ COM1;
+1073   2      
+1074   2                      LCDPTR = 29 - n * 4;
+1075   2                      LCDDAT = ( COM0 + COM3);
+1076   2      
+1077   2                      LCDPTR = 28 - n * 4;
+1078   2                      LCDDAT = 0;
+1079   2                      break;
+1080   2      
+1081   2              }
+1082   1      }
+1083          
+1084          void LCD_ShowString(char *s) {
+1085   1              uint8_t i = 0;
+1086   1              uint8_t len = 0;
+1087   1              BIT b = 0;
+1088   1      
+1089   1              if (s == 0) {
+1090   2                      return;
+1091   2              }
+1092   1              len = strlen(s);
+1093   1              if (len >= 8) {
+1094   2                      for (i = 0; i < 8; i++) {
+1095   3                              LCD_ShowChar(i, *(s + i));
+1096   3                      }
+1097   2              } else {
+1098   2                      for (i = 0; i < 8; i++) {
+1099   3                              if (b == 0) {
+1100   4                                      if (*(s + i) != 0) {
+1101   5                                              LCD_ShowChar(i, *(s + i));
+1102   5                                      } else {
+1103   5                                              b = 1;
+1104   5                                              LCD_ShowChar(i, ' ');
+1105   5                                      }
+1106   4                              } else {
+1107   4                                      LCD_ShowChar(i, ' ');
+C51 COMPILER V9.56.0.0   BSP_DISPLAY                                                       08/30/2017 23:22:33 PAGE 19  
+
+1108   4                              }
+1109   3                      }
+1110   2              }
+1111   1      
+1112   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2750    ----
+   CODE SIZE        =   2906    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----       4
    PDATA SIZE       =   ----    ----
