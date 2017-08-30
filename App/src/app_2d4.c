@@ -13,7 +13,6 @@ static idata uint8_t sendBuf[PAYLOAD_WIDTH] = { 0 };
 
 void app_2d4_init(void) {
 
-
 	sendRcv_flag = 0;
 	memset(rcvBuf, 0, sizeof(rcvBuf));
 	memset(sendBuf, 0, sizeof(sendBuf));
