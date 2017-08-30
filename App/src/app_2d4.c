@@ -122,7 +122,7 @@ void app_2d4_pro(void) {
 			sendRcv_flag = 0;
 			RF_RxMode();
 
-//			key_bright_toggle();
+			key_bright_toggle();
 
 			break;
 		case RX_DR_FLAG:		//发送成功且收到payload
