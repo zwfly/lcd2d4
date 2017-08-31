@@ -55,6 +55,8 @@ void main(void) {
 //			app_charge_100ms_pro();
 			Repeat_Pro();
 
+	//		 app_2d4_1S_pro() ;
+
 			app_lcd_pro();
 
 			n++;

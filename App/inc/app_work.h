@@ -15,10 +15,10 @@ typedef struct _WORK_T {
 		struct {
 			unsigned relay :1;
 			unsigned speaker :1;
-			unsigned ra2 :1;
-			unsigned ra3 :1;
-			unsigned ra4 :1;
-			unsigned ra5 :1;
+			unsigned BT :1;
+			unsigned FM :1;
+			unsigned AUX :1;
+			unsigned USB :1;
 			unsigned ra6 :1;
 			unsigned ra9 :1;
 		} bits;

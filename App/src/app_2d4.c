@@ -8,14 +8,14 @@
 #include "app.h"
 
 static idata uint8_t sendRcv_flag = 0; //0 rcv， 1 send
-static idata uint8_t rcvBuf[PAYLOAD_WIDTH] = { 0 };
-static idata uint8_t sendBuf[PAYLOAD_WIDTH] = { 0 };
+static idata uint8_t rcvBuf[PAYLOAD_WIDTH] = {0};
+static idata uint8_t sendBuf[PAYLOAD_WIDTH] = {0};
 
 void app_2d4_init(void) {
 
 	sendRcv_flag = 0;
-	memset(rcvBuf, 0, sizeof(rcvBuf));
-	memset(sendBuf, 0, sizeof(sendBuf));
+	memset(rcvBuf, 0, PAYLOAD_WIDTH);
+	memset(sendBuf, 0, PAYLOAD_WIDTH);
 
 	RF_Init();
 	RF_RxMode();
@@ -25,7 +25,7 @@ void app_2d4_init(void) {
 
 void app_2d4_send(uint8_t *d, uint8_t len) {
 
-	if (len > sizeof(sendBuf)) {
+	if (len > PAYLOAD_WIDTH) {
 		return;
 	}
 
@@ -80,6 +80,52 @@ static void mode_resp(void) {
 	sprintf(str, " VOL %u", (uint16_t) g_tWork.vol);
 	LCD_ShowString(str);
 }
+static void clear_lcd_resp(void) {
+	LCD_ShowString("        ");
+
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+}
+static void BT_pause_show_lcd_resp(void) {
+	LCD_ShowString("   PAUSE");
+}
+
+static void BT_play_show_lcd_resp(void) {
+	LCD_ShowString("    PLAY");
+}
+static void FM_scanning_show_lcd_resp(void) {
+	LCD_ShowString("SCANNING");
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+	LCD_Clear_MHZ_ICO();
+}
+
+static void FM_ok_show_lcd_resp(void) {
+	LCD_ShowString("FM 1027 ");
+	LCD_Clear_upColon_ICO();
+	LCD_Show_downColon_ICO();
+	LCD_Show_MHZ_ICO();
+
+}
+static void AUX_mute_show_lcd_resp(void) {
+	LCD_ShowString("   MUTE ");
+}
+
+static void AUX_play_show_lcd_resp(void) {
+	LCD_ShowString("    PLAY");
+
+}
+static void USB_pause_show_lcd_resp(void) {
+	LCD_ShowString("   PAUSE");
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+}
+
+static void USB_time_show_lcd_resp(void) {
+	LCD_ShowString("     349");
+	LCD_Show_upColon_ICO();
+	LCD_Show_downColon_ICO();
+}
 static void app_2d4_Rcv(uint8_t *buf) {
 	uint8_t i = 0;
 	uint8_t index = 0;
@@ -87,8 +133,8 @@ static void app_2d4_Rcv(uint8_t *buf) {
 
 	if (buf[0] != LAMP2LCD_HEADER) {
 		return;
-	}
-	if (buf[1] > sizeof(rcvBuf)) {
+	}	key_bright_toggle();
+	if (buf[1] > PAYLOAD_WIDTH) {
 		return;
 	}
 	for (i = 0; i < (buf[1] + 1); i++) {
@@ -98,7 +144,8 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		return;
 	}
 
-	memset(sendBuf, 0, sizeof(sendBuf));
+
+	memset(sendBuf, 0, PAYLOAD_WIDTH);
 	index = 0;
 	switch (buf[2]) {
 	case POWER_SHORT_CMD:
@@ -160,6 +207,60 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		Repeat_Start(20, 1, 1);
 		break;
 	case PLAY_CMD:
+
+		g_tWork.mode = (char) buf[3];
+
+		switch (g_tWork.mode) {
+		case 'B':
+			g_tWork.status.bits.BT = buf[4];
+			if (g_tWork.status.bits.BT) {
+				Repeat_SetStart(BT_play_show_lcd_resp);
+				Repeat_SetStop(0);
+				Repeat_Start(20, 1, 1);
+			} else {
+				Repeat_SetStart(BT_pause_show_lcd_resp);
+				Repeat_SetStop(clear_lcd_resp);
+				Repeat_Start(10, 10, 0);
+			}
+			break;
+		case 'F':
+			g_tWork.status.bits.FM = buf[4];
+			if (g_tWork.status.bits.FM) {
+				Repeat_SetStart(FM_scanning_show_lcd_resp);
+				Repeat_SetStop(0);
+				Repeat_Start(20, 1, 0);
+			} else {
+				Repeat_SetStart(FM_ok_show_lcd_resp);
+				Repeat_SetStop(0);
+				Repeat_Start(10, 1, 1);
+			}
+			break;
+		case 'A':
+			g_tWork.status.bits.AUX = buf[4];
+			if (g_tWork.status.bits.AUX) {
+				Repeat_SetStart(AUX_play_show_lcd_resp);
+				Repeat_SetStop(clear_lcd_resp);
+				Repeat_Start(10, 10, 0);
+			} else {
+				Repeat_SetStart(AUX_mute_show_lcd_resp);
+				Repeat_SetStop(clear_lcd_resp);
+				Repeat_Start(10, 10, 0);
+			}
+
+			break;
+		case 'U':
+			g_tWork.status.bits.USB = buf[4];
+			if (g_tWork.status.bits.USB) {
+				Repeat_SetStart(USB_time_show_lcd_resp);
+				Repeat_SetStop(0);
+				Repeat_Start(10, 1, 1);
+			} else {
+				Repeat_SetStart(USB_pause_show_lcd_resp);
+				Repeat_SetStop(clear_lcd_resp);
+				Repeat_Start(10, 10, 0);
+			}
+			break;
+		}
 
 		break;
 	case MODE_CMD:
@@ -228,7 +329,7 @@ void app_2d4_pro(void) {
 			sendRcv_flag = 0;
 			RF_RxMode();
 
-			key_bright_toggle();
+//			key_bright_toggle();
 
 			break;
 		case RX_DR_FLAG:		//发送成功且收到payload
@@ -243,15 +344,19 @@ void app_2d4_pro(void) {
 			break;
 		default:		// rf 处于空闲状态才发送数据
 
-			RF_TxData(sendBuf, sizeof(sendBuf));
+			RF_TxData(sendBuf, PAYLOAD_WIDTH);
 
 			break;
 		}
 
 	} else {
-		if (ucRF_DumpRxData(rcvBuf, sizeof(rcvBuf))) {
+		if (ucRF_DumpRxData(rcvBuf, PAYLOAD_WIDTH)) {
 
-//			key_bright_toggle();
+
+
+			LCD_Clear_MHZ_ICO();
+			LCD_Clear_upColon_ICO();
+			LCD_Clear_downColon_ICO();
 
 			app_2d4_Rcv(rcvBuf);
 		}
@@ -259,3 +364,40 @@ void app_2d4_pro(void) {
 	}
 
 }
+
+void app_2d4_1S_pro(void) {
+
+	switch (g_tWork.mode) {
+	case 'B':
+
+		app_lcd_default_string_set(" PAIRING", 8);
+		LCD_Clear_MHZ_ICO();
+
+		LCD_Clear_upColon_ICO();
+		LCD_Clear_downColon_ICO();
+
+		break;
+	case 'F':
+		app_lcd_default_string_set("FM  821 ", 8);
+		LCD_Clear_upColon_ICO();
+		LCD_Show_downColon_ICO();
+
+		LCD_Show_MHZ_ICO();
+		break;
+	case 'A':
+		app_lcd_default_string_set("    PLAY", 8);
+		LCD_Clear_MHZ_ICO();
+		LCD_Clear_upColon_ICO();
+		LCD_Clear_downColon_ICO();
+		break;
+	case 'U':
+		app_lcd_default_string_set("     349", 8);
+		LCD_Show_upColon_ICO();
+		LCD_Show_downColon_ICO();
+
+		LCD_Clear_MHZ_ICO();
+		break;
+	}
+
+}
+
