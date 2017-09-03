@@ -7,7 +7,7 @@
 
 #include "app.h"
 
-static idata uint8_t buf[PAYLOAD_WIDTH] = { 0 };
+static idata uint8_t buf[PAYLOAD_WIDTH] = {0};
 
 void app_key_init(void) {
 
@@ -42,7 +42,7 @@ void app_key_pro(uint8_t keyCode) {
 	index = 0;
 	memset(buf, 0, sizeof(buf));
 	switch (keyCode) {
-	case KEY_UP_K1:   // power
+	case KEY_UP_K1:   // power short
 		buf[index++] = LCD2LAMP_HEADER;
 		buf[index++] = 0x02;
 		buf[index++] = POWER_SHORT_CMD;
@@ -82,7 +82,13 @@ void app_key_pro(uint8_t keyCode) {
 
 		break;
 	case KEY_UP_K3:   // down
-
+		buf[index++] = LCD2LAMP_HEADER;
+		buf[index++] = 0x02;
+		buf[index++] = DOWN_CMD;
+		buf[index++] = 0x01;
+		for (i = 0; i < (buf[1] + 1); i++) {
+			buf[index] += buf[i + 1];
+		}
 		break;
 	case KEY_DOWN_K3:
 
@@ -91,7 +97,13 @@ void app_key_pro(uint8_t keyCode) {
 
 		break;
 	case KEY_UP_K4:   // up
-
+		buf[index++] = LCD2LAMP_HEADER;
+		buf[index++] = 0x02;
+		buf[index++] = UP_CMD;
+		buf[index++] = 0x01;
+		for (i = 0; i < (buf[1] + 1); i++) {
+			buf[index] += buf[i + 1];
+		}
 		break;
 	case KEY_DOWN_K4:
 

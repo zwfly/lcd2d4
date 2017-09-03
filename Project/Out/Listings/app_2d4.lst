@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   APP_2D4                                                           09/01/2017 00:48:26 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_2D4                                                           09/03/2017 16:50:59 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_2D4
@@ -62,7 +62,7 @@ line level    source
   51   2              } else {
   52   2                      LCD_ShowString("RELAYOFF");
   53   2              }
-C51 COMPILER V9.56.0.0   APP_2D4                                                           09/01/2017 00:48:26 PAGE 2   
+C51 COMPILER V9.56.0.0   APP_2D4                                                           09/03/2017 16:50:59 PAGE 2   
 
   54   1      
   55   1      }
@@ -126,7 +126,7 @@ line level    source
  113          
  114          static void AUX_play_show_lcd_resp(void) {
  115   1              LCD_ShowString("    PLAY");
-C51 COMPILER V9.56.0.0   APP_2D4                                                           09/01/2017 00:48:26 PAGE 3   
+C51 COMPILER V9.56.0.0   APP_2D4                                                           09/03/2017 16:50:59 PAGE 3   
 
  116   1      
  117   1      }
@@ -190,7 +190,7 @@ line level    source
  175   3                      } else {
  176   3                              g_tWork.status.bits.relay = 0;
  177   3                      }
-C51 COMPILER V9.56.0.0   APP_2D4                                                           09/01/2017 00:48:26 PAGE 4   
+C51 COMPILER V9.56.0.0   APP_2D4                                                           09/03/2017 16:50:59 PAGE 4   
 
  178   2      
  179   2                      Repeat_SetStart(relay_status_resp);
@@ -254,7 +254,7 @@ line level    source
  237   3                              break;
  238   3                      case 'A':
  239   3                              g_tWork.status.bits.AUX = buf[4];
-C51 COMPILER V9.56.0.0   APP_2D4                                                           09/01/2017 00:48:26 PAGE 5   
+C51 COMPILER V9.56.0.0   APP_2D4                                                           09/03/2017 16:50:59 PAGE 5   
 
  240   3                              if (g_tWork.status.bits.AUX) {
  241   4                                      Repeat_SetStart(AUX_play_show_lcd_resp);
@@ -318,7 +318,7 @@ line level    source
  299   3                              break;
  300   3                      case 'U':
  301   3                              LCD_Clear_FM_ICO();
-C51 COMPILER V9.56.0.0   APP_2D4                                                           09/01/2017 00:48:26 PAGE 6   
+C51 COMPILER V9.56.0.0   APP_2D4                                                           09/03/2017 16:50:59 PAGE 6   
 
  302   3      //                      LCD_Show_FM_ICO();
  303   3                              LCD_Clear_BLUETooTH_ICO();
@@ -382,7 +382,7 @@ line level    source
  361   3                              app_2d4_Rcv(rcvBuf);
  362   3                      }
  363   2      
-C51 COMPILER V9.56.0.0   APP_2D4                                                           09/01/2017 00:48:26 PAGE 7   
+C51 COMPILER V9.56.0.0   APP_2D4                                                           09/03/2017 16:50:59 PAGE 7   
 
  364   2              }
  365   1      

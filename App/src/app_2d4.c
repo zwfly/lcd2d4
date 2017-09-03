@@ -43,7 +43,6 @@ static void speaker_status_resp(void) {
 	} else {
 		LCD_ShowString(" PWR OFF");
 	}
-
 }
 static void relay_status_resp(void) {
 	if (g_tWork.status.bits.relay) {
