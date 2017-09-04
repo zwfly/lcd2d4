@@ -244,7 +244,6 @@ static void bsp_InitKeyHard(void) {
 static void bsp_InitKeyVar(void) {
 	uint8_t i;
 
-
 	/* 对按键FIFO读写指针清零 */
 	s_tKey.Read = 0;
 	s_tKey.Write = 0;
@@ -261,6 +260,9 @@ static void bsp_InitKeyVar(void) {
 		s_tBtn[i].RepeatSpeed = 0; /* 按键连发的速度，0表示不支持连发 */
 		s_tBtn[i].RepeatCount = 0; /* 连发计数器 */
 	}
+
+	s_tBtn[3].RepeatSpeed = 50; /* 按键连发的速度，0表示不支持连发 */
+	s_tBtn[4].RepeatSpeed = 50; /* 按键连发的速度，0表示不支持连发 */
 
 	/* 判断按键按下的函数 */
 	s_tBtn[0].IsKeyDownFunc = IsKeyDown1;

@@ -15,17 +15,17 @@ typedef struct _WORK_T {
 		struct {
 			unsigned relay :1;
 			unsigned speaker :1;
-			unsigned BT :1;
-			unsigned FM :1;
-			unsigned AUX :1;
-			unsigned USB :1;
+			unsigned BT1 :1;
+			unsigned FM1 :1;
+			unsigned AUX1 :1;
+			unsigned USB1 :1;
 			unsigned ra6 :1;
 			unsigned ra9 :1;
 		} bits;
 	} status;
 
 	uint8_t vol;
-	char mode;
+	uint8_t mode;
 
 	uint8_t track;
 

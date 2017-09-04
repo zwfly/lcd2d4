@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP                                                               09/03/2017 16:50:59 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP                                                               09/04/2017 22:09:54 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP
@@ -20,23 +20,25 @@ line level    source
    9   1      //      Set_All_GPIO_Quasi_Mode();
   10   1              Set_All_GPIO_Input_Mode();
   11   1      
-  12   1              ADC_Init();
-  13   1              bsp_InitKey();
-  14   1              KEY_Bright_InitHard();
-  15   1              LCD_Bright_InitHard();
-  16   1      
-  17   1              LCD_display_InitHard();
-  18   1              Timer0_InitHard();
-  19   1      //      Timer1_InitHard();
-  20   1      
-  21   1      //      Uart_InitHard();
+  12   1      LCD_display_InitHard();
+  13   1      
+  14   1              ADC_Init();
+  15   1              bsp_InitKey();
+  16   1              KEY_Bright_InitHard();
+  17   1      //      LCD_Bright_InitHard();
+  18   1      
+  19   1      
+  20   1              Timer0_InitHard();
+  21   1      //      Timer1_InitHard();
   22   1      
-  23   1              Wireless2d4_InitHard();
-  24   1      
-  25   1              set_EA;         //enable interrupts
-  26   1      
-  27   1      }
-  28          
+  23   1      
+  24   1              Wireless2d4_InitHard();
+  25   1      
+  26   1              LCD_Bright_InitHard();
+  27   1              set_EA;         //enable interrupts
+  28   1      
+  29   1      }
+  30          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

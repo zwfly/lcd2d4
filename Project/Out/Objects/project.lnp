@@ -7,7 +7,6 @@
 ".\Out\Objects\bsp.obj",
 ".\Out\Objects\bsp_key.obj",
 ".\Out\Objects\bsp_display.obj",
-".\Out\Objects\bsp_uart.obj",
 ".\Out\Objects\bsp_timer0.obj",
 ".\Out\Objects\bsp_timer1.obj",
 ".\Out\Objects\bsp_adc.obj",

@@ -16,6 +16,27 @@
 void LCD_display_InitHard(void) {
 
 #if 1
+
+//	clr_P0M1_7;
+//	clr_P0M2_7;
+//
+//	P1M2 = 0x00;
+//	P1M1 = 0xFF;
+//
+//	P2M2 = 0x00;
+//	P2M1 = 0xFF;
+//
+//	P3M2 = 0x00;
+//	P3M1 = 0x0F;
+//
+//	P4M2 = 0x00;
+//	P4M1 = 0xFF;
+//
+//	P5M2 = 0x00;
+//	P5M1 = 0xFF;
+
+//////
+
 	P0M2 = 0x00;
 	P0M1 = 0x80;
 

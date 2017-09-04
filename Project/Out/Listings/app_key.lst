@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   APP_KEY                                                           09/03/2017 16:50:59 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_KEY                                                           09/04/2017 22:09:54 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_KEY
@@ -28,7 +28,7 @@ line level    source
   17   1              SW_Reset();  //¸´Î»
   18   1      }
   19          void app_power_off(void) {
-  20   1              lcd_bright_off();
+  20   1      //      lcd_bright_off();
   21   1              LCD_Clear_All();
   22   1      }
   23          
@@ -62,7 +62,7 @@ line level    source
   51   3                              buf[index] += buf[i + 1];
   52   3                      }
   53   2      
-C51 COMPILER V9.56.0.0   APP_KEY                                                           09/03/2017 16:50:59 PAGE 2   
+C51 COMPILER V9.56.0.0   APP_KEY                                                           09/04/2017 22:09:54 PAGE 2   
 
   54   2                      break;
   55   2              case KEY_DOWN_K1:
@@ -95,38 +95,38 @@ line level    source
   82   2      
   83   2                      break;
   84   2              case KEY_UP_K3:   // down
-  85   2                      buf[index++] = LCD2LAMP_HEADER;
-  86   2                      buf[index++] = 0x02;
-  87   2                      buf[index++] = DOWN_CMD;
-  88   2                      buf[index++] = 0x01;
-  89   2                      for (i = 0; i < (buf[1] + 1); i++) {
-  90   3                              buf[index] += buf[i + 1];
-  91   3                      }
-  92   2                      break;
-  93   2              case KEY_DOWN_K3:
-  94   2      
+  85   2      
+  86   2                      break;
+  87   2              case KEY_DOWN_K3:
+  88   2                      buf[index++] = LCD2LAMP_HEADER;
+  89   2                      buf[index++] = 0x02;
+  90   2                      buf[index++] = DOWN_CMD;
+  91   2                      buf[index++] = 0x01;
+  92   2                      for (i = 0; i < (buf[1] + 1); i++) {
+  93   3                              buf[index] += buf[i + 1];
+  94   3                      }
   95   2                      break;
   96   2              case KEY_LONG_K3:
   97   2      
   98   2                      break;
   99   2              case KEY_UP_K4:   // up
- 100   2                      buf[index++] = LCD2LAMP_HEADER;
- 101   2                      buf[index++] = 0x02;
- 102   2                      buf[index++] = UP_CMD;
- 103   2                      buf[index++] = 0x01;
- 104   2                      for (i = 0; i < (buf[1] + 1); i++) {
- 105   3                              buf[index] += buf[i + 1];
- 106   3                      }
- 107   2                      break;
- 108   2              case KEY_DOWN_K4:
- 109   2      
+ 100   2      
+ 101   2                      break;
+ 102   2              case KEY_DOWN_K4:  // Á¬·¢
+ 103   2                      buf[index++] = LCD2LAMP_HEADER;
+ 104   2                      buf[index++] = 0x02;
+ 105   2                      buf[index++] = UP_CMD;
+ 106   2                      buf[index++] = 0x01;
+ 107   2                      for (i = 0; i < (buf[1] + 1); i++) {
+ 108   3                              buf[index] += buf[i + 1];
+ 109   3                      }
  110   2                      break;
  111   2              case KEY_LONG_K4:
  112   2      
  113   2                      break;
  114   2              case KEY_UP_K5:   //vol+
  115   2                      buf[index++] = LCD2LAMP_HEADER;
-C51 COMPILER V9.56.0.0   APP_KEY                                                           09/03/2017 16:50:59 PAGE 3   
+C51 COMPILER V9.56.0.0   APP_KEY                                                           09/04/2017 22:09:54 PAGE 3   
 
  116   2                      buf[index++] = 0x02;
  117   2                      buf[index++] = VOL_ADD_CMD;
@@ -190,7 +190,7 @@ line level    source
  175   2      
  176   2                      break;
  177   2              case KEY_LONG_K8:
-C51 COMPILER V9.56.0.0   APP_KEY                                                           09/03/2017 16:50:59 PAGE 4   
+C51 COMPILER V9.56.0.0   APP_KEY                                                           09/04/2017 22:09:54 PAGE 4   
 
  178   2      
  179   2                      break;
@@ -234,7 +234,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1119    ----
+   CODE SIZE        =   1116    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----       3
    PDATA SIZE       =   ----    ----

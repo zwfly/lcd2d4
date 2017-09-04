@@ -17,7 +17,7 @@ void app_power_on(void) {
 	SW_Reset();  //¸´Î»
 }
 void app_power_off(void) {
-	lcd_bright_off();
+//	lcd_bright_off();
 	LCD_Clear_All();
 }
 
@@ -82,6 +82,9 @@ void app_key_pro(uint8_t keyCode) {
 
 		break;
 	case KEY_UP_K3:   // down
+
+		break;
+	case KEY_DOWN_K3:
 		buf[index++] = LCD2LAMP_HEADER;
 		buf[index++] = 0x02;
 		buf[index++] = DOWN_CMD;
@@ -90,13 +93,13 @@ void app_key_pro(uint8_t keyCode) {
 			buf[index] += buf[i + 1];
 		}
 		break;
-	case KEY_DOWN_K3:
-
-		break;
 	case KEY_LONG_K3:
 
 		break;
 	case KEY_UP_K4:   // up
+
+		break;
+	case KEY_DOWN_K4:  // Á¬·¢
 		buf[index++] = LCD2LAMP_HEADER;
 		buf[index++] = 0x02;
 		buf[index++] = UP_CMD;
@@ -104,9 +107,6 @@ void app_key_pro(uint8_t keyCode) {
 		for (i = 0; i < (buf[1] + 1); i++) {
 			buf[index] += buf[i + 1];
 		}
-		break;
-	case KEY_DOWN_K4:
-
 		break;
 	case KEY_LONG_K4:
 

@@ -24,12 +24,12 @@ void main(void) {
 	bsp_Init();
 
 	/****************/
-
+#if 1
 	app_key_init();
 	app_2d4_init();
 	app_lcd_init();
 	app_work_Init();
-
+#endif
 	/****************/
 //	Show_FW_Version_Number_To_PC();
 	while (1) {
@@ -55,7 +55,7 @@ void main(void) {
 //			app_charge_100ms_pro();
 			Repeat_Pro();
 
-	//		 app_2d4_1S_pro() ;
+			//		 app_2d4_1S_pro() ;
 
 			app_lcd_pro();
 
@@ -73,14 +73,14 @@ void main(void) {
 			app_2d4_pro();
 		}
 		if (Task_time.flag_1s) {
+			static uint8_t cnt = 0;
 			Task_time.flag_1s = 0;
 			//////////////////
 //			app_key_1s_pro();
 //			app_work_1s_pro();
-//			app_charge_1s_pro();
-//			app_battery_1s_pro();
-
-//			app_2d4_pro();
+			cnt++;
+//			sprintf(ss, "cc %u", (uint16_t) cnt);
+//			app_lcd_default_string_set(ss, strlen(ss));
 
 		}
 

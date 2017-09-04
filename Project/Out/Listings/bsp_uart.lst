@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_UART                                                          09/03/2017 16:50:59 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_UART                                                          09/03/2017 22:45:17 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_UART
@@ -9,73 +9,6 @@ COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Bsp\src\bsp_uart.c LARGE OPTI
 
 line level    source
 
-   1          /*
-   2           * bsp_uart.c
-   3           *
-   4           *  Created on: 2017Äê6ÔÂ27ÈÕ
-   5           *      Author: fly
-   6           */
-   7          
-   8          #include "bsp.h"
-   9          
-  10          BIT riflag;
-  11          
-  12          void Uart_InitHard(void) {
-  13   1      
-  14   1              P5M1 &= ~SET_BIT7;
-  15   1              P5M2 |= SET_BIT7;
-  16   1      
-  17   1              InitialUART1_Timer3(9600);
-  18   1      //      set_ES_1;
-  19   1      //      set_ET1;
-  20   1      }
-  21          #if 1
-  22          BIT Get_Data_From_UART1(uint8_t *c) {
-  23   1              BIT b;
-  24   1      
-  25   1              if (RI_1) {
-  26   2                      *c = SBUF_1;
-  27   2                      RI_1 = 0;
-  28   2                      b = TRUE;
-  29   2              } else {
-  30   2                      b = FALSE;
-  31   2              }
-  32   1              return b;
-  33   1      }
-  34          #endif
-  35          
-  36          #if 0
-              void serial_IT(void)
-              interrupt 15
-              {
-                      if (RI_1) { /* if reception occur */
-                              clr_RI_1; /* clear reception flag for next reception */
-                              if (SBUF_1) {
-                                      BEEP_Start(0, 5, 5, 2);
-                              } else {
-                                      BEEP_Start(0, 5, 5, 1);
-                              }
-              
-                              //      riflag = 1;
-                      }
-                      if (TI_1) {
-                              clr_TI_1; /* if emission occur */
-                      }
-              }
-C51 COMPILER V9.56.0.0   BSP_UART                                                          09/03/2017 16:50:59 PAGE 2   
+*** ERROR C318 OF ..\Bsp\src\bsp_uart.c: can't open file '..\Bsp\src\bsp_uart.c'
 
-              #endif
-
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     36    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =      1       1
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

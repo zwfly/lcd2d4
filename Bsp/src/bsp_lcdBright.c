@@ -9,12 +9,10 @@
 
 void LCD_Bright_InitHard(void) {
 
-#if 1
 	clr_P0M1_6;
 	set_P0M2_6;
 
 	lcd_bright_on();
-#endif
 
 }
 void lcd_bright_off(void) {
