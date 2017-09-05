@@ -8,7 +8,6 @@
 ".\Out\Objects\bsp_key.obj",
 ".\Out\Objects\bsp_display.obj",
 ".\Out\Objects\bsp_timer0.obj",
-".\Out\Objects\bsp_timer1.obj",
 ".\Out\Objects\bsp_adc.obj",
 ".\Out\Objects\bsp_keyBright.obj",
 ".\Out\Objects\bsp_lcdBright.obj",

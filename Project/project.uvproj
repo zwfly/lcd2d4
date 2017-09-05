@@ -424,11 +424,6 @@
               <FilePath>..\Bsp\src\bsp_timer0.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_timer1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Bsp\src\bsp_timer1.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\src\bsp_adc.c</FilePath>

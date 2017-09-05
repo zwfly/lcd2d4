@@ -9,7 +9,7 @@
 
 static idata uint8_t sendRcv_flag = 0; //0 rcv£¬ 1 send
 static idata uint8_t rcvBuf[PAYLOAD_WIDTH] = {0};
-static idata uint8_t sendBuf[PAYLOAD_WIDTH] = {0};
+idata uint8_t sendBuf[PAYLOAD_WIDTH] = { 0 };
 
 static char tmpBuf[16] = { 0 };
 
@@ -60,27 +60,7 @@ static void vol_resp(void) {
 	sprintf(str, " VOL %u", (uint16_t) g_tWork.vol);
 	LCD_ShowString(str);
 }
-static void mode_resp(void) {
-	char str[16] = { 0 };
 
-	switch (g_tWork.mode) {
-	case 'B':
-		g_tWork.mode = 'F';
-		break;
-	case 'F':
-		g_tWork.mode = 'A';
-		break;
-	case 'A':
-		g_tWork.mode = 'U';
-		break;
-	case 'U':
-		g_tWork.mode = 'B';
-		break;
-	}
-
-	sprintf(str, " VOL %u", (uint16_t) g_tWork.vol);
-	LCD_ShowString(str);
-}
 static void clear_lcd_resp(void) {
 	LCD_ShowString("        ");
 
@@ -100,14 +80,14 @@ static void FM_scanning_show_lcd_resp(void) {
 	LCD_Clear_downColon_ICO();
 	LCD_Clear_MHZ_ICO();
 }
-
+#if 0
 static void FM_ok_show_lcd_resp(void) {
 	LCD_ShowString("FM 1027 ");
 	LCD_Clear_upColon_ICO();
 	LCD_Show_downColon_ICO();
 	LCD_Show_MHZ_ICO();
-
 }
+#endif
 static void AUX_mute_show_lcd_resp(void) {
 	LCD_ShowString("   MUTE ");
 }
@@ -121,12 +101,36 @@ static void USB_pause_show_lcd_resp(void) {
 	LCD_Clear_upColon_ICO();
 	LCD_Clear_downColon_ICO();
 }
-
+#if 0
 static void USB_time_show_lcd_resp(void) {
 	LCD_ShowString("     349");
 	LCD_Show_upColon_ICO();
 	LCD_Show_downColon_ICO();
 }
+#endif
+static void BT_next_show_lcd_resp(void) {
+	LCD_ShowString("   NEXT ");
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+}
+static void BT_prev_show_lcd_resp(void) {
+	LCD_ShowString("   PREV ");
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+}
+static void FM_station_show_lcd_resp(void) {
+	sprintf(tmpBuf, "    ST%u", (uint16_t) g_tWork.FM_station);
+	LCD_ShowString(tmpBuf);
+	LCD_Clear_upColon_ICO();
+	LCD_Show_downColon_ICO();
+}
+static void USB_track_show_lcd_resp(void) {
+	sprintf(tmpBuf, "TR %u", g_tWork.track);
+	LCD_ShowString(tmpBuf);
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+}
+
 static void app_2d4_Rcv(uint8_t *buf) {
 	uint8_t i = 0;
 	uint8_t index = 0;
@@ -176,17 +180,68 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		} else {
 			g_tWork.status.bits.relay = 0;
 		}
-
 		Repeat_SetStart(relay_status_resp);
 		Repeat_SetStop(0);
-
 		Repeat_Start(20, 1, 1);
 
 		break;
 	case UP_CMD:
+		switch (buf[3]) {
+		case 0x01:  //BT
+			Repeat_SetStart(BT_prev_show_lcd_resp);
+			Repeat_SetStop(0);
+			Repeat_Start(20, 1, 1);
 
+			break;
+		case 0x02:  //FM
+			g_tWork.FM_station = buf[4];
+			Repeat_SetStart(FM_station_show_lcd_resp);
+			Repeat_SetStop(0);
+			Repeat_Start(20, 1, 1);
+
+			break;
+		case 0x03:  //LED
+
+			break;
+		case 0x04:  //USB
+			g_tWork.track = buf[4];
+			g_tWork.track |= (buf[5] << 8);
+			Repeat_SetStart(USB_track_show_lcd_resp);
+			Repeat_SetStop(0);
+			Repeat_Start(20, 1, 1);
+			break;
+		default:
+			break;
+		}
 		break;
 	case DOWN_CMD:
+
+		switch (buf[3]) {
+		case 0x01:  //BT
+			Repeat_SetStart(BT_next_show_lcd_resp);
+			Repeat_SetStop(0);
+			Repeat_Start(20, 1, 1);
+
+			break;
+		case 0x02:  //FM
+			g_tWork.FM_station = buf[4];
+			Repeat_SetStart(FM_station_show_lcd_resp);
+			Repeat_SetStop(0);
+			Repeat_Start(20, 1, 1);
+			break;
+		case 0x03:  //LED
+
+			break;
+		case 0x04:  //USB
+			g_tWork.track = buf[4];
+			g_tWork.track |= (buf[5] << 8);
+			Repeat_SetStart(USB_track_show_lcd_resp);
+			Repeat_SetStop(0);
+			Repeat_Start(20, 1, 1);
+			break;
+		default:
+			break;
+		}
 
 		break;
 	case DOME_CMD:
@@ -208,8 +263,7 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		Repeat_Start(20, 1, 1);
 		break;
 	case PLAY_CMD:
-		g_tWork.mode = buf[3];
-		switch (g_tWork.mode) {
+		switch (buf[3]) {
 		case 0x01:  //BT
 			if (1 == buf[4]) {
 				Repeat_SetStart(BT_play_show_lcd_resp);
@@ -258,8 +312,6 @@ static void app_2d4_Rcv(uint8_t *buf) {
 
 		break;
 	case MODE_CMD:
-		g_tWork.mode = buf[3];
-
 		LCD_Clear_MHZ_ICO();
 		LCD_Clear_upColon_ICO();
 		LCD_Clear_downColon_ICO();
@@ -268,7 +320,7 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		LCD_Clear_AUX_ICO();
 		LCD_Clear_USB_ICO();
 
-		switch (g_tWork.mode) {
+		switch (buf[3]) {
 		case 0x01:  //BT
 
 			LCD_Show_BLUETooTH_ICO();
@@ -373,11 +425,11 @@ void app_2d4_pro(void) {
 	}
 
 }
-
+#if 0
 void app_2d4_1S_pro(void) {
 
 	switch (g_tWork.mode) {
-	case 'B':
+		case 'B':
 
 		app_lcd_default_string_set(" PAIRING", 8);
 		LCD_Clear_MHZ_ICO();
@@ -386,20 +438,20 @@ void app_2d4_1S_pro(void) {
 		LCD_Clear_downColon_ICO();
 
 		break;
-	case 'F':
+		case 'F':
 		app_lcd_default_string_set("FM  821 ", 8);
 		LCD_Clear_upColon_ICO();
 		LCD_Show_downColon_ICO();
 
 		LCD_Show_MHZ_ICO();
 		break;
-	case 'A':
+		case 'A':
 		app_lcd_default_string_set("    PLAY", 8);
 		LCD_Clear_MHZ_ICO();
 		LCD_Clear_upColon_ICO();
 		LCD_Clear_downColon_ICO();
 		break;
-	case 'U':
+		case 'U':
 		app_lcd_default_string_set("     349", 8);
 		LCD_Show_upColon_ICO();
 		LCD_Show_downColon_ICO();
@@ -409,4 +461,4 @@ void app_2d4_1S_pro(void) {
 	}
 
 }
-
+#endif

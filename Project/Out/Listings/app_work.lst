@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   APP_WORK                                                          09/04/2017 22:09:54 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_WORK                                                          09/05/2017 23:07:01 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_WORK
@@ -23,31 +23,30 @@ line level    source
   12          static void app_work_pro(void);
   13          
   14          void app_work_Init(void) {
-  15   1              g_tWork.mode = 'B';
-  16   1      
-  17   1              LCD_Show_BAZOOKA_ICO();
-  18   1      }
-  19          
-  20          void app_work_1s_pro(void) {
-  21   1      
-  22   1      }
-  23          void app_work_100ms_pro(void) {
-  24   1      
-  25   1      }
-  26          
-  27          static void app_work_pro(void) {
-  28   1      
-  29   1      }
-  30          
+  15   1      
+  16   1              LCD_Show_BAZOOKA_ICO();
+  17   1      }
+  18          
+  19          void app_work_1s_pro(void) {
+  20   1      
+  21   1      }
+  22          void app_work_100ms_pro(void) {
+  23   1      
+  24   1      }
+  25          
+  26          static void app_work_pro(void) {
+  27   1      
+  28   1      }
+  29          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     10    ----
+   CODE SIZE        =      6    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-   IDATA SIZE       =      5    ----
+   IDATA SIZE       =      6    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 

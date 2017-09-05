@@ -25,7 +25,7 @@ void main(void) {
 
 	/****************/
 #if 1
-	app_key_init();
+//	app_key_init();
 	app_2d4_init();
 	app_lcd_init();
 	app_work_Init();

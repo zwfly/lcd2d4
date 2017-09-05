@@ -12,7 +12,6 @@ idata WORK_T g_tWork;
 static void app_work_pro(void);
 
 void app_work_Init(void) {
-	g_tWork.mode = 'B';
 
 	LCD_Show_BAZOOKA_ICO();
 }

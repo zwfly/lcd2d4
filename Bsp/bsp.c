@@ -16,15 +16,12 @@ LCD_display_InitHard();
 	KEY_Bright_InitHard();
 //	LCD_Bright_InitHard();
 
-
 	Timer0_InitHard();
-//	Timer1_InitHard();
-
 
 	Wireless2d4_InitHard();
 
 	LCD_Bright_InitHard();
-	set_EA;         //enable interrupts
 
+	set_EA;         //enable interrupts
 }
 
