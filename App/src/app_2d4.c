@@ -130,7 +130,19 @@ static void USB_track_show_lcd_resp(void) {
 	LCD_Clear_upColon_ICO();
 	LCD_Clear_downColon_ICO();
 }
-
+static void LED_show_blink_name_show_lcd_resp(void) {
+//	sprintf(tmpBuf, "TR %u", g_tWork.track);
+	LCD_ShowString(tmpBuf);
+//	LCD_ShowString("PAUSE");
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+}
+static void LED_clear_blink_name_show_lcd_resp(void) {
+	//	sprintf(tmpBuf, "TR %u", g_tWork.track);
+	LCD_ShowString("        ");
+	LCD_Clear_upColon_ICO();
+	LCD_Clear_downColon_ICO();
+}
 static void app_2d4_Rcv(uint8_t *buf) {
 	uint8_t i = 0;
 	uint8_t index = 0;
@@ -200,15 +212,17 @@ static void app_2d4_Rcv(uint8_t *buf) {
 			Repeat_Start(20, 1, 1);
 
 			break;
-		case 0x03:  //LED
-
-			break;
 		case 0x04:  //USB
 			g_tWork.track = buf[4];
 			g_tWork.track |= (buf[5] << 8);
 			Repeat_SetStart(USB_track_show_lcd_resp);
 			Repeat_SetStop(0);
 			Repeat_Start(20, 1, 1);
+			break;
+		case 0x05:  //LED
+
+			app_lcd_default_string_set(buf + 4, 8);
+
 			break;
 		default:
 			break;
@@ -229,9 +243,6 @@ static void app_2d4_Rcv(uint8_t *buf) {
 			Repeat_SetStop(0);
 			Repeat_Start(20, 1, 1);
 			break;
-		case 0x03:  //LED
-
-			break;
 		case 0x04:  //USB
 			g_tWork.track = buf[4];
 			g_tWork.track |= (buf[5] << 8);
@@ -239,12 +250,34 @@ static void app_2d4_Rcv(uint8_t *buf) {
 			Repeat_SetStop(0);
 			Repeat_Start(20, 1, 1);
 			break;
+		case 0x05:  //LED
+			app_lcd_default_string_set(buf + 4, 8);
+			break;
 		default:
 			break;
 		}
 
 		break;
 	case DOME_CMD:
+		if (1 == buf[3]) {  //dome mode
+			if (1 == buf[4]) { //pause
+				memcpy(tmpBuf, buf + 5, 8);
+				Repeat_SetStart(LED_show_blink_name_show_lcd_resp);
+				Repeat_SetStop(LED_clear_blink_name_show_lcd_resp);
+				Repeat_Start(8, 8, 0);
+			} else {
+				app_lcd_default_string_set(buf + 5, 8);
+				Repeat_SetStart(LED_show_blink_name_show_lcd_resp);
+				Repeat_SetStop(0);
+				Repeat_Start(1, 1, 1);
+			}
+		} else {
+//			app_lcd_default_string_set(buf + 6, 8);
+			Repeat_SetStart(0);
+			Repeat_SetStop(0);
+			Repeat_Start(1, 1, 1);
+		}
+
 		break;
 	case VOL_ADD_CMD:
 		g_tWork.vol = buf[3];
@@ -308,8 +341,22 @@ static void app_2d4_Rcv(uint8_t *buf) {
 				Repeat_Start(10, 10, 0);
 			}
 			break;
-		}
+		case 0x05:  //LED
 
+			if (1 == buf[4]) { //pause
+				memcpy(tmpBuf, buf + 5, 8);
+				Repeat_SetStart(LED_show_blink_name_show_lcd_resp);
+				Repeat_SetStop(LED_clear_blink_name_show_lcd_resp);
+				Repeat_Start(8, 8, 0);
+
+			} else {
+				app_lcd_default_string_set(buf + 5, 8);
+				Repeat_SetStart(LED_show_blink_name_show_lcd_resp);
+				Repeat_SetStop(0);
+				Repeat_Start(1, 1, 1);
+			}
+			break;
+		}
 		break;
 	case MODE_CMD:
 		LCD_Clear_MHZ_ICO();
