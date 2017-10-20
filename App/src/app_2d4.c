@@ -384,11 +384,14 @@ static void app_2d4_Rcv(uint8_t *buf) {
 			LCD_Clear_downColon_ICO();
 
 			if (buf[4] > 99) {
-				sprintf(tmpBuf, "FM %u%u", buf[4], buf[5]);
+				sprintf(tmpBuf, "FM %u%u", (uint16_t) buf[4],
+						(uint16_t) buf[5]);
 			} else if (buf[4] > 9) {
-				sprintf(tmpBuf, "FM  %u%u", buf[4], buf[5]);
+				sprintf(tmpBuf, "FM  %u%u", (uint16_t) buf[4],
+						(uint16_t) buf[5]);
 			} else {
-				sprintf(tmpBuf, "FM   %u%u", buf[4], buf[5]);
+				sprintf(tmpBuf, "FM   %u%u", (uint16_t) buf[4],
+						(uint16_t) buf[5]);
 			}
 			app_lcd_default_string_set(tmpBuf, strlen(tmpBuf));
 
