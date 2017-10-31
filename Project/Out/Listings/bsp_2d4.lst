@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           09/12/2017 00:43:57 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_2D4                                                           11/01/2017 06:16:46 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_2D4
@@ -62,7 +62,7 @@ line level    source
   51   2                      R_REG <<= 1;
   52   2                      SCK_HIGH;
   53   2                      nop
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           09/12/2017 00:43:57 PAGE 2   
+C51 COMPILER V9.56.0.0   BSP_2D4                                                           11/01/2017 06:16:46 PAGE 2   
 
   54   2              }
   55   1              SCK_LOW;
@@ -126,7 +126,7 @@ line level    source
  113          //                SPI Read BYTE
  114          /******************************************************************************/
  115          uint8_t ucSPI_Read(void) {
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           09/12/2017 00:43:57 PAGE 3   
+C51 COMPILER V9.56.0.0   BSP_2D4                                                           11/01/2017 06:16:46 PAGE 3   
 
  116   1              uint8_t i, dt;
  117   1              dt = 0;
@@ -190,7 +190,7 @@ line level    source
  175   1              nop
  176   1              nop
  177   1      }
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           09/12/2017 00:43:57 PAGE 4   
+C51 COMPILER V9.56.0.0   BSP_2D4                                                           11/01/2017 06:16:46 PAGE 4   
 
  178          
  179          /******************************************************************************/
@@ -254,7 +254,7 @@ line level    source
  237          //            参数：
  238          //              1. ucPayload：需要发送的数据首地址
  239          //              2. length:  需要发送的数据长度
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           09/12/2017 00:43:57 PAGE 5   
+C51 COMPILER V9.56.0.0   BSP_2D4                                                           11/01/2017 06:16:46 PAGE 5   
 
  240          //              length 通常等于 PAYLOAD_WIDTH
  241          /******************************************************************************/
@@ -318,7 +318,7 @@ line level    source
  299   2                      RF_WriteReg(W_REGISTER + FEATURE, 0x20);//FIFO_LEN=32 BYTE  and enable Software control ce
  300   2              } else {
  301   2                      RF_WriteReg(W_REGISTER + FEATURE, 0x38);//FIFO_LEN=64 BYTE  and enable Software control ce
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           09/12/2017 00:43:57 PAGE 6   
+C51 COMPILER V9.56.0.0   BSP_2D4                                                           11/01/2017 06:16:46 PAGE 6   
 
  302   2              }
  303   1              CE_LOW;
@@ -382,7 +382,7 @@ line level    source
  361   1              RF_WriteBuf(W_REGISTER + RF_CAL, RF_cal_data, sizeof(RF_cal_data));
  362   1              RF_WriteBuf(W_REGISTER + DEM_CAL2, Dem_cal2_data, sizeof(Dem_cal2_data));
  363   1      }
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           09/12/2017 00:43:57 PAGE 7   
+C51 COMPILER V9.56.0.0   BSP_2D4                                                           11/01/2017 06:16:46 PAGE 7   
 
  364          
  365          /***************************************end of file ************************************/

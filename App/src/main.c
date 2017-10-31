@@ -76,7 +76,7 @@ void main(void) {
 			static uint8_t cnt = 0;
 			Task_time.flag_1s = 0;
 			//////////////////
-//			app_key_1s_pro();
+// 			app_key_1s_pro();
 //			app_work_1s_pro();
 			cnt++;
 //			sprintf(ss, "cc %u", (uint16_t) cnt);

@@ -1,4 +1,4 @@
-C51 COMPILER V9.56.0.0   BSP_ADC                                                           09/12/2017 00:43:57 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           11/01/2017 06:16:46 PAGE 1   
 
 
 C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_ADC
@@ -62,7 +62,7 @@ line level    source
   51   1      }
   52          
   53          void ADC_Start(void) {
-C51 COMPILER V9.56.0.0   BSP_ADC                                                           09/12/2017 00:43:57 PAGE 2   
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           11/01/2017 06:16:46 PAGE 2   
 
   54   1              if (g_tADC_Result.channel) {
   55   2                      g_tADC_Result.channel = 0;
