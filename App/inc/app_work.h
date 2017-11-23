@@ -25,7 +25,7 @@ typedef struct _WORK_T {
 	} status;
 
 	uint8_t vol;
-//	uint8_t mode;
+	uint8_t mode;
 	uint8_t FM_station;
 	uint16_t track;
 

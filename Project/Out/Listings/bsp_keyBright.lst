@@ -1,11 +1,11 @@
-C51 COMPILER V9.56.0.0   BSP_KEYBRIGHT                                                     11/01/2017 06:16:46 PAGE 1   
+C51 COMPILER V9.52.0.0   BSP_KEYBRIGHT                                                     11/19/2017 14:57:42 PAGE 1   
 
 
-C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_KEYBRIGHT
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE BSP_KEYBRIGHT
 OBJECT MODULE PLACED IN .\Out\Objects\bsp_keyBright.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Bsp\src\bsp_keyBright.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Comm
                     -on\inc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_keyBrigh
-                    -t.lst) OBJECT(.\Out\Objects\bsp_keyBright.obj)
+                    -t.lst) TABS(2) OBJECT(.\Out\Objects\bsp_keyBright.obj)
 
 line level    source
 
@@ -20,20 +20,20 @@ line level    source
    9          
   10          void KEY_Bright_InitHard(void) {
   11   1      
-  12   1              clr_P0M1_5;
-  13   1              set_P0M2_5;
+  12   1        clr_P0M1_5;
+  13   1        set_P0M2_5;
   14   1      
-  15   1              key_bright_off();
+  15   1        key_bright_off();
   16   1      
   17   1      }
   18          void key_bright_off(void) {
-  19   1              clr_P05;
+  19   1        clr_P05;
   20   1      }
   21          void key_bright_on(void) {
-  22   1              set_P05;
+  22   1        set_P05;
   23   1      }
   24          void key_bright_toggle(void) {
-  25   1              P05 = ~P05;
+  25   1        P05 = ~P05;
   26   1      }
 
 

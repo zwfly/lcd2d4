@@ -1,11 +1,11 @@
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 1   
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 1   
 
 
-C51 COMPILER V9.56.0.0, COMPILATION OF MODULE COMMON
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE COMMON
 OBJECT MODULE PLACED IN .\Out\Objects\Common.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Common\src\Common.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\i
-                    -nc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\Common.lst) OBJE
-                    -CT(.\Out\Objects\Common.obj)
+                    -nc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\Common.lst) TABS
+                    -(2) OBJECT(.\Out\Objects\Common.obj)
 
 line level    source
 
@@ -41,117 +41,117 @@ line level    source
   23           System Clock Source Select
   24           ****************************************************************************************************/
   25          void System_Clock_Select(E_SYSTEM_CLOCK clock) {
-  26   1              switch (clock) {
-  27   2              case E_HXTEN: {
-  28   3                      //step1: enable clock source
-  29   3                      set_EXTEN1
-  30   3                      ;
-  31   3                      clr_EXTEN0
-  32   3                      ;
+  26   1        switch (clock) {
+  27   2        case E_HXTEN: {
+  28   3          //step1: enable clock source
+  29   3          set_EXTEN1
+  30   3          ;
+  31   3          clr_EXTEN0
+  32   3          ;
   33   3      
-  34   3                      //step2: check ready
-  35   3                      while ((CKSWT & SET_BIT7) == 0)
-  36   3                              ;
+  34   3          //step2: check ready
+  35   3          while ((CKSWT & SET_BIT7) == 0)
+  36   3            ;
   37   3      
-  38   3                      //step3: switching system clock source
-  39   3                      clr_OSC2
-  40   3                      ;
-  41   3                      set_OSC1
-  42   3                      ;
-  43   3                      clr_OSC0
-  44   3                      ;
-  45   3              }
-  46   2                      break;
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 2   
+  38   3          //step3: switching system clock source
+  39   3          clr_OSC2
+  40   3          ;
+  41   3          set_OSC1
+  42   3          ;
+  43   3          clr_OSC0
+  44   3          ;
+  45   3        }
+  46   2          break;
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 2   
 
   47   2      
-  48   2              case E_LXTEN: {
-  49   3                      //step1: enable clock source
-  50   3                      clr_EXTEN1
-  51   3                      ;
-  52   3                      set_EXTEN0
-  53   3                      ;
+  48   2        case E_LXTEN: {
+  49   3          //step1: enable clock source
+  50   3          clr_EXTEN1
+  51   3          ;
+  52   3          set_EXTEN0
+  53   3          ;
   54   3      
-  55   3                      //step2: check ready
-  56   3                      while ((CKSWT & SET_BIT6) == 0)
-  57   3                              ;
+  55   3          //step2: check ready
+  56   3          while ((CKSWT & SET_BIT6) == 0)
+  57   3            ;
   58   3      
-  59   3                      //step3: switching system clock source
-  60   3                      clr_OSC2
-  61   3                      ;
-  62   3                      set_OSC1
-  63   3                      ;
-  64   3                      clr_OSC0
-  65   3                      ;
-  66   3              }
-  67   2                      break;
+  59   3          //step3: switching system clock source
+  60   3          clr_OSC2
+  61   3          ;
+  62   3          set_OSC1
+  63   3          ;
+  64   3          clr_OSC0
+  65   3          ;
+  66   3        }
+  67   2          break;
   68   2      
-  69   2              case E_HIRCEN: //power on default
-  70   2              {
-  71   3                      //step1: enable clock source
-  72   3                      set_HIRCEN
-  73   3                      ;
+  69   2        case E_HIRCEN: //power on default
+  70   2        {
+  71   3          //step1: enable clock source
+  72   3          set_HIRCEN
+  73   3          ;
   74   3      
-  75   3                      //step2: check ready
-  76   3                      while ((CKSWT & SET_BIT5) == 0)
-  77   3                              ;
+  75   3          //step2: check ready
+  76   3          while ((CKSWT & SET_BIT5) == 0)
+  77   3            ;
   78   3      
-  79   3                      //step3: switching system clock source
-  80   3                      clr_OSC2
-  81   3                      ;
-  82   3                      clr_OSC1
-  83   3                      ;
-  84   3                      clr_OSC0
-  85   3                      ;
-  86   3              }
-  87   2                      break;
+  79   3          //step3: switching system clock source
+  80   3          clr_OSC2
+  81   3          ;
+  82   3          clr_OSC1
+  83   3          ;
+  84   3          clr_OSC0
+  85   3          ;
+  86   3        }
+  87   2          break;
   88   2      
-  89   2              case E_LIRCEN: {
-  90   3                      //step1: enable clock source
-  91   3                      set_LIRCEN
-  92   3                      ;
+  89   2        case E_LIRCEN: {
+  90   3          //step1: enable clock source
+  91   3          set_LIRCEN
+  92   3          ;
   93   3      
-  94   3                      //step2: check ready
-  95   3                      while ((CKSWT & SET_BIT4) == 0)
-  96   3                              ;
+  94   3          //step2: check ready
+  95   3          while ((CKSWT & SET_BIT4) == 0)
+  96   3            ;
   97   3      
-  98   3                      //step3: switching system clock source
-  99   3                      set_OSC2
- 100   3                      ;
- 101   3                      clr_OSC1
- 102   3                      ;
- 103   3                      clr_OSC0
- 104   3                      ;
- 105   3              }
- 106   2                      break;
+  98   3          //step3: switching system clock source
+  99   3          set_OSC2
+ 100   3          ;
+ 101   3          clr_OSC1
+ 102   3          ;
+ 103   3          clr_OSC0
+ 104   3          ;
+ 105   3        }
+ 106   2          break;
  107   2      
- 108   2              case E_OSCEN: {
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 3   
+ 108   2        case E_OSCEN: {
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 3   
 
- 109   3                      //step1: enable clock source
- 110   3                      clr_EXTEN1
- 111   3                      ;
- 112   3                      clr_EXTEN0
- 113   3                      ;
+ 109   3          //step1: enable clock source
+ 110   3          clr_EXTEN1
+ 111   3          ;
+ 112   3          clr_EXTEN0
+ 113   3          ;
  114   3      
- 115   3                      //step2: check ready
- 116   3                      while ((CKSWT & SET_BIT3) == 0)
- 117   3                              ;
+ 115   3          //step2: check ready
+ 116   3          while ((CKSWT & SET_BIT3) == 0)
+ 117   3            ;
  118   3      
- 119   3                      //step3: switching system clock source
- 120   3                      clr_OSC2
- 121   3                      ;
- 122   3                      set_OSC1
- 123   3                      ;
- 124   3                      clr_OSC0
- 125   3                      ;
- 126   3              }
- 127   2                      break;
+ 119   3          //step3: switching system clock source
+ 120   3          clr_OSC2
+ 121   3          ;
+ 122   3          set_OSC1
+ 123   3          ;
+ 124   3          clr_OSC0
+ 125   3          ;
+ 126   3        }
+ 127   2          break;
  128   2      
- 129   2              }
- 130   1              //step4: check system clock switching OK or NG?
- 131   1              while ((CKEN & SET_BIT0) == 1)
- 132   1                      ;  //Check Clock switch fault flag.
+ 129   2        }
+ 130   1        //step4: check system clock switching OK or NG?
+ 131   1        while ((CKEN & SET_BIT0) == 1)
+ 132   1          ;  //Check Clock switch fault flag.
  133   1      }
  134          //--------------------------------------------------------------------------------------------------------
              ----
@@ -159,20 +159,20 @@ line level    source
  136           */
  137          void InitialUART0_Timer1_Type1(UINT32 u32Baudrate)    //T1M = 0, SMOD = 0
  138          {
- 139   1              SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
- 140   1              TMOD |= 0x20;    //Timer1 Mode1
+ 139   1        SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
+ 140   1        TMOD |= 0x20;    //Timer1 Mode1
  141   1      
- 142   1              clr_SMOD;
- 143   1              clr_T1M;
- 144   1              clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
+ 142   1        clr_SMOD;
+ 143   1        clr_T1M;
+ 144   1        clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
  145   1      
  146   1      #ifdef FOSC_110592
- 147   1              TH1 = 256 - (28800 / u32Baudrate); /*11.0592 MHz */
+ 147   1        TH1 = 256 - (28800 / u32Baudrate); /*11.0592 MHz */
  148   1      #endif    
  149   1      #ifdef FOSC_165888
-                      TH1 = 256 - (43200/u32Baudrate); /*16.5888 MHz */
+                TH1 = 256 - (43200/u32Baudrate); /*16.5888 MHz */
               #endif
- 152   1              set_TR1;
+ 152   1        set_TR1;
  153   1      }
  154          
  155          //--------------------------------------------------------------------------------------------------------
@@ -181,22 +181,22 @@ line level    source
  157           */
  158          void InitialUART0_Timer1_Type2(UINT32 u32Baudrate)    //T1M = 0, SMOD = 1
  159          {
- 160   1              SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
- 161   1              TMOD |= 0x20;    //Timer1 Mode1
+ 160   1        SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
+ 161   1        TMOD |= 0x20;    //Timer1 Mode1
  162   1      
- 163   1              set_SMOD;        //UART0 Double Rate Enable
- 164   1              clr_T1M;
- 165   1              clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
+ 163   1        set_SMOD;        //UART0 Double Rate Enable
+ 164   1        clr_T1M;
+ 165   1        clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
  166   1      
  167   1      #ifdef FOSC_110592
- 168   1              TH1 = 256 - (57600 / u32Baudrate); /*11.0592 MHz */
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 4   
+ 168   1        TH1 = 256 - (57600 / u32Baudrate); /*11.0592 MHz */
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 4   
 
  169   1      #endif    
  170   1      #ifdef FOSC_165888
-                      TH1 = 256 - (86400/u32Baudrate); /*16.5888 MHz */
+                TH1 = 256 - (86400/u32Baudrate); /*16.5888 MHz */
               #endif
- 173   1              set_TR1;
+ 173   1        set_TR1;
  174   1      }
  175          
  176          //--------------------------------------------------------------------------------------------------------
@@ -205,20 +205,20 @@ line level    source
  178           */
  179          void InitialUART0_Timer1_Type3(UINT32 u32Baudrate)    //T1M = 1, SMOD = 0
  180          {
- 181   1              SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
- 182   1              TMOD |= 0x20;    //Timer1 Mode1
+ 181   1        SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
+ 182   1        TMOD |= 0x20;    //Timer1 Mode1
  183   1      
- 184   1              clr_SMOD;
- 185   1              set_T1M;
- 186   1              clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
+ 184   1        clr_SMOD;
+ 185   1        set_T1M;
+ 186   1        clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
  187   1      
  188   1      #ifdef FOSC_110592
- 189   1              TH1 = 256 - (345600 / u32Baudrate); /*11.0592 MHz */
+ 189   1        TH1 = 256 - (345600 / u32Baudrate); /*11.0592 MHz */
  190   1      #endif    
  191   1      #ifdef FOSC_165888
-                      TH1 = 256 - (518400/u32Baudrate); /*16.5888 MHz */
+                TH1 = 256 - (518400/u32Baudrate); /*16.5888 MHz */
               #endif
- 194   1              set_TR1;
+ 194   1        set_TR1;
  195   1      }
  196          
  197          //--------------------------------------------------------------------------------------------------------
@@ -227,74 +227,74 @@ line level    source
  199           */
  200          void InitialUART0_Timer1_Type4(UINT32 u32Baudrate)    //T1M = 1, SMOD = 1
  201          {
- 202   1              SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
- 203   1              TMOD |= 0x20;    //Timer1 Mode1
+ 202   1        SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
+ 203   1        TMOD |= 0x20;    //Timer1 Mode1
  204   1      
- 205   1              set_SMOD;        //UART0 Double Rate Enable
- 206   1              set_T1M;
- 207   1              clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
+ 205   1        set_SMOD;        //UART0 Double Rate Enable
+ 206   1        set_T1M;
+ 207   1        clr_BRCK;        //Serial port 0 baud rate clock source = Timer1
  208   1      
  209   1      #ifdef FOSC_110592
- 210   1              TH1 = 256 - (691200 / u32Baudrate); /*11.0592 MHz */
+ 210   1        TH1 = 256 - (691200 / u32Baudrate); /*11.0592 MHz */
  211   1      #endif    
  212   1      #ifdef FOSC_165888
-                      TH1 = 256 - (1036800/u32Baudrate); /*16.5888 MHz */
+                TH1 = 256 - (1036800/u32Baudrate); /*16.5888 MHz */
               #endif
- 215   1              set_TR1;
+ 215   1        set_TR1;
  216   1      }
  217          //---------------------------------------------------------------
  218          void InitialUART0_Timer3_Type5(UINT32 u32Baudrate) //use timer3 as Baudrate generator
  219          {
- 220   1              SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
- 221   1              clr_SMOD;
- 222   1              T3CON &= 0xF8;   //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1)
- 223   1              set_BRCK;        //Serial port 0 baud rate clock source = Timer3
+ 220   1        SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
+ 221   1        clr_SMOD;
+ 222   1        T3CON &= 0xF8;   //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1)
+ 223   1        set_BRCK;        //Serial port 0 baud rate clock source = Timer3
  224   1      
  225   1      #ifdef FOSC_110592
- 226   1              R3H = HIBYTE(65536 - (345600 / u32Baudrate)); /*11.0592 MHz */
- 227   1              R3L = LOBYTE(65536 - (345600 / u32Baudrate)); /*11.0592 MHz */
+ 226   1        R3H = HIBYTE(65536 - (345600 / u32Baudrate)); /*11.0592 MHz */
+ 227   1        R3L = LOBYTE(65536 - (345600 / u32Baudrate)); /*11.0592 MHz */
  228   1      #endif
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 5   
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 5   
 
  229   1      #ifdef FOSC_165888
-                      R3H = HIBYTE(65536 - (518400/u32Baudrate)); /*16.5888 MHz */
-                      R3L = LOBYTE(65536 - (518400/u32Baudrate)); /*16.5888 MHz */
+                R3H = HIBYTE(65536 - (518400/u32Baudrate)); /*16.5888 MHz */
+                R3L = LOBYTE(65536 - (518400/u32Baudrate)); /*16.5888 MHz */
               #endif
- 233   1              set_TR3;         //Trigger Timer3
+ 233   1        set_TR3;         //Trigger Timer3
  234   1      }
  235          //---------------------------------------------------------------
  236          void InitialUART0_Timer3_Type6(UINT32 u32Baudrate) //use timer3 as Baudrate generator
  237          {
- 238   1              SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
- 239   1              set_SMOD;        //UART0 Double Rate Enable
- 240   1              T3CON &= 0xF8;   //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1)
- 241   1              set_BRCK;        //UART0 baud rate clock source = Timer3
+ 238   1        SCON = 0x52;     //UART0 Mode1,REN=1,TI=1
+ 239   1        set_SMOD;        //UART0 Double Rate Enable
+ 240   1        T3CON &= 0xF8;   //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1)
+ 241   1        set_BRCK;        //UART0 baud rate clock source = Timer3
  242   1      
  243   1      #ifdef FOSC_110592
- 244   1              R3H = HIBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
- 245   1              R3L = LOBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
+ 244   1        R3H = HIBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
+ 245   1        R3L = LOBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
  246   1      #endif
  247   1      #ifdef FOSC_165888
-                      R3H = HIBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
-                      R3L = LOBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
+                R3H = HIBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
+                R3L = LOBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
               #endif
- 251   1              set_TR3;         //Trigger Timer3
+ 251   1        set_TR3;         //Trigger Timer3
  252   1      }
  253          //---------------------------------------------------------------
  254          void InitialUART1_Timer3(UINT32 u32Baudrate) //use timer3 as Baudrate generator
  255          {
- 256   1              SCON_1 = 0x52;   //UART1 Mode1,REN_1=1,TI_1=1
- 257   1              T3CON &= 0xF8;   //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1)
+ 256   1        SCON_1 = 0x52;   //UART1 Mode1,REN_1=1,TI_1=1
+ 257   1        T3CON &= 0xF8;   //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1)
  258   1      
  259   1      #ifdef FOSC_110592  //max BR=230400 bps
- 260   1              R3H = HIBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
- 261   1              R3L = LOBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
+ 260   1        R3H = HIBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
+ 261   1        R3L = LOBYTE(65536 - (691200 / u32Baudrate)); /*11.0592 MHz */
  262   1      #endif
  263   1      #ifdef FOSC_165888
-                      R3H = HIBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
-                      R3L = LOBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
+                R3H = HIBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
+                R3L = LOBYTE(65536 - (1036800/u32Baudrate)); /*16.5888 MHz */
               #endif
- 267   1              set_TR3;         //Trigger Timer3
+ 267   1        set_TR3;         //Trigger Timer3
  268   1      }
  269          /**************************************************************************
  270           *
@@ -308,17 +308,17 @@ line level    source
  278           *
  279           **************************************************************************/
  280          UINT8 Receive_Data_From_UART0(void) {
- 281   1              UINT8 c;
+ 281   1        UINT8 c;
  282   1      
- 283   1              while (!RI)
- 284   1                      ;
- 285   1              c = SBUF;
- 286   1              RI = 0;
- 287   1              return (c);
+ 283   1        while (!RI)
+ 284   1          ;
+ 285   1        c = SBUF;
+ 286   1        RI = 0;
+ 287   1        return (c);
  288   1      }
  289          /**************************************************************************
  290           *
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 6   
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 6   
 
  291           *  Function Name: Send_Data_To_UART0()
  292           *
@@ -330,10 +330,10 @@ line level    source
  298           *
  299           **************************************************************************/
  300          void Send_Data_To_UART0(UINT8 c) {
- 301   1              TI = 0;
- 302   1              SBUF = c;
- 303   1              while (TI == 0)
- 304   1                      ;
+ 301   1        TI = 0;
+ 302   1        SBUF = c;
+ 303   1        while (TI == 0)
+ 304   1          ;
  305   1      }
  306          /**************************************************************************
  307           *
@@ -347,13 +347,13 @@ line level    source
  315           *
  316           **************************************************************************/
  317          UINT8 Receive_Data_From_UART1(void) {
- 318   1              UINT8 c;
+ 318   1        UINT8 c;
  319   1      
- 320   1              while (!RI_1)
- 321   1                      ;
- 322   1              c = SBUF_1;
- 323   1              RI_1 = 0;
- 324   1              return (c);
+ 320   1        while (!RI_1)
+ 321   1          ;
+ 322   1        c = SBUF_1;
+ 323   1        RI_1 = 0;
+ 324   1        return (c);
  325   1      }
  326          /**************************************************************************
  327           *
@@ -367,54 +367,54 @@ line level    source
  335           *
  336           **************************************************************************/
  337          void Send_Data_To_UART1(UINT8 c) {
- 338   1              TI_1 = 0;
- 339   1              SBUF_1 = c;
- 340   1              while (TI_1 == 0)
- 341   1                      ;
+ 338   1        TI_1 = 0;
+ 339   1        SBUF_1 = c;
+ 340   1        while (TI_1 == 0)
+ 341   1          ;
  342   1      }
  343          /*==========================================================================*/
  344          void Set_All_GPIO_Quasi_Mode(void) {
- 345   1              P0M1 = 0x00;
- 346   1              P0M2 = 0x00;
- 347   1              P1M1 = 0x00;
- 348   1              P1M2 = 0x00;
- 349   1              P2M1 = 0x00;
- 350   1              P2M2 = 0x00;
- 351   1              P3M1 = 0x00;
- 352   1              P3M2 = 0x00;
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 7   
+ 345   1        P0M1 = 0x00;
+ 346   1        P0M2 = 0x00;
+ 347   1        P1M1 = 0x00;
+ 348   1        P1M2 = 0x00;
+ 349   1        P2M1 = 0x00;
+ 350   1        P2M2 = 0x00;
+ 351   1        P3M1 = 0x00;
+ 352   1        P3M2 = 0x00;
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 7   
 
- 353   1              P4M1 = 0x00;
- 354   1              P4M2 = 0x00;
- 355   1              P5M1 = 0x00;
- 356   1              P5M2 = 0x00;
+ 353   1        P4M1 = 0x00;
+ 354   1        P4M2 = 0x00;
+ 355   1        P5M1 = 0x00;
+ 356   1        P5M2 = 0x00;
  357   1      }
  358          /*==========================================================================*/
  359          void Set_All_GPIO_Input_Mode(void) {
- 360   1              P0M1 = 0xFF;
- 361   1              P0M2 = 0x00;
- 362   1              P1M1 = 0xFF;
- 363   1              P1M2 = 0x00;
- 364   1              P2M1 = 0xFF;
- 365   1              P2M2 = 0x00;
- 366   1              P3M1 = 0xFF;
- 367   1              P3M2 = 0x00;
- 368   1              P4M1 = 0xFF;
- 369   1              P4M2 = 0x00;
- 370   1              P5M1 = 0xFF;
- 371   1              P5M2 = 0x00;
+ 360   1        P0M1 = 0xFF;
+ 361   1        P0M2 = 0x00;
+ 362   1        P1M1 = 0xFF;
+ 363   1        P1M2 = 0x00;
+ 364   1        P2M1 = 0xFF;
+ 365   1        P2M2 = 0x00;
+ 366   1        P3M1 = 0xFF;
+ 367   1        P3M2 = 0x00;
+ 368   1        P4M1 = 0xFF;
+ 369   1        P4M2 = 0x00;
+ 370   1        P5M1 = 0xFF;
+ 371   1        P5M2 = 0x00;
  372   1      }
  373          
  374          /*==========================================================================*/
  375          void SW_Reset(void) {
- 376   1              TA = 0xAA;
- 377   1              TA = 0x55;
- 378   1              set_SWRST
- 379   1              ;
+ 376   1        TA = 0xAA;
+ 377   1        TA = 0x55;
+ 378   1        set_SWRST
+ 379   1        ;
  380   1      }
  381          /*==========================================================================*/
  382          void Fsys_Clock_Output_On_P26(void) {
- 383   1              set_CLOEN;                                  //System Clock Output Enable
+ 383   1        set_CLOEN;                                  //System Clock Output Enable
  384   1      }
  385          
  386          /*****************************************************************************
@@ -426,74 +426,74 @@ line level    source
  392          
  393          char putchar(char c) {
  394   1      #if DEBUG_PORT == 0
-                      if (c == '\n')
+                if (c == '\n')
+                {
+                  if (RI)
+                  {
+                    if (SBUF == XOFF)
+                    {
+                      do
                       {
-                              if (RI)
-                              {
-                                      if (SBUF == XOFF)
-                                      {
-                                              do
-                                              {
-                                                      clr_RI_1;
-                                                      while (!RI);
-                                              }
-                                              while (SBUF != XON);
-                                              clr_RI;
-                                      }
-                              }
-                              while (!TI);
-                              clr_TI;
-                              SBUF = 0x0d; /* output CR  */
+                        clr_RI_1;
+                        while (!RI);
                       }
-                      if (RI)
-C51 COMPILER V9.56.0.0   COMMON                                                            11/01/2017 06:16:46 PAGE 8   
+                      while (SBUF != XON);
+                      clr_RI;
+                    }
+                  }
+                  while (!TI);
+                  clr_TI;
+                  SBUF = 0x0d; /* output CR  */
+                }
+                if (RI)
+C51 COMPILER V9.52.0.0   COMMON                                                            11/19/2017 14:57:42 PAGE 8   
 
-                      {
-                              if (SBUF == XOFF)
-                              {
-                                      do
-                                      {
-                                              clr_RI;
-                                              while (!RI);
-                                      }while (SBUF != XON);
-                                      clr_RI;
-                              }
-                      }
-                      while (!TI);
-                      clr_TI;
-                      return (SBUF = c);
-                      ;
+                {
+                  if (SBUF == XOFF)
+                  {
+                    do
+                    {
+                      clr_RI;
+                      while (!RI);
+                    }while (SBUF != XON);
+                    clr_RI;
+                  }
+                }
+                while (!TI);
+                clr_TI;
+                return (SBUF = c);
+                ;
               #elif DEBUG_PORT == 1
- 431   1              if (c == '\n') {
- 432   2                      if (RI_1) {
- 433   3                              if (SBUF_1 == XOFF) {
- 434   4                                      do {
- 435   5                                              clr_RI_1;
- 436   5                                              while (!RI_1)
- 437   5                                                      ;
- 438   5                                      } while (SBUF_1 != XON);
- 439   4                                      clr_RI_1;
- 440   4                              }
- 441   3                      }
- 442   2                      while (!TI_1)
- 443   2                              ;
- 444   2                      clr_TI_1;
- 445   2                      SBUF_1 = 0x0d; /* output CR  */
- 446   2              }
- 447   1              if (RI_1) {
- 448   2                      if (SBUF_1 == XOFF) {
- 449   3                              do {
- 450   4                                      clr_RI_1;
- 451   4                                      while (!RI_1)
- 452   4                                              ;
- 453   4                              } while (SBUF_1 != XON);
- 454   3                              clr_RI_1;
- 455   3                      }
- 456   2              }
- 457   1              while (!TI_1)
- 458   1                      ;
- 459   1              clr_TI_1;
- 460   1              return (SBUF_1 = c);
+ 431   1        if (c == '\n') {
+ 432   2          if (RI_1) {
+ 433   3            if (SBUF_1 == XOFF) {
+ 434   4              do {
+ 435   5                clr_RI_1;
+ 436   5                while (!RI_1)
+ 437   5                  ;
+ 438   5              } while (SBUF_1 != XON);
+ 439   4              clr_RI_1;
+ 440   4            }
+ 441   3          }
+ 442   2          while (!TI_1)
+ 443   2            ;
+ 444   2          clr_TI_1;
+ 445   2          SBUF_1 = 0x0d; /* output CR  */
+ 446   2        }
+ 447   1        if (RI_1) {
+ 448   2          if (SBUF_1 == XOFF) {
+ 449   3            do {
+ 450   4              clr_RI_1;
+ 451   4              while (!RI_1)
+ 452   4                ;
+ 453   4            } while (SBUF_1 != XON);
+ 454   3            clr_RI_1;
+ 455   3          }
+ 456   2        }
+ 457   1        while (!TI_1)
+ 458   1          ;
+ 459   1        clr_TI_1;
+ 460   1        return (SBUF_1 = c);
  461   1      #endif
  462   1      }
 

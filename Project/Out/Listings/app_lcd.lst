@@ -1,11 +1,11 @@
-C51 COMPILER V9.56.0.0   APP_LCD                                                           11/01/2017 06:16:43 PAGE 1   
+C51 COMPILER V9.52.0.0   APP_LCD                                                           11/19/2017 14:57:41 PAGE 1   
 
 
-C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_LCD
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_LCD
 OBJECT MODULE PLACED IN .\Out\Objects\app_lcd.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\App\src\app_lcd.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\inc
-                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\app_lcd.lst) OBJEC
-                    -T(.\Out\Objects\app_lcd.obj)
+                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\app_lcd.lst) TABS(
+                    -2) OBJECT(.\Out\Objects\app_lcd.obj)
 
 line level    source
 
@@ -19,33 +19,51 @@ line level    source
    8          #include "app.h"
    9          
   10          static char lcd_default_string[16] = { 0 };
-  11          
-  12          void app_lcd_init(void) {
-  13   1              strcpy(lcd_default_string, "DEFAULT");
-  14   1      }
-  15          void app_lcd_default_string_set(char *s, uint8_t len) {
-  16   1              strncpy(lcd_default_string, s, len);
-  17   1              if (len < sizeof(lcd_default_string)) {
-  18   2                      lcd_default_string[len] = '\0';
-  19   2              }
-  20   1      }
-  21          
-  22          void app_lcd_pro(void) {
-  23   1      
-  24   1              if (app_repeat_IsEnable() == 0) {
-  25   2                      LCD_ShowString(lcd_default_string);
-  26   2      
-  27   2              }
-  28   1      
-  29   1      }
+  11          static uint8_t dotn = 0;
+  12          
+  13          void app_lcd_init(void) {
+  14   1        dotn = 0;
+  15   1        strcpy(lcd_default_string, " PWR OFF");
+  16   1      }
+  17          void app_lcd_default_string_set(char *s, uint8_t len, uint8_t _dotn) {
+  18   1        strncpy(lcd_default_string, s, len);
+  19   1        if (len < sizeof(lcd_default_string)) {
+  20   2          lcd_default_string[len] = '\0';
+  21   2        }
+  22   1        dotn = _dotn;
+  23   1      }
+  24          
+  25          void app_lcd_pro(void) {
+  26   1      
+  27   1        if (app_repeat_IsEnable() == 0) {
+  28   2          LCD_ShowString(lcd_default_string);
+  29   2          if (dotn == 0) {
+  30   3            LCD_Clear_downColon_ICO();
+  31   3            LCD_Clear_upColon_ICO();
+  32   3          } else if (dotn == 1) {
+  33   3            LCD_Clear_upColon_ICO();
+  34   3            LCD_Show_downColon_ICO();
+  35   3          } else if (dotn == 2) {
+  36   3            LCD_Show_upColon_ICO();
+  37   3            LCD_Clear_downColon_ICO();
+  38   3      
+  39   3          } else if (dotn == 3) {
+  40   3            LCD_Show_upColon_ICO();
+  41   3            LCD_Show_downColon_ICO();
+  42   3          }
+  43   2        }
+  44   1      
+  45   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    105    ----
-   CONSTANT SIZE    =      8    ----
-   XDATA SIZE       =     16       4
+   CODE SIZE        =    168    ----
+   CONSTANT SIZE    =      9    ----
+   XDATA SIZE       =     17       5
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
+C51 COMPILER V9.52.0.0   APP_LCD                                                           11/19/2017 14:57:41 PAGE 2   
+
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

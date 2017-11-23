@@ -15,7 +15,7 @@ interrupt 11
 	g_tADC_Result.result[g_tADC_Result.channel] |= ADCRL;
 
 }
-static char ss[16] = { 0 };
+//static char ss[16] = { 0 };
 void main(void) {
 	uint8_t ucKeyCode;
 	System_Clock_Select(E_HIRCEN);
@@ -55,20 +55,14 @@ void main(void) {
 //			app_charge_100ms_pro();
 			Repeat_Pro();
 
-			//		 app_2d4_1S_pro() ;
-
 			app_lcd_pro();
 
 			n++;
 			if (n >= 5) {
 				n = 0;
-#if 1
-				sprintf(ss, "ch0 %d", g_tADC_Result.result[0]);
-#else
-				sprintf(ss, "ch1 %d", g_tADC_Result.result[1]);
-#endif
-				//	LCD_ShowString(ss);
-
+//				sprintf(ss, "%04u%04u", g_tADC_Result.result[0],
+//						g_tADC_Result.result[1]);
+//				LCD_ShowString(ss);
 			}
 			app_2d4_pro();
 		}

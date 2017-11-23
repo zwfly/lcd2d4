@@ -49,7 +49,9 @@ void SPI_WW(uint8_t R_REG) {
 			SPI_DATA_LOW;
 		}
 		R_REG <<= 1;
+		nop
 		SCK_HIGH;
+		nop
 		nop
 	}
 	SCK_LOW;
@@ -99,7 +101,9 @@ void SPI_WR(uint8_t R_REG) {
 			SPI_DATA_LOW;
 		}
 		R_REG <<= 1;
+		nop
 		SCK_HIGH;
+		nop
 		nop
 	}
 	SPI_DATA_INPUT_MODE
@@ -118,6 +122,7 @@ uint8_t ucSPI_Read(void) {
 	for (i = 0; i < 8; i++) {
 		SCK_LOW;
 		dt = dt << 1;
+		nop
 		SCK_HIGH;
 		if (SPI_DATA_STATUS) {
 			dt |= 0x01;

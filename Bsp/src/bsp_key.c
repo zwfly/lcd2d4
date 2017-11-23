@@ -15,8 +15,9 @@
 
 #include "bsp.h"
 
-#define KEY_AD_ERROR 5
+#define KEY_AD_ERROR 7
 
+#if 0
 #define S2_AD  980
 #define S3_AD  955
 #define S4_AD  884
@@ -25,6 +26,18 @@
 #define S7_AD  977
 #define S8_AD  952
 #define S9_AD  881
+
+#else
+#define S2_AD  775    //
+#define S3_AD  530    //
+#define S4_AD  274    //
+#define S5_AD  0      //
+
+#define S6_AD  824    //
+#define S7_AD  628    //
+#define S8_AD  432    //
+#define S9_AD  224    //
+#endif
 
 static idata KEY_T s_tBtn[KEY_COUNT];
 static idata KEY_FIFO_T s_tKey; /* 按键FIFO变量,结构体 */
@@ -53,7 +66,6 @@ static uint8_t IsKeyDown1(void) {
 uint16_t max = 0;
 uint16_t min = 0;
 static uint8_t IsKeyDown(uint16_t key_ad, uint16_t result_ad) {
-
 	max = (key_ad + KEY_AD_ERROR) > 1023 ? 1023 : key_ad + KEY_AD_ERROR;
 	min = (key_ad < KEY_AD_ERROR) ? 0 : (key_ad - KEY_AD_ERROR);
 
@@ -62,7 +74,6 @@ static uint8_t IsKeyDown(uint16_t key_ad, uint16_t result_ad) {
 
 //CH1, S2 ad = 980
 static uint8_t IsKeyDown2(void) {
-
 	return IsKeyDown(S2_AD, g_tADC_Result.result[0]);
 }
 //CH1, S3 ad = 954
@@ -261,8 +272,10 @@ static void bsp_InitKeyVar(void) {
 		s_tBtn[i].RepeatCount = 0; /* 连发计数器 */
 	}
 
-	s_tBtn[3].RepeatSpeed = 50; /* 按键连发的速度，0表示不支持连发 */
-	s_tBtn[4].RepeatSpeed = 50; /* 按键连发的速度，0表示不支持连发 */
+	s_tBtn[2].RepeatSpeed = 40; /* 按键连发的速度，0表示不支持连发 */
+	s_tBtn[3].RepeatSpeed = 40; /* 按键连发的速度，0表示不支持连发 */
+	s_tBtn[4].RepeatSpeed = 40; /* 按键连发的速度，0表示不支持连发 */
+	s_tBtn[6].RepeatSpeed = 40; /* 按键连发的速度，0表示不支持连发 */
 
 	/* 判断按键按下的函数 */
 	s_tBtn[0].IsKeyDownFunc = IsKeyDown1;
