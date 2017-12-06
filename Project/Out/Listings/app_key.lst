@@ -1,11 +1,11 @@
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/06/2017 17:03:24 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_KEY                                                           12/06/2017 22:51:12 PAGE 1   
 
 
-C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_KEY
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_KEY
 OBJECT MODULE PLACED IN .\Out\Objects\app_key.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\App\src\app_key.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\inc
-                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\app_key.lst) TABS(
-                    -2) OBJECT(.\Out\Objects\app_key.obj)
+                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\app_key.lst) OBJEC
+                    -T(.\Out\Objects\app_key.obj)
 
 line level    source
 
@@ -27,206 +27,206 @@ line level    source
               }
               
               void app_power_on(void) {
-                SW_Reset();  //复位
+                      SW_Reset();  //复位
               }
               void app_power_off(void) {
-              //  lcd_bright_off();
-                LCD_Clear_All();
+              //      lcd_bright_off();
+                      LCD_Clear_All();
               }
               #endif
   26          
   27          void app_key_pro(uint8_t keyCode) {
   28   1      
-  29   1        uint8_t index = 0;
-  30   1        uint8_t i = 0;
+  29   1              uint8_t index = 0;
+  30   1              uint8_t i = 0;
   31   1      
-  32   1        index = 0;
-  33   1        memset(sendBuf, 0, PAYLOAD_WIDTH);
-  34   1        switch (keyCode) {
-  35   2        case KEY_UP_K1:   // power short
-  36   2          if (press_long_lock == 0) {
-  37   3            sendBuf[index++] = LCD2LAMP_HEADER;
-  38   3            sendBuf[index++] = 0x01;
-  39   3            sendBuf[index++] = KEY_CARD_POWER_CMD;
-  40   3            for (i = 0; i < (sendBuf[1] + 1); i++) {
-  41   4              sendBuf[index] += sendBuf[i + 1];
-  42   4            }
-  43   3          }
-  44   2          press_long_lock = 0;
-  45   2          break;
-  46   2        case KEY_DOWN_K1:
+  32   1              index = 0;
+  33   1              memset(sendBuf, 0, PAYLOAD_WIDTH);
+  34   1              switch (keyCode) {
+  35   2              case KEY_UP_K1:   // power short
+  36   2                      if (press_long_lock == 0) {
+  37   3                              sendBuf[index++] = LCD2LAMP_HEADER;
+  38   3                              sendBuf[index++] = 0x01;
+  39   3                              sendBuf[index++] = KEY_CARD_POWER_CMD;
+  40   3                              for (i = 0; i < (sendBuf[1] + 1); i++) {
+  41   4                                      sendBuf[index] += sendBuf[i + 1];
+  42   4                              }
+  43   3                      }
+  44   2                      press_long_lock = 0;
+  45   2                      break;
+  46   2              case KEY_DOWN_K1:
   47   2      
-  48   2          break;
-  49   2        case KEY_LONG_K1:   //power long
-  50   2          press_long_lock = 1;
-  51   2          sendBuf[index++] = LCD2LAMP_HEADER;
-  52   2          sendBuf[index++] = 0x01;
-  53   2          sendBuf[index++] = KEY_POWER_SHORT_CMD;
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/06/2017 17:03:24 PAGE 2   
+  48   2                      break;
+  49   2              case KEY_LONG_K1:   //power long
+  50   2                      press_long_lock = 1;
+  51   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+  52   2                      sendBuf[index++] = 0x01;
+  53   2                      sendBuf[index++] = KEY_POWER_SHORT_CMD;
+C51 COMPILER V9.56.0.0   APP_KEY                                                           12/06/2017 22:51:12 PAGE 2   
 
-  54   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
-  55   3            sendBuf[index] += sendBuf[i + 1];
-  56   3          }
-  57   2          break;
-  58   2        case KEY_UP_K2:   //play/pause
+  54   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+  55   3                              sendBuf[index] += sendBuf[i + 1];
+  56   3                      }
+  57   2                      break;
+  58   2              case KEY_UP_K2:   //play/pause
   59   2      
-  60   2          break;
-  61   2        case KEY_DOWN_K2:
-  62   2          sendBuf[index++] = LCD2LAMP_HEADER;
-  63   2          sendBuf[index++] = 0x01;
-  64   2          sendBuf[index++] = KEY_PLAY_SHORT_CMD;
-  65   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
-  66   3            sendBuf[index] += sendBuf[i + 1];
-  67   3          }
-  68   2          break;
-  69   2        case KEY_LONG_K2:
-  70   2          sendBuf[index++] = LCD2LAMP_HEADER;
-  71   2          sendBuf[index++] = 0x01;
-  72   2          sendBuf[index++] = KEY_PLAY_LONG_CMD;
-  73   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
-  74   3            sendBuf[index] += sendBuf[i + 1];
-  75   3          }
-  76   2          break;
-  77   2        case KEY_UP_K3:   // down
+  60   2                      break;
+  61   2              case KEY_DOWN_K2:
+  62   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+  63   2                      sendBuf[index++] = 0x01;
+  64   2                      sendBuf[index++] = KEY_PLAY_SHORT_CMD;
+  65   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+  66   3                              sendBuf[index] += sendBuf[i + 1];
+  67   3                      }
+  68   2                      break;
+  69   2              case KEY_LONG_K2:
+  70   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+  71   2                      sendBuf[index++] = 0x01;
+  72   2                      sendBuf[index++] = KEY_PLAY_LONG_CMD;
+  73   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+  74   3                              sendBuf[index] += sendBuf[i + 1];
+  75   3                      }
+  76   2                      break;
+  77   2              case KEY_UP_K3:   // down
   78   2      
-  79   2          break;
-  80   2        case KEY_DOWN_K3:
-  81   2          sendBuf[index++] = LCD2LAMP_HEADER;
-  82   2          sendBuf[index++] = 0x01;
-  83   2          sendBuf[index++] = KEY_DOWN_CMD;
-  84   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
-  85   3            sendBuf[index] += sendBuf[i + 1];
-  86   3          }
-  87   2          break;
-  88   2        case KEY_LONG_K3:
-  89   2          sendBuf[index++] = LCD2LAMP_HEADER;
-  90   2          sendBuf[index++] = 0x01;
-  91   2          sendBuf[index++] = KEY_DOWN_CMD;
-  92   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
-  93   3            sendBuf[index] += sendBuf[i + 1];
-  94   3          }
-  95   2          break;
-  96   2        case KEY_UP_K4:   // up
+  79   2                      break;
+  80   2              case KEY_DOWN_K3:
+  81   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+  82   2                      sendBuf[index++] = 0x01;
+  83   2                      sendBuf[index++] = KEY_DOWN_CMD;
+  84   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+  85   3                              sendBuf[index] += sendBuf[i + 1];
+  86   3                      }
+  87   2                      break;
+  88   2              case KEY_LONG_K3:
+  89   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+  90   2                      sendBuf[index++] = 0x01;
+  91   2                      sendBuf[index++] = KEY_DOWN_CMD;
+  92   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+  93   3                              sendBuf[index] += sendBuf[i + 1];
+  94   3                      }
+  95   2                      break;
+  96   2              case KEY_UP_K4:   // up
   97   2      
-  98   2          break;
-  99   2        case KEY_DOWN_K4:  // 连发
- 100   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 101   2          sendBuf[index++] = 0x01;
- 102   2          sendBuf[index++] = KEY_UP_CMD;
- 103   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 104   3            sendBuf[index] += sendBuf[i + 1];
- 105   3          }
- 106   2          break;
- 107   2        case KEY_LONG_K4:
- 108   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 109   2          sendBuf[index++] = 0x01;
- 110   2          sendBuf[index++] = KEY_UP_CMD;
- 111   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 112   3            sendBuf[index] += sendBuf[i + 1];
- 113   3          }
- 114   2          break;
- 115   2        case KEY_UP_K5:   //vol+
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/06/2017 17:03:24 PAGE 3   
+  98   2                      break;
+  99   2              case KEY_DOWN_K4:  // 连发
+ 100   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 101   2                      sendBuf[index++] = 0x01;
+ 102   2                      sendBuf[index++] = KEY_UP_CMD;
+ 103   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 104   3                              sendBuf[index] += sendBuf[i + 1];
+ 105   3                      }
+ 106   2                      break;
+ 107   2              case KEY_LONG_K4:
+ 108   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 109   2                      sendBuf[index++] = 0x01;
+ 110   2                      sendBuf[index++] = KEY_UP_CMD;
+ 111   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 112   3                              sendBuf[index] += sendBuf[i + 1];
+ 113   3                      }
+ 114   2                      break;
+ 115   2              case KEY_UP_K5:   //vol+
+C51 COMPILER V9.56.0.0   APP_KEY                                                           12/06/2017 22:51:12 PAGE 3   
 
  116   2      
- 117   2          break;
- 118   2        case KEY_DOWN_K5:
- 119   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 120   2          sendBuf[index++] = 0x01;
- 121   2          sendBuf[index++] = KEY_VOL_ADD_CMD;
- 122   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 123   3            sendBuf[index] += sendBuf[i + 1];
- 124   3          }
- 125   2          break;
- 126   2        case KEY_LONG_K5:
- 127   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 128   2          sendBuf[index++] = 0x01;
- 129   2          sendBuf[index++] = KEY_VOL_ADD_CMD;
- 130   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 131   3            sendBuf[index] += sendBuf[i + 1];
- 132   3          }
- 133   2          break;
- 134   2        case KEY_UP_K6:   //ACC  继电器
+ 117   2                      break;
+ 118   2              case KEY_DOWN_K5:
+ 119   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 120   2                      sendBuf[index++] = 0x01;
+ 121   2                      sendBuf[index++] = KEY_VOL_ADD_CMD;
+ 122   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 123   3                              sendBuf[index] += sendBuf[i + 1];
+ 124   3                      }
+ 125   2                      break;
+ 126   2              case KEY_LONG_K5:
+ 127   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 128   2                      sendBuf[index++] = 0x01;
+ 129   2                      sendBuf[index++] = KEY_VOL_ADD_CMD;
+ 130   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 131   3                              sendBuf[index] += sendBuf[i + 1];
+ 132   3                      }
+ 133   2                      break;
+ 134   2              case KEY_UP_K6:   //ACC  继电器
  135   2      
- 136   2          break;
- 137   2        case KEY_DOWN_K6:
- 138   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 139   2          sendBuf[index++] = 0x02;
- 140   2          sendBuf[index++] = KEY_ACC_CMD;
- 141   2          sendBuf[index++] = 0x03;
- 142   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 143   3            sendBuf[index] += sendBuf[i + 1];
- 144   3          }
- 145   2          break;
- 146   2        case KEY_LONG_K6:
+ 136   2                      break;
+ 137   2              case KEY_DOWN_K6:
+ 138   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 139   2                      sendBuf[index++] = 0x02;
+ 140   2                      sendBuf[index++] = KEY_ACC_CMD;
+ 141   2                      sendBuf[index++] = 0x03;
+ 142   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 143   3                              sendBuf[index] += sendBuf[i + 1];
+ 144   3                      }
+ 145   2                      break;
+ 146   2              case KEY_LONG_K6:
  147   2      
- 148   2          break;
- 149   2        case KEY_UP_K7:   // vol-
+ 148   2                      break;
+ 149   2              case KEY_UP_K7:   // vol-
  150   2      
- 151   2          break;
- 152   2        case KEY_DOWN_K7:
- 153   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 154   2          sendBuf[index++] = 0x01;
- 155   2          sendBuf[index++] = KEY_VOL_MINUS_CMD;
- 156   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 157   3            sendBuf[index] += sendBuf[i + 1];
- 158   3          }
- 159   2          break;
- 160   2        case KEY_LONG_K7:
- 161   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 162   2          sendBuf[index++] = 0x01;
- 163   2          sendBuf[index++] = KEY_VOL_MINUS_CMD;
- 164   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 165   3            sendBuf[index] += sendBuf[i + 1];
- 166   3          }
- 167   2          break;
- 168   2        case KEY_UP_K8:   // mode
- 169   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 170   2          sendBuf[index++] = 0x01;
- 171   2          sendBuf[index++] = KEY_MODE_CMD;
- 172   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 173   3            sendBuf[index] += sendBuf[i + 1];
- 174   3          }
- 175   2          break;
- 176   2        case KEY_DOWN_K8:
+ 151   2                      break;
+ 152   2              case KEY_DOWN_K7:
+ 153   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 154   2                      sendBuf[index++] = 0x01;
+ 155   2                      sendBuf[index++] = KEY_VOL_MINUS_CMD;
+ 156   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 157   3                              sendBuf[index] += sendBuf[i + 1];
+ 158   3                      }
+ 159   2                      break;
+ 160   2              case KEY_LONG_K7:
+ 161   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 162   2                      sendBuf[index++] = 0x01;
+ 163   2                      sendBuf[index++] = KEY_VOL_MINUS_CMD;
+ 164   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 165   3                              sendBuf[index] += sendBuf[i + 1];
+ 166   3                      }
+ 167   2                      break;
+ 168   2              case KEY_UP_K8:   // mode
+ 169   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 170   2                      sendBuf[index++] = 0x01;
+ 171   2                      sendBuf[index++] = KEY_MODE_CMD;
+ 172   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 173   3                              sendBuf[index] += sendBuf[i + 1];
+ 174   3                      }
+ 175   2                      break;
+ 176   2              case KEY_DOWN_K8:
  177   2      
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/06/2017 17:03:24 PAGE 4   
+C51 COMPILER V9.56.0.0   APP_KEY                                                           12/06/2017 22:51:12 PAGE 4   
 
- 178   2          break;
- 179   2        case KEY_LONG_K8:
+ 178   2                      break;
+ 179   2              case KEY_LONG_K8:
  180   2      
- 181   2          break;
- 182   2        case KEY_UP_K9:   // dome
- 183   2          sendBuf[index++] = LCD2LAMP_HEADER;
- 184   2          sendBuf[index++] = 0x01;
- 185   2          sendBuf[index++] = KEY_DOME_CMD;
- 186   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
- 187   3            sendBuf[index] += sendBuf[i + 1];
- 188   3          }
- 189   2          break;
- 190   2        case KEY_DOWN_K9:
+ 181   2                      break;
+ 182   2              case KEY_UP_K9:   // dome
+ 183   2                      sendBuf[index++] = LCD2LAMP_HEADER;
+ 184   2                      sendBuf[index++] = 0x01;
+ 185   2                      sendBuf[index++] = KEY_DOME_CMD;
+ 186   2                      for (i = 0; i < (sendBuf[1] + 1); i++) {
+ 187   3                              sendBuf[index] += sendBuf[i + 1];
+ 188   3                      }
+ 189   2                      break;
+ 190   2              case KEY_DOWN_K9:
  191   2      
- 192   2          break;
- 193   2        case KEY_LONG_K9:
+ 192   2                      break;
+ 193   2              case KEY_LONG_K9:
  194   2      
- 195   2          break;
- 196   2        case KEY_UP_K_1AND6:    //power ACC
+ 195   2                      break;
+ 196   2              case KEY_UP_K_1AND6:    //power ACC
  197   2      
- 198   2          break;
- 199   2        case KEY_DOWN_K_1AND6:
+ 198   2                      break;
+ 199   2              case KEY_DOWN_K_1AND6:
  200   2      
- 201   2          break;
- 202   2        case KEY_LONG_K_1AND6:
+ 201   2                      break;
+ 202   2              case KEY_LONG_K_1AND6:
  203   2      
- 204   2          break;
- 205   2        default:
+ 204   2                      break;
+ 205   2              default:
  206   2      
- 207   2          break;
- 208   2        }
- 209   1        if (index) {
- 210   2          index++;
- 211   2          app_2d4_send(sendBuf, index);
- 212   2        }
+ 207   2                      break;
+ 208   2              }
+ 209   1              if (index) {
+ 210   2                      index++;
+ 211   2                      app_2d4_send(sendBuf, index);
+ 212   2              }
  213   1      
  214   1      }
  215          

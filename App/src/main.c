@@ -43,6 +43,8 @@ void main(void) {
 			//////////////////
 
 			bsp_KeyScan();
+
+			app_2d4_pro();
 		}
 		if (Task_time.flag_100ms) {
 			uint8_t i = 0;
@@ -64,7 +66,7 @@ void main(void) {
 //						g_tADC_Result.result[1]);
 //				LCD_ShowString(ss);
 			}
-			app_2d4_pro();
+
 		}
 		if (Task_time.flag_1s) {
 //			static uint8_t cnt = 0;

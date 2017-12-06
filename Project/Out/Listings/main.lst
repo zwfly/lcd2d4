@@ -1,11 +1,11 @@
-C51 COMPILER V9.52.0.0   MAIN                                                              12/06/2017 17:03:24 PAGE 1   
+C51 COMPILER V9.56.0.0   MAIN                                                              12/06/2017 22:51:12 PAGE 1   
 
 
-C51 COMPILER V9.52.0.0, COMPILATION OF MODULE MAIN
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN .\Out\Objects\main.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\App\src\main.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\inc;..
-                    -\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\main.lst) TABS(2) OBJ
-                    -ECT(.\Out\Objects\main.obj)
+                    -\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\main.lst) OBJECT(.\Ou
+                    -t\Objects\main.obj)
 
 line level    source
 
@@ -19,86 +19,88 @@ line level    source
    8          void ADC_ISR(void)
    9          interrupt 11
   10          {
-  11   1        clr_ADCF;                               //clear ADC interrupt flag
+  11   1              clr_ADCF;                               //clear ADC interrupt flag
   12   1      
-  13   1        g_tADC_Result.result[g_tADC_Result.channel] = ADCRH;
-  14   1        g_tADC_Result.result[g_tADC_Result.channel] <<= 2;
-  15   1        g_tADC_Result.result[g_tADC_Result.channel] |= ADCRL;
+  13   1              g_tADC_Result.result[g_tADC_Result.channel] = ADCRH;
+  14   1              g_tADC_Result.result[g_tADC_Result.channel] <<= 2;
+  15   1              g_tADC_Result.result[g_tADC_Result.channel] |= ADCRL;
   16   1      
   17   1      }
   18          //static char ss[16] = { 0 };
   19          void main(void) {
-  20   1        uint8_t ucKeyCode;
-  21   1        System_Clock_Select(E_HIRCEN);
+  20   1              uint8_t ucKeyCode;
+  21   1              System_Clock_Select(E_HIRCEN);
   22   1      
-  23   1        /****************/
-  24   1        bsp_Init();
+  23   1              /****************/
+  24   1              bsp_Init();
   25   1      
-  26   1        /****************/
+  26   1              /****************/
   27   1      #if 1
-  28   1      //  app_key_init();
-  29   1        app_2d4_init();
-  30   1        app_lcd_init();
-  31   1        app_work_Init();
+  28   1      //      app_key_init();
+  29   1              app_2d4_init();
+  30   1              app_lcd_init();
+  31   1              app_work_Init();
   32   1      #endif
-  33   1        /****************/
-  34   1      //  Show_FW_Version_Number_To_PC();
-  35   1        while (1) {
-  36   2          if (Task_time.flag_5ms) {
-  37   3            Task_time.flag_5ms = 0;
-  38   3            //////////////////
-  39   3            ADC_Start();
-  40   3          }
-  41   2          if (Task_time.flag_10ms) {
-  42   3            Task_time.flag_10ms = 0;
-  43   3            //////////////////
+  33   1              /****************/
+  34   1      //      Show_FW_Version_Number_To_PC();
+  35   1              while (1) {
+  36   2                      if (Task_time.flag_5ms) {
+  37   3                              Task_time.flag_5ms = 0;
+  38   3                              //////////////////
+  39   3                              ADC_Start();
+  40   3                      }
+  41   2                      if (Task_time.flag_10ms) {
+  42   3                              Task_time.flag_10ms = 0;
+  43   3                              //////////////////
   44   3      
-  45   3            bsp_KeyScan();
-  46   3          }
-  47   2          if (Task_time.flag_100ms) {
-  48   3            uint8_t i = 0;
-  49   3      
-  50   3            static uint8_t n = 0;
-  51   3            Task_time.flag_100ms = 0;
-  52   3            //////////////////
-  53   3      //      app_key_100ms_pro();
-C51 COMPILER V9.52.0.0   MAIN                                                              12/06/2017 17:03:24 PAGE 2   
+  45   3                              bsp_KeyScan();
+  46   3      
+  47   3                              app_2d4_pro();
+  48   3                      }
+  49   2                      if (Task_time.flag_100ms) {
+  50   3                              uint8_t i = 0;
+  51   3      
+  52   3                              static uint8_t n = 0;
+  53   3                              Task_time.flag_100ms = 0;
+C51 COMPILER V9.56.0.0   MAIN                                                              12/06/2017 22:51:12 PAGE 2   
 
-  54   3      //      app_work_100ms_pro();
-  55   3      //      app_charge_100ms_pro();
-  56   3            Repeat_Pro();
-  57   3      
-  58   3            app_lcd_pro();
+  54   3                              //////////////////
+  55   3      //                      app_key_100ms_pro();
+  56   3      //                      app_work_100ms_pro();
+  57   3      //                      app_charge_100ms_pro();
+  58   3                              Repeat_Pro();
   59   3      
-  60   3            n++;
-  61   3            if (n >= 5) {
-  62   4              n = 0;
-  63   4      //        sprintf(ss, "%04u%04u", g_tADC_Result.result[0],
-  64   4      //            g_tADC_Result.result[1]);
-  65   4      //        LCD_ShowString(ss);
-  66   4            }
-  67   3            app_2d4_pro();
-  68   3          }
-  69   2          if (Task_time.flag_1s) {
-  70   3      //      static uint8_t cnt = 0;
-  71   3            Task_time.flag_1s = 0;
-  72   3            //////////////////
-  73   3            app_work_1s_pro();
-  74   3      //      cnt++;
-  75   3      //      sprintf(ss, "cc %u", (uint16_t) cnt);
-  76   3      //      app_lcd_default_string_set(ss, strlen(ss));
-  77   3      
-  78   3          }
-  79   2      
-  80   2      #if 1
+  60   3                              app_lcd_pro();
+  61   3      
+  62   3                              n++;
+  63   3                              if (n >= 5) {
+  64   4                                      n = 0;
+  65   4      //                              sprintf(ss, "%04u%04u", g_tADC_Result.result[0],
+  66   4      //                                              g_tADC_Result.result[1]);
+  67   4      //                              LCD_ShowString(ss);
+  68   4                              }
+  69   3      
+  70   3                      }
+  71   2                      if (Task_time.flag_1s) {
+  72   3      //                      static uint8_t cnt = 0;
+  73   3                              Task_time.flag_1s = 0;
+  74   3                              //////////////////
+  75   3                              app_work_1s_pro();
+  76   3      //                      cnt++;
+  77   3      //                      sprintf(ss, "cc %u", (uint16_t) cnt);
+  78   3      //                      app_lcd_default_string_set(ss, strlen(ss));
+  79   3      
+  80   3                      }
   81   2      
-  82   2          ucKeyCode = bsp_GetKey();
-  83   2          if (ucKeyCode != KEY_NONE) {
-  84   3            app_key_pro(ucKeyCode);
-  85   3          }
-  86   2      #endif
-  87   2        }
-  88   1      }
+  82   2      #if 1
+  83   2      
+  84   2                      ucKeyCode = bsp_GetKey();
+  85   2                      if (ucKeyCode != KEY_NONE) {
+  86   3                              app_key_pro(ucKeyCode);
+  87   3                      }
+  88   2      #endif
+  89   2              }
+  90   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

@@ -257,16 +257,6 @@ static void app_2d4_Rcv(uint8_t *buf) {
 			app_lcd_default_string_set(tmpBuf, strlen(tmpBuf), 0);
 			break;
 		case FM_MODE:
-			if (buf[4] == 0x01) {
-
-			} else if (buf[4] == 0x02) {
-
-			} else if (buf[4] == 0x03) {
-
-			} else if (buf[4] == 0x04) {
-
-			}
-
 			Repeat_Stop();
 			LCD_Clear_All();
 
@@ -372,7 +362,6 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		case CALL_MODE:
 			break;
 		}
-
 		break;
 	case RCV_PREV_NEXT_CMD:
 		switch (buf[3]) {

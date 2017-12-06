@@ -1,11 +1,11 @@
-C51 COMPILER V9.52.0.0   APP_WORK                                                          12/06/2017 17:03:24 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_WORK                                                          12/06/2017 22:51:12 PAGE 1   
 
 
-C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_WORK
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_WORK
 OBJECT MODULE PLACED IN .\Out\Objects\app_work.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\App\src\app_work.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\in
-                    -c;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\app_work.lst) TAB
-                    -S(2) OBJECT(.\Out\Objects\app_work.obj)
+                    -c;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\app_work.lst) OBJ
+                    -ECT(.\Out\Objects\app_work.obj)
 
 line level    source
 
@@ -26,51 +26,48 @@ line level    source
   15          static void app_work_pro(void);
   16          
   17          void app_work_Init(void) {
-  18   1        cnt = 0;
-  19   1        flag = 0;
-  20   1        memset((uint8_t *) &g_tWork, 0, sizeof(WORK_T));
-  21   1        LCD_Show_BAZOOKA_ICO();
+  18   1              cnt = 0;
+  19   1              flag = 0;
+  20   1              memset((uint8_t *) &g_tWork, 0, sizeof(WORK_T));
+  21   1              LCD_Show_BAZOOKA_ICO();
   22   1      }
   23          
   24          void app_work_1s_pro(void) {
-  25   1        cnt++;
-  26   1        if ((cnt > 5) && (flag == 0)) {
-  27   2      //    cnt = 0;
-  28   2          flag = 1;
-  29   2          Repeat_Stop();
-  30   2          LCD_Clear_All();
-  31   2          LCD_Show_BAZOOKA_ICO();
-  32   2          LCD_ShowString(" PWR OFF");
-  33   2          app_lcd_default_string_set(" PWR OFF");
-*** WARNING C209 IN LINE 33 OF ..\App\src\app_work.c: '_app_lcd_default_string_set': too few actual parameters
-  34   2        }
+  25   1              cnt++;
+  26   1              if ((cnt > 8) && (flag == 0)) {
+  27   2      //              cnt = 0;
+  28   2                      flag = 1;
+  29   2                      Repeat_Stop();
+  30   2                      LCD_Clear_All();
+  31   2                      LCD_Show_BAZOOKA_ICO();
+  32   2                      LCD_ShowString(" PWR OFF");
+  33   2      //              app_lcd_default_string_set(" PWR OFF", 8, 0);
+  34   2              }
   35   1      }
   36          void app_work_100ms_pro(void) {
   37   1      
   38   1      }
   39          void app_work_cnt_clear(void) {
-  40   1      
-  41   1        flag = 0;
-  42   1        cnt = 0;
-  43   1      
-  44   1      }
-  45          static void app_work_pro(void) {
-  46   1      
-  47   1      }
-  48          
+  40   1              flag = 0;
+  41   1              cnt = 0;
+  42   1      }
+  43          static void app_work_pro(void) {
+  44   1      
+  45   1      }
+  46          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     82    ----
-C51 COMPILER V9.52.0.0   APP_WORK                                                          12/06/2017 17:03:24 PAGE 2   
-
+   CODE SIZE        =     73    ----
    CONSTANT SIZE    =      9    ----
    XDATA SIZE       =      2    ----
    PDATA SIZE       =   ----    ----
+C51 COMPILER V9.56.0.0   APP_WORK                                                          12/06/2017 22:51:12 PAGE 2   
+
    DATA SIZE        =   ----    ----
    IDATA SIZE       =      7    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
