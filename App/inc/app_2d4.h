@@ -41,6 +41,7 @@
 
 #define  KEY_CARD_POWER_CMD              0x54
 
+#define  DEVICE_HEART_CMD  0xF1
 
 extern idata uint8_t sendBuf[PAYLOAD_WIDTH];
 

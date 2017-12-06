@@ -103,7 +103,6 @@ static void AUX_mute_show_lcd_resp(void) {
 	LCD_ShowString("   MUTE ");
 }
 
-
 static void USB_pause_show_lcd_resp(void) {
 	LCD_ShowString("   PAUSE");
 	LCD_Clear_upColon_ICO();
@@ -180,8 +179,12 @@ static void app_2d4_Rcv(uint8_t *buf) {
 
 	memset(sendBuf, 0, PAYLOAD_WIDTH);
 	index = 0;
+	app_work_cnt_clear();
 //	switch (0) {
 	switch (buf[2]) {
+	case DEVICE_HEART_CMD:
+		app_work_cnt_clear();
+		break;
 	case RCV_POWER_STATUS_CMD:
 		Repeat_Stop();
 

@@ -67,12 +67,11 @@ void main(void) {
 			app_2d4_pro();
 		}
 		if (Task_time.flag_1s) {
-			static uint8_t cnt = 0;
+//			static uint8_t cnt = 0;
 			Task_time.flag_1s = 0;
 			//////////////////
-// 			app_key_1s_pro();
-//			app_work_1s_pro();
-			cnt++;
+			app_work_1s_pro();
+//			cnt++;
 //			sprintf(ss, "cc %u", (uint16_t) cnt);
 //			app_lcd_default_string_set(ss, strlen(ss));
 

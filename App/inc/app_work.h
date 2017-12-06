@@ -35,5 +35,7 @@ extern idata WORK_T g_tWork;
 void app_work_Init(void);
 void app_work_1s_pro(void);
 void app_work_100ms_pro(void);
+void app_work_cnt_clear(void);
+
 
 #endif /* APP_INC_APP_WORK_H_ */

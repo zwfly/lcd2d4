@@ -1,4 +1,4 @@
-C51 COMPILER V9.52.0.0   APP_WORK                                                          11/19/2017 14:57:40 PAGE 1   
+C51 COMPILER V9.52.0.0   APP_WORK                                                          12/06/2017 17:03:24 PAGE 1   
 
 
 C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_WORK
@@ -20,30 +20,52 @@ line level    source
    9          
   10          idata WORK_T g_tWork;
   11          
-  12          static void app_work_pro(void);
-  13          
-  14          void app_work_Init(void) {
-  15   1      
-  16   1        LCD_Show_BAZOOKA_ICO();
-  17   1      }
-  18          
-  19          void app_work_1s_pro(void) {
-  20   1      
-  21   1      }
-  22          void app_work_100ms_pro(void) {
-  23   1      
-  24   1      }
-  25          
-  26          static void app_work_pro(void) {
-  27   1      
-  28   1      }
-  29          
+  12          static uint8_t cnt = 0;
+  13          static uint8_t flag = 0;
+  14          
+  15          static void app_work_pro(void);
+  16          
+  17          void app_work_Init(void) {
+  18   1        cnt = 0;
+  19   1        flag = 0;
+  20   1        memset((uint8_t *) &g_tWork, 0, sizeof(WORK_T));
+  21   1        LCD_Show_BAZOOKA_ICO();
+  22   1      }
+  23          
+  24          void app_work_1s_pro(void) {
+  25   1        cnt++;
+  26   1        if ((cnt > 5) && (flag == 0)) {
+  27   2      //    cnt = 0;
+  28   2          flag = 1;
+  29   2          Repeat_Stop();
+  30   2          LCD_Clear_All();
+  31   2          LCD_Show_BAZOOKA_ICO();
+  32   2          LCD_ShowString(" PWR OFF");
+  33   2          app_lcd_default_string_set(" PWR OFF");
+*** WARNING C209 IN LINE 33 OF ..\App\src\app_work.c: '_app_lcd_default_string_set': too few actual parameters
+  34   2        }
+  35   1      }
+  36          void app_work_100ms_pro(void) {
+  37   1      
+  38   1      }
+  39          void app_work_cnt_clear(void) {
+  40   1      
+  41   1        flag = 0;
+  42   1        cnt = 0;
+  43   1      
+  44   1      }
+  45          static void app_work_pro(void) {
+  46   1      
+  47   1      }
+  48          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =      6    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
+   CODE SIZE        =     82    ----
+C51 COMPILER V9.52.0.0   APP_WORK                                                          12/06/2017 17:03:24 PAGE 2   
+
+   CONSTANT SIZE    =      9    ----
+   XDATA SIZE       =      2    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =      7    ----
@@ -51,4 +73,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
