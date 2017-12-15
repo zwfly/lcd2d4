@@ -22,15 +22,18 @@ void app_work_Init(void) {
 }
 
 void app_work_1s_pro(void) {
+
+//	return;
+
 	cnt++;
 	if ((cnt > 5) && (flag == 0)) {
-//		cnt = 0;
+		cnt = 0;
 		flag = 1;
 		Repeat_Stop();
 		LCD_Clear_All();
 		LCD_Show_BAZOOKA_ICO();
 		LCD_ShowString(" PWR OFF");
-		app_lcd_default_string_set(" PWR OFF");
+		app_lcd_default_string_set(" PWR OFF", 8, 0);
 	}
 }
 void app_work_100ms_pro(void) {

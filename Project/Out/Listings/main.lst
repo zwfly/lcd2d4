@@ -1,4 +1,4 @@
-C51 COMPILER V9.52.0.0   MAIN                                                              12/06/2017 17:03:24 PAGE 1   
+C51 COMPILER V9.52.0.0   MAIN                                                              12/15/2017 16:05:14 PAGE 1   
 
 
 C51 COMPILER V9.52.0.0, COMPILATION OF MODULE MAIN
@@ -52,53 +52,55 @@ line level    source
   41   2          if (Task_time.flag_10ms) {
   42   3            Task_time.flag_10ms = 0;
   43   3            //////////////////
-  44   3      
-  45   3            bsp_KeyScan();
-  46   3          }
-  47   2          if (Task_time.flag_100ms) {
-  48   3            uint8_t i = 0;
-  49   3      
-  50   3            static uint8_t n = 0;
-  51   3            Task_time.flag_100ms = 0;
-  52   3            //////////////////
-  53   3      //      app_key_100ms_pro();
-C51 COMPILER V9.52.0.0   MAIN                                                              12/06/2017 17:03:24 PAGE 2   
+  44   3            bsp_KeyScan();
+  45   3      
+  46   3            app_2d4_pro();
+  47   3          }
+  48   2          if (Task_time.flag_100ms) {
+  49   3            uint8_t i = 0;
+  50   3      
+  51   3            static uint8_t n = 0;
+  52   3            Task_time.flag_100ms = 0;
+  53   3            //////////////////
+C51 COMPILER V9.52.0.0   MAIN                                                              12/15/2017 16:05:14 PAGE 2   
 
-  54   3      //      app_work_100ms_pro();
-  55   3      //      app_charge_100ms_pro();
-  56   3            Repeat_Pro();
-  57   3      
-  58   3            app_lcd_pro();
-  59   3      
-  60   3            n++;
-  61   3            if (n >= 5) {
-  62   4              n = 0;
-  63   4      //        sprintf(ss, "%04u%04u", g_tADC_Result.result[0],
-  64   4      //            g_tADC_Result.result[1]);
-  65   4      //        LCD_ShowString(ss);
-  66   4            }
-  67   3            app_2d4_pro();
-  68   3          }
-  69   2          if (Task_time.flag_1s) {
-  70   3      //      static uint8_t cnt = 0;
-  71   3            Task_time.flag_1s = 0;
-  72   3            //////////////////
-  73   3            app_work_1s_pro();
-  74   3      //      cnt++;
-  75   3      //      sprintf(ss, "cc %u", (uint16_t) cnt);
-  76   3      //      app_lcd_default_string_set(ss, strlen(ss));
-  77   3      
-  78   3          }
-  79   2      
-  80   2      #if 1
-  81   2      
-  82   2          ucKeyCode = bsp_GetKey();
-  83   2          if (ucKeyCode != KEY_NONE) {
-  84   3            app_key_pro(ucKeyCode);
-  85   3          }
-  86   2      #endif
-  87   2        }
-  88   1      }
+  54   3      //      app_key_100ms_pro();
+  55   3      //      app_work_100ms_pro();
+  56   3      //      app_charge_100ms_pro();
+  57   3            Repeat_Pro();
+  58   3      
+  59   3            app_lcd_pro();
+  60   3      
+  61   3            n++;
+  62   3            if (n >= 5) {
+  63   4              n = 0;
+  64   4      //        sprintf(ss, "%04u%04u", g_tADC_Result.result[0],
+  65   4      //            g_tADC_Result.result[1]);
+  66   4      //        LCD_ShowString(ss);
+  67   4            }
+  68   3      
+  69   3          }
+  70   2          if (Task_time.flag_1s) {
+  71   3      //      static uint8_t cnt = 0;
+  72   3            Task_time.flag_1s = 0;
+  73   3            //////////////////
+  74   3            app_work_1s_pro();
+  75   3      //      cnt++;
+  76   3      //      sprintf(ss, "cc %u", (uint16_t) cnt);
+  77   3      //      app_lcd_default_string_set(ss, strlen(ss));
+  78   3      
+  79   3          }
+  80   2      
+  81   2      #if 1
+  82   2      
+  83   2          ucKeyCode = bsp_GetKey();
+  84   2          if (ucKeyCode != KEY_NONE) {
+  85   3      
+  86   3            app_key_pro(ucKeyCode);
+  87   3          }
+  88   2      #endif
+  89   2        }
+  90   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

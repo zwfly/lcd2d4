@@ -182,8 +182,54 @@ static void app_2d4_Rcv(uint8_t *buf) {
 	app_work_cnt_clear();
 //	switch (0) {
 	switch (buf[2]) {
-	case DEVICE_HEART_CMD:
-		app_work_cnt_clear();
+	case LED_MODE_MSG_CMD: {
+		LED_MODE_MSG_ST led_mode_msg;
+		memset((uint8_t *) &led_mode_msg, 0, sizeof(LED_MODE_MSG_ST));
+
+		LCD_Show_LED_ICO();
+
+		LCD_Clear_MHZ_ICO();
+		LCD_Clear_FM_ICO();
+		LCD_Clear_USB_ICO();
+		LCD_Clear_AUX_ICO();
+		LCD_Clear_BLUETooTH_ICO();
+		switch (buf[3]) { //蓝牙模块工作模式
+		case BT_MODE:
+			LCD_Show_BLUETooTH_ICO();
+			break;
+		case FM_MODE:
+			LCD_Show_FM_ICO();
+			break;
+		case USB_MODE:
+			LCD_Show_USB_ICO();
+			break;
+		case AUX_MODE:
+			LCD_Show_AUX_ICO();
+			break;
+		case DOME_MODE:
+			break;
+		case CALL_MODE:
+			break;
+		}
+
+		memset((uint8_t *) tmpBuf, 0, sizeof(tmpBuf));
+		memcpy(tmpBuf, buf + 4, 8);
+		app_lcd_default_string_set(tmpBuf, strlen(tmpBuf), 0);
+
+		led_mode_msg.status.allbits = buf[12];
+		if (led_mode_msg.status.bits.pp) {
+			Repeat_SetStart(LED_show_blink_name_show_lcd_resp);
+			Repeat_SetStop(LED_clear_blink_name_show_lcd_resp);
+			if (0 == app_repeat_IsEnable()) {
+				Repeat_Start(6, 6, 0);
+			}
+		} else {
+			if (app_repeat_IsEnable()) {
+				Repeat_Stop();
+			}
+		}
+
+	}
 		break;
 	case RCV_POWER_STATUS_CMD:
 		Repeat_Stop();

@@ -1,4 +1,4 @@
-C51 COMPILER V9.52.0.0   APP_WORK                                                          12/06/2017 17:03:24 PAGE 1   
+C51 COMPILER V9.52.0.0   APP_WORK                                                          12/15/2017 16:05:14 PAGE 1   
 
 
 C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_WORK
@@ -33,37 +33,39 @@ line level    source
   22   1      }
   23          
   24          void app_work_1s_pro(void) {
-  25   1        cnt++;
-  26   1        if ((cnt > 5) && (flag == 0)) {
-  27   2      //    cnt = 0;
-  28   2          flag = 1;
-  29   2          Repeat_Stop();
-  30   2          LCD_Clear_All();
-  31   2          LCD_Show_BAZOOKA_ICO();
-  32   2          LCD_ShowString(" PWR OFF");
-  33   2          app_lcd_default_string_set(" PWR OFF");
-*** WARNING C209 IN LINE 33 OF ..\App\src\app_work.c: '_app_lcd_default_string_set': too few actual parameters
-  34   2        }
-  35   1      }
-  36          void app_work_100ms_pro(void) {
-  37   1      
+  25   1      
+  26   1      //  return;
+  27   1      
+  28   1        cnt++;
+  29   1        if ((cnt > 5) && (flag == 0)) {
+  30   2          cnt = 0;
+  31   2          flag = 1;
+  32   2          Repeat_Stop();
+  33   2          LCD_Clear_All();
+  34   2          LCD_Show_BAZOOKA_ICO();
+  35   2          LCD_ShowString(" PWR OFF");
+  36   2          app_lcd_default_string_set(" PWR OFF", 8, 0);
+  37   2        }
   38   1      }
-  39          void app_work_cnt_clear(void) {
+  39          void app_work_100ms_pro(void) {
   40   1      
-  41   1        flag = 0;
-  42   1        cnt = 0;
+  41   1      }
+  42          void app_work_cnt_clear(void) {
   43   1      
-  44   1      }
-  45          static void app_work_pro(void) {
+  44   1        flag = 0;
+  45   1        cnt = 0;
   46   1      
   47   1      }
-  48          
+  48          static void app_work_pro(void) {
+  49   1      
+  50   1      }
+  51          
 
+
+C51 COMPILER V9.52.0.0   APP_WORK                                                          12/15/2017 16:05:14 PAGE 2   
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     82    ----
-C51 COMPILER V9.52.0.0   APP_WORK                                                          12/06/2017 17:03:24 PAGE 2   
-
+   CODE SIZE        =     94    ----
    CONSTANT SIZE    =      9    ----
    XDATA SIZE       =      2    ----
    PDATA SIZE       =   ----    ----
@@ -73,4 +75,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
