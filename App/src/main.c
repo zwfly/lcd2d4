@@ -75,7 +75,6 @@ void main(void) {
 //			cnt++;
 //			sprintf(ss, "cc %u", (uint16_t) cnt);
 //			app_lcd_default_string_set(ss, strlen(ss));
-
 		}
 
 #if 1
