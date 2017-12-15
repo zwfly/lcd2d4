@@ -40,10 +40,8 @@ void app_work_100ms_pro(void) {
 
 }
 void app_work_cnt_clear(void) {
-
 	flag = 0;
 	cnt = 0;
-
 }
 static void app_work_pro(void) {
 

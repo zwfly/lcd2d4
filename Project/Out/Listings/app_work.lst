@@ -1,4 +1,4 @@
-C51 COMPILER V9.52.0.0   APP_WORK                                                          12/15/2017 16:05:14 PAGE 1   
+C51 COMPILER V9.52.0.0   APP_WORK                                                          12/15/2017 17:13:43 PAGE 1   
 
 
 C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_WORK
@@ -51,21 +51,19 @@ line level    source
   40   1      
   41   1      }
   42          void app_work_cnt_clear(void) {
-  43   1      
-  44   1        flag = 0;
-  45   1        cnt = 0;
-  46   1      
-  47   1      }
-  48          static void app_work_pro(void) {
-  49   1      
-  50   1      }
-  51          
+  43   1        flag = 0;
+  44   1        cnt = 0;
+  45   1      }
+  46          static void app_work_pro(void) {
+  47   1      
+  48   1      }
+  49          
 
-
-C51 COMPILER V9.52.0.0   APP_WORK                                                          12/15/2017 16:05:14 PAGE 2   
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =     94    ----
+C51 COMPILER V9.52.0.0   APP_WORK                                                          12/15/2017 17:13:43 PAGE 2   
+
    CONSTANT SIZE    =      9    ----
    XDATA SIZE       =      2    ----
    PDATA SIZE       =   ----    ----

@@ -1,4 +1,4 @@
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 16:05:14 PAGE 1   
+C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 17:13:43 PAGE 1   
 
 
 C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_KEY
@@ -62,7 +62,7 @@ line level    source
   51   2          sendBuf[index++] = LCD2LAMP_HEADER;
   52   2          sendBuf[index++] = 0x01;
   53   2          sendBuf[index++] = KEY_POWER_SHORT_CMD;
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 16:05:14 PAGE 2   
+C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 17:13:43 PAGE 2   
 
   54   2          for (i = 0; i < (sendBuf[1] + 1); i++) {
   55   3            sendBuf[index] += sendBuf[i + 1];
@@ -126,7 +126,7 @@ line level    source
  113   3          }
  114   2          break;
  115   2        case KEY_UP_K5:   //vol+
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 16:05:14 PAGE 3   
+C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 17:13:43 PAGE 3   
 
  116   2      
  117   2          break;
@@ -190,7 +190,7 @@ line level    source
  175   2          break;
  176   2        case KEY_DOWN_K8:
  177   2      
-C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 16:05:14 PAGE 4   
+C51 COMPILER V9.52.0.0   APP_KEY                                                           12/15/2017 17:13:43 PAGE 4   
 
  178   2          break;
  179   2        case KEY_LONG_K8:
