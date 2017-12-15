@@ -65,7 +65,6 @@ void main(void) {
 //						g_tADC_Result.result[1]);
 //				LCD_ShowString(ss);
 			}
-
 		}
 		if (Task_time.flag_1s) {
 //			static uint8_t cnt = 0;
