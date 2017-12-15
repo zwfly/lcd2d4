@@ -1,11 +1,11 @@
-C51 COMPILER V9.52.0.0   BSP_ADC                                                           12/15/2017 17:13:44 PAGE 1   
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           12/16/2017 00:33:58 PAGE 1   
 
 
-C51 COMPILER V9.52.0.0, COMPILATION OF MODULE BSP_ADC
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_ADC
 OBJECT MODULE PLACED IN .\Out\Objects\bsp_adc.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Bsp\src\bsp_adc.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\inc
-                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_adc.lst) TABS(
-                    -2) OBJECT(.\Out\Objects\bsp_adc.obj)
+                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_adc.lst) OBJEC
+                    -T(.\Out\Objects\bsp_adc.obj)
 
 line level    source
 
@@ -21,70 +21,70 @@ line level    source
   10          idata ADC_RESULT_T g_tADC_Result;
   11          
   12          void ADC_Init(void) {
-  13   1        g_tADC_Result.channel = 0;
-  14   1        g_tADC_Result.result[0] = 1023;
-  15   1        g_tADC_Result.result[1] = 1023;
+  13   1              g_tADC_Result.channel = 0;
+  14   1              g_tADC_Result.result[0] = 1023;
+  15   1              g_tADC_Result.result[1] = 1023;
   16   1      #if 1
   17   1      
-  18   1      //  clr_P0M1_0;
-  19   1      //  clr_P0M2_0;
+  18   1      //      clr_P0M1_0;
+  19   1      //      clr_P0M2_0;
   20   1      
-  21   1      //  clr_P0M1_1;
-  22   1      //  clr_P0M2_1;
+  21   1      //      clr_P0M1_1;
+  22   1      //      clr_P0M2_1;
   23   1      
-  24   1        set_ADCEN;
+  24   1              set_ADCEN;
   25   1      
-  26   1        ADCCON0 = 0x00;                   //select ADC pin
+  26   1              ADCCON0 = 0x00;                   //select ADC pin
   27   1      #if 1
-  28   1        set_P0M1_0;                       //set ADC pin is input only mode
-  29   1        clr_P0M2_0;
-  30   1        set_P00DIDS;                      //disable digital connection
+  28   1              set_P0M1_0;                       //set ADC pin is input only mode
+  29   1              clr_P0M2_0;
+  30   1              set_P00DIDS;                      //disable digital connection
   31   1      
-  32   1        set_P0M1_1;                       //set ADC pin is input only mode
-  33   1        clr_P0M2_1;
-  34   1        set_P01DIDS;
+  32   1              set_P0M1_1;                       //set ADC pin is input only mode
+  33   1              clr_P0M2_1;
+  34   1              set_P01DIDS;
   35   1      
   36   1      #else
-                clr_P0M1_0;                       //set ADC pin is input only mode
-                clr_P0M2_0;
+                      clr_P0M1_0;                       //set ADC pin is input only mode
+                      clr_P0M2_0;
               
-                clr_P0M1_1;//set ADC pin is input only mode
-                clr_P0M2_1;
+                      clr_P0M1_1;//set ADC pin is input only mode
+                      clr_P0M2_1;
               
               #endif
   44   1      
-  45   1        clr_ADCDIV2;
-  46   1        set_ADCDIV1;
-  47   1        clr_ADCDIV0;
+  45   1              clr_ADCDIV2;
+  46   1              set_ADCDIV1;
+  47   1              clr_ADCDIV0;
   48   1      
-  49   1        EADC = 1;
+  49   1              EADC = 1;
   50   1      #endif
   51   1      }
   52          
   53          void ADC_Start(void) {
-C51 COMPILER V9.52.0.0   BSP_ADC                                                           12/15/2017 17:13:44 PAGE 2   
+C51 COMPILER V9.56.0.0   BSP_ADC                                                           12/16/2017 00:33:58 PAGE 2   
 
-  54   1        if (g_tADC_Result.channel) {
-  55   2          g_tADC_Result.channel = 0;
-  56   2          clr_ADCHS3;
-  57   2          clr_ADCHS2;
-  58   2          clr_ADCHS1;
-  59   2          clr_ADCHS0;
-  60   2          nop
-  61   2          nop
-  62   2          nop
-  63   2          set_ADCS;  //Trigger ADC start conversion
-  64   2        } else {
-  65   2          g_tADC_Result.channel = 1;
-  66   2          clr_ADCHS3;
-  67   2          clr_ADCHS2;
-  68   2          clr_ADCHS1;
-  69   2          set_ADCHS0;
-  70   2          nop
-  71   2          nop
-  72   2          nop
-  73   2          set_ADCS;  //Trigger ADC start conversion
-  74   2        }
+  54   1              if (g_tADC_Result.channel) {
+  55   2                      g_tADC_Result.channel = 0;
+  56   2                      clr_ADCHS3;
+  57   2                      clr_ADCHS2;
+  58   2                      clr_ADCHS1;
+  59   2                      clr_ADCHS0;
+  60   2                      nop
+  61   2                      nop
+  62   2                      nop
+  63   2                      set_ADCS;  //Trigger ADC start conversion
+  64   2              } else {
+  65   2                      g_tADC_Result.channel = 1;
+  66   2                      clr_ADCHS3;
+  67   2                      clr_ADCHS2;
+  68   2                      clr_ADCHS1;
+  69   2                      set_ADCHS0;
+  70   2                      nop
+  71   2                      nop
+  72   2                      nop
+  73   2                      set_ADCS;  //Trigger ADC start conversion
+  74   2              }
   75   1      
   76   1      }
 

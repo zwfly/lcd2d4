@@ -398,6 +398,11 @@
               <FileType>1</FileType>
               <FilePath>..\App\src\app_lcd.c</FilePath>
             </File>
+            <File>
+              <FileName>app_eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\src\app_eeprom.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -442,6 +447,11 @@
               <FileName>bsp_2d4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\src\bsp_2d4.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Bsp\src\bsp_eeprom.c</FilePath>
             </File>
           </Files>
         </Group>

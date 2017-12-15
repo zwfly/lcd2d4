@@ -26,7 +26,12 @@ void main(void) {
 	/****************/
 #if 1
 //	app_key_init();
+#if 0
 	app_2d4_init();
+#else
+	g_tWork.match_code_mode = 0;
+	app_2d4_switch_saved_address();
+#endif
 	app_lcd_init();
 	app_work_Init();
 #endif

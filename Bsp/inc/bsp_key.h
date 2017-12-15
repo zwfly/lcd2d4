@@ -51,9 +51,9 @@
 #define KEY_UP_K9		KEY_9_UP
 #define KEY_LONG_K9		KEY_9_LONG
 
-#define KEY_DOWN_K_1AND6	KEY_1AND6_DOWN
-#define KEY_UP_K_1AND6		KEY_1AND6_UP
-#define KEY_LONG_K_1AND6	KEY_1AND6_LONG
+#define KEY_DOWN_K2_6	KEY_2_6_DOWN
+#define KEY_UP_K2_6		KEY_2_6_UP
+#define KEY_LONG_K2_6	KEY_2_6_LONG
 
 /* 按键ID, 主要用于bsp_KeyState()函数的入口参数 */
 typedef enum {
@@ -66,7 +66,7 @@ typedef enum {
 	KID_K7,
 	KID_K8,
 	KID_K9,
-	KID_K_1AND6,
+	KID_K2_6,
 
 } KEY_ID_E;
 
@@ -76,7 +76,7 @@ typedef enum {
  即使按键电路不做硬件滤波，该滤波机制也可以保证可靠地检测到按键事件
  */
 #define KEY_FILTER_TIME   5
-#define KEY_LONG_TIME     200			/* 单位10ms， 持续1秒，认为长按事件 */
+#define KEY_LONG_TIME     150			/* 单位10ms， 持续1秒，认为长按事件 */
 
 /*
  每个按键对应1个全局的结构体变量。
@@ -139,9 +139,7 @@ typedef enum {
 	KEY_9_UP, /* 9键弹起 */
 	KEY_9_LONG, /* 9键长按 */
 
-	KEY_1AND6_DOWN, /* 9键按下 */
-	KEY_1AND6_UP, /* 9键弹起 */
-	KEY_1AND6_LONG, /* 9键长按 */
+	KEY_2_6_DOWN, KEY_2_6_UP, KEY_2_6_LONG,
 } KEY_ENUM;
 
 /* 按键FIFO用到变量 */

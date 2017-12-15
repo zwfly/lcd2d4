@@ -18,7 +18,7 @@
 #include "bsp_2d4.h"
 #include "bsp_timer0.h"
 #include "bsp_adc.h"
-
+#include "bsp_eeprom.h"
 
 #ifndef TRUE
 #define TRUE  1

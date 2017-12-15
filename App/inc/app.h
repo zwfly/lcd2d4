@@ -16,5 +16,6 @@
 #include "app_key.h"
 #include "app_2d4.h"
 #include "app_lcd.h"
+#include "app_eeprom.h"
 
 #endif /* APP_INC_APP_H_ */

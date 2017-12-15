@@ -11,7 +11,6 @@
 #define  LCD2LAMP_HEADER   0xF2
 #define  LAMP2LCD_HEADER   0xF8
 
-
 //#define POWER_LONG_CMD      0xBA
 
 #define  KEY_ACC_CMD        0x09
@@ -45,8 +44,13 @@
 
 //#define  DEVICE_HEART_CMD  0xF1
 
+#define WIRELESS_MATCH_CODE_CMD  0xFE
+
 extern idata uint8_t sendBuf[PAYLOAD_WIDTH];
 
+void app_get_saved_address(uint8_t *addr);
+void app_2d4_switch_public_address(void);
+void app_2d4_switch_saved_address(void);
 void app_2d4_init(void);
 void app_2d4_send(uint8_t *d, uint8_t len);
 void app_2d4_pro(void);

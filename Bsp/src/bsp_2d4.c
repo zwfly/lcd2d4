@@ -6,6 +6,8 @@
  */
 
 #include "bsp.h"
+const uint8_t PUBLIC_ADDRESS_DEF[5] = { 0x12, 0x62, 0xAC, 0xB3, 0x66 }; //RF 公共地址
+uint8_t TX_ADDRESS_DEF[5] = { 0xCC, 0xCC, 0xCC, 0xCC, 0xCC }; //RF 地址：接收端和发送端需一致
 
 void Wireless2d4_InitHard(void) {
 
@@ -22,8 +24,6 @@ void Wireless2d4_InitHard(void) {
 	P3M2 |= SET_BIT5;
 
 }
-
-const uint8_t TX_ADDRESS_DEF[5] = { 0xCC, 0xCC, 0xCC, 0xCC, 0xCC }; //RF 地址：接收端和发送端需一致
 
 /******************************************************************************/
 //            SPI_init

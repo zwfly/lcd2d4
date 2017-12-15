@@ -104,6 +104,9 @@
 //                  根据用户应用，以下部分可能需要修改                       //
 ///////////////////////////////////////////////////////////////////////////////
 /******************* Function declare *******************/
+extern const uint8_t PUBLIC_ADDRESS_DEF[5]; //RF 公共地址
+extern uint8_t TX_ADDRESS_DEF[5];
+
 void Wireless2d4_InitHard(void);
 
 void SPI_WW(uint8_t R_REG);

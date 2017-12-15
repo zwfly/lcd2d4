@@ -188,19 +188,16 @@ void app_key_pro(uint8_t keyCode) {
 		}
 		break;
 	case KEY_DOWN_K9:
-
 		break;
 	case KEY_LONG_K9:
-
 		break;
-	case KEY_UP_K_1AND6:    //power ACC
-
+	case KEY_UP_K2_6:    //
 		break;
-	case KEY_DOWN_K_1AND6:
-
+	case KEY_DOWN_K2_6:
 		break;
-	case KEY_LONG_K_1AND6:
-
+	case KEY_LONG_K2_6:
+		g_tWork.match_code_mode = 1;
+		app_2d4_switch_public_address();
 		break;
 	default:
 
@@ -208,7 +205,10 @@ void app_key_pro(uint8_t keyCode) {
 	}
 	if (index) {
 		index++;
-		app_2d4_send(sendBuf, index);
+		if (g_tWork.match_code_mode == 0) {
+			app_2d4_send(sendBuf, index);
+		}
+
 	}
 
 }

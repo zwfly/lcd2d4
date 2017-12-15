@@ -32,6 +32,26 @@ void app_2d4_init(void) {
 //	RF_Carrier(1);
 }
 
+void app_get_saved_address(uint8_t *addr) {
+	uint8_t i = 0;
+	for (i = 0; i < 5; i++) {
+		*(addr + i) = app_eeprom_read_byte(WIRELESS_ADDRESS_START_ADDR + i);
+	}
+}
+void app_2d4_switch_public_address(void) {
+	memcpy(TX_ADDRESS_DEF, PUBLIC_ADDRESS_DEF, 5);
+
+	sendRcv_flag = 0;
+	memset(rcvBuf, 0, sizeof(rcvBuf));
+	memset(sendBuf, 0, sizeof(sendBuf));
+
+	RF_Init();
+	RF_RxMode();
+}
+void app_2d4_switch_saved_address(void) {
+	app_get_saved_address(TX_ADDRESS_DEF);
+	app_2d4_init();
+}
 void app_2d4_send(uint8_t *d, uint8_t len) {
 
 	if (len > PAYLOAD_WIDTH) {
@@ -182,9 +202,40 @@ static void app_2d4_Rcv(uint8_t *buf) {
 	app_work_cnt_clear();
 //	switch (0) {
 	switch (buf[2]) {
+	case WIRELESS_MATCH_CODE_CMD: {
+		uint8_t eq = 0;
+		idata uint8_t
+		address_saved_tmp[5] = {0};
+		idata uint8_t
+		address_sended_tmp[5] = {0};
+
+		memset(address_saved_tmp, 0, 5);
+		memset(address_sended_tmp, 0, 5);
+
+		app_get_saved_address(address_saved_tmp);
+		memcpy(address_sended_tmp, buf + 3, 5);
+
+		eq = 1;
+		for (i = 0; i < 5; i++) {
+			if (address_sended_tmp[i] != address_saved_tmp[i]) {
+				eq = 0;
+				break;
+			}
+		}
+		if (eq == 0) {
+			app_eeprom_erase(0);
+			for (i = 0; i < 253; i++)
+				;
+			app_eeprom_write_buf(0, address_sended_tmp, 5);
+		}
+		g_tWork.match_code_mode = 0;
+
+		app_2d4_switch_saved_address();
+	}
+		break;
 	case LED_MODE_MSG_CMD: {
-		LED_MODE_MSG_ST led_mode_msg;
-		memset((uint8_t *) &led_mode_msg, 0, sizeof(LED_MODE_MSG_ST));
+		//LED_MODE_MSG_ST led_mode_msg;
+//		memset((uint8_t *) &led_mode_msg, 0, sizeof(LED_MODE_MSG_ST));
 
 		LCD_Show_LED_ICO();
 
@@ -216,8 +267,7 @@ static void app_2d4_Rcv(uint8_t *buf) {
 		memcpy(tmpBuf, buf + 4, 8);
 		app_lcd_default_string_set(tmpBuf, strlen(tmpBuf), 0);
 
-		led_mode_msg.status.allbits = buf[12];
-		if (led_mode_msg.status.bits.pp) {
+		if (*(buf + 12)) {
 			Repeat_SetStart(LED_show_blink_name_show_lcd_resp);
 			Repeat_SetStop(LED_clear_blink_name_show_lcd_resp);
 			if (0 == app_repeat_IsEnable()) {
@@ -247,7 +297,7 @@ static void app_2d4_Rcv(uint8_t *buf) {
 			g_tWork.status.bits.speaker = 1;
 			Repeat_SetStart(speaker_status_resp);
 			Repeat_SetStop(0);
-			Repeat_Start(50, 1, 1);
+			Repeat_Start(80, 1, 1);
 		} else if (buf[3] == 0x02) {
 			g_tWork.status.bits.speaker = 0;
 			Repeat_SetStart(speaker_status_resp);

@@ -106,8 +106,8 @@ static uint8_t IsKeyDown9(void) {
 	return IsKeyDown(S9_AD, g_tADC_Result.result[1]);
 }
 
-static uint8_t IsKeyDown_1AND6(void) {
-	if (IsKeyDown1() && IsKeyDown6()) {
+static uint8_t IsKeyDown_2_and_6(void) {
+	if (IsKeyDown2() && IsKeyDown6()) {
 		return 1;
 	} else {
 		return 0;
@@ -287,7 +287,7 @@ static void bsp_InitKeyVar(void) {
 	s_tBtn[6].IsKeyDownFunc = IsKeyDown7;
 	s_tBtn[7].IsKeyDownFunc = IsKeyDown8;
 	s_tBtn[8].IsKeyDownFunc = IsKeyDown9;
-	s_tBtn[9].IsKeyDownFunc = IsKeyDown_1AND6;
+	s_tBtn[9].IsKeyDownFunc = IsKeyDown_2_and_6;
 }
 
 /*

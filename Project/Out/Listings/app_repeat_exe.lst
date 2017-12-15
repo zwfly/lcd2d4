@@ -1,11 +1,11 @@
-C51 COMPILER V9.52.0.0   APP_REPEAT_EXE                                                    12/15/2017 17:13:43 PAGE 1   
+C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    12/16/2017 00:33:57 PAGE 1   
 
 
-C51 COMPILER V9.52.0.0, COMPILATION OF MODULE APP_REPEAT_EXE
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE APP_REPEAT_EXE
 OBJECT MODULE PLACED IN .\Out\Objects\app_repeat_exe.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\App\src\app_repeat_exe.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Com
                     -mon\inc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\app_repeat_
-                    -exe.lst) TABS(2) OBJECT(.\Out\Objects\app_repeat_exe.obj)
+                    -exe.lst) OBJECT(.\Out\Objects\app_repeat_exe.obj)
 
 line level    source
 
@@ -21,124 +21,124 @@ line level    source
   10          static REPEAT_T g_tRepeat; /* 定义蜂鸣器全局结构体变量 */
   11          
   12          void Repeat_SetStart(void (*fun)(void)) {
-  13   1        g_tRepeat.Start = fun;
+  13   1              g_tRepeat.Start = fun;
   14   1      }
   15          
   16          void Repeat_SetStop(void (*fun)(void)) {
-  17   1        g_tRepeat.Stop = fun;
+  17   1              g_tRepeat.Stop = fun;
   18   1      }
   19          
   20          static void Repeat_Start_exe(void) {
-  21   1        if (g_tRepeat.Start != 0) {
-  22   2          g_tRepeat.Start();
-  23   2        }
+  21   1              if (g_tRepeat.Start != 0) {
+  22   2                      g_tRepeat.Start();
+  23   2              }
   24   1      }
   25          
   26          static void Repeat_Stop_exe(void) {
-  27   1        if (g_tRepeat.Stop != 0) {
-  28   2          g_tRepeat.Stop();
-  29   2        }
+  27   1              if (g_tRepeat.Stop != 0) {
+  28   2                      g_tRepeat.Stop();
+  29   2              }
   30   1      }
   31          
   32          /*
   33           *********************************************************************************************************
-  34           *  函 数 名:
-  35           *  功能说明: 启动。
-  36           *  形    参：_usBeepTime : 蜂鸣时间，单位100ms; 0 表示不鸣叫
-  37           *        _usStopTime : 停止时间，单位100ms; 0 表示持续鸣叫
-  38           *       _usCycle : 鸣叫次数， 0 表示持续鸣叫
-  39           *  返 回 值: 无
+  34           *      函 数 名:
+  35           *      功能说明: 启动。
+  36           *      形    参：_usBeepTime : 蜂鸣时间，单位100ms; 0 表示不鸣叫
+  37           *                        _usStopTime : 停止时间，单位100ms; 0 表示持续鸣叫
+  38           *                       _usCycle : 鸣叫次数， 0 表示持续鸣叫
+  39           *      返 回 值: 无
   40           *********************************************************************************************************
   41           */
   42          void Repeat_Start(uint16_t _usStartTime, uint16_t _usStopTime,
-  43              uint16_t _usCycle) {
-  44   1        if (_usStartTime == 0) {
-  45   2          return;
-  46   2        }
+  43                          uint16_t _usCycle) {
+  44   1              if (_usStartTime == 0) {
+  45   2                      return;
+  46   2              }
   47   1      
-  48   1        g_tRepeat.usStartTime = _usStartTime;
-  49   1        g_tRepeat.usStopTime = _usStopTime;
-  50   1        g_tRepeat.usCycle = _usCycle;
-  51   1        g_tRepeat.usCount = 0;
-  52   1        g_tRepeat.usCycleCount = 0;
-  53   1        g_tRepeat.ucState = 0;
-C51 COMPILER V9.52.0.0   APP_REPEAT_EXE                                                    12/15/2017 17:13:43 PAGE 2   
+  48   1              g_tRepeat.usStartTime = _usStartTime;
+  49   1              g_tRepeat.usStopTime = _usStopTime;
+  50   1              g_tRepeat.usCycle = _usCycle;
+  51   1              g_tRepeat.usCount = 0;
+  52   1              g_tRepeat.usCycleCount = 0;
+  53   1              g_tRepeat.ucState = 0;
+C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    12/16/2017 00:33:57 PAGE 2   
 
-  54   1        g_tRepeat.ucEnalbe = 1; /* 设置完全局参数后再使能发声标志 */
+  54   1              g_tRepeat.ucEnalbe = 1; /* 设置完全局参数后再使能发声标志 */
   55   1      
-  56   1        Repeat_Start_exe(); /* 开始发声 */
+  56   1              Repeat_Start_exe(); /* 开始发声 */
   57   1      }
   58          
   59          /*
   60           *********************************************************************************************************
-  61           *  函 数 名:
-  62           *  功能说明: 停止。
-  63           *  形    参：无
-  64           *  返 回 值: 无
+  61           *      函 数 名:
+  62           *      功能说明: 停止。
+  63           *      形    参：无
+  64           *      返 回 值: 无
   65           *********************************************************************************************************
   66           */
   67          void Repeat_Stop(void) {
-  68   1        g_tRepeat.ucEnalbe = 0;
-  69   1        Repeat_Stop_exe(); /* 必须在清控制标志后再停止发声，避免停止后在中断中又开启 */
-  70   1        Repeat_SetStart(0);
-  71   1        Repeat_SetStop(0);
+  68   1              g_tRepeat.ucEnalbe = 0;
+  69   1              Repeat_Stop_exe(); /* 必须在清控制标志后再停止发声，避免停止后在中断中又开启 */
+  70   1              Repeat_SetStart(0);
+  71   1              Repeat_SetStop(0);
   72   1      
   73   1      }
   74          
   75          BIT app_repeat_IsEnable(void) {
-  76   1        if (g_tRepeat.ucEnalbe) {
-  77   2          return 1;
-  78   2        }
-  79   1        return 0;
+  76   1              if (g_tRepeat.ucEnalbe) {
+  77   2                      return 1;
+  78   2              }
+  79   1              return 0;
   80   1      }
   81          
   82          /*
   83           *********************************************************************************************************
-  84           *  函 数 名:
-  85           *  功能说明: 每隔100ms调用1次该函数，用于控制蜂鸣器发声。该函数在  中被调用。
-  86           *  形    参：无
-  87           *  返 回 值: 无
+  84           *      函 数 名:
+  85           *      功能说明: 每隔100ms调用1次该函数，用于控制蜂鸣器发声。该函数在  中被调用。
+  86           *      形    参：无
+  87           *      返 回 值: 无
   88           *********************************************************************************************************
   89           */
   90          void Repeat_Pro(void) {
   91   1      
-  92   1        if ((g_tRepeat.ucEnalbe == 0) || (g_tRepeat.usStopTime == 0)) {
-  93   2          return;
-  94   2        }
+  92   1              if ((g_tRepeat.ucEnalbe == 0) || (g_tRepeat.usStopTime == 0)) {
+  93   2                      return;
+  94   2              }
   95   1      
-  96   1        if (g_tRepeat.ucState == 0) {
-  97   2          if (g_tRepeat.usStopTime > 0) /* 间断 */
-  98   2          {
-  99   3            if (++g_tRepeat.usCount >= g_tRepeat.usStartTime) {
- 100   4              Repeat_Stop_exe(); /* 停止 */
- 101   4              g_tRepeat.usCount = 0;
- 102   4              g_tRepeat.ucState = 1;
- 103   4            }
- 104   3          } else {
- 105   3            /* 不做任何处理，连续 */
- 106   3          }
- 107   2        } else if (g_tRepeat.ucState == 1) {
- 108   2          if (++g_tRepeat.usCount >= g_tRepeat.usStopTime) {
- 109   3            /* 连续时，直到调用stop停止为止 */
- 110   3            if (g_tRepeat.usCycle > 0) {
- 111   4              if (++g_tRepeat.usCycleCount >= g_tRepeat.usCycle) {
- 112   5                /* 循环次数到，停止 */
- 113   5                g_tRepeat.ucEnalbe = 0;
- 114   5              }
+  96   1              if (g_tRepeat.ucState == 0) {
+  97   2                      if (g_tRepeat.usStopTime > 0) /* 间断 */
+  98   2                      {
+  99   3                              if (++g_tRepeat.usCount >= g_tRepeat.usStartTime) {
+ 100   4                                      Repeat_Stop_exe(); /* 停止 */
+ 101   4                                      g_tRepeat.usCount = 0;
+ 102   4                                      g_tRepeat.ucState = 1;
+ 103   4                              }
+ 104   3                      } else {
+ 105   3                              /* 不做任何处理，连续 */
+ 106   3                      }
+ 107   2              } else if (g_tRepeat.ucState == 1) {
+ 108   2                      if (++g_tRepeat.usCount >= g_tRepeat.usStopTime) {
+ 109   3                              /* 连续时，直到调用stop停止为止 */
+ 110   3                              if (g_tRepeat.usCycle > 0) {
+ 111   4                                      if (++g_tRepeat.usCycleCount >= g_tRepeat.usCycle) {
+ 112   5                                              /* 循环次数到，停止 */
+ 113   5                                              g_tRepeat.ucEnalbe = 0;
+ 114   5                                      }
  115   4      
-C51 COMPILER V9.52.0.0   APP_REPEAT_EXE                                                    12/15/2017 17:13:43 PAGE 3   
+C51 COMPILER V9.56.0.0   APP_REPEAT_EXE                                                    12/16/2017 00:33:57 PAGE 3   
 
- 116   4              if (g_tRepeat.ucEnalbe == 0) {
- 117   5                g_tRepeat.usStopTime = 0;
- 118   5                return;
- 119   5              }
- 120   4            }
- 121   3            g_tRepeat.usCount = 0;
- 122   3            g_tRepeat.ucState = 0;
+ 116   4                                      if (g_tRepeat.ucEnalbe == 0) {
+ 117   5                                              g_tRepeat.usStopTime = 0;
+ 118   5                                              return;
+ 119   5                                      }
+ 120   4                              }
+ 121   3                              g_tRepeat.usCount = 0;
+ 122   3                              g_tRepeat.ucState = 0;
  123   3      
- 124   3            Repeat_Start_exe(); /* 开始 */
- 125   3          }
- 126   2        }
+ 124   3                              Repeat_Start_exe(); /* 开始 */
+ 125   3                      }
+ 126   2              }
  127   1      
  128   1      }
 

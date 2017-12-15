@@ -1,11 +1,11 @@
-C51 COMPILER V9.52.0.0   VERSION                                                           12/15/2017 17:13:44 PAGE 1   
+C51 COMPILER V9.56.0.0   VERSION                                                           12/16/2017 00:33:59 PAGE 1   
 
 
-C51 COMPILER V9.52.0.0, COMPILATION OF MODULE VERSION
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE VERSION
 OBJECT MODULE PLACED IN .\Out\Objects\Version.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Common\src\Version.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\
-                    -inc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\Version.lst) TA
-                    -BS(2) OBJECT(.\Out\Objects\Version.obj)
+                    -inc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\Version.lst) OB
+                    -JECT(.\Out\Objects\Version.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =     95    ----
-C51 COMPILER V9.52.0.0   VERSION                                                           12/15/2017 17:13:44 PAGE 2   
+C51 COMPILER V9.56.0.0   VERSION                                                           12/16/2017 00:33:59 PAGE 2   
 
    CONSTANT SIZE    =    274    ----
    XDATA SIZE       =   ----    ----

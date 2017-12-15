@@ -35,7 +35,7 @@ typedef struct _WORK_T {
 	uint8_t mode;
 	uint8_t FM_station;
 	uint16_t track;
-
+	uint8_t match_code_mode;
 } WORK_T;
 
 typedef struct _LED_MODE_MSG_ST {
@@ -64,6 +64,5 @@ void app_work_Init(void);
 void app_work_1s_pro(void);
 void app_work_100ms_pro(void);
 void app_work_cnt_clear(void);
-
 
 #endif /* APP_INC_APP_WORK_H_ */
