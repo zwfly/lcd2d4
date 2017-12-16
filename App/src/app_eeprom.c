@@ -18,7 +18,16 @@ void app_eeprom_write_byte(uint16_t addr, uint8_t d) {
 	write_DATAFLASH_BYTE(WIRELESS_ADDRESS_START_ADDR + addr, d);
 }
 void app_eeprom_write_buf(uint16_t addr, uint8_t *pt, uint8_t len) {
+#if 0
 	write_DATAFLASH_BUF(WIRELESS_ADDRESS_START_ADDR + addr, pt, len);
+#else
+	uint8_t i = 0;
+	for (i = 0; i < len; i++) {
+		app_eeprom_write_byte(addr + i, *(pt + i));
+	}
+
+#endif
+
 }
 uint8_t app_eeprom_read_byte(uint16_t addr) {
 	return read_APROM_BYTE((uint16_t *) addr);

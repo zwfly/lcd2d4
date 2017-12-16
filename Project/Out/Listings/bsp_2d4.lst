@@ -1,11 +1,11 @@
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           12/16/2017 00:33:58 PAGE 1   
+C51 COMPILER V9.52.0.0   BSP_2D4                                                           12/16/2017 12:36:15 PAGE 1   
 
 
-C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_2D4
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE BSP_2D4
 OBJECT MODULE PLACED IN .\Out\Objects\bsp_2d4.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Bsp\src\bsp_2d4.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Common\inc
-                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_2d4.lst) OBJEC
-                    -T(.\Out\Objects\bsp_2d4.obj)
+                    -;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_2d4.lst) TABS(
+                    -2) OBJECT(.\Out\Objects\bsp_2d4.obj)
 
 line level    source
 
@@ -22,17 +22,17 @@ line level    source
   11          
   12          void Wireless2d4_InitHard(void) {
   13   1      
-  14   1              //SCK
-  15   1              clr_P0M1_4;
-  16   1              set_P0M2_4;
+  14   1        //SCK
+  15   1        clr_P0M1_4;
+  16   1        set_P0M2_4;
   17   1      
-  18   1              //CSN
-  19   1              P3M1 &= ~SET_BIT4;
-  20   1              P3M2 |= SET_BIT4;
+  18   1        //CSN
+  19   1        P3M1 &= ~SET_BIT4;
+  20   1        P3M2 |= SET_BIT4;
   21   1      
-  22   1              //TX
-  23   1              P3M1 &= ~SET_BIT5;
-  24   1              P3M2 |= SET_BIT5;
+  22   1        //TX
+  23   1        P3M1 &= ~SET_BIT5;
+  24   1        P3M2 |= SET_BIT5;
   25   1      
   26   1      }
   27          
@@ -41,9 +41,9 @@ line level    source
   30          //               init spi pin  input/out mode
   31          /******************************************************************************/
   32          void SPI_init(void) {
-  33   1      //      GPIO_Init(GPIOB, GPIO_Pin_4, GPIO_Mode_Out_PP_High_Fast); //CSN PIN output High pulling push
-  34   1      //      GPIO_Init(GPIOB, GPIO_Pin_5, GPIO_Mode_Out_PP_Low_Fast); //SCK PIN output Low  pulling push
-  35   1      //      GPIO_Init(GPIOB, GPIO_Pin_6, GPIO_Mode_Out_PP_High_Fast); //DATA PIN output  DEFAULT  High pulling push
+  33   1      //  GPIO_Init(GPIOB, GPIO_Pin_4, GPIO_Mode_Out_PP_High_Fast); //CSN PIN output High pulling push
+  34   1      //  GPIO_Init(GPIOB, GPIO_Pin_5, GPIO_Mode_Out_PP_Low_Fast); //SCK PIN output Low  pulling push
+  35   1      //  GPIO_Init(GPIOB, GPIO_Pin_6, GPIO_Mode_Out_PP_High_Fast); //DATA PIN output  DEFAULT  High pulling push
   36   1      }
   37          
   38          /******************************************************************************/
@@ -51,23 +51,23 @@ line level    source
   40          //                SPI Write a byte for write regiest
   41          /******************************************************************************/
   42          void SPI_WW(uint8_t R_REG) {
-  43   1              uint8_t i;
-  44   1              for (i = 0; i < 8; i++) {
-  45   2                      SCK_LOW;
-  46   2                      if (R_REG & 0x80) {
-  47   3                              SPI_DATA_HIGH;
-  48   3                      } else {
-  49   3                              SPI_DATA_LOW;
-  50   3                      }
-  51   2                      R_REG <<= 1;
-  52   2                      nop
-  53   2                      SCK_HIGH;
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           12/16/2017 00:33:58 PAGE 2   
+  43   1        uint8_t i;
+  44   1        for (i = 0; i < 8; i++) {
+  45   2          SCK_LOW;
+  46   2          if (R_REG & 0x80) {
+  47   3            SPI_DATA_HIGH;
+  48   3          } else {
+  49   3            SPI_DATA_LOW;
+  50   3          }
+  51   2          R_REG <<= 1;
+  52   2          nop
+  53   2          SCK_HIGH;
+C51 COMPILER V9.52.0.0   BSP_2D4                                                           12/16/2017 12:36:15 PAGE 2   
 
-  54   2                      nop
-  55   2                      nop
-  56   2              }
-  57   1              SCK_LOW;
+  54   2          nop
+  55   2          nop
+  56   2        }
+  57   1        SCK_LOW;
   58   1      
   59   1      }
   60          
@@ -76,12 +76,12 @@ line level    source
   63          //                Write Data(1 Byte Address ,1 byte data)
   64          /******************************************************************************/
   65          void RF_WriteReg(uint8_t reg, uint8_t wdata) {
-  66   1              CSN_LOW;
-  67   1              nop
-  68   1              SPI_WW(reg);
-  69   1              SPI_WW(wdata);
-  70   1              nop
-  71   1              CSN_HIGH;
+  66   1        CSN_LOW;
+  67   1        nop
+  68   1        SPI_WW(reg);
+  69   1        SPI_WW(wdata);
+  70   1        nop
+  71   1        CSN_HIGH;
   72   1      }
   73          
   74          /******************************************************************************/
@@ -89,15 +89,15 @@ line level    source
   76          //                Write Buffer
   77          /******************************************************************************/
   78          void RF_WriteBuf(uint8_t reg, uint8_t *pBuf, uint8_t length) {
-  79   1              uint8_t j;
-  80   1              CSN_LOW;
-  81   1              j = 0;
-  82   1              SPI_WW(reg);
-  83   1              for (j = 0; j < length; j++) {
-  84   2                      SPI_WW(pBuf[j]);
-  85   2              }
-  86   1              j = 0;
-  87   1              CSN_HIGH;
+  79   1        uint8_t j;
+  80   1        CSN_LOW;
+  81   1        j = 0;
+  82   1        SPI_WW(reg);
+  83   1        for (j = 0; j < length; j++) {
+  84   2          SPI_WW(pBuf[j]);
+  85   2        }
+  86   1        j = 0;
+  87   1        CSN_HIGH;
   88   1      }
   89          
   90          /******************************************************************************/
@@ -105,46 +105,46 @@ line level    source
   92          //                SPI Write a byte for read regiset
   93          /******************************************************************************/
   94          void SPI_WR(uint8_t R_REG) {
-  95   1              uint8_t i;
-  96   1              for (i = 0; i < 8; i++) {
-  97   2                      SCK_LOW;
-  98   2                      if (R_REG & 0x80) {
-  99   3                              SPI_DATA_HIGH;
- 100   3                      } else {
- 101   3                              SPI_DATA_LOW;
- 102   3                      }
- 103   2                      R_REG <<= 1;
- 104   2                      nop
- 105   2                      SCK_HIGH;
- 106   2                      nop
- 107   2                      nop
- 108   2              }
- 109   1              SPI_DATA_INPUT_MODE
- 110   1              ;
- 111   1              SCK_LOW;
+  95   1        uint8_t i;
+  96   1        for (i = 0; i < 8; i++) {
+  97   2          SCK_LOW;
+  98   2          if (R_REG & 0x80) {
+  99   3            SPI_DATA_HIGH;
+ 100   3          } else {
+ 101   3            SPI_DATA_LOW;
+ 102   3          }
+ 103   2          R_REG <<= 1;
+ 104   2          nop
+ 105   2          SCK_HIGH;
+ 106   2          nop
+ 107   2          nop
+ 108   2        }
+ 109   1        SPI_DATA_INPUT_MODE
+ 110   1        ;
+ 111   1        SCK_LOW;
  112   1      
  113   1      }
  114          
  115          /******************************************************************************/
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           12/16/2017 00:33:58 PAGE 3   
+C51 COMPILER V9.52.0.0   BSP_2D4                                                           12/16/2017 12:36:15 PAGE 3   
 
  116          //            ucSPI_Read
  117          //                SPI Read BYTE
  118          /******************************************************************************/
  119          uint8_t ucSPI_Read(void) {
- 120   1              uint8_t i, dt;
- 121   1              dt = 0;
- 122   1              for (i = 0; i < 8; i++) {
- 123   2                      SCK_LOW;
- 124   2                      dt = dt << 1;
- 125   2                      nop
- 126   2                      SCK_HIGH;
- 127   2                      if (SPI_DATA_STATUS) {
- 128   3                              dt |= 0x01;
- 129   3                      }
- 130   2              }
- 131   1              SCK_LOW;
- 132   1              return dt;
+ 120   1        uint8_t i, dt;
+ 121   1        dt = 0;
+ 122   1        for (i = 0; i < 8; i++) {
+ 123   2          SCK_LOW;
+ 124   2          dt = dt << 1;
+ 125   2          nop
+ 126   2          SCK_HIGH;
+ 127   2          if (SPI_DATA_STATUS) {
+ 128   3            dt |= 0x01;
+ 129   3          }
+ 130   2        }
+ 131   1        SCK_LOW;
+ 132   1        return dt;
  133   1      }
  134          
  135          /******************************************************************************/
@@ -152,18 +152,18 @@ line level    source
  137          //                Read Data(1 Byte Address ,1 byte data return)
  138          /******************************************************************************/
  139          uint8_t ucRF_ReadReg(uint8_t reg) {
- 140   1              uint8_t dt;
+ 140   1        uint8_t dt;
  141   1      
- 142   1              CSN_LOW;
- 143   1              nop
- 144   1              SPI_WR(reg);
- 145   1              dt = ucSPI_Read();
- 146   1              SPI_DATA_OUTPUT_MODE
- 147   1              ;
- 148   1              nop
- 149   1              CSN_HIGH;
+ 142   1        CSN_LOW;
+ 143   1        nop
+ 144   1        SPI_WR(reg);
+ 145   1        dt = ucSPI_Read();
+ 146   1        SPI_DATA_OUTPUT_MODE
+ 147   1        ;
+ 148   1        nop
+ 149   1        CSN_HIGH;
  150   1      
- 151   1              return dt;
+ 151   1        return dt;
  152   1      }
  153          
  154          /******************************************************************************/
@@ -171,15 +171,15 @@ line level    source
  156          //                Read Data(1 Byte Address ,length byte data read)
  157          /******************************************************************************/
  158          void RF_ReadBuf(uint8_t reg, unsigned char *pBuf, uint8_t length) {
- 159   1              uint8_t byte_ctr;
+ 159   1        uint8_t byte_ctr;
  160   1      
- 161   1              CSN_LOW;
- 162   1              SPI_WR(reg);
- 163   1              for (byte_ctr = 0; byte_ctr < length; byte_ctr++)
- 164   1                      pBuf[byte_ctr] = ucSPI_Read();
- 165   1              SPI_DATA_OUTPUT_MODE
- 166   1              ;
- 167   1              CSN_HIGH;
+ 161   1        CSN_LOW;
+ 162   1        SPI_WR(reg);
+ 163   1        for (byte_ctr = 0; byte_ctr < length; byte_ctr++)
+ 164   1          pBuf[byte_ctr] = ucSPI_Read();
+ 165   1        SPI_DATA_OUTPUT_MODE
+ 166   1        ;
+ 167   1        CSN_HIGH;
  168   1      }
  169          
  170          /******************************************************************************/
@@ -187,15 +187,15 @@ line level    source
  172          //                Set RF into TX mode
  173          /******************************************************************************/
  174          void RF_TxMode(void) {
- 175   1              CE_LOW;
- 176   1              RF_WriteReg(W_REGISTER + CONFIG, 0X8E);                                         // 将RF设置成TX模式
- 177   1      //      delay_10us(1);
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           12/16/2017 00:33:58 PAGE 4   
+ 175   1        CE_LOW;
+ 176   1        RF_WriteReg(W_REGISTER + CONFIG, 0X8E);           // 将RF设置成TX模式
+ 177   1      //  delay_10us(1);
+C51 COMPILER V9.52.0.0   BSP_2D4                                                           12/16/2017 12:36:15 PAGE 4   
 
- 178   1              nop
- 179   1              nop
- 180   1              nop
- 181   1              nop
+ 178   1        nop
+ 179   1        nop
+ 180   1        nop
+ 181   1        nop
  182   1      }
  183          
  184          /******************************************************************************/
@@ -203,14 +203,14 @@ line level    source
  186          //            将RF设置成RX模式，准备接收数据
  187          /******************************************************************************/
  188          void RF_RxMode(void) {
- 189   1              uint16_t i = 0;
- 190   1              CE_LOW;
- 191   1              RF_WriteReg(W_REGISTER + CONFIG, 0X8F);                                         // 将RF设置成RX模式
- 192   1              CE_HIGH;                                                                                // Set CE pin high 开始接收数据
- 193   1      //      delay_ms(2);
- 194   1              for (i = 0; i < 2000; i++) {
- 195   2                      nop
- 196   2              }
+ 189   1        uint16_t i = 0;
+ 190   1        CE_LOW;
+ 191   1        RF_WriteReg(W_REGISTER + CONFIG, 0X8F);           // 将RF设置成RX模式
+ 192   1        CE_HIGH;                    // Set CE pin high 开始接收数据
+ 193   1      //  delay_ms(2);
+ 194   1        for (i = 0; i < 2000; i++) {
+ 195   2          nop
+ 196   2        }
  197   1      
  198   1      }
  199          
@@ -219,21 +219,21 @@ line level    source
  202          //            read RF IRQ status,3bits return
  203          /******************************************************************************/
  204          uint8_t ucRF_GetStatus(void) {
- 205   1              return ucRF_ReadReg(STATUS) & 0x70;                                                             //读取RF的状态
+ 205   1        return ucRF_ReadReg(STATUS) & 0x70;               //读取RF的状态
  206   1      }
  207          /******************************************************************************/
  208          //            ucRF_GetRSSI
  209          //                读取rssi 值
  210          /******************************************************************************/
  211          uint8_t ucRF_GetRSSI(void) {
- 212   1              return (ucRF_ReadReg(DATAOUT));                                                         //读取RF RSSI
+ 212   1        return (ucRF_ReadReg(DATAOUT));               //读取RF RSSI
  213   1      }
  214          /******************************************************************************/
  215          //            RF_ClearStatus
  216          //                clear RF IRQ
  217          /******************************************************************************/
  218          void RF_ClearStatus(void) {
- 219   1              RF_WriteReg(W_REGISTER + STATUS, 0x70);                                                 //清除RF的IRQ标志
+ 219   1        RF_WriteReg(W_REGISTER + STATUS, 0x70);             //清除RF的IRQ标志
  220   1      }
  221          
  222          /******************************************************************************/
@@ -241,8 +241,8 @@ line level    source
  224          //                clear RF TX/RX FIFO
  225          /******************************************************************************/
  226          void RF_ClearFIFO(void) {
- 227   1              RF_WriteReg(FLUSH_TX, 0);                                               //清除RF 的 TX FIFO
- 228   1              RF_WriteReg(FLUSH_RX, 0);                                   //清除RF 的 RX FIFO
+ 227   1        RF_WriteReg(FLUSH_TX, 0);                             //清除RF 的 TX FIFO
+ 228   1        RF_WriteReg(FLUSH_RX, 0);                                   //清除RF 的 RX FIFO
  229   1      }
  230          
  231          /******************************************************************************/
@@ -250,11 +250,11 @@ line level    source
  233          //                Set RF TX/RX channel:Channel
  234          /******************************************************************************/
  235          void RF_SetChannel(uint8_t Channel) {
- 236   1              CE_LOW;
- 237   1              RF_WriteReg(W_REGISTER + RF_CH, Channel);
+ 236   1        CE_LOW;
+ 237   1        RF_WriteReg(W_REGISTER + RF_CH, Channel);
  238   1      }
  239          
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           12/16/2017 00:33:58 PAGE 5   
+C51 COMPILER V9.52.0.0   BSP_2D4                                                           12/16/2017 12:36:15 PAGE 5   
 
  240          /******************************************************************************/
  241          //            发送数据：
@@ -264,16 +264,16 @@ line level    source
  245          //              length 通常等于 PAYLOAD_WIDTH
  246          /******************************************************************************/
  247          void RF_TxData(uint8_t *ucPayload, uint8_t length) {
- 248   1              if (0 == ucRF_GetStatus()) {                             // rf free status
- 249   2                      uint16_t i = 0;
- 250   2                      RF_WriteBuf(W_TX_PAYLOAD, ucPayload, length);
- 251   2                      CE_HIGH;                             //rf entery tx mode start send data
- 252   2      //              delay_10us(60);                            //keep ce high at least 600us
- 253   2                      for (i = 0; i < 200; i++) {
- 254   3                              nop
- 255   3                      }
- 256   2                      CE_LOW;                                                 //rf entery stb3
- 257   2              }
+ 248   1        if (0 == ucRF_GetStatus()) {                             // rf free status
+ 249   2          uint16_t i = 0;
+ 250   2          RF_WriteBuf(W_TX_PAYLOAD, ucPayload, length);
+ 251   2          CE_HIGH;                             //rf entery tx mode start send data
+ 252   2      //    delay_10us(60);                            //keep ce high at least 600us
+ 253   2          for (i = 0; i < 200; i++) {
+ 254   3            nop
+ 255   3          }
+ 256   2          CE_LOW;                                                 //rf entery stb3
+ 257   2        }
  258   1      }
  259          
  260          /******************************************************************************/
@@ -289,16 +289,16 @@ line level    source
  270          //              length 通常等于 PAYLOAD_WIDTH
  271          /******************************************************************************/
  272          uint8_t ucRF_DumpRxData(uint8_t *ucPayload, uint8_t length) {
- 273   1              if (ucRF_GetStatus() & RX_DR_FLAG) {
+ 273   1        if (ucRF_GetStatus() & RX_DR_FLAG) {
  274   2      
- 275   2                      CE_LOW;
- 276   2                      RF_ReadBuf(R_RX_PAYLOAD, ucPayload, length); //将接收到的数据读出到ucPayload，且清除rxfifo
- 277   2                      RF_ClearFIFO();
- 278   2                      RF_ClearStatus();                                                 //清除Status
- 279   2                      CE_HIGH;                                                         //继续开始接
- 280   2                      return 1;
- 281   2              }
- 282   1              return 0;
+ 275   2          CE_LOW;
+ 276   2          RF_ReadBuf(R_RX_PAYLOAD, ucPayload, length); //将接收到的数据读出到ucPayload，且清除rxfifo
+ 277   2          RF_ClearFIFO();
+ 278   2          RF_ClearStatus();                                           //清除Status
+ 279   2          CE_HIGH;                                                         //继续开始接
+ 280   2          return 1;
+ 281   2        }
+ 282   1        return 0;
  283   1      }
  284          
  285          ////////////////////////////////////////////////////////////////////////////////
@@ -310,84 +310,84 @@ line level    source
  291          //                Initial RF
  292          /******************************************************************************/
  293          void RF_Init(void) {
- 294   1              uint8_t BB_cal_data[5] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
- 295   1              uint8_t RF_cal_data[3] = { 0xF6, 0x37, 0x5D };
- 296   1              uint8_t RF_cal2_data[6] = { 0x45, 0x21, 0xef, 0xAC, 0x5A, 0x50 };
- 297   1              uint8_t Dem_cal_data[1] = { 0x01 };
- 298   1              uint8_t Dem_cal2_data[3] = { 0x0b, 0xDF, 0x02 };
- 299   1              SPI_init();
- 300   1              RF_WriteReg(RST_FSPI, 0x5A);                                                            //Software Reset
- 301   1              RF_WriteReg(RST_FSPI, 0XA5);
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           12/16/2017 00:33:58 PAGE 6   
+ 294   1        uint8_t BB_cal_data[5] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
+ 295   1        uint8_t RF_cal_data[3] = { 0xF6, 0x37, 0x5D };
+ 296   1        uint8_t RF_cal2_data[6] = { 0x45, 0x21, 0xef, 0xAC, 0x5A, 0x50 };
+ 297   1        uint8_t Dem_cal_data[1] = { 0x01 };
+ 298   1        uint8_t Dem_cal2_data[3] = { 0x0b, 0xDF, 0x02 };
+ 299   1        SPI_init();
+ 300   1        RF_WriteReg(RST_FSPI, 0x5A);                //Software Reset
+ 301   1        RF_WriteReg(RST_FSPI, 0XA5);
+C51 COMPILER V9.52.0.0   BSP_2D4                                                           12/16/2017 12:36:15 PAGE 6   
 
  302   1      
- 303   1              if (PAYLOAD_WIDTH < 33) {
- 304   2                      RF_WriteReg(W_REGISTER + FEATURE, 0x20);//FIFO_LEN=32 BYTE  and enable Software control ce
- 305   2              } else {
- 306   2                      RF_WriteReg(W_REGISTER + FEATURE, 0x38);//FIFO_LEN=64 BYTE  and enable Software control ce
- 307   2              }
- 308   1              CE_LOW;
- 309   1              RF_WriteReg(FLUSH_TX, 0);                                                                       // CLEAR TXFIFO
- 310   1              RF_WriteReg(FLUSH_RX, 0);                                                                       // CLEAR  RXFIFO
- 311   1              RF_WriteReg(W_REGISTER + STATUS, 0x70);                                         // CLEAR  STATUS
- 312   1              RF_WriteReg(W_REGISTER + EN_RXADDR, 0x01);                                      // Enable Pipe0
- 313   1              RF_WriteReg(W_REGISTER + SETUP_AW, 0x03);               // address witdth is 5 bytes
- 314   1              RF_WriteReg(W_REGISTER + RF_CH, DEFAULT_CHANNEL);                // 2478M HZ
- 315   1              RF_WriteReg(W_REGISTER + RX_PW_P0, PAYLOAD_WIDTH);                              // 8 bytes
- 316   1              RF_WriteBuf(W_REGISTER + TX_ADDR, (uint8_t*) TX_ADDRESS_DEF,
- 317   1                              sizeof(TX_ADDRESS_DEF));        // Writes TX_Address to PN006
- 318   1              RF_WriteBuf(W_REGISTER + RX_ADDR_P0, (uint8_t*) TX_ADDRESS_DEF,
- 319   1                              sizeof(TX_ADDRESS_DEF));        // RX_Addr0 same as TX_Adr for Auto.Ack
- 320   1              RF_WriteBuf(W_REGISTER + BB_CAL, BB_cal_data, sizeof(BB_cal_data));
- 321   1              RF_WriteBuf(W_REGISTER + RF_CAL2, RF_cal2_data, sizeof(RF_cal2_data));
- 322   1              RF_WriteBuf(W_REGISTER + DEMOD_CAL, Dem_cal_data, sizeof(Dem_cal_data));
- 323   1              RF_WriteBuf(W_REGISTER + RF_CAL, RF_cal_data, sizeof(RF_cal_data));
- 324   1              RF_WriteBuf(W_REGISTER + DEM_CAL2, Dem_cal2_data, sizeof(Dem_cal2_data));
- 325   1              RF_WriteReg(W_REGISTER + DYNPD, 0x00);
- 326   1              RF_WriteReg(W_REGISTER + RF_SETUP, RF_POWER);                                           // 13DBM
+ 303   1        if (PAYLOAD_WIDTH < 33) {
+ 304   2          RF_WriteReg(W_REGISTER + FEATURE, 0x20);//FIFO_LEN=32 BYTE  and enable Software control ce
+ 305   2        } else {
+ 306   2          RF_WriteReg(W_REGISTER + FEATURE, 0x38);//FIFO_LEN=64 BYTE  and enable Software control ce
+ 307   2        }
+ 308   1        CE_LOW;
+ 309   1        RF_WriteReg(FLUSH_TX, 0);                 // CLEAR TXFIFO
+ 310   1        RF_WriteReg(FLUSH_RX, 0);                 // CLEAR  RXFIFO
+ 311   1        RF_WriteReg(W_REGISTER + STATUS, 0x70);           // CLEAR  STATUS
+ 312   1        RF_WriteReg(W_REGISTER + EN_RXADDR, 0x01);          // Enable Pipe0
+ 313   1        RF_WriteReg(W_REGISTER + SETUP_AW, 0x03);   // address witdth is 5 bytes
+ 314   1        RF_WriteReg(W_REGISTER + RF_CH, DEFAULT_CHANNEL);                // 2478M HZ
+ 315   1        RF_WriteReg(W_REGISTER + RX_PW_P0, PAYLOAD_WIDTH);        // 8 bytes
+ 316   1        RF_WriteBuf(W_REGISTER + TX_ADDR, (uint8_t*) TX_ADDRESS_DEF,
+ 317   1            sizeof(TX_ADDRESS_DEF));  // Writes TX_Address to PN006
+ 318   1        RF_WriteBuf(W_REGISTER + RX_ADDR_P0, (uint8_t*) TX_ADDRESS_DEF,
+ 319   1            sizeof(TX_ADDRESS_DEF));  // RX_Addr0 same as TX_Adr for Auto.Ack
+ 320   1        RF_WriteBuf(W_REGISTER + BB_CAL, BB_cal_data, sizeof(BB_cal_data));
+ 321   1        RF_WriteBuf(W_REGISTER + RF_CAL2, RF_cal2_data, sizeof(RF_cal2_data));
+ 322   1        RF_WriteBuf(W_REGISTER + DEMOD_CAL, Dem_cal_data, sizeof(Dem_cal_data));
+ 323   1        RF_WriteBuf(W_REGISTER + RF_CAL, RF_cal_data, sizeof(RF_cal_data));
+ 324   1        RF_WriteBuf(W_REGISTER + DEM_CAL2, Dem_cal2_data, sizeof(Dem_cal2_data));
+ 325   1        RF_WriteReg(W_REGISTER + DYNPD, 0x00);
+ 326   1        RF_WriteReg(W_REGISTER + RF_SETUP, RF_POWER);           // 13DBM
  327   1      
  328   1      #if(TRANSMIT_TYPE == TRANS_ENHANCE_MODE)
-                      RF_WriteReg(W_REGISTER + SETUP_RETR, 0x03);                                     //  3 retrans...
-                      RF_WriteReg(W_REGISTER + EN_AA, 0x01);// Enable Auto.Ack:Pipe0
+                RF_WriteReg(W_REGISTER + SETUP_RETR, 0x03);         //  3 retrans...
+                RF_WriteReg(W_REGISTER + EN_AA, 0x01);// Enable Auto.Ack:Pipe0
               #elif(TRANSMIT_TYPE == TRANS_BURST_MODE)
- 332   1              RF_WriteReg(W_REGISTER + SETUP_RETR, 0x00);     // Disable retrans...
- 333   1              RF_WriteReg(W_REGISTER + EN_AA, 0x00);  // Disable AutoAck
+ 332   1        RF_WriteReg(W_REGISTER + SETUP_RETR, 0x00); // Disable retrans...
+ 333   1        RF_WriteReg(W_REGISTER + EN_AA, 0x00);  // Disable AutoAck
  334   1      #endif
  335   1      
  336   1      }
  337          
  338          /******************************************************************************/
- 339          //                      进入载波模式
+ 339          //                进入载波模式
  340          /******************************************************************************/
  341          void RF_Carrier(uint8_t ucChannel_Set) {
- 342   1              uint8_t i = 0;
- 343   1              uint8_t BB_cal_data[5] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
- 344   1              uint8_t RF_cal_data[3] = { 0xF6, 0x37, 0x5D };
- 345   1              uint8_t RF_cal2_data[6] = { 0x45, 0x21, 0xEF, 0xAC, 0x5A, 0x50 };
- 346   1              uint8_t Dem_cal_data[1] = { 0xE1 };
- 347   1              uint8_t Dem_cal2_data[3] = { 0x0B, 0xDF, 0x02 };
+ 342   1        uint8_t i = 0;
+ 343   1        uint8_t BB_cal_data[5] = { 0x0A, 0x6D, 0x67, 0x9C, 0x46 };
+ 344   1        uint8_t RF_cal_data[3] = { 0xF6, 0x37, 0x5D };
+ 345   1        uint8_t RF_cal2_data[6] = { 0x45, 0x21, 0xEF, 0xAC, 0x5A, 0x50 };
+ 346   1        uint8_t Dem_cal_data[1] = { 0xE1 };
+ 347   1        uint8_t Dem_cal2_data[3] = { 0x0B, 0xDF, 0x02 };
  348   1      
- 349   1              RF_WriteReg(RST_FSPI, 0x5A);                                                            //Software Reset
- 350   1              RF_WriteReg(RST_FSPI, 0XA5);
- 351   1              RF_WriteReg(W_REGISTER + FEATURE, 0x20);
- 352   1              CE_LOW;
- 353   1      //      delay_ms(200);
- 354   1              for (i = 0; i < 220; i++) {
- 355   2                      nop
- 356   2                      nop
- 357   2                      nop
- 358   2                      nop
- 359   2              }
+ 349   1        RF_WriteReg(RST_FSPI, 0x5A);                //Software Reset
+ 350   1        RF_WriteReg(RST_FSPI, 0XA5);
+ 351   1        RF_WriteReg(W_REGISTER + FEATURE, 0x20);
+ 352   1        CE_LOW;
+ 353   1      //  delay_ms(200);
+ 354   1        for (i = 0; i < 220; i++) {
+ 355   2          nop
+ 356   2          nop
+ 357   2          nop
+ 358   2          nop
+ 359   2        }
  360   1      
- 361   1              RF_WriteReg(W_REGISTER + RF_CH, ucChannel_Set);                                         //单载波频点
- 362   1              RF_WriteReg(W_REGISTER + RF_SETUP, RF_POWER);                                           //13dbm
- 363   1              RF_WriteBuf(W_REGISTER + BB_CAL, BB_cal_data, sizeof(BB_cal_data));
-C51 COMPILER V9.56.0.0   BSP_2D4                                                           12/16/2017 00:33:58 PAGE 7   
+ 361   1        RF_WriteReg(W_REGISTER + RF_CH, ucChannel_Set);           //单载波频点
+ 362   1        RF_WriteReg(W_REGISTER + RF_SETUP, RF_POWER);               //13dbm
+ 363   1        RF_WriteBuf(W_REGISTER + BB_CAL, BB_cal_data, sizeof(BB_cal_data));
+C51 COMPILER V9.52.0.0   BSP_2D4                                                           12/16/2017 12:36:15 PAGE 7   
 
- 364   1              RF_WriteBuf(W_REGISTER + RF_CAL2, RF_cal2_data, sizeof(RF_cal2_data));
- 365   1              RF_WriteBuf(W_REGISTER + DEMOD_CAL, Dem_cal_data, sizeof(Dem_cal_data));
- 366   1              RF_WriteBuf(W_REGISTER + RF_CAL, RF_cal_data, sizeof(RF_cal_data));
- 367   1              RF_WriteBuf(W_REGISTER + DEM_CAL2, Dem_cal2_data, sizeof(Dem_cal2_data));
+ 364   1        RF_WriteBuf(W_REGISTER + RF_CAL2, RF_cal2_data, sizeof(RF_cal2_data));
+ 365   1        RF_WriteBuf(W_REGISTER + DEMOD_CAL, Dem_cal_data, sizeof(Dem_cal_data));
+ 366   1        RF_WriteBuf(W_REGISTER + RF_CAL, RF_cal_data, sizeof(RF_cal_data));
+ 367   1        RF_WriteBuf(W_REGISTER + DEM_CAL2, Dem_cal2_data, sizeof(Dem_cal2_data));
  368   1      }
  369          
  370          /***************************************end of file ************************************/

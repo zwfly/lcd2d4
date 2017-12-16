@@ -227,10 +227,17 @@ static void app_2d4_Rcv(uint8_t *buf) {
 			for (i = 0; i < 253; i++)
 				;
 			app_eeprom_write_buf(0, address_sended_tmp, 5);
+
+//			app_lcd_default_string_set("EQ 0    ", 8, 0);
+
+		} else {
+//			app_lcd_default_string_set("EQ 1    ", 8, 0);
 		}
 		g_tWork.match_code_mode = 0;
 
 		app_2d4_switch_saved_address();
+
+		app_lcd_default_string_set("MATCH OK", 8, 0);
 	}
 		break;
 	case LED_MODE_MSG_CMD: {

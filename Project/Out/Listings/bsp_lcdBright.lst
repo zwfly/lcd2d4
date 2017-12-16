@@ -1,11 +1,11 @@
-C51 COMPILER V9.56.0.0   BSP_LCDBRIGHT                                                     12/16/2017 00:33:58 PAGE 1   
+C51 COMPILER V9.52.0.0   BSP_LCDBRIGHT                                                     12/16/2017 12:36:15 PAGE 1   
 
 
-C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_LCDBRIGHT
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE BSP_LCDBRIGHT
 OBJECT MODULE PLACED IN .\Out\Objects\bsp_lcdBright.obj
 COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Bsp\src\bsp_lcdBright.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Comm
                     -on\inc;..\App\inc;..\Bsp\inc;..\Startup;..\Bsp) DEFINE(FOSC_110592) DEBUG OBJECTEXTEND PRINT(.\Out\Listings\bsp_lcdBrigh
-                    -t.lst) OBJECT(.\Out\Objects\bsp_lcdBright.obj)
+                    -t.lst) TABS(2) OBJECT(.\Out\Objects\bsp_lcdBright.obj)
 
 line level    source
 
@@ -20,17 +20,17 @@ line level    source
    9          
   10          void LCD_Bright_InitHard(void) {
   11   1      
-  12   1              clr_P0M1_6;
-  13   1              set_P0M2_6;
+  12   1        clr_P0M1_6;
+  13   1        set_P0M2_6;
   14   1      
-  15   1              lcd_bright_on();
+  15   1        lcd_bright_on();
   16   1      
   17   1      }
   18          void lcd_bright_off(void) {
-  19   1              clr_P06;
+  19   1        clr_P06;
   20   1      }
   21          void lcd_bright_on() {
-  22   1              set_P06;
+  22   1        set_P06;
   23   1      }
 
 

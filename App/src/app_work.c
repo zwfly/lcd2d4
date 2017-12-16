@@ -28,20 +28,27 @@ void app_work_1s_pro(void) {
 		if (match_code_cnt > 45) {
 			g_tWork.match_code_mode = 0;
 			app_2d4_switch_saved_address();
+			app_lcd_default_string_set("OFF LINE", 8, 0);
+			cnt = 0;
 		}
 	} else {
 		match_code_cnt = 0;
+
+		cnt++;
+		if (cnt == 6) {
+//		cnt = 0;
+			Repeat_Stop();
+			LCD_Clear_All();
+			LCD_Show_BAZOOKA_ICO();
+			LCD_ShowString(" PWR OFF");
+			app_lcd_default_string_set(" PWR OFF", 8, 0);
+		}
+		if (cnt >= 100) {
+			cnt = 100;
+		}
+
 	}
 
-	cnt++;
-	if (cnt == 6) {
-//		cnt = 0;
-		Repeat_Stop();
-		LCD_Clear_All();
-		LCD_Show_BAZOOKA_ICO();
-		LCD_ShowString(" PWR OFF");
-		app_lcd_default_string_set(" PWR OFF", 8, 0);
-	}
 }
 void app_work_100ms_pro(void) {
 

@@ -29,6 +29,10 @@ void app_key_pro(uint8_t keyCode) {
 	uint8_t index = 0;
 	uint8_t i = 0;
 
+	if (g_tWork.match_code_mode) {
+		return;
+	}
+
 	index = 0;
 	memset(sendBuf, 0, PAYLOAD_WIDTH);
 	switch (keyCode) {
@@ -198,6 +202,10 @@ void app_key_pro(uint8_t keyCode) {
 	case KEY_LONG_K2_6:
 		g_tWork.match_code_mode = 1;
 		app_2d4_switch_public_address();
+
+		LCD_ShowString(" CONNECT");
+		app_lcd_default_string_set(" CONNECT", 8, 0);
+
 		break;
 	default:
 
@@ -205,10 +213,7 @@ void app_key_pro(uint8_t keyCode) {
 	}
 	if (index) {
 		index++;
-		if (g_tWork.match_code_mode == 0) {
-			app_2d4_send(sendBuf, index);
-		}
-
+		app_2d4_send(sendBuf, index);
 	}
 
 }
